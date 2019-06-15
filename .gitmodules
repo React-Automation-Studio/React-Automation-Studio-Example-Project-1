@@ -1,0 +1,3 @@
+[submodule "src/automation-studio"]
+	path = src/automation-studio
+	url = https://wduckitt@bitbucket.org/epicscontributors/automation-studio.git
