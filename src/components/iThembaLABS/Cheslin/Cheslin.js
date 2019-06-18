@@ -6,8 +6,8 @@ import { withRouter } from 'react-router-dom';
 
 import {Link} from 'react-router-dom'
 import Button from '@material-ui/core/Button';
-import RedirectToLogIn from './automation-studio/src/components/SystemComponents/RedirectToLogin.js';
-import SideBar from './automation-studio/src/components/SystemComponents/SideBar';
+import RedirectToLogIn from '../../../automation-studio/src/components/SystemComponents/RedirectToLogin.js';
+import SideBar from '../../../automation-studio/src/components/SystemComponents/SideBar';
 // Styles
 
 
@@ -35,11 +35,14 @@ const styles = theme => ({
 
 });
 
-let AutomationStudioStyleGuideBuildURL;
 
 
 
-class Main extends Component {
+
+
+
+
+class Cheslin extends Component {
   constructor(props) {
     super(props);
     this.logout=this.logout.bind(this);
@@ -51,7 +54,7 @@ class Main extends Component {
   }
   componentDidMount()
   {
-    console.log('main mounted')
+    console.log('Cheslin mounted')
   }
   render() {
 
@@ -68,15 +71,14 @@ class Main extends Component {
 
 
 
+          <br/>
+          <Button className= {classes.button} component={Link} to="/Cheslin1" color="primary" variant='contained'>  Cheslin1 </Button>
+          <br/>
+          <Button className= {classes.button} component={Link} to="/Cheslin2" color="primary" variant='contained'>  Cheslin2 </Button>
+          <br/>
+          <Button className= {classes.button} component={Link} to="/Cheslin3" color="primary" variant='contained'>  Cheslin3 </Button>
+          <br/>
 
-          <Button className= {classes.button} component={Link} to="/Demos" color="primary" variant='contained'>  Demos </Button>
-          <br/>
-          <Button className= {classes.button} component={Link} to="/Staging" color="primary" variant='contained'>  Staging </Button>
-          <br/>
-          
-          <Button className= {classes.button} component={Link} to="/Help" color="secondary" variant='contained'>  Help </Button>
-          <br/>
-          <Button className= {classes.button} target="_blank" href={AutomationStudioStyleGuideBuildURL} color="secondary" variant='contained'>  StyleGuide </Button>
           <RedirectToLogIn/>
 
 
@@ -88,4 +90,4 @@ class Main extends Component {
 }
 }
 
-export default withRouter(withStyles(styles)(Main));
+export default withRouter(withStyles(styles)(Cheslin));

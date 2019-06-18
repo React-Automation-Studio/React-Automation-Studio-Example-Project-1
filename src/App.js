@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 
-//import Routes from './routes'
+import Routes from './routes'
 //import LimitedRoutes from './limitedRoutes'
 import 'typeface-roboto';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -192,8 +192,8 @@ class App extends Component {
       <AutomationStudioContext.Provider value={this.state.system}>
         <MuiThemeProvider theme={this.state.theme}>
           <CssBaseline />
-<MobileTest/>
-          {/*  <Routes limitRoutes={false}/>*/}
+
+           <Routes limitRoutes={false}/>
           {/*<Routes limitRoutes={this.state.AuthenticationFailed}/>*/}
 
 
