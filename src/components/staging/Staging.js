@@ -6,8 +6,8 @@ import { withRouter } from 'react-router-dom';
 
 import {Link} from 'react-router-dom'
 import Button from '@material-ui/core/Button';
-import RedirectToLogIn from '../../../automation-studio/src/components/SystemComponents/RedirectToLogin.js';
-import SideBar from '../../../automation-studio/src/components/SystemComponents/SideBar';
+import RedirectToLogIn from '../../automation-studio/src/components/SystemComponents/RedirectToLogin.js';
+import SideBar from '../../automation-studio/src/components/SystemComponents/SideBar';
 // Styles
 
 
@@ -42,7 +42,7 @@ const styles = theme => ({
 
 
 
-class Cheslin extends Component {
+class Staging extends Component {
   constructor(props) {
     super(props);
     this.logout=this.logout.bind(this);
@@ -54,7 +54,7 @@ class Cheslin extends Component {
   }
   componentDidMount()
   {
-    console.log('Cheslin mounted')
+    console.log('Staging mounted')
   }
   render() {
 
@@ -71,13 +71,9 @@ class Cheslin extends Component {
 
 
 
+          <Button className= {classes.button} component={Link} to="/Example" color="primary" variant='contained'>  Example </Button>
           <br/>
-          <Button className= {classes.button} component={Link} to="/Cheslin1" color="primary" variant='contained'>  Cheslin1 </Button>
-          <br/>
-          <Button className= {classes.button} component={Link} to="/Cheslin2" color="primary" variant='contained'>  Cheslin2 </Button>
-          <br/>
-          <Button className= {classes.button} component={Link} to="/Cheslin3" color="primary" variant='contained'>  Cheslin3 </Button>
-          <br/>
+
 
           <RedirectToLogIn/>
 
@@ -90,4 +86,4 @@ class Cheslin extends Component {
 }
 }
 
-export default withRouter(withStyles(styles)(Cheslin));
+export default withRouter(withStyles(styles)(Staging));

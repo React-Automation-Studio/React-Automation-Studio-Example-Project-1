@@ -42,7 +42,7 @@ const styles = theme => ({
 
 
 
-class Justin extends Component {
+class Example extends Component {
   constructor(props) {
     super(props);
     this.logout=this.logout.bind(this);
@@ -54,7 +54,7 @@ class Justin extends Component {
   }
   componentDidMount()
   {
-    console.log('Justin mounted')
+    console.log('Example mounted')
   }
   render() {
 
@@ -72,11 +72,11 @@ class Justin extends Component {
 
 
           <br/>
-          <Button className= {classes.button} component={Link} to="/JustinTest1" color="primary" variant='contained'>  JustinTest1 </Button>
+          <Button className= {classes.button} component={Link} to="/Example1" color="primary" variant='contained'>  Example1 </Button>
           <br/>
-          <Button className= {classes.button} component={Link} to="/JustinTest2" color="primary" variant='contained'>  JustinTest2 </Button>
+          <Button className= {classes.button} component={Link} to="/Example2" color="primary" variant='contained'>  Example2 </Button>
           <br/>
-          <Button className= {classes.button} component={Link} to="/JustinTest3" color="primary" variant='contained'>  JustinTest3 </Button>
+          <Button className= {classes.button} component={Link} to="/Example3" color="primary" variant='contained'>  Example3 </Button>
           <br/>
 
           <RedirectToLogIn/>
@@ -90,4 +90,4 @@ class Justin extends Component {
 }
 }
 
-export default withRouter(withStyles(styles)(Justin));
+export default withRouter(withStyles(styles)(Example));

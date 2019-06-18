@@ -52,7 +52,7 @@ const styles = theme => ({
   },
 
 });
-class Mike2 extends React.Component {
+class Example3 extends React.Component {
 
 
   render() {
@@ -67,9 +67,9 @@ class Mike2 extends React.Component {
   }
 }
 
-Mike2.propTypes = {
+Example3.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles,{withTheme:true})(Mike2);
-//export default Mike2;
+export default withStyles(styles,{withTheme:true})(Example3);
+//export default Example3;

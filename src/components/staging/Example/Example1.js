@@ -100,7 +100,7 @@ const styles = theme => ({
   },
 });
 
-class JustinTest2 extends React.Component {
+class Example1 extends React.Component {
   constructor(props) {
     super(props);
     this.state={
@@ -334,8 +334,8 @@ return (
         }
       }
 
-      JustinTest2.propTypes = {
+      Example1.propTypes = {
         classes: PropTypes.object.isRequired,
       };
 
-      export default withWidth()(withStyles(styles,{withTheme:true})(JustinTest2));
+      export default withWidth()(withStyles(styles,{withTheme:true})(Example1));

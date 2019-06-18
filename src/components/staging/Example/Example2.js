@@ -52,7 +52,7 @@ const styles = theme => ({
   },
 
 });
-class Cheslin3 extends React.Component {
+class Example2 extends React.Component {
 
 
   render() {
@@ -67,9 +67,9 @@ class Cheslin3 extends React.Component {
   }
 }
 
-Cheslin3.propTypes = {
+Example2.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles,{withTheme:true})(Cheslin3);
-//export default Cheslin3;
+export default withStyles(styles,{withTheme:true})(Example2);
+//export default Example2;
