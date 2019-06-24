@@ -1,0 +1,57 @@
+version: '3.2'
+services:
+  stagingprodfrontendserver:
+    env_file: .env
+    build:
+      context: ./
+      args: # Environment variables available at build-time
+                - http_proxy
+                - https_proxy
+                - no_proxy
+      dockerfile: docker/frontendserver/Dockerfile
+    volumes:
+      - /frontendserverApp/build
+      - AsEx1NodeModules:/frontendserverApp/node_modules
+      - AsFsEx1NodeModules:/frontendServer/node_modules
+    restart: always
+    network_mode: host
+    #ports:
+    # - "80:9000"
+  stagingprodpvserver:
+    env_file: .env
+    build:
+      context: ./
+      args: # Environment variables available at build-time
+                - http_proxy
+                - https_proxy
+                - no_proxy
+      dockerfile: docker/pvserver/Dockerfile
+    restart: always
+    network_mode: host
+  stagingdemoioc:
+    build:
+      context: ./
+      args: # Environment variables available at build-time
+                - http_proxy
+                - https_proxy
+                - no_proxy
+      dockerfile: docker/demoioc/Dockerfile
+    tty: true
+    stdin_open: true
+    restart: always
+    network_mode: host
+  stagingtestioc:
+    build:
+      context: ./
+      args: # Environment variables available at build-time
+                - http_proxy
+                - https_proxy
+                - no_proxy
+      dockerfile: docker/stagingioc/Dockerfile
+    tty: true
+    stdin_open: true
+    restart: always
+    network_mode: host
+volumes:
+  AsEx1NodeModules:
+  AsFsEx1NodeModules:

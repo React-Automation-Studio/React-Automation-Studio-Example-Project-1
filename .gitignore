@@ -72,7 +72,7 @@ yarn-error.log*
 *.csr
 *.cer
 *.key
-
+/build/*
 epics/testIOC/configure/O.linux-x86_64/
 epics/testIOC/iocBoot/iocexample/envPaths
 epics/testIOC/iocBoot/ioctestIOC/envPaths

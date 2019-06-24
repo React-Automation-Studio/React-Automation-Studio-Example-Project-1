@@ -1,0 +1,89 @@
+version: '3.2'
+services:
+  stagingfrontendserverdev:
+    env_file: .env
+    build:
+      context: ./
+      args: # Environment variables available at build-time
+                - http_proxy
+                - https_proxy
+                - no_proxy
+      dockerfile: docker/frontendserverDev/Dockerfile
+    volumes:
+      - AsEx1NodeModules:/frontendserverAppDev/node_modules
+      - ${PWD}:/frontendserverAppDev
+    restart: always
+    network_mode: host
+  stagingpvserver:
+    env_file: .env
+    build:
+      context: ./
+      args: # Environment variables available at build-time
+                - http_proxy
+                - https_proxy
+                - no_proxy
+      dockerfile: docker/pvserver/Dockerfile
+    restart: always
+    network_mode: host
+
+  stagingunsecurestylguidepvserver:
+    env_file: .env
+    environment:
+          - REACT_APP_PyEpicsServerPORT=5001
+          - REACT_APP_EnableLogin=false
+
+    build:
+      context: ./
+      args: # Environment variables available at build-time
+                - http_proxy
+                - https_proxy
+                - no_proxy
+      dockerfile: docker/pvserver/Dockerfile
+    restart: always
+    network_mode: host
+  stagingdemoioc:
+    build:
+      context: ./
+      args: # Environment variables available at build-time
+                - http_proxy
+                - https_proxy
+                - no_proxy
+      dockerfile: docker/demoioc/Dockerfile
+    tty: true
+    stdin_open: true
+    restart: always
+    network_mode: host
+  styleguideserver:
+    env_file: .env
+    environment:
+            - REACT_APP_PyEpicsServerPORT=5001
+            - REACT_APP_EnableLogin=false
+
+    build:
+      context: ./
+      args: # Environment variables available at build-time
+                - http_proxy
+                - https_proxy
+                - no_proxy
+      dockerfile: docker/styleguideserver/Dockerfile
+    volumes:
+      - /app/styleguide
+      - AsEx1NodeModules:/app/node_modules
+      - AsEx1SgNodeModules:/styleguideServer/node_modules
+    restart: always
+    network_mode: host
+  stagingtestioc:
+      build:
+        context: ./
+        args: # Environment variables available at build-time
+                  - http_proxy
+                  - https_proxy
+                  - no_proxy
+        dockerfile: docker/stagingioc/Dockerfile
+      tty: true
+      stdin_open: true
+      restart: always
+      network_mode: host
+volumes:
+  AsEx1NodeModules:
+  AsEx1SgNodeModules:

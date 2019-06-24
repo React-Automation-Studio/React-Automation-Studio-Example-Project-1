@@ -6,7 +6,7 @@ import App from './App';
 //import * as serviceWorker from './serviceWorker';
 
 import Main from './Main';
-import Demos from './automation-studio/src/components/Examples/Demos';
+import EpicsDemos from './automation-studio/src/components/Examples/EpicsDemos';
 import Help from './automation-studio/src/components/docs/Help';
 import Staging from './components/staging/Staging';
 import Example from './components/staging/Example/Example';
@@ -34,7 +34,7 @@ export default props=>(
       {props.limitRoutes===false&&<Route path="/Probe" component={Probe} />}
       {props.limitRoutes===false&&<Route path="/SettingsSinglePS" component={SettingsSinglePS} />}
       {props.limitRoutes===false&&<Route path="/SettingsSteererXY" component={SettingsSteererXY} />}
-      {props.limitRoutes===false&&<Route path="/Demos" component={Demos} />}
+      {props.limitRoutes===false&&<Route path="/EpicsDemos" component={EpicsDemos} />}
       {props.limitRoutes===false&&<Route path="/Help" component={Help} />}
       {props.limitRoutes===false&&<Route path="/Staging" component={Staging} />}
 
