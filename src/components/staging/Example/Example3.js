@@ -24,7 +24,7 @@ import SwitchComponent from '../../../automation-studio/src/components/BaseCompo
 import SelectionInput from '../../../automation-studio/src/components/BaseComponents/SelectionInput';
 import ToggleButton from '../../../automation-studio/src/components/BaseComponents/ToggleButton';
 import ActionButton from '../../../automation-studio/src/components/BaseComponents/ActionButton';
-import ArrowButton from '../../../automation-studio/src/components/BaseComponents/ArrowButton';
+
 import ThumbWheel from '../../../automation-studio/src/components/BaseComponents/ThumbWheel';
 import ControlRightEx1 from '../../../automation-studio/src/components/ControlScreens/GridComponents/ControlRightEx1'
 import ControlTopEx1 from '../../../automation-studio/src/components/ControlScreens/GridComponents/ControlTopEx1'

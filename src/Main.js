@@ -35,9 +35,23 @@ const styles = theme => ({
 
 });
 
-let AutomationStudioStyleGuideBuildURL;
+let pvServerBASEURL;
+if(typeof process.env.REACT_APP_PyEpicsServerBASEURL==='undefined'){
+  pvServerBASEURL= "http://127.0.0.1";
+}
+else{
+  pvServerBASEURL=process.env.REACT_APP_PyEpicsServerBASEURL;
+}
 
+let port;
+if(typeof process.env.REACT_APP_StyleguideServerPORT==='undefined'){
+  port= 6060;
+}
+else{
+  port=process.env.REACT_APP_StyleguideServerPORT;
+}
 
+let AutomationStudioStyleGuideBuildURL=pvServerBASEURL+":"+port;
 
 class Main extends Component {
   constructor(props) {
@@ -69,11 +83,11 @@ class Main extends Component {
 
 
 
-          <Button className= {classes.button} component={Link} to="/Demos" color="primary" variant='contained'>  Demos </Button>
+          <Button className= {classes.button} component={Link} to="/EpicsDemos" color="primary" variant='contained'>  Epics Demos </Button>
           <br/>
           <Button className= {classes.button} component={Link} to="/Staging" color="primary" variant='contained'>  Staging </Button>
           <br/>
-          
+
           <Button className= {classes.button} component={Link} to="/Help" color="secondary" variant='contained'>  Help </Button>
           <br/>
           <Button className= {classes.button} target="_blank" href={AutomationStudioStyleGuideBuildURL} color="secondary" variant='contained'>  StyleGuide </Button>

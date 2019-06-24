@@ -13,69 +13,40 @@ import { blue, indigo,pink, red, green,cyan,lime } from '@material-ui/core/color
 import io from 'socket.io-client';
 import { Redirect } from 'react-router-dom'
 import LogIn from './automation-studio/src/LogIn';
-import MobileTest from './automation-studio/src/components/Examples/MobileTest'
 
-let socket;
-switch(process.env.NODE_ENV){
-  case 'production':
-  if(typeof process.env.REACT_APP_PyEpicsServerURL==='undefined'){
-    console.log('process.env',process.env)
-    console.log('process.env.REACT_APP_PyEpicsServerURL!==undefined')
-    socket = io('127.0.0.1:5000/test',{
-      transports: ['websocket'],
-    })
+
+let port;
+ if(typeof process.env.REACT_APP_PyEpicsServerPORT==='undefined'){
+  port= 5000;
+ }
+ else{
+  port=process.env.REACT_APP_PyEpicsServerPORT;
+ }
+
+ let pvServerBASEURL;
+  if(typeof process.env.REACT_APP_PyEpicsServerBASEURL==='undefined'){
+   pvServerBASEURL= "http://127.0.0.1";
   }
   else{
-    socket = io(process.env.REACT_APP_PyEpicsServerURL,{
-      transports: ['websocket'],
-    })
+   pvServerBASEURL=process.env.REACT_APP_PyEpicsServerBASEURL;
   }
 
+  let pvServerNamespace;
+   if(typeof process.env.REACT_APP_PyEpicsServerNamespace==='undefined'){
+    pvServerNamespace= "test";
+   }
+   else{
+    pvServerNamespace=process.env.REACT_APP_PyEpicsServerNamespace;
+   }
+
+let PyEpicsServerURL=pvServerBASEURL+":"+port+"/"+pvServerNamespace;
 
 
 
-  break;
-  case 'development':
-  if(typeof process.env.REACT_APP_PyEpicsServerURL==='undefined'){
-    console.log('process.env',process.env)
-    console.log('process.env.REACT_APP_PyEpicsServerURL!==undefined')
-    socket = io('127.0.0.1:5000/test',{
+let socket = io(PyEpicsServerURL,{
       transports: ['websocket'],
     })
-  }
-  else{
-    socket = io(process.env.REACT_APP_PyEpicsServerURL,{
-      transports: ['websocket'],
-    })
-  }
 
-
-
-
-  break;
-  case 'test':
-  if(typeof process.env.REACT_APP_PyEpicsServerURL==='undefined'){
-    console.log('process.env',process.env)
-    console.log('process.env.REACT_APP_PyEpicsServerURL!==undefined')
-    socket = io('127.0.0.1:5000/test',{
-      transports: ['websocket'],
-    })
-  }
-  else{
-    socket = io(process.env.REACT_APP_PyEpicsServerURL,{
-      transports: ['websocket'],
-    })
-  }
-
-
-
-
-
-
-
-
-  break;
-}
 
 
 
