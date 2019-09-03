@@ -1,3 +1,4 @@
 [submodule "src/automation-studio"]
 	path = src/automation-studio
 	url = https://bitbucket.org/epicscontributors/automation-studio/src/master/
+        branch = master

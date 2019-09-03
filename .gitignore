@@ -11,8 +11,8 @@
 /coverage
 
 # production
-/build
-
+!/build/
+/build/*
 /venv
 /epics/base
 /epics/support
@@ -72,7 +72,7 @@ yarn-error.log*
 *.csr
 *.cer
 *.key
-/build/*
+
 epics/testIOC/configure/O.linux-x86_64/
 epics/testIOC/iocBoot/iocexample/envPaths
 epics/testIOC/iocBoot/ioctestIOC/envPaths
@@ -82,13 +82,38 @@ epics/testIOC/testIOCApp/src/O.Common/
 epics/testIOC/testIOCApp/src/O.linux-x86_64/
 epics/testIOC/bin/
 epics/testIOC/bin/
+
+epics/stagingHarpsTestIOC/configure/O.linux-x86_64/
+epics/stagingHarpsTestIOC/iocBoot/iocexample/envPaths
+epics/stagingHarpsTestIOC/iocBoot/iocstagingHarpsTestIOC/envPaths
+epics/stagingHarpsTestIOC/dbd/stagingHarpsTestIOC.dbd
+epics/stagingHarpsTestIOC/stagingHarpsTestIOCApp/Db/O.linux-x86_64/
+epics/stagingHarpsTestIOC/stagingHarpsTestIOCApp/src/O.Common/
+epics/stagingHarpsTestIOC/stagingHarpsTestIOCApp/src/O.linux-x86_64/
+epics/stagingHarpsTestIOC/bin/
+epics/stagingHarpsTestIOC/bin/
+
+epics/stagingTestIOC/configure/O.linux-x86_64/
+epics/stagingTestIOC/iocBoot/iocexample/envPaths
+epics/stagingTestIOC/iocBoot/iocstagingTestIOC/envPaths
+epics/stagingTestIOC/dbd/stagingTestIOC.dbd
+epics/stagingTestIOC/stagingTestIOCApp/Db/O.linux-x86_64/
+epics/stagingTestIOC/stagingTestIOCApp/src/O.Common/
+epics/stagingTestIOC/stagingTestIOCApp/src/O.linux-x86_64/
+epics/stagingTestIOC/bin/
+epics/stagingTestIOC/bin/
+
 epics/*.gz
 
 __pycache__/
 /styleguide/build/
-/styleguide/
+!/styleguide/
 
 .env
 pvServer/userAuthentication/SECRET_PWD_KEY
 pvServer/userAuthentication/SECRET_KEY
 pvServer/userAuthentication/USERS
+
+users/users.json
+users/pvAccess.json
+users/SECRET_PWD_KEY

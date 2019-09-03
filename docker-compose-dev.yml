@@ -10,8 +10,12 @@ services:
                 - no_proxy
       dockerfile: docker/frontendserverDev/Dockerfile
     volumes:
-      - AsEx1NodeModules:/frontendserverAppDev/node_modules
-      - ${PWD}:/frontendserverAppDev
+      #- ${PWD}:/frontendserverAppDev
+      #- iTlAsNodeModules:/frontendserverAppDev/node_modules
+      - ./certificates:/certificates/
+      - ./package.json:/frontendserverAppDev/package.json
+      - ./src:/frontendserverAppDev/src
+      - ./public:/frontendserverAppDev/public
     restart: always
     network_mode: host
   stagingpvserver:
@@ -25,7 +29,11 @@ services:
       dockerfile: docker/pvserver/Dockerfile
     restart: always
     network_mode: host
-
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./certificates:/certificates/
+      - ./users:/pvServer/userAuthentication/users
   stagingunsecurestylguidepvserver:
     env_file: .env
     environment:
@@ -41,6 +49,8 @@ services:
       dockerfile: docker/pvserver/Dockerfile
     restart: always
     network_mode: host
+    volumes:
+      - ./certificates:/certificates/
   stagingdemoioc:
     build:
       context: ./
@@ -67,9 +77,10 @@ services:
                 - no_proxy
       dockerfile: docker/styleguideserver/Dockerfile
     volumes:
-      - /app/styleguide
-      - AsEx1NodeModules:/app/node_modules
-      - AsEx1SgNodeModules:/styleguideServer/node_modules
+      #- /app/styleguide
+      #- iTlAsNodeModules:/app/node_modules
+      #- iTlAsSgNodeModules:/styleguideServer/node_modules
+      - ./certificates:/certificates/
     restart: always
     network_mode: host
   stagingtestioc:
@@ -84,6 +95,3 @@ services:
       stdin_open: true
       restart: always
       network_mode: host
-volumes:
-  AsEx1NodeModules:
-  AsEx1SgNodeModules:

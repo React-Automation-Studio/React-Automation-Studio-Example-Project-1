@@ -1,4 +1,4 @@
-version: '3.2'
+version: '3.4'
 services:
   stagingprodfrontendserver:
     env_file: .env
@@ -10,13 +10,13 @@ services:
                 - no_proxy
       dockerfile: docker/frontendserver/Dockerfile
     volumes:
-      - /frontendserverApp/build
-      - AsEx1NodeModules:/frontendserverApp/node_modules
-      - AsFsEx1NodeModules:/frontendServer/node_modules
+      #- /frontendserverApp/build
+      #- iTlAsNodeModules:/frontendserverApp/node_modules
+      #- iTlFsNodeModules:/frontendServer/node_modules
+      - ./certificates:/certificates/
     restart: always
     network_mode: host
-    #ports:
-    # - "80:9000"
+
   stagingprodpvserver:
     env_file: .env
     build:
@@ -28,6 +28,11 @@ services:
       dockerfile: docker/pvserver/Dockerfile
     restart: always
     network_mode: host
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./certificates:/certificates/
+      - ./users:/pvServer/userAuthentication/users
   stagingdemoioc:
     build:
       context: ./
@@ -52,6 +57,3 @@ services:
     stdin_open: true
     restart: always
     network_mode: host
-volumes:
-  AsEx1NodeModules:
-  AsFsEx1NodeModules:

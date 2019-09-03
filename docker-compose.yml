@@ -10,12 +10,10 @@ services:
                 - no_proxy
       dockerfile: docker/frontendserver/Dockerfile
     volumes:
-      - /frontendserverApp/build
-      - AsEx1NodeModules:/frontendserverApp/node_modules
-      - AsFsEx1NodeModules:/frontendServer/node_modules
+      - ./certificates:/certificates/
     restart: always
     network_mode: host
-    #ports:
+        #ports:
     # - "80:9000"
   stagingprodpvserver:
     env_file: .env
@@ -28,6 +26,6 @@ services:
       dockerfile: docker/pvserver/Dockerfile
     restart: always
     network_mode: host
-volumes:
-  AsEx1NodeModules:
-  AsFsEx1NodeModules:
+    volumes:
+      - ./certificates:/certificates/
+      - ./users:/pvServer/userAuthentication/users
