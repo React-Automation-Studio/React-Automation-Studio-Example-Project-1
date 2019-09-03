@@ -1,9 +1,13 @@
 
 import React, { Component } from 'react';
 
+//import AutomationStudioContext from '../SystemComponents/AutomationStudioContext';
 
+
+//import './App.css';
+//import io from 'socket.io-client';
 import Routes from './routes'
-//import LimitedRoutes from './limitedRoutes'
+
 import 'typeface-roboto';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,51 +18,60 @@ import io from 'socket.io-client';
 import { Redirect } from 'react-router-dom'
 import LogIn from './automation-studio/src/LogIn';
 
+// const socket = io('https://172.16.5.52:5000/test',{
+//   transports: ['websocket'],
+//   secure:true
+// })
 
+
+console.log('process.env',process.env)
 let port;
- if(typeof process.env.REACT_APP_PyEpicsServerPORT==='undefined'){
+if(typeof process.env.REACT_APP_PyEpicsServerPORT==='undefined'){
   port= 5000;
- }
- else{
+}
+else{
   port=process.env.REACT_APP_PyEpicsServerPORT;
- }
+}
 
- let pvServerBASEURL;
-  if(typeof process.env.REACT_APP_PyEpicsServerBASEURL==='undefined'){
-   pvServerBASEURL= "http://127.0.0.1";
-  }
-  else{
-   pvServerBASEURL=process.env.REACT_APP_PyEpicsServerBASEURL;
-  }
+let pvServerBASEURL;
+if(typeof process.env.REACT_APP_PyEpicsServerBASEURL==='undefined'){
+  pvServerBASEURL= "http://127.0.0.1";
+}
+else{
+  pvServerBASEURL=process.env.REACT_APP_PyEpicsServerBASEURL;
+}
 
-  let pvServerNamespace;
-   if(typeof process.env.REACT_APP_PyEpicsServerNamespace==='undefined'){
-    pvServerNamespace= "test";
-   }
-   else{
-    pvServerNamespace=process.env.REACT_APP_PyEpicsServerNamespace;
-   }
+let pvServerNamespace;
+if(typeof process.env.REACT_APP_PyEpicsServerNamespace==='undefined'){
+  pvServerNamespace= "pvServer";
+}
+else{
+  pvServerNamespace=process.env.REACT_APP_PyEpicsServerNamespace;
+}
 
 let PyEpicsServerURL=pvServerBASEURL+":"+port+"/"+pvServerNamespace;
 
 
 
 let socket = io(PyEpicsServerURL,{
-      transports: ['websocket'],
-    })
+  transports: ['websocket'],
+})
 
 
 
-
-
+/*
+const socket = io('127.0.0.1:5000/test',{
+transports: ['websocket']
+})*/
+let themeStyle='dark';
 class App extends Component {
   constructor(props) {
     super(props);
 
     let theme = createMuiTheme({
       palette: {
-        type:'dark',
-        primary: cyan,
+        type:themeStyle,
+        primary: themeStyle=='dark'?cyan:indigo,
         secondary:pink,
         error: pink,
         action:green,
@@ -112,62 +125,70 @@ class App extends Component {
 
 
     }
-  this.handleConnect=this.handleConnect.bind(this);
-  this.handleRedirectToLogIn=this.handleRedirectToLogIn.bind(this);
-    this.handleAuthentication=this.handleAuthentication.bind(this);
+    this.handleConnect=this.handleConnect.bind(this);
+
+    this.handleClientAuthorisation=this.handleClientAuthorisation.bind(this);
   }
-  handleRedirectToLogIn(){
-    console.log('redirectToLogIn')
-    this.setState({'redirectToLoginPage':true});
-  }
+
 
   handleConnect(){
+    console.log("soceket connected")
+    //  console.log('soceket connecting');
+    let jwt = JSON.parse(localStorage.getItem('jwt'));
 
-      console.log('soceket connecting');
-      let jwt = JSON.parse(localStorage.getItem('jwt'));
-
-      console.log('jwt',jwt);
-
+    //console.log('jwt',jwt);
+    if(jwt){
       let socket=this.state.system.socket;
-      socket.emit('Authenticate', jwt);
+      socket.emit('AuthoriseClient', jwt);
+    }
 
 
   }
-  handleAuthentication(msg){
+  handleClientAuthorisation(msg){
 
-    this.setState({'Authenticated':msg.successful,'AuthenticationFailed':msg.successful!==true});
+    this.setState({'Authorised':msg.successful,'AuthorisationFailed':msg.successful!==true});
 
 
   }
   componentDidMount(){
-    this.setState({'redirectToLoginPage':false});
-    let socket=this.state.system.socket;
-    socket.on('connect',this.handleConnect);
-    //socket.on('redirectToLogIn', this.handleRedirectToLogIn);
-    socket.on('authentication',this.handleAuthentication);
+
+    let jwt = JSON.parse(localStorage.getItem('jwt'));
+
+    if(jwt){
+      this.setState({'redirectToLoginPage':false});
+      let socket=this.state.system.socket;
+      socket.on('connect',this.handleConnect);
+      //socket.on('redirectToLogIn', this.handleRedirectToLogIn);
+      socket.on('clientAuthorisation',this.handleClientAuthorisation);
+
+
+    }
+
+
+
   }
   componentWillUnmount(){
     console.log('unmounted')
-      let socket=this.state.system.socket;
-      socket.removeListener('connect',this.handleConnect);
+    let socket=this.state.system.socket;
+    socket.removeListener('connect',this.handleConnect);
     //  socket.removeListener('redirectToLogIn', this.handleRedirectToLogIn);
-      socket.removeListener('authentication',this.handleAuthentication);
+    socket.removeListener('clientAuthorisation',this.handleClientAuthorisation);
   }
   render() {
-  //  console.log('node env',process.env.NODE_ENV)
-  //  console.log(this.state.theme)
+    //  console.log('node env',process.env.NODE_ENV)
+    //  console.log(this.state.theme)
 
-    console.log(this.state.system)
+    console.log(this.state)
     return (
 
       <AutomationStudioContext.Provider value={this.state.system}>
         <MuiThemeProvider theme={this.state.theme}>
           <CssBaseline />
+          <Routes limitRoutes={false}>
+            {/*<Routes limitRoutes={this.state.AuthenticationFailed}/>*/}
 
-           <Routes limitRoutes={false}/>
-          {/*<Routes limitRoutes={this.state.AuthenticationFailed}/>*/}
 
-
+          </Routes>
         </MuiThemeProvider>
       </AutomationStudioContext.Provider>
     );

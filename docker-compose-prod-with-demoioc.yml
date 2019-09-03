@@ -33,6 +33,23 @@ services:
     volumes:
       - ./certificates:/certificates/
       - ./users:/pvServer/userAuthentication/users
+  stagingunsecurestylguidepvserver:
+    env_file: .env
+    environment:
+          - REACT_APP_PyEpicsServerPORT=5001
+          - REACT_APP_EnableLogin=false
+
+    build:
+      context: ./
+      args: # Environment variables available at build-time
+                - http_proxy
+                - https_proxy
+                - no_proxy
+      dockerfile: docker/pvserver/Dockerfile
+    restart: always
+    network_mode: host
+    volumes:
+      - ./certificates:/certificates/
   stagingdemoioc:
     build:
       context: ./
@@ -45,15 +62,35 @@ services:
     stdin_open: true
     restart: always
     network_mode: host
-  stagingtestioc:
+  styleguideserver:
+    env_file: .env
+    environment:
+            - REACT_APP_PyEpicsServerPORT=5001
+            - REACT_APP_EnableLogin=false
+
     build:
       context: ./
       args: # Environment variables available at build-time
                 - http_proxy
                 - https_proxy
                 - no_proxy
-      dockerfile: docker/stagingioc/Dockerfile
-    tty: true
-    stdin_open: true
+      dockerfile: docker/styleguideserver/Dockerfile
+    volumes:
+      #- /app/styleguide
+      #- iTlAsNodeModules:/app/node_modules
+      #- iTlAsSgNodeModules:/styleguideServer/node_modules
+      - ./certificates:/certificates/
     restart: always
     network_mode: host
+  stagingtestioc:
+      build:
+        context: ./
+        args: # Environment variables available at build-time
+                  - http_proxy
+                  - https_proxy
+                  - no_proxy
+        dockerfile: docker/stagingioc/Dockerfile
+      tty: true
+      stdin_open: true
+      restart: always
+      network_mode: host

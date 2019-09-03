@@ -27,7 +27,7 @@ import ActionButton from '../../../automation-studio/src/components/BaseComponen
 
 import ThumbWheel from '../../../automation-studio/src/components/BaseComponents/ThumbWheel';
 import ControlRightEx1 from '../../../automation-studio/src/components/ControlScreens/GridComponents/ControlRightEx1'
-import ControlTopEx1 from '../../../automation-studio/src/components/ControlScreens/GridComponents/ControlTopEx1'
+
 import ControlBottomEx1 from '../../../automation-studio/src/components/ControlScreens/GridComponents/ControlBottomEx1'
 import Card from '@material-ui/core/Card';
 import SideBar from '../../../automation-studio/src/components/SystemComponents/SideBar';

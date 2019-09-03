@@ -8,6 +8,8 @@ import {Link} from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 import RedirectToLogIn from './automation-studio/src/components/SystemComponents/RedirectToLogin.js';
 import SideBar from './automation-studio/src/components/SystemComponents/SideBar';
+import Grid from '@material-ui/core/Grid';
+import { Redirect } from 'react-router-dom'
 // Styles
 
 
@@ -28,10 +30,21 @@ const styles = theme => ({
     height:'50%'
 
   },
-  button:{
-    marginTop:'10px',
-    paddingTop:'10px'
-  }
+  button: {
+    width:'100%',
+    height:'100%',
+    marginTop:'auto',
+    marginBottom:'auto',
+    marginLeft:'auto',
+    marginRight:'auto',
+    //  width:'100%',
+    //    marginTop:'auto',
+    //    marginLeft:'auto',
+    //    marginRight:'auto',
+    //    marginBottom:'auto',
+
+  },
+
 
 });
 
@@ -53,10 +66,12 @@ else{
 
 let AutomationStudioStyleGuideBuildURL=pvServerBASEURL+":"+port;
 
+
 class Main extends Component {
   constructor(props) {
     super(props);
     this.logout=this.logout.bind(this);
+    this.state={redirectToLoginPage:false}
   }
 
   logout(){
@@ -74,8 +89,38 @@ class Main extends Component {
 
     return (
       <React.Fragment>
-        <SideBar/>
-        <div id="test" className={classes.center}>
+        <RedirectToLogIn/>
+        <Grid container direction="row" item justify="center" spacing={1} alignItems="center">
+          <Grid item lg={4} sm={4} xs={2}>
+            <SideBar/>
+          </Grid>
+
+          <Grid  item lg={2} sm={4}  xs={8}>
+
+            <div style={{textAlign: 'center'}} className={classes.body1}>React Automation Studio V1.00</div>
+
+          </Grid>
+          <Grid item lg={4} sm={4} xs={2}>
+
+          </Grid>
+        </Grid>
+        <Grid container direction="row" item justify="center" spacing={1} alignItems="center">
+          <Grid item lg={2} sm={4}  xs={8}>
+            <Grid container direction="row" justify="center" spacing={3} alignItems="stretch">
+              <Grid item xs={12}  >
+                  <Button className= {classes.button} component={Link} to="/EpicsDemos" color="primary" variant='contained'>  Epics Demos </Button>
+              </Grid>
+
+              <Grid item xs={12}  >
+                  <Button className= {classes.button} component={Link} to="/Staging" color="primary" variant='contained'>  Staging </Button>
+              </Grid>
+              <Grid item xs={12}  >
+              <Button className= {classes.button} target="_blank" href={AutomationStudioStyleGuideBuildURL} color="secondary" variant='contained'>  Help </Button>
+              </Grid>
+            </Grid>
+
+          </Grid>
+        </Grid>
 
 
 
@@ -83,23 +128,10 @@ class Main extends Component {
 
 
 
-          <Button className= {classes.button} component={Link} to="/EpicsDemos" color="primary" variant='contained'>  Epics Demos </Button>
-          <br/>
-          <Button className= {classes.button} component={Link} to="/Staging" color="primary" variant='contained'>  Staging </Button>
-          <br/>
 
-          <Button className= {classes.button} component={Link} to="/Help" color="secondary" variant='contained'>  Help </Button>
-          <br/>
-          <Button className= {classes.button} target="_blank" href={AutomationStudioStyleGuideBuildURL} color="secondary" variant='contained'>  StyleGuide </Button>
-          <RedirectToLogIn/>
+          </React.Fragment>
+          )
+          }
+          }
 
-
-
-
-        </div>
-      </React.Fragment>
-  )
-}
-}
-
-export default withRouter(withStyles(styles)(Main));
+          export default withRouter(withStyles(styles)(Main));

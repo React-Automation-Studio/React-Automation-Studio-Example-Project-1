@@ -33,7 +33,7 @@ import ToggleButton from '../../../automation-studio/src/components/BaseComponen
 import ActionButton from '../../../automation-studio/src/components/BaseComponents/ActionButton';
 
 import ControlRightEx1 from '../../../automation-studio/src/components/ControlScreens/GridComponents/ControlRightEx1'
-import ControlTopEx1 from '../../../automation-studio/src/components/ControlScreens/GridComponents/ControlTopEx1'
+
 import ControlBottomEx1 from '../../../automation-studio/src/components/ControlScreens/GridComponents/ControlBottomEx1'
 import Gauge from '../../../automation-studio/src/components/BaseComponents/Gauge';
 import Card from '@material-ui/core/Card';
