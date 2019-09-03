@@ -1,492 +1,196 @@
-#Introduction
+# Introduction
 
-Automation Studio is a new software platform to enable the control of large scientific equipment through EPICS.
+This repository pulls in the src from the  React Automation Studio repository and acts a standalone boiler plate example project for React Automation Studio without having to delve into the source code of the master repository.
 
-The system implements a modern tool chain with a React frontend with integrated Material-UI and ReactVis components and real time Socket-IO data transfer to a Python based PyEpics backend.
-Installation occurs as a progressive web application. This enables efficient and responsive cross platform and cross device operation.
+The system has been containerised with Docker and version controlled as a mono-repository using Git.
 
-The current software stack is show in Fig1.
+Each of the Docker containers are deployed as micro services and environment variables can be configured to deploy the system on different ports, or to enable user authentication and authorisation or to serve the application on a unique URL or on the localhost. Separate Docker commands exist to load the development and production version. These containerised environments allows for precise versioning of packages used and prevents deployment dependency issues.
+
+The software stack for React Automation Studio is shown in Fig. 1 and an overview of the system components are give below:
 
 ![picture](img/softwareStack.png)
-*Fig 1. The current software stack*
 
-This repository is the code source for Automation Studio. The repository is built in 4 components:
+*Fig 1. The current software stack and an example mobile layout*
+
+An overview of the system components are give below:
 
 *1. pvServer*
 
-This is the python process variable server. Process variable requests are made from the multiple connected clients, the pvServer makes a connection to the EPICS process variable and serves the process variable meta data and data to client through socket-IO events.
+This is the python process variable server. It is layered on the Flask and  Flask-Socket-IO web application frameworks to serve the EPICS process variables to clients.
 
-User login and authentication can enable in the pvServer and the client by altering the environment variables.
+Communication between clients and the pvServer occurs between the data connection wrapper in the client components and the pvServer as follows:
+
+The client initially makes a Socket-IO connection to the pvServer. Depending if authentication is enabled the client will first be authenticated, thereafter the  data connection wrapper will emit Socket-IO events to the pvServer requesting access to the EPICS variable.
+
+Depending on the clients access rights, access is either denied or the socket connection is placed in a Socket-IO room with read-only or read-write privileges but with same name as PV. EPICS CA to the required process variables are established and the PyEpics PV is stored in a list, the connection and value change call backs of the PyEpics CA are used to emit meta-data, connection status and value changes to the read-only and read-write rooms. The PV name is used as the event name.
+
+In the data connection layer of the clients components, an event listener that is tied to the PV name is registered on the Socket-IO connection for each instantiation of the component. This allows efficient asynchronous update of each listening component when the pvServer emits the PVs event update.
+
+The only difference between the read-only and read-write rooms is that the write-access field of the meta-data has been changed to read-only based on the access rights and that for a read-write room the write access field is inherited from security rights defined by the EPICS IOC or gateway.
+
+Similarly for writes to an EPICS variable, depending on the access rights, the client is either granted  or denied permission to write to the variable.
 
 *2. React frontend*
 
- The React frontend is  integrated with Material-UI and ReactVis components that have data a connection wrapper around them that allow connection to the pvServer through a single socket.
+React was chosen to develop the frontend for the PWA as it enables us to develop the frontend in a single language, i.e JavaScript  as opposed to conventional web development in HTML, JavaScript and CSS. The UI interfaces that we have created are highly responsive and offer a real-time experience as is shown in the example of a mobile view in in Fig. 1.
 
- Some components can handle multiple PVs such as the graph or single PVs such as textinputs. For each of the components the PVs name can me declared using macros. The macros are replaced at runtime.
- This allows  the complex design of user interfaces that can be reused by simply grouping the components and changing the global macro to point to another system.
+We have integrated selected components from the Material-UI React component framework and the React-visgraphing framework with our system to create user interfaces with the same features that we use in our current CS-Studio operator interfaces. These components have been integrated with a data connection layer which handles, input and output, meta-data for labels, limits, precision, alarm sensitivity and initialisation from the pvServer.
 
- By using Material-UI's grid layout system responsive UI's can be implemented  across platforms and across multiple devices.
+Some components can handle multiple PVs such as the graph or single PVs such as text inputs. For each of the components the PVs name can be declared using macros. The macros are replaced at component instantiation. This allows the  design of complex user interfaces that can be reused by simply grouping the components and changing the global macro to point to another system.
 
- Enormous effort was put into the documentation and the style guide should be launched to view how to use and instantiate the components.
 
 
 *3. Styleguide*
 
-The style guide is based on Reactstyleguidedist and is used to document the use of all the components from the source files. The current style guide is interactive with the demo IOC
+A lot of effort was put into the documentation and a style guide based on React Styleguidedist and is used as the help function and to document the use of all the components from the source files. The current style guide is also  interactive with a demo IOC. All the properties of each of the components are documented and examples of their usage are shown.
 
-*4. Demo Epics IOC*
+*4. Access rights and Administration*
 
-The repository comes with a demonstration IOC that enables the frontend demos to connect live to a realtime system.
+The URL, protocol selection for HTTPS or HTTP , authentication and server ports are controlled through the environment variables.
 
-*5. Future*
+If React Automation Studio is installed on the localhost then there is no need to enable authentication as the host authentication system will protect access.
 
-In future boiler plate repositories will be created that pull in the packages from this repository and the installation will be simplified through the use of containers.
+In this release, and with authentication enabled, the user name and password are managed through an administrator Docker environment through the command line. Passwords are stored on the server in encrypted format using Bcrypt. In future releases this may be replaced by a web based administration page. The default authentication procedure can easily be modified to suite a different environment and point to an authentication server. The client is kept authenticated using an encrypted Jason Web Token (JWT). This JWT is used to check authorisation and access rights for every PV request and write. If the JWT is invalidated by the server then user will be required to login.
 
-
-
-# 0 Automated installation of Automation Studio
-
-1st clone the repo
+Access rights can be controlled though a JSON file which contains user access groups and rules for defining PV access using regular expressions in the same way that the EPICS Gatewayaccess is defined. All of the components in React Automation studio currently indicate access rights to the PV.
 
 
-2nd setup enviroment variables as in 7.1 and 7.2
 
-In Automation Studio installation folder
+# 1 Installation
+The development and production versions of React Automation Studio have been containerized with Docker.
+
+It is advised to only use the containerized version.
+
+
+
+Prerequisites: git , latest version of docker-ce and docker compose
+
+To install docker-ce follow:
+
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
+
+And docker-compose:
+
+https://docs.docker.com/compose/install/
+
+
+First clone this repo.
+
+
+To install the efficient production version with default settings:
+
+In React Automation Studio installation folder run:
+```bash
+touch .env
+```
+Initialize the git submodule:
 ```bash
 git submodule update --init --recursive
-npm install
-npm start
-
 ```
-
-
-
-# 1 Semi Automated installation of Automation Studio
-
-This is still in testing mode. use manual installation for now
-
-1st clone the repo
-
-## 1.1 Install npm modules
-
-In Automation Studio installation folder
+update and merge with the latest submodule master commit
 ```bash
-npm install
-npm run build
+git submodule update --remote --merge
 ```
-
-## 1.2 pvServer Installation
-
-Make sure docker is installed:
-
-https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
-
-In Automation Studio installation folder:
-To build:
+# 2 Launching the Docker compose files
+The systems uses Docker to create isolated production and development environments. There are four docker-compose configuration files.
 
 ```bash
-  docker build -t pvserver -f docker/pvserver/Dockerfile .
+docker-compose -f docker-compose.yaml up
 ```
-
-To run:
+Will launch the compiled production version without the demoIOC's and styleguide
+```bash
+docker-compose -f docker-compose-prod-with-demoioc.yml up
+```
+Will launch the compiled production version with the demoIOC's and styleguide
 
 ```bash
-
-  docker run -d -P --network="host"  pvserver
+docker-compose -f docker-compose-dev.yml up
 ```
-
-
-## 1.3 demoIOC Installation
-
-Make sure docker is installed:
-
-https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
-
-In Automation Studio installation folder:
-To build:
+Will launch the development version with the demoIOC's and styleguide.
+And:
 
 ```bash
-   docker build -t demoioc -f docker/demoioc/Dockerfile .
+docker-compose -f docker-compose-administator.yml run administrator
 ```
+will launch the username, login and password administration functions environment.
 
-To run in detached mode :
+Initially to check that everything is working only bring up the production version by running
 
 ```bash
-
-  docker run -it -d -P --network="host"  demoioc
+docker-compose  up
 ```
 
-Or in foreground:
+This installation process of all the docker images may take a while (20-30min) the first time. There after it is fast as all the repeated build and up commands uses cached installations. The longest process is the installation of the node modules. Do not be deterred by the red warnings.
 
+This default installation will serve the  app at http://127.0.0.1:9000 and the style guide at http://127.0.0.1:6060.
+
+
+To launch the development environment make sure the production version is stopped,and the run :
 ```bash
-
-  docker run -it  -P --network="host"  demoioc
-
+docker-compose -f docker-compose-dev.yml up
 ```
+This will launch the pvServer, demo IOC ,style guide and the React Development environment. As with the production version the first run may take awhile. There after it is fast as all the repeated build and up commands uses cached installations.
 
+The react development environment app will be served on http://127.0.0.1:3000 and the styleguide at http://127.0.0.1:6060.
 
-## 1.4 production frontend Installation
+The source can then be edited using your favorite editor like Atom, when the file is saved the project automatically recompiles and the web page is refreshed. It is recommended to only work in the
+/src/components/staging/ folders.
 
-Make sure docker is installed:
+Bug fixes and contributions can be submitted via pull requests.
 
-https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
+To change the URL, ports, and enable user authentication See section 6.1 and 6.2
 
-In Automation Studio installation folder:
-To build:
 
-```bash
-   docker build -t frontendserver -f docker/frontendserver/Dockerfile .
-```
 
-To run:
 
-```bash
+# 3 Enabling user login, authentication and https
 
-   docker run -d -P --network="host"  frontendserver
-```
+If it is intended to run the application locally on a pc then no authentication is needed and the users' system login will protect access.
 
+If access is required on a mobile device or from another pc then is encourage to enable HTTPS and user authentication.
 
-## 1.5 production Styleguide Installation
 
-Make sure docker is installed:
+To enable secure transmission of usernames and passwords it is highly recommend to enabled HTTPS as in section 3.3.
 
-https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
+With this release the authentication  feature is quite open for customization. The authentication is handled in python backend and the authentication procedure can easily be modified to use another authentication procedure.
 
-In Automation Studio installation folder:
-To build:
+The current authentication method works as follows:
 
-```bash
-   docker build -t styleguideserver -f docker/styleguideserver/Dockerfile .
-```
+_Note: The administrator must first enable login ability and setup the users and access rights as described in 3.1._
 
-To run:
+The administration utility in 3.1 is used to create users and store the passwords in an encrypted format using Bcrypt.
 
-```bash
+The usernames and passwords are stored in json format in USERS/users.json file.
 
-   docker run -d -P --network="host"  styleguideserver
-```
+Only the administration utility should be used to edit this file.
 
+The access rights for each user are managed in the USERS/pvAccess.json file.
+Configuring this file is described in 3.2.
 
+If the system is configured correctly then the user will be directed to the login page initially.
 
+They will be prompted to enter the username and password.
 
-Still to come...
+The username and password is then  transmitted to the backend for authentication. If authenticated, the server returns an encrypted Jason web token (JWT). This is used to keep the user logged in between session. No username or password is stored in the browser. The user must logout in order cancel the session.
 
-# 2 Automated Dev environment
+The JWT can also be invalidated by changing the username/ password in the administration utility.
 
-Still to come...
+If the JWT is invalid the user will be redirected tot he login screen.
 
-# 3 Automated Production deployment
+All JWT's of all users can also be invalidated by declaring a new secret key in the USERS/SECRET_PWD_KEY file. If the SECRET_PWD_KEY file is not defined then a random key will be used and the JWTs will change everytime the server restarts.
 
-Still to come...
+For every process variable write the access rights are first checked to confirm if the process variable can be written to. And for every user at the initial data connection to each process variable the read access rights are checked.
 
-# 4 Manual Installation
+If no read access rights are granted the widget on the client will display "connecting" permanently. And if no write access is granted the widget is indicated as read only.
 
-Clone this repo.
 
-##4.1 Manual Installation of EPICS
 
-The system comes with an EPICS demo IOC which runs on a custom port 8001, so as not to interfere with the normal EPICS network,
 
-If the demo IOC is not required then at least EPICS base installation needs to exits for PyEPICs to enable the channel access.
+## 3.1 Enabling login and authentication
 
-If you wish to customize the location of EPICS installation then the following lines need to be edited to pointed to your install location, otherwise add as so to the end of your to your **~/.bashrc**
+First cd to React Automation Studio installation directory
 
-### 4.1.1 Setup the EPICS environment variables
-
-```bash
-
-export PYEPICS_LIBCA=/epics/base/lib/linux-x86_64/libca.so
-export EPICS_BASE=/epics/base/
-export EPICS_HOST_ARCH=x86_64
-
-```
-
-To enable pyEpics to communicate to the demo IOC also add
-
-```bash
-
-export EPICS_CA_ADDR_LIST="127.0.0.1:8001"
-
-```
-
-The default is to place the EPICS installation inside the epics subfolder for the installation folder Automation Studio's.
-
-It is also necessary then to create a symbolic link to /epics , otherwise the configure RELEASE files need to be updated manualy
-
-### 4.2.2.1 Install dependencies
-
-Run:
-
-```bash
-sudo apt-get install autoconf libtool check patch build-essential libreadline-gplv2-dev re2c libxml2-dev  tmux curl
-```
-
-### 4.2.2.2 Download and install EPICS base
-
-Inside the epics subfolder, run:  
-
-```bash
-ls
-```  
-
-You should see the testIOC folder which houses the demo IOC.
-
-Next, download and install base  
-
-Run:  
-
-``` bash  
-wget https://epics.anl.gov/download/base/base-3.15.6.tar.gz
-tar -xvf base-3.15.6.tar.gz
-mv base-3.15.6 base
-cd base
-make
-cd ..
-rm base-3.15.6.tar.gz
-sudo ln -s $PWD/epics /epics
-cd /epics
-ls
-```
-check to see if your epics files exist
-
-cd back to Automation Studio install path and cd to epics/
-
-
-### 4.2.2.3 Download and install Synapps
-
-If you are installing the demo IOC the n you must install Synapps
-
-Run:  
-
-```bash
-
-wget https://epics.anl.gov/bcda/synApps/tar/synApps_6_0.tar.gz
-tar -xvf synApps_6_0.tar.gz
-mv synApps/support/ support
-rm -R synApps
-rm synApps_6_0.tar.gz
-
-```
-Edit support/configure/RELEASE to suite your needs or run:
-
-```bash
-cp config/synApps_6_0/configure/RELEASE support/configure/RELEASE
-cp config/synApps_6_0/busy-R1-7/configure/RELEASE support/busy-R1-7/configure/RELEASE
-cp config/synApps_6_0/ipac-2-15/configure/RELEASE support/ipac-2-15/configure/RELEASE
-cd support
-make release
-make
-cd..
-cd testIOC
-make clean
-make
-```
-
-
-
-
-
----
-
-## 4.2 Install node V10.15.0
-```bash
- curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
- source ~/.bashrc
- nvm install v10.15.0
- nvm ls
- node --version
-```
-
-## 4.3 Install reactJS node modules
-
-cd to automation studio install directory
-
-```bash
-
-npm install
-
-```
-
-This may take a while depending on you internet connection speed
-
-
-## 4.4 Install Python 3.7.3
-
-Install dependencies:
-
-```bash
-sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
-libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
-xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
-```
-Install pyenv:
-```bash
-
-curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
-
-```
-
-Then Add the following to ~/.bash_profile, ~/.profile or ~/.bashrc.
-
-```bash
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-```
-
-then:
-
-```bash
-
-source ~/.bashrc
-
-
-pyenv update
-
-pyenv install 3.7.3
-
-pyenv versions
-
-pyenv virtualenv 3.7.3 venv
-
-pyenv activate venv
-
-cd pvServer
-
-pip3 install -r requirements.txt
-
-```
-
-On beagle bone with debian jessie, need to install a newer openssl:
-
-https://help.dreamhost.com/hc/en-us/articles/360001435926-Installing-OpenSSL-locally-under-your-username
-
-
-# 5 Manual Dev environment
-
-Open up the terminal.
-
-cd to automation studio install location.
-
-## 5.1 Launch the pvServer
-
-Initially:
-```bash
-cd pvServer
-pyenv activate venv
-```
-Then
-```bash
-python3 pvServer
-```
-## 5.2 Launch the demo IOC
-
-In a new terminal:
-
-cd to automation studio install location
-
-```bash
-
-cd epics/testIOC/iocBoot/ioctestIOC/
-./st.cmd
-```
-
-## 5.3 Launch the dev ReactJS Environment
-
-In a new terminal:
-
-cd to automation studio install location
-
-```bash
-npm start
-```
-
-open at http://locahost:3000
-
-
-## 5.4 Optionally launch the dev styleguide
-
-In a new terminal:
-
-cd to automation studio install location
-
-```bash
-npm run styleguide
-```
-
-open at http://locahost:6060
-
-Note: if login ability has been enable as in 7.1, then the styleguide cannot connect to demoIOC.
-A work around will exist in future.
-
-
-## 5.5 Or launch the production styleguide
-
-In a new terminal:
-
-cd to automation studio install location
-
-```bash
-npm run styleguidebuild
-node styleguideServer.js
-```
-
-open at http://locahost:6060
-
-Note: if login ability has been enable as in 7.1, then the styleguide cannot connect to demoIOC.
-A work around will exist in future.
-
-
-# 6 Manual Production deployment
-6.1,6.2 and 6.5 are the same as 5.1,5.2 and 5.5 except for 5.3.and 5.4
-
-## 6.3 Launch the dev ReactJS Environment
-
-In a new terminal:
-
-cd to automation studio install location
-
-```bash
-npm run build
-```
-The build is currently served via the flask server at:
-open at http://locahost:5000 or replace localhost with host's hostname or ip  
-
-Or run a node express server:
-
-```bash
-node clientserver.js
-```
-
-Open at http://locahost:9000 or replace localhost with host's hostname or ip
-
-Currently the node express is the preferred installation as the PWA installs correctly.
-
-
-#7 Enabling user login, authentication and https
-
-The system has ability to enable regular user authentication and login ability.
-With this release the login authorisation feature is quite open for customization. The authorisation is handled in python backend and the authorisation procedure can easliy be modifed to use another authisation procedure.
-
-The login procedure is as follows: Fisrtly the username and password needs to manuallly declared in the  pvServer/userAuthentication/USERS file. Then from the login page the user enters the email and password on the client and then the authorisation procedure compares the login details with that declared in the pvServer/userAuthentication/USERS file.
-If authorisation is confirmed then the an encrypted JWT token is returned, which will keep the user logged in until they log out or the server invalidates the JWT. In this case the user will redirected to the login page
-
-##7.1 Enabling login and authentication
-
-First cd to Automation Studio installation directory
-
-```bash
-cd pvServer/userAuthentication/
-cp USERS.example  USERS
-```
-Then edit the  USERS file to add in  your user profile
-
-The format  per line is:
-
-Userid:email:pw
-
-Next set up the .env to enable login:
+Set up the .env to enable login:
 ```bash
 cd ..
 ls .env
@@ -503,37 +207,140 @@ cp example.env .env
 ```bash
 REACT_APP_EnableLogin=true
 ```
-Make sure that the other parameters in the file are correct. Or see 7.2:
+Make sure that the other parameters in the file are correct. Or see 4.1:
+
+The administration utility is used to create users and store the passwords in an encrypted format using Bcrypt.
+
+The usernames and passwords are stored in json format in USERS/users.json file.
+
+Only the administration utility should be used to edit this file.
 
 
-##7.2 Enabling https
-Firstly the system is by default configured to serve the socket connections and client webserver over http on locahost or on the hostanmes ip.
+To launch the admin utility:
+```bash
+docker-compose -f docker-compose-administator.yml run administrator
+```
 
-To enable secure login and installation as a PWA, a certificate and key needs to be installed that is bound to your hostname and the .env environment variables need to be edited to serve overs https and via the correct hostname.
+There are five scripts than can be run:
 
-Inside the Automation Studio installation folder:
+To add a user launch:
+```bash
+admin-add-user
+```
+To change a user password:
+```bash
+admin-change-user-password
+```
+To confirm a user password:
+```bash
+admin-check-user-password
+```
+To delete a user launch:
+```bash
+admin-del-user
+```
+To list all users launch:
+```bash
+admin-list-users
+```
+## 3.2 Enabling user access rights
+
+The access rights for each user are managed in the USERS/pvAccess.json file.
+
+The pvAccess.json file an be created by placing the contents of the example.pvAccess.json in a new pvAccess.json file.
+
+The rules defined in the pvAccess.json file are loaded each time pv Server is restarted.
+
+For every process variable write, the access rights are first checked to confirm if the process variable can be written to. And for every user at the initial data connection to each process variable the read access rights are checked.
+
+If no read access rights are granted the widget on the client will display "connecting" permanently. And if no write access is granted the widget is indicated as read only.
+
+Regular expression rules are used to evaluate the read and write access rights.
+
+The order in which the user access groups and rules are defined are important. The lowest priority is at the top  and highest priority which can overwrite the previously defined rules is at the bottom.
+
+For example in the default user access group, the rules disables write access and enable read access for all usernames and process variables:
+
+```json
+"DEFAULT":
+    {
+      "usernames":["*"],
+      "rules":
+      [
+        { "rule":"[0-9].*",                   "read":true,  "write":false },
+        { "rule":"[a-z].*",                   "read":true,  "write":false },
+        { "rule":"[A-Z].*",                   "read":true,  "write":false }
+
+
+      ]
+    }
+```
+To enable write access for everyone one could change the default to as follows.
+```json
+"DEFAULT":
+    {
+      "usernames":["*"],
+      "rules":
+      [
+        { "rule":"[0-9].*",                   "read":true,  "write":true },
+        { "rule":"[a-z].*",                   "read":true,  "write":true },
+        { "rule":"[A-Z].*",                   "read":true,  "write":true }
+
+
+      ]
+    }
+```
+
+Although it is more ingenious to create separate user access groups and to define access for specific users. The example below first denies user1 and user2 access to all process variables and enables read access to all pvs that start with "pva://testIOC:Harp1", "pva://testIOC:FC2" and "pva://testIOC:amplitude". And only enables write access for "pva://testIOC:amplitude".
+
+```json
+"UAG1":
+{
+  "usernames":["user1","user2"],
+  "rules":
+  [
+    { "rule":"[0-9].*",                   "read":false,  "write":false },
+    { "rule":"[a-z].*",                   "read":false,  "write":false },
+    { "rule":"[A-Z].*",                   "read":false,  "write":false },
+    { "rule":"^pva://testIOC:Harp1",      "read":true, "write":false },
+    { "rule":"^pva://testIOC:FC2",        "read":true,  "write":false },
+    { "rule":"^pva://testIOC:amplitude",  "read":true,  "write":true }
+
+  ]
+}
+```
+
+In theory, all regular expression allowed by Python regex can be used although this has not been tested. More examples are available at: https://www.w3schools.com/python/python_regex.asp
+
+
+
+## 3.3 Enabling https
+The system is by default configured to serve the socket connections and client webserver over HTTP on localhost.
+
+To enable secure login and installation as a PWA, a certificate and key needs to be installed that is bound to your hostname and the .env environment variables need to be edited to serve overs HTTPS and via the correct hostname.
+
+Inside the React Automation Studio installation folder:
 
 ```bash
 ls .env
 ```
-If it exist edit .env file otherwise copy example.env to .env and set
+If it exists edit the .env file, otherwise copy example.env to .env and set
 
 ```bash
 
-REACT_APP_PyEpicsServerURL= https://example.com:5000/test
+REACT_APP_PyEpicsServerBASEURL=https://customURL
+REACT_APP_EnableLogin=false
+REACT_APP_FrontendServerPORT=9000
+REACT_APP_PyEpicsServerPORT=5000
+REACT_APP_PyEpicsServerStyleguidePORT=5001
+REACT_APP_StyleguideServerPORT=6060
+REACT_APP_EnableLoginStyleguide=false
 ```
 to https and the correct hostname
 
-Then set :
-```bash
+The certificates need to be placed in the the React Automation Studio installation folder under the certificates folder.
 
-REACT_APP_AutomationStudioStyleGuideBuildURL=https://example.com:6060
-```
-
-The certificates neeed to be placed in the the Automation Studio installation folder.
-
-The certificate needs to be called: server.cer
-And the key needs to be called: server.key
+The certificate needs to be called: server.cer And the key needs to be called: server.key The .gitignore will prevent them from being copied to the repository
 
 
 
@@ -541,4 +348,4 @@ The pvServer and node development environment, will need to be restarted, and th
 
 Both the pvServer and the node clientserver will automatically detect the change.
 
-The built client will be then served https://example.com:5000/ or https://example.com:9000/ and the dev client at https://example.com:3000/
+The built client will be then served  https://customURL:9000/, the styleguide at https://customURL:6060/ and the dev client at http://127.0.0.1:3000/ or http://hostip:3000/
