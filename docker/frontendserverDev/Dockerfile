@@ -3,7 +3,7 @@ FROM node:10.16.3
 
 
 ADD ./package.json /frontendserverAppDev/package.json
-
+ADD ./jsconfig.json /frontendserverAppDev/jsconfig.json
 WORKDIR /frontendserverAppDev
 ENV PATH /frontendserverAppDev/node_modules/.bin:$PATH
 RUN npm set registry http://registry.npmjs.org/
