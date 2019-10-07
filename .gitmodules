@@ -1,4 +1,4 @@
 [submodule "src/automation-studio"]
 	path = src/automation-studio
-	url = https://bitbucket.org/epicscontributors/automation-studio/src/master/
-        branch = master
+	url = https://github.com/wduckitt/React-Automation-Studio.git
+  branch = master
