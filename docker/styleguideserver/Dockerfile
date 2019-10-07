@@ -10,8 +10,8 @@ RUN npm install
 ADD ./public /app/public
 
 ADD version ./.env* /app/
-ADD ./src/automation-studio/src /app/src
-ADD ./src/automation-studio/styleguide.config.js /app/styleguide.config.js
+ADD ./src/automation-studio/src /app/src/automation-studio/src
+ADD ./styleguide.config.js /app/styleguide.config.js
 ADD ./src/automation-studio/img /app/img
 RUN npm run styleguidebuild
 RUN cp -R /app/styleguide/ /styleguide/
