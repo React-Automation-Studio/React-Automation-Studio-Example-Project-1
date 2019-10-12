@@ -6,18 +6,18 @@ import App from './App';
 //import * as serviceWorker from './serviceWorker';
 
 import Main from './Main';
-import EpicsDemos from './automation-studio/src/components/Examples/EpicsDemos';
-import Help from './automation-studio/src/components/docs/Help';
+import EpicsDemos from './React-Automation-Studio/components/Examples/EpicsDemos';
+import Help from './React-Automation-Studio/components/docs/Help';
 import Staging from './components/staging/Staging';
 import Example from './components/staging/Example/Example';
 import Example1 from './components/staging/Example/Example1';
 import Example2 from './components/staging/Example/Example2';
 import Example3 from './components/staging/Example/Example3';
 
-import Probe from './automation-studio/src/components/SettingsPages/Probe';
-import SettingsSteererXY from './automation-studio/src/components/SettingsPages/SettingsSteererXY';
-import SettingsSinglePS from './automation-studio/src/components/SettingsPages/SettingsSinglePS';
-import LogIn from './automation-studio/src/LogIn';
+import Probe from './React-Automation-Studio/components/SettingsPages/Probe';
+import SettingsSteererXY from './React-Automation-Studio/components/SettingsPages/SettingsSteererXY';
+import SettingsSinglePS from './React-Automation-Studio/components/SettingsPages/SettingsSinglePS';
+import LogIn from './React-Automation-Studio/LogIn';
 import { Redirect } from 'react-router-dom'
 export default props=>(
   <BrowserRouter >

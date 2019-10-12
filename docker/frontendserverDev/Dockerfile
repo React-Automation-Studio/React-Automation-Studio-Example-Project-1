@@ -26,8 +26,11 @@ ADD version ./server.cer* /
 
 
 WORKDIR /frontendserverAppDev
-
-
+RUN mkdir src
+WORKDIR /frontendserverAppDev/src
+RUN mkdir React-Automation-Studio
+WORKDIR /frontendserverAppDev/
 CMD npm start
+#CMD ls /frontendserverAppDev/src/React-Automation-Studio
 
 EXPOSE 3001 3000

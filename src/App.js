@@ -12,11 +12,11 @@ import 'typeface-roboto';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import AutomationStudioContext from './automation-studio/src/components/SystemComponents/AutomationStudioContext';
+import AutomationStudioContext from './React-Automation-Studio/components/SystemComponents/AutomationStudioContext';
 import { blue, indigo,pink, red, green,cyan,lime } from '@material-ui/core/colors'
 import io from 'socket.io-client';
 import { Redirect } from 'react-router-dom'
-import LogIn from './automation-studio/src/LogIn';
+import LogIn from './React-Automation-Studio/LogIn';
 
 // const socket = io('https://172.16.5.52:5000/test',{
 //   transports: ['websocket'],

@@ -6,8 +6,8 @@ import { withRouter } from 'react-router-dom';
 
 import {Link} from 'react-router-dom'
 import Button from '@material-ui/core/Button';
-import RedirectToLogIn from '../../automation-studio/src/components/SystemComponents/RedirectToLogin.js';
-import SideBar from '../../automation-studio/src/components/SystemComponents/SideBar';
+import RedirectToLogIn from '../../React-Automation-Studio/components/SystemComponents/RedirectToLogin.js';
+import SideBar from '../../React-Automation-Studio/components/SystemComponents/SideBar';
 // Styles
 
 
