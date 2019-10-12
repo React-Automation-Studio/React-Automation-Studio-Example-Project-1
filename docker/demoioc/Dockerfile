@@ -21,7 +21,7 @@ RUN ln -s /epics/synApps/support /epics/support
 
 
 
-ADD ./src/automation-studio/epics/config /epics/config
+ADD ./submodules/React-Automation-Studio/epics/config /epics/config
 
 WORKDIR /epics/
 
@@ -33,7 +33,7 @@ WORKDIR /epics/support
 RUN make release
 RUN make
 
-ADD ./src/automation-studio/epics/testIOC /epics/testIOC
+ADD ./submodules/React-Automation-Studio/epics/testIOC /epics/testIOC
 WORKDIR /epics/testIOC
 RUN make clean
 RUN make

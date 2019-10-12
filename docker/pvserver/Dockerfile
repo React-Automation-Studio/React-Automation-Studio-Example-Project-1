@@ -2,7 +2,7 @@ FROM python:3.7
 
 
 
-ADD ./src/automation-studio/pvServer/requirements.txt /pvServer/requirements.txt
+ADD ./submodules/React-Automation-Studio/pvServer/requirements.txt /pvServer/requirements.txt
 WORKDIR /pvServer
 
 RUN pip install -r requirements.txt
@@ -20,7 +20,7 @@ RUN make
 WORKDIR /epics
 
 
-ADD ./src/automation-studio/pvServer /pvServer
+ADD ./submodules/React-Automation-Studio/pvServer /pvServer
 
 WORKDIR /pvServer
 

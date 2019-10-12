@@ -25,51 +25,51 @@ services:
       - ./public:/frontendserverAppDev/public
     restart: always
     network_mode: host
-  # stagingpvserver:
-  #   env_file: .env
-  #   build:
-  #     context: ./
-  #     args: # Environment variables available at build-time
-  #               - http_proxy
-  #               - https_proxy
-  #               - no_proxy
-  #     dockerfile: docker/pvserver/Dockerfile
-  #   restart: always
-  #   network_mode: host
-  #   tty: true
-  #   stdin_open: true
-  #   volumes:
-  #     - ./certificates:/certificates/
-  #     - ./users:/pvServer/userAuthentication/users
-  # stagingunsecurestylguidepvserver:
-  #   env_file: .env
-  #   environment:
-  #         - REACT_APP_PyEpicsServerPORT=5001
-  #         - REACT_APP_EnableLogin=false
-  #
-  #   build:
-  #     context: ./
-  #     args: # Environment variables available at build-time
-  #               - http_proxy
-  #               - https_proxy
-  #               - no_proxy
-  #     dockerfile: docker/pvserver/Dockerfile
-  #   restart: always
-  #   network_mode: host
-  #   volumes:
-  #     - ./certificates:/certificates/
-  # stagingdemoioc:
-  #   build:
-  #     context: ./
-  #     args: # Environment variables available at build-time
-  #               - http_proxy
-  #               - https_proxy
-  #               - no_proxy
-  #     dockerfile: docker/demoioc/Dockerfile
-  #   tty: true
-  #   stdin_open: true
-  #   restart: always
-  #   network_mode: host
+  stagingpvserver:
+    env_file: .env
+    build:
+      context: ./
+      args: # Environment variables available at build-time
+                - http_proxy
+                - https_proxy
+                - no_proxy
+      dockerfile: docker/pvserver/Dockerfile
+    restart: always
+    network_mode: host
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./certificates:/certificates/
+      - ./users:/pvServer/userAuthentication/users
+  stagingunsecurestylguidepvserver:
+    env_file: .env
+    environment:
+          - REACT_APP_PyEpicsServerPORT=5001
+          - REACT_APP_EnableLogin=false
+
+    build:
+      context: ./
+      args: # Environment variables available at build-time
+                - http_proxy
+                - https_proxy
+                - no_proxy
+      dockerfile: docker/pvserver/Dockerfile
+    restart: always
+    network_mode: host
+    volumes:
+      - ./certificates:/certificates/
+  stagingdemoioc:
+    build:
+      context: ./
+      args: # Environment variables available at build-time
+                - http_proxy
+                - https_proxy
+                - no_proxy
+      dockerfile: docker/demoioc/Dockerfile
+    tty: true
+    stdin_open: true
+    restart: always
+    network_mode: host
   # styleguideserver:
   #   env_file: .env
   #   environment:
@@ -90,15 +90,15 @@ services:
   #     - ./certificates:/certificates/
   #   restart: always
   #   network_mode: host
-  # stagingtestioc:
-  #     build:
-  #       context: ./
-  #       args: # Environment variables available at build-time
-  #                 - http_proxy
-  #                 - https_proxy
-  #                 - no_proxy
-  #       dockerfile: docker/stagingioc/Dockerfile
-  #     tty: true
-  #     stdin_open: true
-  #     restart: always
-  #     network_mode: host
+  stagingtestioc:
+      build:
+        context: ./
+        args: # Environment variables available at build-time
+                  - http_proxy
+                  - https_proxy
+                  - no_proxy
+        dockerfile: docker/stagingioc/Dockerfile
+      tty: true
+      stdin_open: true
+      restart: always
+      network_mode: host
