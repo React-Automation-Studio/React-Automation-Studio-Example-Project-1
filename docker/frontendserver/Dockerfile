@@ -3,13 +3,15 @@ FROM node:10.16.3
 
 
 ADD ./package.json /frontendserverApp/package.json
-
+ADD ./jsconfig.json /frontendserverApp/jsconfig.json
 WORKDIR /frontendserverApp
 ENV PATH /frontendserverApp/node_modules/.bin:$PATH
 RUN npm set registry http://registry.npmjs.org/
 RUN npm install
 ADD ./public /frontendserverApp/public
 ADD ./src /frontendserverApp/src
+COPY ./submodules/React-Automation-Studio/src /frontendserverApp/src/React-Automation-Studio
+
 ADD version ./.env* /frontendserverApp/
 #ENV REACT_APP_PyEpicsServerBASEURL http://127.0.0.1
 #ENV REACT_APP_FrontendServerPORT 9003
@@ -18,7 +20,7 @@ ADD version ./.env* /frontendserverApp/
 #ENV REACT_APP_EnableLogin=false
 RUN npm run build
 RUN cp -R /frontendserverApp/build/ /build/
-ADD ./src/automation-studio/frontendServer/ /frontendServer
+ADD ./submodules/React-Automation-Studio/frontendServer/ /frontendServer
 WORKDIR /frontendServer
 ENV PATH /frontendServer/node_modules/.bin:$PATH
 RUN npm set registry http://registry.npmjs.org/

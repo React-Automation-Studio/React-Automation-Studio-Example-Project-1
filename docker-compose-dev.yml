@@ -13,6 +13,7 @@ services:
       #- ${PWD}:/frontendserverAppDev
       #- iTlAsNodeModules:/frontendserverAppDev/node_modules
       - ./certificates:/certificates/
+      - ./jsconfig.json:/frontendserverAppDev/jsconfig.json
       - ./package.json:/frontendserverAppDev/package.json
       - ./src/components:/frontendserverAppDev/src/components
       - ./src/App.js:/frontendserverAppDev/src/App.js
