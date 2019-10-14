@@ -2,14 +2,14 @@ FROM node:10.16.3
 
 
 
-ADD ./package.json /frontendserverApp/package.json
-ADD ./jsconfig.json /frontendserverApp/jsconfig.json
+ADD ./ReactApp/package.json /frontendserverApp/package.json
+ADD ./ReactApp/jsconfig.json /frontendserverApp/jsconfig.json
 WORKDIR /frontendserverApp
 ENV PATH /frontendserverApp/node_modules/.bin:$PATH
 RUN npm set registry http://registry.npmjs.org/
 RUN npm install
-ADD ./public /frontendserverApp/public
-ADD ./src /frontendserverApp/src
+ADD ./ReactApp/public /frontendserverApp/public
+ADD ./ReactApp/src /frontendserverApp/src
 COPY ./submodules/React-Automation-Studio/src /frontendserverApp/src/React-Automation-Studio
 
 ADD version ./.env* /frontendserverApp/

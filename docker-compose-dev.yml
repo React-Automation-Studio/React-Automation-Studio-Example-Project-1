@@ -13,17 +13,17 @@ services:
       #- ${PWD}:/frontendserverAppDev
       #- iTlAsNodeModules:/frontendserverAppDev/node_modules
       - ./certificates:/certificates/
-      - ./jsconfig.json:/frontendserverAppDev/jsconfig.json
-      - ./package.json:/frontendserverAppDev/package.json
-      - ./src/components:/frontendserverAppDev/src/components
-      - ./src/App.js:/frontendserverAppDev/src/App.js
-      - ./src/index.css:/frontendserverAppDev/src/index.css
-      - ./src/index.js:/frontendserverAppDev/src/index.js
-      - ./src/Main.js:/frontendserverAppDev/src/Main.js
-      - ./src/routes.js:/frontendserverAppDev/src/routes.js
-      - ./src/serviceWorker.js:/frontendserverAppDev/src/serviceWorker.js
+      - ./ReactApp/jsconfig.json:/frontendserverAppDev/jsconfig.json
+      - ./ReactApp/package.json:/frontendserverAppDev/package.json
+      - ./ReactApp/src/components:/frontendserverAppDev/src/components
+      - ./ReactApp/src/App.js:/frontendserverAppDev/src/App.js
+      - ./ReactApp/src/index.css:/frontendserverAppDev/src/index.css
+      - ./ReactApp/src/index.js:/frontendserverAppDev/src/index.js
+      - ./ReactApp/src/Main.js:/frontendserverAppDev/src/Main.js
+      - ./ReactApp/src/routes.js:/frontendserverAppDev/src/routes.js
+      - ./ReactApp/src/serviceWorker.js:/frontendserverAppDev/src/serviceWorker.js
       - ./submodules/React-Automation-Studio/src:/frontendserverAppDev/src/React-Automation-Studio/
-      - ./public:/frontendserverAppDev/public
+      - ./ReactApp/public:/frontendserverAppDev/public
     restart: always
     network_mode: host
   stagingpvserver:

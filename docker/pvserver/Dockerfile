@@ -44,7 +44,7 @@ RUN echo $REACT_APP_PyEpicsServerNamespace
 #ADD version ./.env* /
 ADD version ./server.key* /
 ADD version ./server.cer* /
-ADD ./build /build
+ADD ./ReactApp/build /build
 
 
 

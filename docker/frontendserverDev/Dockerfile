@@ -2,14 +2,14 @@ FROM node:10.16.3
 
 
 
-ADD ./package.json /frontendserverAppDev/package.json
-ADD ./jsconfig.json /frontendserverAppDev/jsconfig.json
+ADD ./ReactApp/package.json /frontendserverAppDev/package.json
+ADD ./ReactApp/jsconfig.json /frontendserverAppDev/jsconfig.json
 WORKDIR /frontendserverAppDev
 ENV PATH /frontendserverAppDev/node_modules/.bin:$PATH
 RUN npm set registry http://registry.npmjs.org/
 RUN npm install
-#ADD ./public /frontendserverAppDev/public
-#ADD ./src /frontendserverAppDev/src
+#ADD ./ReactApp/public /frontendserverAppDev/public
+#ADD ./ReactApp/src /frontendserverAppDev/src
 ADD version ./.env* /frontendserverAppDev/
 
 #RUN test
