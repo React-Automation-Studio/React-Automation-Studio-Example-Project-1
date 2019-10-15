@@ -12,12 +12,8 @@ ADD ./ReactApp/public /frontendserverApp/public
 ADD ./ReactApp/src /frontendserverApp/src
 COPY ./submodules/React-Automation-Studio/src /frontendserverApp/src/React-Automation-Studio
 
-ADD version ./.env* /frontendserverApp/
-#ENV REACT_APP_PyEpicsServerBASEURL http://127.0.0.1
-#ENV REACT_APP_FrontendServerPORT 9003
-#ENV REACT_APP_PyEpicsServerPORT 5003
-#ENV REACT_APP_PyEpicsServerNamespace=test
-#ENV REACT_APP_EnableLogin=false
+ADD .env /frontendserverApp/
+
 RUN npm run build
 RUN cp -R /frontendserverApp/build/ /build/
 ADD ./submodules/React-Automation-Studio/frontendServer/ /frontendServer
@@ -25,18 +21,6 @@ WORKDIR /frontendServer
 ENV PATH /frontendServer/node_modules/.bin:$PATH
 RUN npm set registry http://registry.npmjs.org/
 RUN npm install
-
-#RUN test
-
-WORKDIR /
-
-
-
-
-
-
-ADD version ./server.key* /
-ADD version ./server.cer* /
 
 
 WORKDIR /frontendServer

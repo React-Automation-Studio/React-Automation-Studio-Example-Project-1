@@ -8,11 +8,10 @@ WORKDIR /frontendserverAppDev
 ENV PATH /frontendserverAppDev/node_modules/.bin:$PATH
 RUN npm set registry http://registry.npmjs.org/
 RUN npm install
-#ADD ./ReactApp/public /frontendserverAppDev/public
-#ADD ./ReactApp/src /frontendserverAppDev/src
-ADD version ./.env* /frontendserverAppDev/
 
-#RUN test
+ADD .env /frontendserverAppDev/
+
+
 
 WORKDIR /
 
@@ -21,8 +20,6 @@ WORKDIR /
 
 
 
-ADD version ./server.key* /
-ADD version ./server.cer* /
 
 
 WORKDIR /frontendserverAppDev
@@ -31,6 +28,6 @@ WORKDIR /frontendserverAppDev/src
 RUN mkdir React-Automation-Studio
 WORKDIR /frontendserverAppDev/
 CMD npm start
-#CMD ls /frontendserverAppDev/src/React-Automation-Studio
+
 
 EXPOSE 3001 3000

@@ -52,5 +52,5 @@ RUN echo $PATH
 WORKDIR /epics/stagingTestIOC/iocBoot/iocstagingTestIOC/
 
 CMD ./st.cmd
-#CMD ["/epics/base/bin/linux-x86_64/caget","RFPA:IPA_TUNE_MOT:display_ENG"]
+
 EXPOSE 5000 5064 5065 8001

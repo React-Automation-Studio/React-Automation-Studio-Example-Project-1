@@ -9,9 +9,9 @@ RUN npm set registry http://registry.npmjs.org/
 RUN npm install
 ADD ./ReactApp/public /app/public
 
-ADD version ./.env* /app/
+ADD .env /app/
 ADD ./submodules/React-Automation-Studio/src /app/src/React-Automation-Studio
-ADD ./styleguide.config.js /app/styleguide.config.js
+ADD ./ReactApp/styleguide.config.js /app/styleguide.config.js
 ADD ./submodules/React-Automation-Studio/img /app/img
 RUN npm run styleguidebuild
 RUN cp -R /app/styleguide/ /styleguide/
@@ -23,14 +23,11 @@ RUN npm set registry http://registry.npmjs.org/
 RUN npm install
 
 
-#RUN test
 
 WORKDIR /
 
 
 
-
-COPY version ./.env* /
 
 WORKDIR /styleguideServer
 
