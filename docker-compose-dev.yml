@@ -22,7 +22,7 @@ services:
       - ./ReactApp/src/Main.js:/frontendserverAppDev/src/Main.js
       - ./ReactApp/src/routes.js:/frontendserverAppDev/src/routes.js
       - ./ReactApp/src/serviceWorker.js:/frontendserverAppDev/src/serviceWorker.js
-      - ./submodules/React-Automation-Studio/src:/frontendserverAppDev/src/React-Automation-Studio/
+      - ./submodules/React-Automation-Studio/ReactApp/src:/frontendserverAppDev/src/React-Automation-Studio/
       - ./ReactApp/public:/frontendserverAppDev/public
     restart: always
     network_mode: host

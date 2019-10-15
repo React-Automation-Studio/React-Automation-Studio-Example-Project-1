@@ -10,7 +10,7 @@ RUN npm set registry http://registry.npmjs.org/
 RUN npm install
 ADD ./ReactApp/public /frontendserverApp/public
 ADD ./ReactApp/src /frontendserverApp/src
-COPY ./submodules/React-Automation-Studio/src /frontendserverApp/src/React-Automation-Studio
+COPY ./submodules/React-Automation-Studio/ReactApp/src /frontendserverApp/src/React-Automation-Studio
 
 ADD .env /frontendserverApp/
 

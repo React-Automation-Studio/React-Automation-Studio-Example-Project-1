@@ -10,9 +10,9 @@ RUN npm install
 ADD ./ReactApp/public /app/public
 
 ADD .env /app/
-ADD ./submodules/React-Automation-Studio/src /app/src/React-Automation-Studio
+ADD ./submodules/React-Automation-Studio/ReactApp/src /app/src/React-Automation-Studio
 ADD ./ReactApp/styleguide.config.js /app/styleguide.config.js
-ADD ./submodules/React-Automation-Studio/img /app/img
+ADD ./submodules/React-Automation-Studio/ReactApp/img /app/img
 RUN npm run styleguidebuild
 RUN cp -R /app/styleguide/ /styleguide/
 ADD ./ReactApp/img /styleguide/img
