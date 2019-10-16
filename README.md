@@ -44,6 +44,15 @@ Some components can handle multiple PVs such as the graph or single PVs such as 
 
 A lot of effort was put into the documentation and a style guide based on React Styleguidedist and is used as the help function and to document the use of all the components from the source files. The current style guide is also  interactive with a demo IOC. All the properties of each of the components are documented and examples of their usage are shown.
 
+**Note**: The style guide displays the absolute path of the component. For example for the TextInput widget it is:
+
+`src/React-Automation-Studio/components/BaseComponents/TextInput.js`
+
+this can be copied and inserted into your source file **but** due to react's absolute import rules the `src/` prefix must not be included in order to compile. The `.js` can also be left off as so:
+
+`React-Automation-Studio/components/BaseComponents/TextInput`.
+
+
 *4. Access rights and Administration*
 
 The URL, protocol selection for HTTPS or HTTP , authentication and server ports are controlled through the environment variables.
@@ -380,7 +389,19 @@ Inside: `./epics`the demo and staging IOCs that interact with the DEmo react scr
 
 `./users` contains the user access configuration files as per section 3.
 
-# 5 Changing the user authentication procedure
+
+# 5 Running the web app as PWA
+
+The automatic PWA installation notification is currently disabled. Installation can still occur manually.
+
+On a mobile running Chrome, whilst viewing the website, click on the 3 dots at the top right and then click add to home. Follow the onscreen instructions to install.
+
+On a desktop running Chrome, whilst viewing the website, click on the 3 dots at the top right and the click more tools and then create shortcut. Tick open as window and then create and the PWA will be installed on your desktop.
+
+**Note**: Unless HTTPS is enabled then when viewing the PWA, a banner at the top stating that the webapp is unsecure will appear,
+
+
+# 6 Changing the user authentication procedure
 
 **Note:** This is experimental.
 
@@ -389,3 +410,13 @@ The file `submodules/React-Automation-Studio/pvServer/userAuthentication/authent
 You will need to make sure that the new authorise  and authentication procedures that are called by the `submodules/React-Automation-Studio/pvServer/pvServer.py` return the JWT and in the same way.
 
 Thereafter you must uncomment the `docker/pvserver/Dockerfile` line 25 which is marked `#COPY ./modifiedUserAuthenication/authenticate.py /pvServer/userAuthentication/authenticate.py` to copy and  overwite it with your new one.
+
+# 7 Contributing
+
+Site specific components and app screens should be kept in your repository. If you wish to contribute to the main repository for bug fixes then this must be done in  the main repository at https://github.com/wduckitt/React-Automation-Studio. If you wish to add in new components then please create them in the staging folder. If the new component requires custom EPICS code then please add it to the demo IOC.
+
+# 8 Contact
+
+Contact us at rasadmin@tlabs.ac.za
+
+# Changelog
