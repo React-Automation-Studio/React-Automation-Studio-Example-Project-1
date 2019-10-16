@@ -34,7 +34,7 @@ Similarly for writes to an EPICS variable, depending on the access rights, the c
 
 React was chosen to develop the frontend for the PWA as it enables us to develop the frontend in a single language, i.e JavaScript  as opposed to conventional web development in HTML, JavaScript and CSS. The UI interfaces that we have created are highly responsive and offer a real-time experience as is shown in the example of a mobile view in in Fig. 1.
 
-We have integrated selected components from the Material-UI React component framework and the React-visgraphing framework with our system to create user interfaces with the same features that we use in our current CS-Studio operator interfaces. These components have been integrated with a data connection layer which handles, input and output, meta-data for labels, limits, precision, alarm sensitivity and initialisation from the pvServer.
+We have integrated selected components from the Material-UI React component framework and the React-vis graphing framework with our system to create user interfaces with the same features that we use in our current CS-Studio operator interfaces. These components have been integrated with a data connection layer which handles, input and output, meta-data for labels, limits, precision, alarm sensitivity and initialisation from the pvServer.
 
 Some components can handle multiple PVs such as the graph or single PVs such as text inputs. For each of the components the PVs name can be declared using macros. The macros are replaced at component instantiation. This allows the  design of complex user interfaces that can be reused by simply grouping the components and changing the global macro to point to another system.
 
@@ -63,7 +63,7 @@ It is advised to only use the containerized version.
 
 
 
-Prerequisites: git , latest version of docker-ce and docker compose
+**Prerequisites: git , latest version of docker-ce and docker compose**
 
 To install docker-ce follow:
 
@@ -74,7 +74,10 @@ And docker-compose:
 https://docs.docker.com/compose/install/
 
 
-First clone this repo.
+Then first clone this repo:
+```bash
+git clone https://github.com/wduckitt/React-Automation-Studio-Example-Project-1.git
+```
 
 
 To install the efficient production version with default settings:
@@ -87,17 +90,14 @@ Initialize the git submodule:
 ```bash
 git submodule update --init --recursive
 ```
-update and merge with the latest submodule master commit
+update and merge with the latest submodule commit
 ```bash
 git submodule update --remote --merge
 ```
 # 2 Launching the Docker compose files
 The systems uses Docker to create isolated production and development environments. There are four docker-compose configuration files.
 
-```bash
-docker-compose -f docker-compose.yaml up
-```
-Will launch the compiled production version without the demoIOC's and styleguide
+
 ```bash
 docker-compose -f docker-compose-prod-with-demoioc.yml up
 ```
@@ -114,10 +114,15 @@ docker-compose -f docker-compose-administator.yml run administrator
 ```
 will launch the username, login and password administration functions environment.
 
-Initially to check that everything is working only bring up the production version by running
+```bash
+docker-compose -f docker-compose.yml up
+```
+Will launch the compiled production version without the demoIOC's and styleguide
+
+Initially to check that everything is working only bring up the production version with the demos and help by running
 
 ```bash
-docker-compose  up
+docker-compose -f docker-compose-prod-with-demoioc.yml up
 ```
 
 This installation process of all the docker images may take a while (20-30min) the first time. There after it is fast as all the repeated build and up commands uses cached installations. The longest process is the installation of the node modules. Do not be deterred by the red warnings.
