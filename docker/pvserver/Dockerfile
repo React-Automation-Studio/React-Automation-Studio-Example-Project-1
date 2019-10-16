@@ -21,7 +21,8 @@ WORKDIR /epics
 
 
 ADD ./submodules/React-Automation-Studio/pvServer /pvServer
-
+# insert new authentication procedure below
+#COPY ./modifiedUserAuthenication/authenticate.py /pvServer/userAuthentication/authenticate.py
 WORKDIR /pvServer
 
 
