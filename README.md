@@ -82,7 +82,7 @@ git clone https://github.com/wduckitt/React-Automation-Studio-Example-Project-1.
 
 To install the efficient production version with default settings:
 
-In React Automation Studio installation folder run:
+In repository installation folder run:
 ```bash
 touch .env
 ```
@@ -117,7 +117,9 @@ will launch the username, login and password administration functions environmen
 ```bash
 docker-compose -f docker-compose.yml up
 ```
-Will launch the compiled production version without the demoIOC's and styleguide
+Will launch the compiled production version without the demoIOC's and styleguide.
+
+**Note**: Any of the above containers can be rebuilt by add --build at the end of the command.
 
 **Initially to check that everything is working only bring up the production version with the demos and help by running:**
 
@@ -136,6 +138,7 @@ docker-compose -f docker-compose-dev.yml up
 ```
 This will launch the pvServer, demo IOC ,style guide and the React Development environment. As with the production version the first run may take awhile. There after it is fast as all the repeated build and up commands uses cached installations.
 
+
 The react development environment app will be served on http://127.0.0.1:3000 and the styleguide at http://127.0.0.1:6060.
 
 The source can then be edited using your favorite editor like Atom, when the file is saved the project automatically recompiles and the web page is refreshed. It is recommended to only work in the
@@ -143,7 +146,7 @@ ReactApp/src/components/ folders. Although you are free to maintain your own rep
 
 Bug fixes and contributions can be submitted via pull requests.
 
-**Note:** The stagingfrontendserverdev service in the docker-compose-dev.yml in the development mode mounts the ReactApp/src and submodules/ReactApp folders and files as volumes. This is only way to enable persistence of the src code between the containerised development mode and the git repo. If you add in you own custom files please add them under ReactApp/src/components/ . In this case there is no need to modify the docker-compose file. If you add in files or folders in the ReactApp/src/ folder then you need to mount them in the stagingfrontendserverdev service in the docker-compose-dev.yml file. No changes need to be made for the production versions.
+**Note:** The stagingfrontendserverdev service in the docker-compose-dev.yml in the development mode mounts the ReactApp/src and submodules/ReactApp folders and files as volumes. This is only way to enable persistence of the src code between the containerised development mode and the git repo. If you add in your own custom files please add them under ReactApp/src/components/ . In this case there is no need to modify the docker-compose file. If you add in files or folders in the ReactApp/src/ folder then you need to mount them in the stagingfrontendserverdev service in the docker-compose-dev.yml file. No changes need to be made for the production versions.
 
 
 To change the URL, ports, and enable user authentication See section 3.1 and 3.2. For further information the folder structure see section 4.
@@ -357,3 +360,32 @@ The pvServer and node development environment, will need to be restarted, and th
 Both the pvServer and the node clientserver will automatically detect the change.
 
 The built client will be then served  https://customURL:9000/, the styleguide at https://customURL:6060/ and the dev client at http://127.0.0.1:3000/ or http://hostip:3000/
+
+# 4 Folder structure
+This section has some notes on  systems folder structure:
+
+The installation folder is referenced:
+```bash
+./
+```
+Inside: `./certificates`the certificates according to 3.3 are placed.
+
+Inside: `./docker`the docker files that build the conatiners that are used by the docker-compose files are placed.
+
+Inside: `./epics`the demo and staging IOCs that interact with the DEmo react screens are located. The staging IOC can be modified by the user for their own demo purposes.
+
+`./ReactApp`contains the source files for the web app. they can be edited as is described in Section 2.
+
+`./submodules`contains the git submodule that pulls in the source form the main React-Automation-Studio repository.
+
+`./users` contains the user access configuration files as per section 3.
+
+# 5 Changing the user authentication procedure
+
+**Note:** This is experimental.
+
+The file `submodules/React-Automation-Studio/pvServer/userAuthentication/authenticate.py` handles user user authentication. Theoretically this file can be copied to the parent installation folder in a new folder called `modifiedUserAuthenication/`. Where you are free to modify it.
+
+You will need to make sure that the new authorise  and authentication procedures that are called by the `submodules/React-Automation-Studio/pvServer/pvServer.py` return the JWT and in the same way.
+
+Thereafter you must uncomment the `docker/pvserver/Dockerfile` line 25 which is marked `#COPY ./modifiedUserAuthenication/authenticate.py /pvServer/userAuthentication/authenticate.py` to copy and  overwite it with your new one.
