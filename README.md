@@ -373,7 +373,7 @@ The built client will be then served  https://customURL:9000/, the styleguide at
 # 4 Folder structure
 This section has some notes on  systems folder structure:
 
-The installation folder is referenced:
+The installation folder is referenced below  as:
 ```bash
 ./
 ```
@@ -381,9 +381,9 @@ Inside: `./certificates`the certificates according to 3.3 are placed.
 
 Inside: `./docker`the docker files that build the conatiners that are used by the docker-compose files are placed.
 
-Inside: `./epics`the demo and staging IOCs that interact with the DEmo react screens are located. The staging IOC can be modified by the user for their own demo purposes.
+Inside: `./epics`the demo and staging IOCs that interact with the Demo react screens are located. The staging IOC can be modified by the user for their own demo purposes.
 
-`./ReactApp`contains the source files for the web app. they can be edited as is described in Section 2.
+`./ReactApp`contains the source files for the web app. They can be edited as is described in Section 2.
 
 `./submodules`contains the git submodule that pulls in the source form the main React-Automation-Studio repository.
 
