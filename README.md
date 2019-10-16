@@ -119,7 +119,7 @@ docker-compose -f docker-compose.yml up
 ```
 Will launch the compiled production version without the demoIOC's and styleguide
 
-Initially to check that everything is working only bring up the production version with the demos and help by running
+**Initially to check that everything is working only bring up the production version with the demos and help by running:**
 
 ```bash
 docker-compose -f docker-compose-prod-with-demoioc.yml up
@@ -139,11 +139,14 @@ This will launch the pvServer, demo IOC ,style guide and the React Development e
 The react development environment app will be served on http://127.0.0.1:3000 and the styleguide at http://127.0.0.1:6060.
 
 The source can then be edited using your favorite editor like Atom, when the file is saved the project automatically recompiles and the web page is refreshed. It is recommended to only work in the
-/src/components/staging/ folders.
+ReactApp/src/components/ folders. Although you are free to maintain your own repository that is based on this one.
 
 Bug fixes and contributions can be submitted via pull requests.
 
-To change the URL, ports, and enable user authentication See section 6.1 and 6.2
+**Note:** The stagingfrontendserverdev service in the docker-compose-dev.yml in the development mode mounts the ReactApp/src and submodules/ReactApp folders and files as volumes. This is only way to enable persistence of the src code between the containerised development mode and the git repo. If you add in you own custom files please add them under ReactApp/src/components/ . In this case there is no need to modify the docker-compose file. If you add in files or folders in the ReactApp/src/ folder then you need to mount them in the stagingfrontendserverdev service in the docker-compose-dev.yml file. No changes need to be made for the production versions.
+
+
+To change the URL, ports, and enable user authentication See section 3.1 and 3.2. For further information the folder structure see section 4.
 
 
 
