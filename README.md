@@ -40,6 +40,13 @@ Some components can handle multiple PVs such as the graph or single PVs such as 
 
 
 
+![picture](./ReactApp/img/contextMenu.png)
+
+*Fig 2. An example of a context menu and a diagnostic probe user interface*
+
+Many of the components such as TextInputs and TextOutputs have embedded diagnostic features such as a context menu and diagnostic probe.
+
+
 *3. Styleguide*
 
 A lot of effort was put into the documentation and a style guide based on React Styleguidedist and is used as the help function and to document the use of all the components from the source files. The current style guide is also  interactive with a demo IOC. All the properties of each of the components are documented and examples of their usage are shown.
