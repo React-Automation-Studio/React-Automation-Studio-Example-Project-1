@@ -1,6 +1,6 @@
 # Introduction
 
-This repository pulls in the src from the  React Automation Studio repository and acts a standalone boiler plate example project for React Automation Studio without having to delve into the source code of the master repository.
+This repository pulls in the src from the  React Automation Studio repository https://github.com/wduckitt/React-Automation-Studio.git and acts a standalone boiler plate example project for React Automation Studio without having to delve into the source code of the master repository.
 
 The system has been containerised with Docker and version controlled as a mono-repository using Git.
 
