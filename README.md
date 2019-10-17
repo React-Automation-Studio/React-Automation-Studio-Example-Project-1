@@ -44,8 +44,13 @@ Some components can handle multiple PVs such as the graph or single PVs such as 
 
 *Fig 2. An example of a context menu and a diagnostic probe user interface*
 
-Many of the components such as TextInputs and TextOutputs have embedded diagnostic features such as a context menu and diagnostic probe.
+Many of the components such as TextInputs and TextOutputs have embedded diagnostic features such as a context menu and diagnostic prob as shown in figure 2.
 
+![picture](./ReactApp/img/beamline.png)
+
+*Fig 3. An example of a desktop beamline control system ui*
+
+Apart form mobile UIs complex UIs suitable for desktop systems can also be created as is shown in figure 3.
 
 *3. Styleguide*
 
