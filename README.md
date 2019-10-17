@@ -44,7 +44,7 @@ Some components can handle multiple PVs such as the graph or single PVs such as 
 
 *Fig 2. An example of a context menu and a diagnostic probe user interface*
 
-Many of the components such as TextInputs and TextOutputs have embedded diagnostic features such as a context menu and diagnostic prob as shown in figure 2.
+Many of the components such as TextInputs and TextOutputs have embedded diagnostic features such as a context menu and diagnostic probe as shown in figure 2.
 
 ![picture](./ReactApp/img/beamline.png)
 
