@@ -1,4 +1,3 @@
 [submodule "submodules/React-Automation-Studio"]
 	path = submodules/React-Automation-Studio
 	url = https://github.com/wduckitt/React-Automation-Studio.git
-  branch = V1.00
