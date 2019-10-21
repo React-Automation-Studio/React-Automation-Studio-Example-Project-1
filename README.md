@@ -100,13 +100,19 @@ Then first clone this repo:
 git clone --recurse-submodules https://github.com/wduckitt/React-Automation-Studio-Example-Project-1.git
 ```
 
-Then run with the correct tagname:
+Then checkout the correct version with the correct tagname:
 
 ```bash
  git checkout tags/<tagname>
 ```
 
-For Version 1.00 this should be:
+To list the tags run:
+```bash
+git tag
+```
+
+
+To checkout version 1.00 run:
 ```bash
  git checkout tags/V1.00
 ```
