@@ -97,22 +97,36 @@ https://docs.docker.com/compose/install/
 
 Then first clone this repo:
 ```bash
-git clone https://github.com/wduckitt/React-Automation-Studio-Example-Project-1.git
+git clone --recurse-submodules https://github.com/wduckitt/React-Automation-Studio-Example-Project-1.git
+```
+
+Then run with the correct tagname:
+
+```bash
+ git checkout tags/<tagname>
+```
+
+For Version 1.00 this should be:
+```bash
+ git checkout tags/V1.00
 ```
 
 
-To install the efficient production version with default settings:
 
-In repository installation folder run:
+To confirm the correct git submodule version :
+```bash
+git submodule status
+```
+Should contain `submodules/React-Automation-Studio (V1.00)` in the output for version 1.00 .
+# 2 Launching the Docker compose files
+
+Initially in repository installation folder run:
 ```bash
 touch .env
 ```
-Initialize the git submodule:
-```bash
-git submodule update --init --recursive
-```
+to create an environment settings file or copy one from a previous installation.
 
-# 2 Launching the Docker compose files
+
 The systems uses Docker to create isolated production and development environments. There are four docker-compose configuration files.
 
 
