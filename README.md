@@ -111,10 +111,7 @@ Initialize the git submodule:
 ```bash
 git submodule update --init --recursive
 ```
-update and merge with the latest submodule commit
-```bash
-git submodule update --remote --merge
-```
+
 # 2 Launching the Docker compose files
 The systems uses Docker to create isolated production and development environments. There are four docker-compose configuration files.
 
