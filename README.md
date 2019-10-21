@@ -423,11 +423,15 @@ You will need to make sure that the new authorise  and authentication procedures
 
 Thereafter you must uncomment the `docker/pvserver/Dockerfile` line 25 which is marked `#COPY ./modifiedUserAuthenication/authenticate.py /pvServer/userAuthentication/authenticate.py` to copy and  overwite it with your new one.
 
-# 7 Contributing
+# 8 Theme and color scheme
+The theme and color scheme is currently hard coded but can be edited in `ReactApp/src/App.js` on line 66.
+
+
+# 9 Contributing
 
 Site specific components and app screens should be kept in your repository. If you wish to contribute to the main repository for bug fixes then this must be done in  the main repository at https://github.com/wduckitt/React-Automation-Studio. If you wish to add in new components then please create them in the staging folder. If the new component requires custom EPICS code then please add it to the demo IOC.
 
-# 8 Contact
+# 10 Contact
 
 Contact us at rasadmin@tlabs.ac.za
 
