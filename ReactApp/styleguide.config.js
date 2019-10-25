@@ -77,6 +77,10 @@ module.exports = {
         usageMode: 'hide' // 'hide' | 'collapse' | 'expand'
       },
       {
+        name: 'Working with Components',
+        content: 'src/React-Automation-Studio/docs/WorkingWithComponents.md',
+      },
+      {
         name: 'Base Components',
        // content: 'docs/ui.md',
         components: 'src/React-Automation-Studio/components/BaseComponents/*.js',
