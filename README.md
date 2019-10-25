@@ -112,9 +112,9 @@ git tag
 ```
 
 
-To checkout version 1.00 run:
+To checkout version 1.01 run:
 ```bash
- git checkout tags/V1.00
+ git checkout tags/V1.01
 ```
 
 
@@ -123,7 +123,7 @@ To confirm the correct git submodule version :
 ```bash
 git submodule status
 ```
-Should contain `submodules/React-Automation-Studio (V1.00)` in the output for version 1.00 .
+Should contain `submodules/React-Automation-Studio (V1.01)` in the output for version 1.01 .
 # 2 Launching the Docker compose files
 
 Initially in repository installation folder run:
@@ -453,3 +453,15 @@ Site specific components and app screens should be kept in your repository. If y
 Contact us at rasadmin@tlabs.ac.za
 
 # Changelog
+**V1.01 Friday 25 October 2019**
+
+Updated the React-Automation-Studio submodule to V1.01:
+
+Fixes:
+
+Minor bug fix to Selection List and Radio Button Group components
+
+Updates to documentation, explanations of initial local variable value properties that were missing from some components.
+
+**V1.00 Monday 21 October 2019**
+Initial Public Release
