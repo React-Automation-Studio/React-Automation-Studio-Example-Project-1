@@ -13,7 +13,7 @@ import TextInput from 'React-Automation-Studio/components/BaseComponents/TextInp
 import TextOutput from 'React-Automation-Studio/components/BaseComponents/TextOutput';
 import Meter from 'React-Automation-Studio/components/BaseComponents/Gauge';
 import SimpleSlider from 'React-Automation-Studio/components/BaseComponents/SimpleSlider';
-import GraphMultiplePVs from 'React-Automation-Studio/components/BaseComponents/GraphMultiplePVs';
+import GraphY from 'React-Automation-Studio/components/BaseComponents/GraphY';
 import SelectionList from 'React-Automation-Studio/components/BaseComponents/SelectionList';
 import StyledIconIndicator from 'React-Automation-Studio/components/BaseComponents/StyledIconIndicator';
 

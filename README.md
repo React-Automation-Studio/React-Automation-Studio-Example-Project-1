@@ -112,9 +112,9 @@ git tag
 ```
 
 
-To checkout version 1.01 run:
+To checkout version 1.1.0 run:
 ```bash
- git checkout tags/V1.01
+ git checkout tags/V1.1.0
 ```
 
 
@@ -123,7 +123,12 @@ To confirm the correct git submodule version :
 ```bash
 git submodule status
 ```
-Should contain `submodules/React-Automation-Studio (V1.01)` in the output for version 1.01 .
+Should contain `submodules/React-Automation-Studio (V1.1.0)` in the output for version 1.1.0 .
+
+If not and you previously checked out a different version run:
+```bash
+git pull --recurse-submodules
+```
 # 2 Launching the Docker compose files
 
 Initially in repository installation folder run:
@@ -453,6 +458,18 @@ Site specific components and app screens should be kept in your repository. If y
 Contact us at rasadmin@tlabs.ac.za
 
 # Changelog
+**V1.1.0 Friday 29 November 2019**
+
+Changed disconnection indicators for all components
+
+Components added: BitIndicators GraphXY GraphY
+
+Components to be deprecated in future: GraphMultiplePVs, replacement is GraphY
+
+Major package updates:
+
+Updated to React 16.11.0 Updated to Material-UI 4.7.0 Updated to Node LTS 12.13.1
+
 **V1.01 Friday 25 October 2019**
 
 Updated the React-Automation-Studio submodule to V1.01:

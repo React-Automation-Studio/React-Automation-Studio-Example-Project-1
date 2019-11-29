@@ -20,7 +20,7 @@ import TextInput from 'React-Automation-Studio/components/BaseComponents/TextInp
 import TextOutput from 'React-Automation-Studio/components/BaseComponents/TextOutput';
 import Meter from 'React-Automation-Studio/components/BaseComponents/Gauge';
 import SimpleSlider from 'React-Automation-Studio/components/BaseComponents/SimpleSlider';
-import GraphMultiplePVs from 'React-Automation-Studio/components/BaseComponents/GraphMultiplePVs';
+import GraphY from 'React-Automation-Studio/components/BaseComponents/GraphY';
 import SelectionList from 'React-Automation-Studio/components/BaseComponents/SelectionList';
 import ThumbWheel from 'React-Automation-Studio/components/BaseComponents/ThumbWheel';
 
@@ -190,7 +190,7 @@ class Example1 extends React.Component {
 
                 <Grid item xs={12} >
                   <div style={{ height: graphVH, width:'96vw',}}>
-                    <GraphMultiplePVs  pvs={['pva://testIOC:test4','pva://testIOC:test5'] } legend={['Sine Wave','Amplitude']} lineColor={[this.props.theme.palette.secondary.main,lime['400']]}/>
+                    <GraphY  pvs={['pva://testIOC:test4','pva://testIOC:test5'] } legend={['Sine Wave','Amplitude']} lineColor={[this.props.theme.palette.secondary.main,lime['400']]}/>
                   </div>
                 </Grid>
                 <Grid item xs={12}>
