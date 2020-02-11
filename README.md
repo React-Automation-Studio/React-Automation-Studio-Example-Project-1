@@ -112,9 +112,9 @@ git tag
 ```
 
 
-To checkout version 1.1.0 run:
+To checkout version 1.2.0 run:
 ```bash
- git checkout tags/V1.1.0
+ git checkout tags/V1.2.0
 ```
 
 
@@ -123,7 +123,7 @@ To confirm the correct git submodule version :
 ```bash
 git submodule status
 ```
-Should contain `submodules/React-Automation-Studio (V1.1.0)` in the output for version 1.1.0 .
+Should contain `submodules/React-Automation-Studio (V1.2.0)` in the output for version 1.2.0 .
 
 If not and you previously checked out a different version run:
 ```bash
@@ -457,8 +457,19 @@ Site specific components and app screens should be kept in your repository. If y
 
 Contact us at rasadmin@tlabs.ac.za
 
-# Changelog
-**V1.1.0 Friday 29 November 2019**
+**V1.2.0 Tuesday 11 February 2020**
+Major updates
+
+Updated to React 16.12.0
+Updated to Material-UI 4.9.2
+Updated to Node LTS 12.15.0
+
+Changed the version of Python in pvServer to 3.7.5 from 3.7
+
+
+**V1.1.0 Thursday 28 November 2019**
+Note: The compile of PyEpics breaks with the latest version of the Python 3.7 docker image and appears to be an issue in Python 3.7.6.
+Either fix the dockerfile to version 3.7.5 or move to React Automation Studio V1.2.0 -11 February 2020
 
 Changed disconnection indicators for all components
 
