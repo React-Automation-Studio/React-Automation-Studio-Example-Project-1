@@ -458,6 +458,11 @@ Site specific components and app screens should be kept in your repository. If y
 Contact us at rasadmin@tlabs.ac.za
 
 # Changelog
+**V1.2.2 Monday 17 February 2020**
+Minor updates
+
+Changed Node-sass 16.12.0 to sass 1.25.0
+
 
 **V1.2.1 Monday 17 February 2020**
 Minor updates
