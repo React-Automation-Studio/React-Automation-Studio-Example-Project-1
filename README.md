@@ -112,9 +112,9 @@ git tag
 ```
 
 
-To checkout version 1.2.2 run:
+To checkout version 1.2.3 run:
 ```bash
- git checkout tags/V1.2.2
+ git checkout tags/V1.2.3
 ```
 
 
@@ -123,7 +123,7 @@ To confirm the correct git submodule version :
 ```bash
 git submodule status
 ```
-Should contain `submodules/React-Automation-Studio (V1.2.2)` in the output for version 1.2.2 .
+Should contain `submodules/React-Automation-Studio (V1.2.3)` in the output for version 1.2.3 .
 
 If not and you previously checked out a different version run:
 ```bash
@@ -456,6 +456,12 @@ Site specific components and app screens should be kept in your repository. If y
 # 10 Contact
 
 Contact us at rasadmin@tlabs.ac.za
+#Changelog
+**V1.2.3 Wednesday 11 March 2020
+Node 12.16.1 LTS
+Material UI 4.9.5
+React-style-guidist 11.0.1
+Fixed height props and added in an aspect ratio in the progress bar and tank components
 
 # Changelog
 **V1.2.2 Monday 17 February 2020**
