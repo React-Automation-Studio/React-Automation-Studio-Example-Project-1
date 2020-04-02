@@ -458,6 +458,11 @@ Site specific components and app screens should be kept in your repository. If y
 Contact us at rasadmin@tlabs.ac.za
 # Changelog
 
+**V1.2.4 Thursday 2 April 2020**
+
+Minor bug fixed in the styleguide for GraphY and GraphXY
+Updated to React-style-guidist 11.0.4
+
 **V1.2.3 Wednesday 11 March 2020**
 
 Node 12.16.1 LTS

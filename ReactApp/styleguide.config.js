@@ -1,5 +1,6 @@
 const path = require('path')
 module.exports = {
+  pagePerSection:true,
   theme: {
 
     fontFamily: {
@@ -76,18 +77,16 @@ module.exports = {
         exampleMode: 'hide', // 'hide' | 'collapse' | 'expand'
         usageMode: 'hide' // 'hide' | 'collapse' | 'expand'
       },
-      {
-        name: 'Working with Components',
-        content: 'src/React-Automation-Studio/docs/WorkingWithComponents.md',
-      },
+
       {
         name: 'Base Components',
-       // content: 'docs/ui.md',
+        content: 'src/React-Automation-Studio/docs/WorkingWithComponents.md',
         components: 'src/React-Automation-Studio/components/BaseComponents/*.js',
         exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
         usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
       },
-    ]
+    ],
+    sectionDepth: 2
   },
    // {
    //   name: 'Documentation',
