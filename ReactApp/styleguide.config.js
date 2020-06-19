@@ -19,14 +19,14 @@ module.exports = {
 
   },
   sections: [
-   {
+    {
       name: 'Introduction',
       content: 'src/React-Automation-Studio/docs/introduction.md'
-   },
+    },
 
     {
-       name: 'Documentation',
-       content: 'src/React-Automation-Studio/docs/documentation.md'
+      name: 'Documentation',
+      content: 'src/React-Automation-Studio/docs/documentation.md'
     },
     {
       name: 'Installation Guide',
@@ -61,33 +61,58 @@ module.exports = {
 
 
       ]
-      },
-  {
-    name: 'Style Guide',
-    content: 'src/React-Automation-Studio/docs/styleguide.md',
-    sections: [
-      {
-        name: 'How It Works',
-        content: 'src/React-Automation-Studio/docs/layout/howItWorks.md',
-      },
-      {
-        name: 'Sample Layouts',
-        content: 'src/React-Automation-Studio/docs/layout/sampleLayouts.md',
-        components: 'src/React-Automation-Studio/docs/layout/layoutExamples/*.js',
-        exampleMode: 'hide', // 'hide' | 'collapse' | 'expand'
-        usageMode: 'hide' // 'hide' | 'collapse' | 'expand'
-      },
+    },
+    {
+      name: 'Style Guide',
+      content: 'src/React-Automation-Studio/docs/styleguide.md',
+      sections: [
+        {
+          name: 'How It Works',
+          content: 'src/React-Automation-Studio/docs/layout/howItWorks.md',
+        },
+        {
+          name: 'Sample Layouts',
+          content: 'src/React-Automation-Studio/docs/layout/sampleLayouts.md',
+          components: 'src/React-Automation-Studio/docs/layout/layoutExamples/*.js',
+          exampleMode: 'hide', // 'hide' | 'collapse' | 'expand'
+          usageMode: 'hide' // 'hide' | 'collapse' | 'expand'
+        },
+        {
+          name: 'Layout Wrapper Components',
+          content: 'src/React-Automation-Studio/docs/WorkingWithLayouts.md',
+          components: 'src/React-Automation-Studio/components/UI/Layout/ComposedLayouts/*.js',
+          exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
+          usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
+        },
+        {
+          name: 'Base Components',
+          content: 'src/React-Automation-Studio/docs/WorkingWithComponents.md',
+          components: 'src/React-Automation-Studio/components/BaseComponents/*.js',
+          exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
+          usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
+        },
+        {
+          name: 'Widget and PV Components',
+          content: 'src/React-Automation-Studio/docs/widget/widget.md',
+          components: ['src/React-Automation-Studio/components/SystemComponents/Widgets/Widget.js', 'src/React-Automation-Studio/components/SystemComponents/PV.js', 'src/React-Automation-Studio/components/ExperimentalExamples/Mobile/DynamicPvFieldExample.js'],
+          exampleMode: 'expand', // 'hide' | 'collapse' | 'expand'
+          usageMode: 'expand', // 'hide' | 'collapse' | 'expand'
 
-      {
-        name: 'Base Components',
-        content: 'src/React-Automation-Studio/docs/WorkingWithComponents.md',
-        components: 'src/React-Automation-Studio/components/BaseComponents/*.js',
-        exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
-        usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
-      },
-    ],
-    sectionDepth: 2
-  },
+
+
+
+        },
+        {
+          name: 'Experimental Base Components',
+          content: 'src/React-Automation-Studio/docs/WorkingWithComponents.md',
+          components: 'src/React-Automation-Studio/components/ExperimentalBaseComponents/*.js',
+          exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
+          usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
+        },
+
+      ],
+      sectionDepth: 2
+    },
    // {
    //   name: 'Documentation',
    //   sections: [
