@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 
 //import './React-Automation-Studio/App.css';
 //import io from 'socket.io-client';
-import Routes from './React-Automation-Studio/routes'
+import Routes from './routes'
 
 import 'typeface-roboto';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -15,7 +15,7 @@ import ReactVisCssBaseline from './React-Automation-Studio/components/SystemComp
 import AutomationStudioContext from './React-Automation-Studio/components/SystemComponents/AutomationStudioContext';
 import io from 'socket.io-client';
 
-import {themes } from './React-Automation-Studio/Themes'
+import {themes } from './Themes'
 
 // const socket = io('https://172.16.5.52:5000/test',{
 //   transports: ['websocket'],
