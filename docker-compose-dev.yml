@@ -20,6 +20,8 @@ services:
       - ./ReactApp/src/index.css:/frontendserverAppDev/src/index.css
       - ./ReactApp/src/index.js:/frontendserverAppDev/src/index.js
       - ./ReactApp/src/Main.js:/frontendserverAppDev/src/Main.js
+      - ./ReactApp/src/MainPublic.js:/frontendserverAppDev/src/MainPublic.js
+      - ./ReactApp/src/Themes.js:/frontendserverAppDev/src/Themes.js
       - ./ReactApp/src/routes.js:/frontendserverAppDev/src/routes.js
       - ./ReactApp/src/serviceWorker.js:/frontendserverAppDev/src/serviceWorker.js
       - ./submodules/React-Automation-Studio/ReactApp/src:/frontendserverAppDev/src/React-Automation-Studio/
