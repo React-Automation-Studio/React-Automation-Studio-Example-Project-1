@@ -72,7 +72,7 @@ class App extends Component {
      
     }
     else {
-      themeStyle = themeKeys[0];
+      themeStyle='Ocean'
       theme = createMuiTheme(themes[themeStyle])
       localStorage.setItem('themeStyle', JSON.stringify(themeStyle));
     }
