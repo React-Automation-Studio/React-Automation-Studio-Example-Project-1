@@ -6,8 +6,9 @@ import { withRouter } from 'react-router-dom';
 
 import {Link} from 'react-router-dom'
 import Button from '@material-ui/core/Button';
-import RedirectToLogIn from './React-Automation-Studio/components/SystemComponents/RedirectToLogin.js';
-import SideBar from './React-Automation-Studio/components/SystemComponents/SideBar';
+import RedirectToLogIn from 'React-Automation-Studio/components/SystemComponents/RedirectToLogin.js';
+import SideBar from 'React-Automation-Studio/components/SystemComponents/SideBar';
+import TraditionalLayout from 'React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout.js';
 import Grid from '@material-ui/core/Grid';
 import { Redirect } from 'react-router-dom'
 // Styles
@@ -88,23 +89,15 @@ class Main extends Component {
     const { classes } = this.props;
 
     return (
-      <React.Fragment>
-        <RedirectToLogIn/>
-        <Grid container direction="row" item justify="center" spacing={1} alignItems="center">
-          <Grid item lg={4} sm={4} xs={2}>
-            <SideBar/>
-          </Grid>
+      <TraditionalLayout
+      title="React Automation Studio V1.3.0"
+      denseAppBar
+      alignTitle="center"
+    >
 
-          <Grid  item lg={2} sm={4}  xs={8}>
 
-            <div style={{textAlign: 'center'}} className={classes.body1}>React Automation Studio V1.3.0</div>
-
-          </Grid>
-          <Grid item lg={4} sm={4} xs={2}>
-
-          </Grid>
-        </Grid>
-        <Grid container direction="row" item justify="center" spacing={1} alignItems="center">
+      <RedirectToLogIn/>
+        <Grid container direction="row" item justify="center" spacing={1} alignItems="center" style={{paddingTop:64}}>
           <Grid item lg={2} sm={4}  xs={8}>
             <Grid container direction="row" justify="center" spacing={3} alignItems="stretch">
               <Grid item xs={12}  >
@@ -115,7 +108,7 @@ class Main extends Component {
                   <Button className= {classes.button} component={Link} to="/Staging" color="primary" variant='contained'>  Staging </Button>
               </Grid>
               <Grid item xs={12}  >
-              <Button className= {classes.button} target="_blank" href={AutomationStudioStyleGuideBuildURL} color="secondary" variant='contained'>  Help </Button>
+              <Button className= {classes.button} target="_blank" href={AutomationStudioStyleGuideBuildURL}  variant='contained'>  Help </Button>
               </Grid>
             </Grid>
 
@@ -129,9 +122,9 @@ class Main extends Component {
 
 
 
-          </React.Fragment>
+          </TraditionalLayout>
           )
           }
           }
 
-          export default withRouter(withStyles(styles)(Main));
+          export default withRouter(withStyles(styles,{withTheme:true})(Main));

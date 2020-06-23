@@ -1,75 +1,59 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import EpicsBinaryOutDebug from 'React-Automation-Studio/components/GroupedComponents/EpicsBinaryOutDebug';
-import EpicsAnalogOutDebug from 'React-Automation-Studio/components/GroupedComponents/EpicsAnalogOutDebug';
-import EpicsMbboDebug from 'React-Automation-Studio/components/GroupedComponents/EpicsMbboDebug';
-import TextUpdate from 'React-Automation-Studio/components/BaseComponents/TextUpdate';
-import TextInput from 'React-Automation-Studio/components/BaseComponents/TextInput';
-import TextOutput from 'React-Automation-Studio/components/BaseComponents/TextOutput';
-import Meter from 'React-Automation-Studio/components/BaseComponents/Gauge';
-import SimpleSlider from 'React-Automation-Studio/components/BaseComponents/SimpleSlider';
-import GraphY from 'React-Automation-Studio/components/BaseComponents/GraphY';
-import SelectionList from 'React-Automation-Studio/components/BaseComponents/SelectionList';
-import StyledIconIndicator from 'React-Automation-Studio/components/BaseComponents/StyledIconIndicator';
 
+import withStyles from '@material-ui/core/styles/withStyles';
+import { withRouter } from 'react-router-dom';
+
+import { Link } from 'react-router-dom'
+import Button from '@material-ui/core/Button';
+import RedirectToLogIn from 'React-Automation-Studio/components/SystemComponents/RedirectToLogin.js';
+
+import TraditionalLayout from 'React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout.js';
 import Grid from '@material-ui/core/Grid';
-import DataConnection from 'React-Automation-Studio/components/SystemComponents/DataConnection';
-
-import SwitchComponent from 'React-Automation-Studio/components/BaseComponents/SwitchComponent';
-import SelectionInput from 'React-Automation-Studio/components/BaseComponents/SelectionInput';
-import ToggleButton from 'React-Automation-Studio/components/BaseComponents/ToggleButton';
-import ActionButton from 'React-Automation-Studio/components/BaseComponents/ActionButton';
-
-import ThumbWheel from 'React-Automation-Studio/components/BaseComponents/ThumbWheel';
-import ControlRightEx1 from 'React-Automation-Studio/components/ControlScreens/GridComponents/ControlRightEx1'
-
-import ControlBottomEx1 from 'React-Automation-Studio/components/ControlScreens/GridComponents/ControlBottomEx1'
-import Card from '@material-ui/core/Card';
-import SideBar from 'React-Automation-Studio/components/SystemComponents/SideBar';
-import AppBar from '@material-ui/core/AppBar';
-
-
-
-
-
-
-
 
 const styles = theme => ({
   root: {
-    padding: 0,
-    spacing: 0,
-    direction: 'row',
-    alignItems: 'stretch',
-    justify: "flex-start",
-    overflowX: "hidden",
-    overflowY: "hidden",
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.default,
+  },
+  center: {
+    margin: 'auto',
+
+    width: '15%',
+    height: '50%'
+
+  },
+  button: {
+    width: '100%',
+    height: '100%',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+
   },
 
+
 });
-class Example2 extends React.Component {
+
+const Example2 = (props) => {
 
 
-  render() {
-    //  console.log("state: ",this.state);
+  return (
+    <TraditionalLayout
+      title="Example 2"
+      denseAppBar
+      alignTitle="center"
+    >
 
-    return (
-      <React.Fragment>
-        <SideBar/>
-        <div> Hello World</div>
-      </React.Fragment>
+
+      <RedirectToLogIn />
+    
+        <div style={{ paddingTop: 64 }} > Hello World</div>
+      </TraditionalLayout>
     );
   }
-}
 
-Example2.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+
 
 export default withStyles(styles,{withTheme:true})(Example2);
-//export default Example2;
