@@ -1,11 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React,{useContext} from 'react';
 
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
-import App from './App';
-//import * as serviceWorker from './serviceWorker';
 
 import Main from './Main';
+import MainPublic from './MainPublic';
 import Demos from './components/demos/Demos';
 
 import Help from './React-Automation-Studio/components/docs/Help';
@@ -18,7 +16,6 @@ import Example3 from './components/staging/Example/Example3';
 import Probe from './React-Automation-Studio/components/SettingsPages/Probe';
 
 import LogIn from './React-Automation-Studio/LogIn';
-import { Redirect } from 'react-router-dom';
 
 
 import EpicsDemos from './React-Automation-Studio/components/Examples/EpicsDemos';
@@ -34,17 +31,26 @@ import Test3D from './React-Automation-Studio/components/Experimental/Test3D';
 
 import SettingsSteererXY from './React-Automation-Studio/components/SettingsPages/SettingsSteererXY';
 import SettingsSinglePS from './React-Automation-Studio/components/SettingsPages/SettingsSinglePS';
+import ReactAutomationStudioContext from 'React-Automation-Studio/components/SystemComponents/AutomationStudioContext';
 
 
-
-
-export default props=>(
+const Routes = (props) => {
+  const context = useContext(ReactAutomationStudioContext);
+  const roles = context.userData.roles;
+  const username = context.userData.username;
+  let loggedIn = username !== "" || process.env.REACT_APP_EnableLogin !== 'true';
+  
+  return (
   <BrowserRouter >
 
     <Switch>
 
-      <Route exact path="/" component={ Main } />
-
+    <Route exact path="/" >
+          {loggedIn === false
+            ? <MainPublic />
+            :<Main/>
+          }
+    </Route>
 
       {process.env.REACT_APP_EnableLogin==='true'&&
         <Route exact path="/LogIn" component={ LogIn } />
@@ -84,4 +90,6 @@ export default props=>(
     </Switch>
 
   </BrowserRouter>
-)
+  )
+}
+export default Routes;
