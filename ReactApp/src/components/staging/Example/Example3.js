@@ -41,7 +41,7 @@ const Example3 = (props) => {
 
   return (
     <TraditionalLayout
-      title="Example 2"
+      title="Example 3"
       denseAppBar
       alignTitle="center"
     >
