@@ -54,7 +54,7 @@ const MobileDemo1 =(props)=> {
   const  editorType=useLocalPV({pv:'loc://editorType',})
 
   const handleChange = (event, value) => {
-    setShowAdvancedSettings({ value });
+    setShowAdvancedSettings( value );
   };
 
 
