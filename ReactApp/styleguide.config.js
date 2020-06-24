@@ -109,30 +109,18 @@ module.exports = {
           exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
           usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
         },
+        {
+          name: 'Custom Components',
+          components: 'src/components/customComponents/*.js',
+          exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
+          usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
+        },
 
       ],
-      sectionDepth: 2
-    },
-   // {
-   //   name: 'Documentation',
-   //   sections: [
-   //     {
-   //       name: 'Installation',
-   //       content: 'docs/installation.md',
-   //       description: 'The description for the installation section'
-   //     },
-   //     {
-   //       name: 'Configuration',
-   //       content: 'docs/configuration.md'
-   //     },
-   //     {
-   //       name: 'Live Demo',
-   //       external: true,
-   //       href: 'http://example.com'
-   //     }
-   //   ]
-   // },
 
+      sectionDepth: 2,
+    },
+   
 
  ]
 }
