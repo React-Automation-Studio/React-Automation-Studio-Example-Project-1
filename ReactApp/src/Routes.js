@@ -31,15 +31,15 @@ import Test3D from './React-Automation-Studio/components/Experimental/Test3D';
 
 import SettingsSteererXY from './React-Automation-Studio/components/SettingsPages/SettingsSteererXY';
 import SettingsSinglePS from './React-Automation-Studio/components/SettingsPages/SettingsSinglePS';
-import ReactAutomationStudioContext from 'React-Automation-Studio/components/SystemComponents/AutomationStudioContext';
+import AutomationStudioContext from 'React-Automation-Studio/components/SystemComponents/AutomationStudioContext';
 
 
 const Routes = (props) => {
-  const context = useContext(ReactAutomationStudioContext);
+  const context = useContext(AutomationStudioContext);
+  const userData=context.userData;
   const roles = context.userData.roles;
   const username = context.userData.username;
   let loggedIn = username !== "" || process.env.REACT_APP_EnableLogin !== 'true';
-  
   return (
   <BrowserRouter >
 
