@@ -1,19 +1,11 @@
 import React, { Component } from 'react';
-
-import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
-
 import {Link} from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 import RedirectToLogIn from 'React-Automation-Studio/components/SystemComponents/RedirectToLogin.js';
-import SideBar from 'React-Automation-Studio/components/SystemComponents/SideBar';
 import TraditionalLayout from 'React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout.js';
 import Grid from '@material-ui/core/Grid';
-import { Redirect } from 'react-router-dom'
-// Styles
-
-
 
 
 const styles = theme => ({

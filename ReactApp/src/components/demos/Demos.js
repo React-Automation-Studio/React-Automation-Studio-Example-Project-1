@@ -85,7 +85,7 @@ const Demos = (props) => {
         <Grid item lg={2} sm={4} xs={8}>
           <Grid container direction="row" justify="center" spacing={3} alignItems="stretch">
             <Grid item xs={12}  >
-              <Button fullWidth fullWidth className={classes.button} component={Link} to="/MobileDemo1" color="primary" variant='contained'>  Mobile Demo 1 </Button>
+              <Button fullWidth className={classes.button} component={Link} to="/MobileDemo1" color="primary" variant='contained'>  Mobile Demo 1 </Button>
             </Grid>
             <Grid item xs={12}  >
               <Button fullWidth className={classes.button} component={Link} to="/MobileDemo2" color="primary" variant='contained'>  Mobile Demo 2 </Button>

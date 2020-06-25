@@ -56,7 +56,7 @@ const Staging = (props) => {
         <Grid item lg={2} sm={4} xs={8}>
           <Grid container direction="row" justify="center" spacing={3} alignItems="stretch">
             <Grid item xs={12}  >
-              <Button fullWidth fullWidth className={classes.button} component={Link} to="/Example" color="primary" variant='contained'>  Example</Button>
+              <Button fullWidth className={classes.button} component={Link} to="/Example" color="primary" variant='contained'>  Example</Button>
             </Grid>
 
           </Grid>

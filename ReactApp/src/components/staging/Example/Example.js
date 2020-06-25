@@ -56,16 +56,16 @@ const Example = (props) => {
             <Grid item lg={2} sm={4}  xs={8}>
               <Grid container direction="row" justify="center" spacing={3} alignItems="stretch">
                 <Grid item xs={12}  >
-                  <Button  fullWidth  fullWidth className= {classes.button} component={Link} to="/Example1" color="primary" variant='contained'>  Example1 </Button>
+                  <Button  fullWidth   className= {classes.button} component={Link} to="/Example1" color="primary" variant='contained'>  Example1 </Button>
                 </Grid>
                 <Grid item xs={12}  >
-                  <Button  fullWidth  fullWidth className= {classes.button} component={Link} to="/Example2" color="primary" variant='contained'>  Example2 </Button>
+                  <Button  fullWidth  className= {classes.button} component={Link} to="/Example2" color="primary" variant='contained'>  Example2 </Button>
                 </Grid>
 
 
 
                 <Grid item xs={12}  >
-                  <Button  fullWidth  fullWidth className= {classes.button} component={Link} to="/Example3" color="primary" variant='contained'>  Example3 </Button>
+                  <Button  fullWidth   className= {classes.button} component={Link} to="/Example3" color="primary" variant='contained'>  Example3 </Button>
                 </Grid>
 
 
