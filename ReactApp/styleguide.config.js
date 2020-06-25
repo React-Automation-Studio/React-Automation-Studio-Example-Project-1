@@ -111,6 +111,7 @@ module.exports = {
         },
         {
           name: 'Custom Components',
+          content:'src/components/customComponents/docs/customComponents.md',
           components: 'src/components/customComponents/*.js',
           exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
           usageMode: 'expand' // 'hide' | 'collapse' | 'expand'

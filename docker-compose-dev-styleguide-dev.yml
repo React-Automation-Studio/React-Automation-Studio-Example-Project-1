@@ -115,10 +115,8 @@ services:
                 - no_proxy
       dockerfile: docker/styleguideServerDev/Dockerfile
     volumes:
-      - ./certificates:/certificates/
-      - ./ReactApp/package.json:/frontendserverAppDev/package.json
-      - ./ReactApp/src:/frontendserverAppDev/src
-      - ./ReactApp/public:/frontendserverAppDev/public
-      - ./ReactApp/styleguide.config.js:/frontendserverAppDev/styleguide.config.js
+   
+      - ./ReactApp/src/components:/app/src/components
+      - ./ReactApp/styleguide.config.js:/app/styleguide.config.js
     restart: always
     network_mode: host

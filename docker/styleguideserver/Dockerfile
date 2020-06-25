@@ -12,6 +12,7 @@ ADD ./ReactApp/public /app/public
 ADD .env /app/
 ADD ./submodules/React-Automation-Studio/ReactApp/src /app/src/React-Automation-Studio
 ADD ./ReactApp/styleguide.config.js /app/styleguide.config.js
+ADD ./ReactApp/src/components /app/src/components
 ADD ./submodules/React-Automation-Studio/ReactApp/img /app/img
 RUN npm run styleguidebuild
 RUN cp -R /app/styleguide/ /styleguide/
