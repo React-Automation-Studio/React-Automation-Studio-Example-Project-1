@@ -36,7 +36,9 @@ import AutomationStudioContext from 'React-Automation-Studio/components/SystemCo
 
 const Routes = (props) => {
   const context = useContext(AutomationStudioContext);
+  /* eslint-disable-next-line no-unused-vars */
   const userData=context.userData;
+  /* eslint-disable-next-line no-unused-vars */
   const roles = context.userData.roles;
   const username = context.userData.username;
   let loggedIn = username !== "" || process.env.REACT_APP_EnableLogin !== 'true';
