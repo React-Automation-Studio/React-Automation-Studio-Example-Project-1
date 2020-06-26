@@ -12,6 +12,28 @@ CustomTextInput example connection to an SoftChannel EPICS AI pv:
        alarmSensitive={true}
     />
 ```
+Example with CustomTextInput and Slider
+```js
+import Slider from 'React-Automation-Studio/components/BaseComponents/Slider';
+    <div>
+    <CustomTextInput  
+       pv='pva://$(device):test$(id)'
+       macros={{'$(device)':'testIOC','$(id)':'2'}}
+       alarmSensitive={true}
+       usePvPrecision={true}
+       
+       usePvUnits={true}
+       usePvLabel={true}
+    />
+     <Slider  pv='pva://testIOC:amplitude'  
+       pv='pva://$(device):test$(id)'
+       macros={{'$(device)':'testIOC','$(id)':'2'}}
+        showValue={true} usePvMinMax={true} usePvLabel={true} step={1} usePvUnits={true}/>
+     </div>
+```
+
+
+
 CustomTextInput example connection to a SoftChannel EPICS AI pv with example overrides of EPICS fields:
 
 ```js
@@ -19,7 +41,7 @@ CustomTextInput example connection to a SoftChannel EPICS AI pv with example ove
        pv='pva://$(device):test$(id)'
        macros={{'$(device)':'testIOC','$(id)':'2'}}
        label={'Custom Label'}
-       usePvPrecision={true}
+       
        prec={5}
        units={"🍕"}
        max={5500}

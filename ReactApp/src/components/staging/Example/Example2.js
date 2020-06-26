@@ -6,7 +6,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import RedirectToLogIn from 'React-Automation-Studio/components/SystemComponents/RedirectToLogin.js';
 
 import TraditionalLayout from 'React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout.js';
-
+import CustomTextInput from 'components/customComponents/CustomTextInput';
 
 const styles = theme => ({
   root: {
@@ -38,7 +38,7 @@ const Example2 = (props) => {
 
   return (
     <TraditionalLayout
-      title="Example 2"
+      title="Example 2 with customComponent imports"
       denseAppBar
       alignTitle="center"
     >
@@ -46,7 +46,16 @@ const Example2 = (props) => {
 
       <RedirectToLogIn />
     
-        <div style={{ paddingTop: 64 }} > Hello World</div>
+        <div style={{ paddingTop: 64,paddingBottom:8}} >This example imports the site specific custom TextInput in the ReactApp/src/components/customComponents/ folder</div>
+        <CustomTextInput  
+       pv='pva://$(device):test$(id)'
+       macros={{'$(device)':'testIOC','$(id)':'2'}}
+       usePvLabel={true}
+       usePvPrecision={true}
+       usePvUnits={true}
+       usePvMinMax={true}
+       alarmSensitive={true}
+    />
       </TraditionalLayout>
     );
   }
