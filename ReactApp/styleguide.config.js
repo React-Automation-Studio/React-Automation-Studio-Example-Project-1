@@ -24,6 +24,15 @@ module.exports = {
   moduleAliases: {
    'React-Automation-Studio': path.resolve(__dirname, 'src/React-Automation-Studio')
   },
+  
+  getComponentPathLine(componentPath) {
+    const name = path.basename(componentPath, '.js')
+    let dir = path.dirname(componentPath);    
+    dir =dir.replace('src/','');
+
+
+    return `import ${name} from '${dir}/${name}';`
+  },
   sections: [
     {
       name: 'Introduction',
