@@ -162,6 +162,13 @@ docker-compose -f docker-compose.yml up
 ```
 Will launch the compiled production version without the demoIOC's and styleguide.
 
+And:
+
+```bash
+docker-compose -f docker-compose-dev-styleguide-dev.yml up
+```
+Will launch the development version of the styleguide.
+
 **Note**: Any of the above containers can be rebuilt by add --build at the end of the command.
 
 **Initially to check that everything is working only bring up the production version with the demos and help by running:**
@@ -309,6 +316,7 @@ For every process variable write, the access rights are first checked to confirm
 
 If no read access rights are granted the widget on the client will display "connecting" permanently. And if no write access is granted the widget is indicated as read only.
 
+
 Regular expression rules are used to evaluate the read and write access rights.
 
 The order in which the user access groups and rules are defined are important. The lowest priority is at the top  and highest priority which can overwrite the previously defined rules is at the bottom.
@@ -319,6 +327,7 @@ For example in the default user access group, the rules disables write access an
 "DEFAULT":
     {
       "usernames":["*"],
+      "roles":[],
       "rules":
       [
         { "rule":"[0-9].*",                   "read":true,  "write":false },
@@ -334,6 +343,7 @@ To enable write access for everyone one could change the default to as follows.
 "DEFAULT":
     {
       "usernames":["*"],
+      "roles":[],
       "rules":
       [
         { "rule":"[0-9].*",                   "read":true,  "write":true },
@@ -351,6 +361,7 @@ Although it is more ingenious to create separate user access groups and to defin
 "UAG1":
 {
   "usernames":["user1","user2"],
+  "roles":[],
   "rules":
   [
     { "rule":"[0-9].*",                   "read":false,  "write":false },
@@ -366,6 +377,38 @@ Although it is more ingenious to create separate user access groups and to defin
 
 In theory, all regular expression allowed by Python regex can be used although this has not been tested. More examples are available at: https://www.w3schools.com/python/python_regex.asp
 
+** New** to release 2.0.0 are the definition of roles, by defining a role dynamic routes can be created using the role. This now enables portions of your app to isolated from other users.
+
+
+```json
+"UAG1":
+{
+  "usernames":["user1"],
+  "roles":["engineer"],
+  "rules":
+  [
+    { "rule":"[0-9].*",                   "read":true,  "write":true },
+    { "rule":"[a-z].*",                   "read":true,  "write":true },
+    { "rule":"[A-Z].*",                   "read":true,  "write":true },
+   
+
+  ]
+},
+"UAG2":
+{
+  "usernames":["operator1"],
+  "roles":["operator"],
+  "rules":
+  [
+    { "rule":"[0-9].*",                   "read":true,  "write":false },
+    { "rule":"[a-z].*",                   "read":true,  "write":false },
+    { "rule":"[A-Z].*",                   "read":true,  "write":false },
+    { "rule":"^pva://testIOC:Harp1",      "read":true, "write":true },
+    { "rule":"^pva://testIOC:FC2",        "read":true,  "write":true },
+
+  ]
+}
+```
 
 
 ## 3.3 Enabling https
@@ -457,6 +500,45 @@ Site specific components and app screens should be kept in your repository. If y
 
 Contact us at rasadmin@tlabs.ac.za
 # Changelog
+
+** V2.0.0 Friday 26 June 2020
+
+Improvements and new features:
+- Updated to React Hooks based  components
+- Introduction of new RasAppCore component, the logic in App.js is replaced by this component
+- Created the new component Widget that is the base component for all Widgets.
+- PV component substitutes old DataConnection component.
+- Dynamic connection: When useMetadata props is false some fields, such as min, max, prec, alarm and units, are read from external PVs or an additional connection with those fields is established. By default useMetadata prop is false.
+- New Layout with new themes.
+- All buttons can receive and icon.
+- All components extending MUI components can pass MUI props to the MUI components through a special prop (it changes based on the component).
+- All components can have a tooltip.
+- Packages updated in both RAS and RAS-Example-Project-1
+
+
+
+
+Widget Logic:
+Custom Widget -> Widget -> PV -> EpicsPV -> Socket connection to pvServer
+                            		  \  
+                              		     -> LocalPV -> RAS-Context
+The bind between Custom Widget and Widget is made through the HOC function in Widget.
+EpicsPV and LocalPV respectively uses useEpicsPV and useLocalPV hooks that can be used in other components.
+
+Deprecated Components:
+These components will be removed in future releases
+- SimpleSlider -> Use Slider
+- ActionFanoutButton -> Use ActionButton
+- SwitchComponent -> Use Switch
+
+Removed Component:
+- GraphMultiplePVs
+
+Breaking Changes
+- routes.js was renamed Routes.js and now contains extra logic to enable dynamic or isolated routes based on the use role.
+  This is necessary for the next release
+- removal of GraphMultiplePVs
+- If you added extra logic to the App.js you will to adapt to the new RasAppCore component.
 
 **V1.2.4 Thursday 2 April 2020**
 
