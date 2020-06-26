@@ -100,6 +100,11 @@ module.exports = {
           usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
         },
         {
+          name: 'Theming',
+          content: 'src/docs/themes/themes.md',
+          
+        },
+        {
           name: 'Base Components',
           content: 'src/React-Automation-Studio/docs/WorkingWithComponents.md',
           components: 'src/React-Automation-Studio/components/BaseComponents/*.js',

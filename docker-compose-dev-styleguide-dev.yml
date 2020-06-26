@@ -117,6 +117,7 @@ services:
     volumes:
    
       - ./ReactApp/src/components:/app/src/components
+      - ./ReactApp/src/docs:/app/src/docs
       - ./ReactApp/styleguide.config.js:/app/styleguide.config.js
     restart: always
     network_mode: host
