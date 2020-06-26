@@ -1,8 +1,8 @@
 
-TextInput example connection to an SoftChannel EPICS AI pv:
+CustomTextInput example connection to an SoftChannel EPICS AI pv:
 
 ```js
-    <TextInput  
+    <CustomTextInput  
        pv='pva://$(device):test$(id)'
        macros={{'$(device)':'testIOC','$(id)':'2'}}
        usePvLabel={true}
@@ -12,10 +12,10 @@ TextInput example connection to an SoftChannel EPICS AI pv:
        alarmSensitive={true}
     />
 ```
-TextInput example connection to a SoftChannel EPICS AI pv with example overrides of EPICS fields:
+CustomTextInput example connection to a SoftChannel EPICS AI pv with example overrides of EPICS fields:
 
 ```js
-    <TextInput  
+    <CustomTextInput  
        pv='pva://$(device):test$(id)'
        macros={{'$(device)':'testIOC','$(id)':'2'}}
        label={'Custom Label'}
@@ -28,10 +28,10 @@ TextInput example connection to a SoftChannel EPICS AI pv with example overrides
     />
 ```
 
-TextInput example connection to an SoftChannel EPICS MBBO pv using the string value:
+CustomTextInput example connection to an SoftChannel EPICS MBBO pv using the string value:
 
 ```js
-    <TextInput  
+    <CustomTextInput  
        pv='pva://$(device):mbboTest$(id)'
        macros={{'$(device)':'testIOC','$(id)':'1'}}
        usePvLabel={true}
@@ -42,10 +42,10 @@ TextInput example connection to an SoftChannel EPICS MBBO pv using the string va
 
 
 ```
-TextInput example connection to an SoftChannel EPICS MBBO pv using the numerical value:
+CustomTextInput example connection to an SoftChannel EPICS MBBO pv using the numerical value:
 
 ```js
-    <TextInput  
+    <CustomTextInput  
        pv='pva://$(device):mbboTest$(id)'
        macros={{'$(device)':'testIOC','$(id)':'1'}}
        usePvLabel={true}
@@ -56,10 +56,10 @@ TextInput example connection to an SoftChannel EPICS MBBO pv using the numerical
 
 ```
 
-TextInput example :
+CustomTextInput example :
 
 ```js
-    <TextInput  
+    <CustomTextInput  
        pv='pva://$(device):test$(id)'
        macros={{'$(device)':'testIOC','$(id)':'2'}}
        alarmSensitive={true}
@@ -69,10 +69,10 @@ TextInput example :
     />
 ```
 
-TextInput number format example :
+CustomTextInput number format example :
 
 ```js
-    <TextInput  
+    <CustomTextInput  
        pv='pva://$(device):test$(id)'
        macros={{'$(device)':'testIOC','$(id)':'2'}}
        alarmSensitive={true}

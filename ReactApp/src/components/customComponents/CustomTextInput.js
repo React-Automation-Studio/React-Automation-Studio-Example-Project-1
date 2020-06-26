@@ -2,7 +2,7 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { InputAdornment, TextField } from "@material-ui/core";
 import PropTypes from 'prop-types';
-import Widget from "React-Automation-Studio/SystemComponents/Widgets/Widget";
+import Widget from "React-Automation-Studio/components/SystemComponents/Widgets/Widget";
 
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
@@ -27,7 +27,7 @@ const styles = (theme) => ({
   }
 });
 
-const TextInputComponent=(props)=> {
+const CustomTextInputComponent=(props)=> {
 
  
   const handleChange=(event)=>{
@@ -110,7 +110,7 @@ const TextInputComponent=(props)=> {
 }
 
 /**
- * The TextInput Component is a wrapper on the Material-UI contained TextField component.
+ * The CustomTextInput Component is a wrapper on the Material-UI contained TextField component.
  * The TextField component is implemented with zero margins and enabled to grow to the width of its parent container.<br/><br/>
  * The margins and spacing must be controlled from the parent component.<br/><br/>
  * Material-UI TextField Demos:
@@ -121,13 +121,13 @@ const TextInputComponent=(props)=> {
  * 
  * 
  */
-const TextInput =(props)=>{
+const CustomTextInput =(props)=>{
     return (
-      <Widget {...props} component={TextInputComponent} pvs={undefined}/>
+      <Widget {...props} component={CustomTextInputComponent} pvs={undefined}/>
     )
 }
 
-TextInput.propTypes = {
+CustomTextInput.propTypes = {
   
   /** Material-UI TextField variant*/
   variant: PropTypes.string,
@@ -292,7 +292,7 @@ TextInput.propTypes = {
 
 
 };
-TextInput.defaultProps = {
+CustomTextInput.defaultProps = {
   debug: false,
   variant: "outlined",
   margin: "none",
@@ -300,4 +300,4 @@ TextInput.defaultProps = {
   showTooltip:false
 };
 
-export default withStyles(styles, { withTheme: true })(TextInput);
+export default withStyles(styles, { withTheme: true })(CustomTextInput);

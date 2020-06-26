@@ -1,4 +1,6 @@
 const path = require('path')
+
+const resolve = dir => path.resolve(__dirname, dir);
 module.exports = {
   pagePerSection:true,
   theme: {
@@ -7,7 +9,8 @@ module.exports = {
       base: 'Roboto'
     }
   },
-
+    
+  
   styleguideComponents: {
     Wrapper: path.join(__dirname, './src/React-Automation-Studio/styleguide/Wrapper'),
     //LogoRenderer: path.join(__dirname, './src/React-Automation-Studio/styleguide/components/Logo'),
@@ -17,6 +20,9 @@ module.exports = {
 
 
 
+  },
+  moduleAliases: {
+   'React-Automation-Studio': path.resolve(__dirname, 'src/React-Automation-Studio')
   },
   sections: [
     {
