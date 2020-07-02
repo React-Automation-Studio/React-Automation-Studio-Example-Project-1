@@ -92,12 +92,34 @@ module.exports = {
           exampleMode: 'hide', // 'hide' | 'collapse' | 'expand'
           usageMode: 'hide' // 'hide' | 'collapse' | 'expand'
         },
+        
         {
           name: 'Layout Wrapper Components',
           content: 'src/React-Automation-Studio/docs/WorkingWithLayouts.md',
-          components: 'src/React-Automation-Studio/components/UI/Layout/ComposedLayouts/*.js',
-          exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
-          usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
+          
+        
+          
+          sections:[
+            { 
+              name: 'Layout Components',
+              components: 'src/React-Automation-Studio/components/UI/Layout/ComposedLayouts/*.js',
+              exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
+              usageMode: 'expand', // 'hide' | 'collapse' | 'expand'
+            },
+            { 
+              name: 'TraditionalLayout Example 1',
+              content: 'src/React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayoutEx1.md',
+            },
+            { 
+              name: 'TraditionalLayout Example 2',
+              content: 'src/React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayoutEx2.md',
+            },
+            { 
+              name: 'TraditionalLayout Example 3',
+              content: 'src/React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayoutEx3.md',
+            },
+         
+          ]
         },
         {
           name: 'Theming',
@@ -133,6 +155,20 @@ module.exports = {
           name: 'Custom Components',
           content:'src/components/customComponents/docs/customComponents.md',
           components: 'src/components/customComponents/*.js',
+          exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
+          usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
+        },
+        {
+          name: 'Experimental Beamline Components',
+          content: 'src/React-Automation-Studio/docs/beamlineComponents/BeamlineComponents.md',
+          components: 'src/React-Automation-Studio/components/SvgBeamlineComponents/*.js',
+          exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
+          usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
+        },
+        {
+          name: 'Experimental Alarm Handler',
+          content: 'src/React-Automation-Studio/docs/alarmHandler/alarmHandler.md',
+          //components: 'src/components/SvgBeamlineComponents/*.js',
           exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
           usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
         },

@@ -93,7 +93,7 @@ class Main extends Component {
           <Grid item lg={2} sm={4}  xs={8}>
             <Grid container direction="row" justify="center" spacing={3} alignItems="stretch">
               <Grid item xs={12}  >
-                  <Button className= {classes.button} component={Link} to="/Demos" color="primary" variant='contained'> Demos </Button>
+                  <Button className= {classes.button} component={Link} to="/DemosDashboard" color="primary" variant='contained'> Demos Dashboard </Button>
               </Grid>
 
               <Grid item xs={12}  >

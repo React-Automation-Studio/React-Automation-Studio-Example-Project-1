@@ -32,8 +32,8 @@ import Test3D from './React-Automation-Studio/components/Experimental/Test3D';
 import SettingsSteererXY from './React-Automation-Studio/components/SettingsPages/SettingsSteererXY';
 import SettingsSinglePS from './React-Automation-Studio/components/SettingsPages/SettingsSinglePS';
 import AutomationStudioContext from 'React-Automation-Studio/components/SystemComponents/AutomationStudioContext';
-
-
+import MainDashboard from './React-Automation-Studio/components/UI/MainDashboard';
+import BeamlineControlSystem from './React-Automation-Studio/components/ExperimentalControlScreens/BeamlineControlSystem';
 const Routes = (props) => {
   const context = useContext(AutomationStudioContext);
   /* eslint-disable-next-line no-unused-vars */
@@ -59,7 +59,7 @@ const Routes = (props) => {
       }
 
       <Route path="/Probe" component={Probe} />
-
+      <Route path="/DemosDashboard" component={MainDashboard} />
       <Route path="/Demos" component={Demos} />
       <Route path="/Help" component={Help} />
       <Route path="/Staging" component={Staging} />
@@ -79,6 +79,7 @@ const Routes = (props) => {
       <Route path="/ControlTestHarp1" component={ControlTestHarp1} />
 
       <Route path="/ControlTableExample" component={ControlTableExample} />
+      <Route path="/BeamlineControlSystem" component={BeamlineControlSystem} />
       <Route path="/EpicsDemos" component={EpicsDemos} />
 
 
