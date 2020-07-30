@@ -10,8 +10,7 @@ services:
                 - no_proxy
       dockerfile: docker/frontendserverDev/Dockerfile
     volumes:
-      #- ${PWD}:/frontendserverAppDev
-      #- iTlAsNodeModules:/frontendserverAppDev/node_modules
+    
       - ./certificates:/certificates/
       - ./ReactApp/jsconfig.json:/frontendserverAppDev/jsconfig.json
       - ./ReactApp/package.json:/frontendserverAppDev/package.json
@@ -30,6 +29,11 @@ services:
     network_mode: host
   stagingpvserver:
     env_file: .env
+    environment:
+      - ALARM_DATABASE=${ALARM_DATABASE-localhost}
+      - ALARM_DATABASE_REPLICA_SET_NAME=${ALARM_DATABASE_REPLICA_SET_NAME-devrs}
+      - LOADSAVE_DATABASE=${ALARM_LOADSAVE_DATABASEDATABASE-localhost}
+      - LOADSAVE_DATABASE_REPLICA_SET_NAME=${LOADSAVE_DATABASE_REPLICA_SET_NAME-devrs}
     build:
       context: ./
       args: # Environment variables available at build-time
@@ -73,26 +77,6 @@ services:
     stdin_open: true
     restart: always
     network_mode: host
-  # styleguideserver:
-  #   env_file: .env
-  #   environment:
-  #           - REACT_APP_PyEpicsServerPORT=5001
-  #           - REACT_APP_EnableLogin=false
-
-  #   build:
-  #     context: ./
-  #     args: # Environment variables available at build-time
-  #               - http_proxy
-  #               - https_proxy
-  #               - no_proxy
-  #     dockerfile: docker/styleguideserver/Dockerfile
-  #   volumes:
-  #     #- /app/styleguide
-  #     #- iTlAsNodeModules:/app/node_modules
-  #     #- iTlAsSgNodeModules:/styleguideServer/node_modules
-  #     - ./certificates:/certificates/
-  #   restart: always
-  #   network_mode: host
   stagingtestioc:
       build:
         context: ./
@@ -121,3 +105,106 @@ services:
       - ./ReactApp/styleguide.config.js:/app/styleguide.config.js
     restart: always
     network_mode: host
+
+  ## ALL Database related Docker processes -start   
+  mongo1:
+    image: mongo:4.2.3-bionic
+    hostname: mongo1
+    restart: always
+    network_mode: "host"
+    env_file: .env
+    # environment: 
+    #   MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME-admin}
+    #   MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD-password}
+    logging:
+      driver: "none"
+    volumes:
+      - "mongo-db-data1:/data/db"
+      - "mongo-db-configdb1:/data/configdb"
+    command: "--bind_ip_all --port 27017 --replSet ${REPLICA_SET_NAME-devrs}"
+
+  mongo2:
+    image: mongo:4.2.3-bionic
+    hostname: mongo2
+    restart: always
+    network_mode: "host"
+    env_file: .env
+    # environment: 
+    #   MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME-admin}
+    #   MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD-password}
+    logging:
+      driver: "none"
+    volumes:
+      - "mongo-db-data2:/data/db"
+      - "mongo-db-configdb2:/data/configdb"
+    command: "--bind_ip_all --port 27018 --replSet ${REPLICA_SET_NAME-devrs}"
+
+  mongo3:
+    image: mongo:4.2.3-bionic
+    hostname: mongo3
+    restart: always
+    network_mode: "host"
+    env_file: .env
+    # environment: 
+    #   MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME-admin}
+    #   MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD-password}
+    logging:
+      driver: "none"
+    volumes:
+      - "mongo-db-data3:/data/db"
+      - "mongo-db-configdb3:/data/configdb"
+    command: "--bind_ip_all --port 27019 --replSet ${REPLICA_SET_NAME-devrs}"
+  mongosetup:
+    build:
+      context: ./submodules/React-Automation-Studio/
+      dockerfile: docker/mongoSetup/Dockerfile
+    hostname: mongosetup
+    restart: on-failure
+    network_mode: "host"
+    depends_on:
+      - mongo1
+      - mongo2
+      - mongo3
+    stdin_open: true
+    tty: true
+    env_file: .env
+  
+  initializeloadsavedb: ### This is copy of the main repos loadsavedb init routine and can be fully customized
+    env_file: .env
+    environment:
+      - LOADSAVE_DATABASE=localhost
+      - LOADSAVE_DATABASE_REPLICA_SET_NAME=devrs
+    build:
+      context: ./
+      
+      args: # Environment variables available at build-time
+                - http_proxy
+                - https_proxy
+                - no_proxy
+      dockerfile: docker/loadSaveDbInit/Dockerfile
+    network_mode: "host"
+    tty: true
+    stdin_open: true
+    depends_on:
+      - mongosetup
+  alarmhandlerserver:
+    build:
+      context: ./submodules/React-Automation-Studio/
+      dockerfile: docker/alarmHandlerServer/Dockerfile
+    hostname: alarmhandlerserver
+    restart: always
+    depends_on:
+      - mongosetup
+    network_mode: "host"
+    stdin_open: true
+    tty: true
+    env_file: .env
+  
+volumes:
+  mongo-db-data1:
+  mongo-db-configdb1:
+  mongo-db-data2:
+  mongo-db-configdb2:
+  mongo-db-data3:
+  mongo-db-configdb3:
+## ALL Database related Docker processes -end   
