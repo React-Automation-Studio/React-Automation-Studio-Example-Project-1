@@ -73,9 +73,44 @@ module.exports = {
             },
           ]
         },
+        {
+          name: 'Configuring MongoDB Server Settings',
+          content: 'src/React-Automation-Studio/docs/MongoDB/MongoDB.md',
+          sections: [
+            {
+              name: 'MongoDB Primer',
+              content: 'src/React-Automation-Studio/docs/MongoDB/MongoDB_Primer.md',
+              sections: [
+                {
+                  name: 'Replication',
+                  content: 'src/React-Automation-Studio/docs/MongoDB/MongoDB_Primer_Replication.md',
+                }
+              ]
+            },
+            {
+              name: 'MongoDB Configuration',
+              content: 'src/React-Automation-Studio/docs/MongoDB/MongoDB_Config.md',
+              sections: [
+                {
+                  name: 'Default configuration',
+                  content: 'src/React-Automation-Studio/docs/MongoDB/MongoDB_Config_Default.md',
+                },
+                {
+                  name: 'Changing MongoDB configuration settings',
+                  content: 'src/React-Automation-Studio/docs/MongoDB/MongoDB_Config_Config.md',
+                }
+              ]
+            },
+            {
+              name: 'MongoDB Compass - A GUI for MongoDB',
+              content: 'src/React-Automation-Studio/docs/MongoDB/MongoDB_Compass.md',
+            }
+          ],
+        },
 
 
-      ]
+      ],
+      sectionDepth: 1
     },
     {
       name: 'Style Guide',
@@ -145,6 +180,146 @@ module.exports = {
 
         },
         {
+          name: 'Database Hooks',
+          content: 'src/React-Automation-Studio/components/SystemComponents/database/MongoDB/MongoDb.md',
+          //components: 'src/React-Automation-Studio/components/SystemComponents/database/MongoDB/*.js',
+          exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
+          usageMode: 'expand', // 'hide' | 'collapse' | 'expand'
+          sections: [
+            {
+              name: 'useMongoDbWatch',
+              content: 'src/React-Automation-Studio/components/SystemComponents/database/MongoDB/useMongoDbWatch.md',
+            },
+            {
+              name: 'useMongoDbInsertOne',
+              content: 'src/React-Automation-Studio/components/SystemComponents/database/MongoDB/useMongoDbInsertOne.md',
+            },
+            {
+              name: 'useMongoDbUpdateOne',
+              content: 'src/React-Automation-Studio/components/SystemComponents/database/MongoDB/useMongoDbUpdateOne.md',
+            },
+          ],
+        },
+        {
+          name: 'Beamline Components',
+          content: 'src/React-Automation-Studio/docs/beamlineComponents/BeamlineComponents.md',
+          components: 'src/React-Automation-Studio/components/SvgBeamlineComponents/*.js',
+          exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
+          usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
+        },
+
+        {
+          name: 'Experimental Base Components',
+          content: 'src/React-Automation-Studio/docs/WorkingWithComponents.md',
+          components: 'src/React-Automation-Studio/components/ExperimentalBaseComponents/*.js',
+          exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
+          usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
+        },
+        {
+          name: 'Experimental Beamline Components',
+          content: 'src/React-Automation-Studio/docs/beamlineComponents/BeamlineComponents.md',
+          components: 'src/React-Automation-Studio/components/ExperimentalSvgBeamlineComponents/*.js',
+          exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
+          usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
+        },
+        {
+          name: 'Experimental Alarm Handler',
+          content: 'src/React-Automation-Studio/docs/alarmHandler/alarmHandler.md',
+          sections: [
+            {
+              name: 'Setting Up Alarm Server',
+              content: 'src/React-Automation-Studio/docs/alarmHandler/setup.md',
+              sections: [
+                {
+                  name: 'Environment settings',
+                  content: 'src/React-Automation-Studio/docs/alarmHandler/environment.md',
+                },
+                {
+                  name: 'MongoDB seed data',
+                  content: 'src/React-Automation-Studio/docs/alarmHandler/seedData.md',
+                  sections: [
+                    {
+                      name: 'config.json',
+                      content: 'src/React-Automation-Studio/docs/alarmHandler/configJson.md',
+                    },
+                    {
+                      name: 'pvList.json',
+                      content: 'src/React-Automation-Studio/docs/alarmHandler/pvListJson.md',
+                    },
+                    {
+                      name: 'users.json',
+                      content: 'src/React-Automation-Studio/docs/alarmHandler/usersJson.md',
+                    },
+                  ]
+                },
+              ]
+            },
+            {
+              name: 'Alarm Handler User Guide',
+              content: 'src/React-Automation-Studio/docs/alarmHandler/userGuide.md',
+              sections: [
+                {
+                  name: 'Functional implementation and conventions',
+                  content: 'src/React-Automation-Studio/docs/alarmHandler/implementConventions.md',
+                  sections: [
+                    {
+                      name: 'Alarm server conventions',
+                      content: 'src/React-Automation-Studio/docs/alarmHandler/serverConventions.md',
+                    },
+                    {
+                      name: 'Logging of alarm activities',
+                      content: 'src/React-Automation-Studio/docs/alarmHandler/serverLogging.md',
+                    }
+                  ]
+                },
+                {
+                  name: 'Alarm setup view',
+                  content: 'src/React-Automation-Studio/docs/alarmHandler/alarmSetup.md',
+                  sections: [
+                    {
+                      name: 'ALARM AREAS',
+                      content: 'src/React-Automation-Studio/docs/alarmHandler/alarmAreas.md',
+                    },
+                    {
+                      name: 'ALARM TABLE',
+                      content: 'src/React-Automation-Studio/docs/alarmHandler/alarmTable.md',
+                    },
+                    {
+                      name: 'ALARM LOG',
+                      content: 'src/React-Automation-Studio/docs/alarmHandler/alarmLog.md',
+                    },
+                  ]
+                },
+                {
+                  name: 'User notification view',
+                  content: 'src/React-Automation-Studio/docs/alarmHandler/userNotification.md',
+                  sections: [
+                    {
+                      name: 'Alarm handler user table',
+                      content: 'src/React-Automation-Studio/docs/alarmHandler/alarmUserTable.md',
+                    },
+                    {
+                      name: 'Filtered pvs list',
+                      content: 'src/React-Automation-Studio/docs/alarmHandler/filterPvList.md',
+                    },
+                  ]
+                },
+              ]
+            }
+          ],
+          components: 'src/React-Automation-Studio/components/AlarmHandler/AlarmHandler.js',
+          exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
+          usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
+        },
+        {
+          name: 'Experimental Load Save',
+          content: 'src/React-Automation-Studio/docs/loadSave/loadSave.md',
+          components: 'src/React-Automation-Studio/components/LoadSaveComponent/LoadSave.js',
+          exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
+          usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
+         
+        },
+        {
           name: 'Experimental Base Components',
           content: 'src/React-Automation-Studio/docs/WorkingWithComponents.md',
           components: 'src/React-Automation-Studio/components/ExperimentalBaseComponents/*.js',
@@ -158,20 +333,8 @@ module.exports = {
           exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
           usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
         },
-        {
-          name: 'Experimental Beamline Components',
-          content: 'src/React-Automation-Studio/docs/beamlineComponents/BeamlineComponents.md',
-          components: 'src/React-Automation-Studio/components/SvgBeamlineComponents/*.js',
-          exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
-          usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
-        },
-        {
-          name: 'Experimental Alarm Handler',
-          content: 'src/React-Automation-Studio/docs/alarmHandler/alarmHandler.md',
-          //components: 'src/components/SvgBeamlineComponents/*.js',
-          exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
-          usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
-        },
+        
+      
 
       ],
 
