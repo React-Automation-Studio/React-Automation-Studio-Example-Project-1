@@ -59,8 +59,8 @@ else{
 
 let AutomationStudioStyleGuideBuildURL=pvServerBASEURL+":"+port;
 
-let enableDemos = typeof process.env.REACT_APP_ENABLE_DEMOS!=='undefined'?process.env.REACT_APP_ENABLE_DEMOS.toUpperCase() === 'TRUE':false;
-console.log(process.env.REACT_APP_ENABLE_DEMO, enableDemos)
+let enableDemos = typeof process.env.REACT_APP_DISABLE_DEMOS!=='undefined'?!(process.env.REACT_APP_DISABLE_DEMOS.toUpperCase() === 'TRUE'):true;
+console.log(process.env.REACT_APP_DISABLE_DEMOS, enableDemos)
 class Main extends Component {
   constructor(props) {
     super(props);

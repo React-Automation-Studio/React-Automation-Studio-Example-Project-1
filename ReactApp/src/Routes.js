@@ -41,7 +41,7 @@ const Routes = (props) => {
   const roles = context.userData.roles;
   const username = context.userData.username;
   let loggedIn = username !== "" || process.env.REACT_APP_EnableLogin !== 'true';
-  let enableDemos = typeof process.env.REACT_APP_ENABLE_DEMOS!=='undefined'?process.env.REACT_APP_ENABLE_DEMOS.toUpperCase() === 'TRUE':false;
+  let enableDemos = typeof process.env.REACT_APP_DISABLE_DEMOS !== 'undefined' ? !(process.env.REACT_APP_DISABLE_DEMOS.toUpperCase() === 'TRUE') : true;
 
   return (
     <BrowserRouter >
@@ -65,25 +65,23 @@ const Routes = (props) => {
         {/*system end*/}
 
         {/*demos start*/}
-        {enableDemos &&
-          <React.Fragment>
-            <Route path="/DemosDashboard" component={MainDashboard} />
-            <Route path="/Demos" component={Demos} />
-            <Route path="/MobileDemo1" component={MobileDemo1} />
-            <Route path="/MobileDemo2" component={MobileDemo2} />
-            <Route path="/EpicsDemos" component={EpicsDemos} />
-            <Route path="/Test3D" component={Test3D} />
-            <Route path="/AlarmHandlerDemo" component={AlarmHandlerDemo} />
-            <Route path="/VaultDemo" component={Vault} />
-            <Route path="/LoadSaveExample" component={LoadSaveExample} />
-            {/* new Beamline and table control System routes start*/}
-            <Route path="/BeamlineControlSystem" component={BeamlineControlSystem} />
-            <Route path="/AdvancedSettingsSinglePS" component={AdvancedSettingsSinglePS} />
-            <Route path="/TableControlSystem" component={TableControlSystem} />
-            <Route path="/SettingsSinglePS" component={SettingsSinglePS} />
-            <Route path="/SettingsSteererXY" component={SettingsSteererXY} />
-          </React.Fragment>
-        }
+        {enableDemos && <Route path="/DemosDashboard" component={MainDashboard} />}
+        {enableDemos && <Route path="/Demos" component={Demos} />}
+        {enableDemos && <Route path="/MobileDemo1" component={MobileDemo1} />}
+        {enableDemos && <Route path="/MobileDemo2" component={MobileDemo2} />}
+        {enableDemos && <Route path="/EpicsDemos" component={EpicsDemos} />}
+        {enableDemos && <Route path="/Test3D" component={Test3D} />}
+        {enableDemos && <Route path="/AlarmHandlerDemo" component={AlarmHandlerDemo} />}
+        {enableDemos && <Route path="/VaultDemo" component={Vault} />}
+        {enableDemos && <Route path="/LoadSaveExample" component={LoadSaveExample} />}
+        {/* new Beamline and table control System routes start*/}
+        {enableDemos && <Route path="/BeamlineControlSystem" component={BeamlineControlSystem} />}
+        {enableDemos && <Route path="/AdvancedSettingsSinglePS" component={AdvancedSettingsSinglePS} />}
+        {enableDemos && <Route path="/TableControlSystem" component={TableControlSystem} />}
+        {enableDemos && <Route path="/SettingsSinglePS" component={SettingsSinglePS} />}
+        {enableDemos && <Route path="/SettingsSteererXY" component={SettingsSteererXY} />}
+
+
         {/* new Beamline and table control System routes end*/}
 
         {/*demos end*/}

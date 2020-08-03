@@ -449,7 +449,7 @@ The built client will be then served  https://customURL:9000/, the styleguide at
 
 # 3.4 Disabling the demo components
   To disable the demo React components and links in development and production, in the .env file set
-  REACT_APP_ENABLE_DEMOS=false
+  REACT_APP_DISABLE_DEMOS=true
   
 # 4 Folder structure
 This section has some notes on  systems folder structure:
