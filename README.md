@@ -204,7 +204,7 @@ To change the URL, ports, and enable user authentication See section 3.1 and 3.2
 
 
 
-# 3 Enabling user login, authentication and https
+# 3 Environment Variables:Enabling user login, authentication, https and changing environment variables
 
 If it is intended to run the application locally on a pc then no authentication is needed and the users' system login will protect access.
 
@@ -447,6 +447,10 @@ Both the pvServer and the node clientserver will automatically detect the change
 
 The built client will be then served  https://customURL:9000/, the styleguide at https://customURL:6060/ and the dev client at http://127.0.0.1:3000/ or http://hostip:3000/
 
+# 3.4 Disabling the demo components
+  To disable the demo React components and links in development and production, in the .env file set
+  REACT_APP_ENABLE_DEMOS=false
+  
 # 4 Folder structure
 This section has some notes on  systems folder structure:
 
