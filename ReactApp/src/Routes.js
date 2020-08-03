@@ -41,6 +41,8 @@ const Routes = (props) => {
   const roles = context.userData.roles;
   const username = context.userData.username;
   let loggedIn = username !== "" || process.env.REACT_APP_EnableLogin !== 'true';
+  let enableDemos = typeof process.env.REACT_APP_ENABLE_DEMO!=='undefined'?process.env.REACT_APP_ENABLE_DEMOS.toUpperCase() === 'TRUE':false;
+
   return (
     <BrowserRouter >
 
@@ -63,37 +65,41 @@ const Routes = (props) => {
         {/*system end*/}
 
         {/*demos start*/}
-        <Route path="/DemosDashboard" component={MainDashboard} />
-        <Route path="/Demos" component={Demos} />
-        <Route path="/MobileDemo1" component={MobileDemo1} />
-        <Route path="/MobileDemo2" component={MobileDemo2} />
-        <Route path="/EpicsDemos" component={EpicsDemos} />
-        <Route path="/Test3D" component={Test3D} />
-        <Route path="/AlarmHandlerDemo" component={AlarmHandlerDemo} />
-        <Route path="/VaultDemo" component={Vault} />
-        <Route path="/LoadSaveExample" component={LoadSaveExample} />
-        {/* new Beamline and table control System routes start*/}
-        <Route path="/BeamlineControlSystem" component={BeamlineControlSystem} />
-        <Route path="/AdvancedSettingsSinglePS" component={AdvancedSettingsSinglePS} />
-        <Route path="/TableControlSystem" component={TableControlSystem} />
-        <Route path="/SettingsSinglePS" component={SettingsSinglePS} />
-        <Route path="/SettingsSteererXY" component={SettingsSteererXY} />
+        {enableDemos &&
+          <React.Fragment>
+            <Route path="/DemosDashboard" component={MainDashboard} />
+            <Route path="/Demos" component={Demos} />
+            <Route path="/MobileDemo1" component={MobileDemo1} />
+            <Route path="/MobileDemo2" component={MobileDemo2} />
+            <Route path="/EpicsDemos" component={EpicsDemos} />
+            <Route path="/Test3D" component={Test3D} />
+            <Route path="/AlarmHandlerDemo" component={AlarmHandlerDemo} />
+            <Route path="/VaultDemo" component={Vault} />
+            <Route path="/LoadSaveExample" component={LoadSaveExample} />
+            {/* new Beamline and table control System routes start*/}
+            <Route path="/BeamlineControlSystem" component={BeamlineControlSystem} />
+            <Route path="/AdvancedSettingsSinglePS" component={AdvancedSettingsSinglePS} />
+            <Route path="/TableControlSystem" component={TableControlSystem} />
+            <Route path="/SettingsSinglePS" component={SettingsSinglePS} />
+            <Route path="/SettingsSteererXY" component={SettingsSteererXY} />
+          </React.Fragment>
+        }
         {/* new Beamline and table control System routes end*/}
 
-         {/*demos end*/}
+        {/*demos end*/}
 
-         {/*staging start*/}
-         <Route path="/Staging" component={Staging} />
+        {/*staging start*/}
+        <Route path="/Staging" component={Staging} />
         <Route path="/Example" component={Example} />
         <Route path="/Example1" component={Example1} />
         <Route path="/Example2" component={Example2} />
         <Route path="/Example3" component={Example3} />
         {/*staging end*/}
 
-       
 
 
-     
+
+
 
 
 

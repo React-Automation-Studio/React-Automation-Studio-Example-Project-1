@@ -59,7 +59,7 @@ else{
 
 let AutomationStudioStyleGuideBuildURL=pvServerBASEURL+":"+port;
 
-
+let enableDemos = typeof process.env.REACT_APP_ENABLE_DEMO!=='undefined'?process.env.REACT_APP_ENABLE_DEMOS.toUpperCase() === 'TRUE':false;
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -92,9 +92,9 @@ class Main extends Component {
         <Grid container direction="row" item justify="center" spacing={1} alignItems="center" style={{paddingTop:64}}>
           <Grid item lg={2} sm={4}  xs={8}>
             <Grid container direction="row" justify="center" spacing={3} alignItems="stretch">
-              <Grid item xs={12}  >
+              {enableDemos&&<Grid item xs={12}  >
                   <Button className= {classes.button} component={Link} to="/DemosDashboard" color="primary" variant='contained'> Demos Dashboard </Button>
-              </Grid>
+              </Grid>}
 
               <Grid item xs={12}  >
                   <Button className= {classes.button} component={Link} to="/Staging" color="primary" variant='contained'>  Staging </Button>

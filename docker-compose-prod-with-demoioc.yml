@@ -2,6 +2,8 @@ version: '3.4'
 services:
   stagingprodfrontendserver:
     env_file: .env
+    environment:
+    - REACT_APP_ENABLE_DEMOS=${REACT_APP_ENABLE_DEMOS-true}
     build:
       context: ./
       args: # Environment variables available at build-time
