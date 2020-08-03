@@ -41,7 +41,7 @@ const Routes = (props) => {
   const roles = context.userData.roles;
   const username = context.userData.username;
   let loggedIn = username !== "" || process.env.REACT_APP_EnableLogin !== 'true';
-  let enableDemos = typeof process.env.REACT_APP_ENABLE_DEMO!=='undefined'?process.env.REACT_APP_ENABLE_DEMOS.toUpperCase() === 'TRUE':false;
+  let enableDemos = typeof process.env.REACT_APP_ENABLE_DEMOS!=='undefined'?process.env.REACT_APP_ENABLE_DEMOS.toUpperCase() === 'TRUE':false;
 
   return (
     <BrowserRouter >
