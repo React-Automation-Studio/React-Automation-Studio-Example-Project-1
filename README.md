@@ -1,3 +1,5 @@
+Current Release: V2.0.0
+
 # Introduction
 
 This repository pulls in the src from the  React Automation Studio repository https://github.com/wduckitt/React-Automation-Studio.git and acts a standalone boiler plate example project for React Automation Studio without having to delve into the source code of the master repository.
@@ -112,9 +114,9 @@ git tag
 ```
 
 
-To checkout version 1.2.3 run:
+To checkout version 2.0.0 run:
 ```bash
- git checkout tags/V1.2.3
+ git checkout tags/V2.0.0
 ```
 
 
@@ -123,7 +125,7 @@ To confirm the correct git submodule version :
 ```bash
 git submodule status
 ```
-Should contain `submodules/React-Automation-Studio (V1.2.3)` in the output for version 1.2.3 .
+Should contain `submodules/React-Automation-Studio (V2.0.0)` in the output for version 2.0.0 .
 
 If not and you previously checked out a different version run:
 ```bash
