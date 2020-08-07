@@ -77,8 +77,8 @@ In this release, and with authentication enabled, the user name and password are
 
 Access rights can be controlled though a JSON file which contains user access groups and rules for defining PV access using regular expressions in the same way that the EPICS Gatewayaccess is defined. All of the components in React Automation studio currently indicate access rights to the PV.
 
-
-
+## YouTube Channel:
+[![React Automation Studio Youtube](http://img.youtube.com/vi/djTPrkRxgAo/0.jpg)](http://www.youtube.com/watch?v=djTPrkRxgAo "React Automation Studio")
 # 1 Installation
 The development and production versions of React Automation Studio have been containerized with Docker.
 
