@@ -1,4 +1,4 @@
-Current Release: V2.0.0
+Current Release: V2.0.1
 
 # Introduction
 
@@ -116,7 +116,7 @@ git tag
 
 To checkout version 2.0.0 run:
 ```bash
- git checkout tags/V2.0.0
+ git checkout tags/V2.0.1
 ```
 
 
@@ -125,7 +125,7 @@ To confirm the correct git submodule version :
 ```bash
 git submodule status
 ```
-Should contain `submodules/React-Automation-Studio (V2.0.0)` in the output for version 2.0.0 .
+Should contain `submodules/React-Automation-Studio (V2.0.1)` in the output for version 2.0.0 .
 
 If not and you previously checked out a different version run:
 ```bash
@@ -392,7 +392,7 @@ In theory, all regular expression allowed by Python regex can be used although t
     { "rule":"[0-9].*",                   "read":true,  "write":true },
     { "rule":"[a-z].*",                   "read":true,  "write":true },
     { "rule":"[A-Z].*",                   "read":true,  "write":true },
-   
+
 
   ]
 },
@@ -452,7 +452,7 @@ The built client will be then served  https://customURL:9000/, the styleguide at
 # 3.4 Disabling the demo components
   To disable the demo React components and links in development and production, in the .env file set
   REACT_APP_DISABLE_DEMOS=true
-  
+
 # 4 Folder structure
 This section has some notes on  systems folder structure:
 
@@ -507,6 +507,15 @@ Site specific components and app screens should be kept in your repository. If y
 Contact us at rasadmin@tlabs.ac.za
 # Changelog
 
+V2.0.1 Tuesday 29 September 2020
+  <br />
+  Improvements and new features:
+  <br />
+  <ul>
+    <li>Added logging to pvServer</li>
+    <li>Minor bug fix to pvServer</li>
+  </ul>
+
 V2.0.0 Wednesday 5 August 2020
 <br />
 
@@ -537,8 +546,8 @@ Improvements and new features:
       </li>
     </ul>
   </li>
-  
-  
+
+
   <li> Deprecated Components: These components will be removed in future releases                  <br />
     <ul>
       <li>
@@ -552,18 +561,18 @@ Improvements and new features:
       </li>
       </ul>
   </li>
-  <li> 
+  <li>
     Removed Component:
-  
+
   <ul>
     <li>
       GraphMultiplePVs
     </li>
   </ul>
   </li>
-  <li> 
+  <li>
     Breaking Changes:
-  
+
   <ul>
     <li>
     routes.js was renamed Routes.js and now contains extra logic to enable dynamic or isolated routes based on the use role.
@@ -574,7 +583,7 @@ Improvements and new features:
   </ul>
   </li>
   <li>Packages updated in both RAS and RAS-Example-Project-1</li>
-  
+
 </ul>
 
 **V1.2.4 Thursday 2 April 2020**
