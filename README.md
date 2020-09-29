@@ -58,13 +58,7 @@ Apart form mobile UIs complex UIs suitable for desktop systems can also be creat
 
 A lot of effort was put into the documentation and a style guide based on React Styleguidedist and is used as the help function and to document the use of all the components from the source files. The current style guide is also  interactive with a demo IOC. All the properties of each of the components are documented and examples of their usage are shown.
 
-**Note**: The style guide displays the absolute path of the component. For example for the TextInput widget it is:
 
-`src/React-Automation-Studio/components/BaseComponents/TextInput.js`
-
-this can be copied and inserted into your source file **but** due to react's absolute import rules the `src/` prefix must not be included in order to compile. The `.js` can also be left off as so:
-
-`React-Automation-Studio/components/BaseComponents/TextInput`.
 
 
 *4. Access rights and Administration*
@@ -114,7 +108,7 @@ git tag
 ```
 
 
-To checkout version 2.0.0 run:
+To checkout version 2.0.1 run:
 ```bash
  git checkout tags/V2.0.1
 ```
@@ -125,7 +119,7 @@ To confirm the correct git submodule version :
 ```bash
 git submodule status
 ```
-Should contain `submodules/React-Automation-Studio (V2.0.1)` in the output for version 2.0.0 .
+Should contain `submodules/React-Automation-Studio (V2.0.1)` in the output for version 2.0.1 .
 
 If not and you previously checked out a different version run:
 ```bash
