@@ -19,7 +19,6 @@ services:
       - ./ReactApp/src/index.js:/frontendserverAppDev/src/index.js
       - ./ReactApp/src/Main.js:/frontendserverAppDev/src/Main.js
       - ./ReactApp/src/MainPublic.js:/frontendserverAppDev/src/MainPublic.js
-      - ./ReactApp/src/Themes.js:/frontendserverAppDev/src/Themes.js
       - ./ReactApp/src/Routes.js:/frontendserverAppDev/src/Routes.js
       - ./ReactApp/src/serviceWorker.js:/frontendserverAppDev/src/serviceWorker.js
       - ./submodules/React-Automation-Studio/ReactApp/src:/frontendserverAppDev/src/React-Automation-Studio/
@@ -33,6 +32,9 @@ services:
       - ALARM_DATABASE_REPLICA_SET_NAME=${ALARM_DATABASE_REPLICA_SET_NAME-devrs}
       - LOADSAVE_DATABASE=${ALARM_LOADSAVE_DATABASEDATABASE-localhost}
       - LOADSAVE_DATABASE_REPLICA_SET_NAME=${LOADSAVE_DATABASE_REPLICA_SET_NAME-devrs}
+      - pvServerLogLevel=INFO
+      - pvServerLogFile=/pvServer/log/pvServerLogFile
+
     build:
       context: ./
       args: # Environment variables available at build-time
@@ -47,6 +49,9 @@ services:
     volumes:
       - ./certificates:/certificates/
       - ./users:/pvServer/userAuthentication/users
+      - ./submodules/React-Automation-Studio/ReactApp/src:/frontendserverAppDev/src/React-Automation-Studio/
+      - ./ReactApp/public:/frontendserverAppDev/public
+      - ./log/:/pvServer/log
   stagingunsecurestylguidepvserver:
     env_file: .env
     environment:
@@ -90,7 +95,7 @@ services:
                 - no_proxy
       dockerfile: docker/styleguideserver/Dockerfile
     volumes:
-     
+
       - ./certificates:/certificates/
     restart: always
     network_mode: host
@@ -106,14 +111,14 @@ services:
       stdin_open: true
       restart: always
       network_mode: host
-    ## ALL Database related Docker processes -start   
+    ## ALL Database related Docker processes -start
   mongo1:
     image: mongo:4.2.3-bionic
     hostname: mongo1
     restart: always
     network_mode: "host"
     env_file: .env
-    # environment: 
+    # environment:
     #   MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME-admin}
     #   MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD-password}
     logging:
@@ -129,7 +134,7 @@ services:
     restart: always
     network_mode: "host"
     env_file: .env
-    # environment: 
+    # environment:
     #   MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME-admin}
     #   MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD-password}
     logging:
@@ -145,7 +150,7 @@ services:
     restart: always
     network_mode: "host"
     env_file: .env
-    # environment: 
+    # environment:
     #   MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME-admin}
     #   MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD-password}
     logging:
@@ -168,7 +173,7 @@ services:
     stdin_open: true
     tty: true
     env_file: .env
-  
+
   initializeloadsavedb: ### This is copy of the main repos loadsavedb init routine and can be fully customized
     env_file: .env
     environment:
@@ -176,7 +181,7 @@ services:
       - LOADSAVE_DATABASE_REPLICA_SET_NAME=devrs
     build:
       context: ./
-      
+
       args: # Environment variables available at build-time
                 - http_proxy
                 - https_proxy
@@ -211,7 +216,7 @@ services:
     stdin_open: true
     tty: true
     env_file: .env
-  
+
 volumes:
   mongo-db-data1:
   mongo-db-configdb1:
@@ -219,5 +224,5 @@ volumes:
   mongo-db-configdb2:
   mongo-db-data3:
   mongo-db-configdb3:
-## ALL Database related Docker processes -end   
+## ALL Database related Docker processes -end
 
