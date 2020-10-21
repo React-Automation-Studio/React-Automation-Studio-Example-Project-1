@@ -25,8 +25,12 @@ services:
       - ALARM_DATABASE_REPLICA_SET_NAME=${ALARM_DATABASE_REPLICA_SET_NAME-devrs}
       - LOADSAVE_DATABASE=${ALARM_LOADSAVE_DATABASEDATABASE-localhost}
       - LOADSAVE_DATABASE_REPLICA_SET_NAME=${LOADSAVE_DATABASE_REPLICA_SET_NAME-devrs}
+      - DEMO_ARCHIVER=http://localhost:17668
       - pvServerLogLevel=INFO
       - pvServerLogFile=/pvServer/log/pvServerLogFile
+      - http_proxy
+      - https_proxy
+      - no_proxy
     build:
       context: ./
       args: # Environment variables available at build-time
@@ -48,6 +52,10 @@ services:
     environment:
           - REACT_APP_PyEpicsServerPORT=5001
           - REACT_APP_EnableLogin=false
+          - DEMO_ARCHIVER=http://localhost:17668
+          - http_proxy
+          - https_proxy
+          - no_proxy
 
     build:
       context: ./

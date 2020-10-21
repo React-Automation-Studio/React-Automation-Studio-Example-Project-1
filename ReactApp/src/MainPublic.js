@@ -12,7 +12,7 @@ const MainPublic = (props) => {
 
   return (
     <TraditionalLayout
-      title="React Automation Studio V2.0.1"
+      title="React Automation Studio V2.1.0"
       denseAppBar
       alignTitle="center"
     >

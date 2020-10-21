@@ -1,4 +1,4 @@
-Current Release: V2.0.1
+Current Release: V2.1.0
 
 # Introduction
 
@@ -108,9 +108,9 @@ git tag
 ```
 
 
-To checkout version 2.0.1 run:
+To checkout version 2.1.0 run:
 ```bash
- git checkout tags/V2.0.1
+ git checkout tags/V2.1.0
 ```
 
 
@@ -119,7 +119,7 @@ To confirm the correct git submodule version :
 ```bash
 git submodule status
 ```
-Should contain `submodules/React-Automation-Studio (V2.0.1)` in the output for version 2.0.1 .
+Should contain `submodules/React-Automation-Studio (V2.1.0)` in the output for version 2.1.0 .
 
 If not and you previously checked out a different version run:
 ```bash
@@ -500,6 +500,15 @@ Site specific components and app screens should be kept in your repository. If y
 
 Contact us at rasadmin@tlabs.ac.za
 # Changelog
+ V2.1.0 Tuesday 20 October 2020
+<br />
+  Improvements and new features:
+<br />
+<ul>
+  <li>Added Epics Archiver Viewer component</li>
+  <li>Package updates</li>
+</ul>
+<br/>
 
 V2.0.1 Tuesday 29 September 2020
   <br />

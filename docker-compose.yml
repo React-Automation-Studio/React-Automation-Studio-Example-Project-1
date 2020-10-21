@@ -24,6 +24,9 @@ services:
       - LOADSAVE_DATABASE_REPLICA_SET_NAME=${LOADSAVE_DATABASE_REPLICA_SET_NAME-devrs}
       - pvServerLogLevel=INFO
       - pvServerLogFile=/pvServer/log/pvServerLogFile
+      - http_proxy
+      - https_proxy
+      - no_proxy
     build:
       context: ./
       args: # Environment variables available at build-time

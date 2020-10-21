@@ -9,8 +9,8 @@ module.exports = {
       base: 'Roboto'
     }
   },
-    
-  
+
+
   styleguideComponents: {
     Wrapper: path.join(__dirname, './src/React-Automation-Studio/styleguide/Wrapper'),
     //LogoRenderer: path.join(__dirname, './src/React-Automation-Studio/styleguide/components/Logo'),
@@ -24,10 +24,10 @@ module.exports = {
   moduleAliases: {
    'React-Automation-Studio': path.resolve(__dirname, 'src/React-Automation-Studio')
   },
-  
+
   getComponentPathLine(componentPath) {
     const name = path.basename(componentPath, '.js')
-    let dir = path.dirname(componentPath);    
+    let dir = path.dirname(componentPath);
     dir =dir.replace('src/','');
 
 
@@ -127,39 +127,39 @@ module.exports = {
           exampleMode: 'hide', // 'hide' | 'collapse' | 'expand'
           usageMode: 'hide' // 'hide' | 'collapse' | 'expand'
         },
-        
+
         {
           name: 'Layout Wrapper Components',
           content: 'src/React-Automation-Studio/docs/WorkingWithLayouts.md',
-          
-        
-          
+
+
+
           sections:[
-            { 
+            {
               name: 'Layout Components',
               components: 'src/React-Automation-Studio/components/UI/Layout/ComposedLayouts/*.js',
               exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
               usageMode: 'expand', // 'hide' | 'collapse' | 'expand'
             },
-            { 
+            {
               name: 'TraditionalLayout Example 1',
               content: 'src/React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayoutEx1.md',
             },
-            { 
+            {
               name: 'TraditionalLayout Example 2',
               content: 'src/React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayoutEx2.md',
             },
-            { 
+            {
               name: 'TraditionalLayout Example 3',
               content: 'src/React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayoutEx3.md',
             },
-         
+
           ]
         },
         {
           name: 'Theming',
           content: 'src/docs/themes/themes.md',
-          
+
         },
         {
           name: 'Base Components',
@@ -317,7 +317,15 @@ module.exports = {
           components: 'src/React-Automation-Studio/components/LoadSaveComponent/LoadSave.js',
           exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
           usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
-         
+
+        },
+        {
+          name: 'Experimental Archiver Data Viewer',
+          content: 'src/React-Automation-Studio/components/ArchiverDataViewer/Archiver.md',
+          components: 'src/React-Automation-Studio/components/ArchiverDataViewer/ArchiverDataViewer.js',
+          exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
+          usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
+
         },
         {
           name: 'Experimental Base Components',
@@ -333,14 +341,14 @@ module.exports = {
           exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
           usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
         },
-        
-      
+
+
 
       ],
 
       sectionDepth: 2,
     },
-   
+
 
  ]
 }

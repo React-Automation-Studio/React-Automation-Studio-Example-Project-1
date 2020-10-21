@@ -14,6 +14,7 @@ import TableControlSystem from './React-Automation-Studio/components/ControlScre
 import Test3D from './React-Automation-Studio/components/Experimental/Test3D';
 import AlarmHandlerDemo from './React-Automation-Studio/components/Examples/AlarmHandlerDemo';
 import LoadSaveExample from './React-Automation-Studio/components/ExperimentalExamples/LoadSaveExample';
+import ArchiverDataViewerDemo from './React-Automation-Studio/components/ArchiverDataViewer/ArchiverDataViewerDemo';
 import SettingsSteererXY from './React-Automation-Studio/components/SettingsPages/SettingsSteererXY';
 import SettingsSinglePS from './React-Automation-Studio/components/SettingsPages/SettingsSinglePS';
 import AdvancedSettingsSinglePS from './React-Automation-Studio/components/ExperimentalControlScreens/SettingsPages/AdvancedSettingsSinglePS';
@@ -74,6 +75,7 @@ const Routes = (props) => {
         {enableDemos && <Route path="/AlarmHandlerDemo" component={AlarmHandlerDemo} />}
         {enableDemos && <Route path="/VaultDemo" component={Vault} />}
         {enableDemos && <Route path="/LoadSaveExample" component={LoadSaveExample} />}
+        {enableDemos && <Route path="/ArchiverDataViewerDemo" component={ArchiverDataViewerDemo}/>}
         {/* new Beamline and table control System routes start*/}
         {enableDemos && <Route path="/BeamlineControlSystem" component={BeamlineControlSystem} />}
         {enableDemos && <Route path="/AdvancedSettingsSinglePS" component={AdvancedSettingsSinglePS} />}
