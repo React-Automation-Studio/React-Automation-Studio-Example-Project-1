@@ -4,10 +4,6 @@ services:
     env_file: .env
     build:
       context: ./
-      args: # Environment variables available at build-time
-                - http_proxy
-                - https_proxy
-                - no_proxy
       dockerfile: docker/frontendserverDev/Dockerfile
     volumes:
 
@@ -41,10 +37,6 @@ services:
       - no_proxy
     build:
       context: ./
-      args: # Environment variables available at build-time
-                - http_proxy
-                - https_proxy
-                - no_proxy
       dockerfile: docker/pvserver/Dockerfile
     restart: always
     network_mode: host
@@ -67,10 +59,6 @@ services:
 
     build:
       context: ./
-      args: # Environment variables available at build-time
-                - http_proxy
-                - https_proxy
-                - no_proxy
       dockerfile: docker/pvserver/Dockerfile
     restart: always
     network_mode: host
@@ -78,11 +66,7 @@ services:
       - ./certificates:/certificates/
   stagingdemoioc:
     build:
-      context: ./
-      args: # Environment variables available at build-time
-                - http_proxy
-                - https_proxy
-                - no_proxy
+      context: ./  
       dockerfile: docker/demoioc/Dockerfile
     tty: true
     stdin_open: true
@@ -91,10 +75,6 @@ services:
   stagingtestioc:
       build:
         context: ./
-        args: # Environment variables available at build-time
-                  - http_proxy
-                  - https_proxy
-                  - no_proxy
         dockerfile: docker/stagingioc/Dockerfile
       tty: true
       stdin_open: true
@@ -104,10 +84,6 @@ services:
     env_file: .env
     build:
       context: ./
-      args: # Environment variables available at build-time
-                - http_proxy
-                - https_proxy
-                - no_proxy
       dockerfile: docker/styleguideServerDev/Dockerfile
     volumes:
 
@@ -188,10 +164,7 @@ services:
     build:
       context: ./
 
-      args: # Environment variables available at build-time
-                - http_proxy
-                - https_proxy
-                - no_proxy
+      
       dockerfile: docker/loadSaveDbInit/Dockerfile
     network_mode: "host"
     tty: true

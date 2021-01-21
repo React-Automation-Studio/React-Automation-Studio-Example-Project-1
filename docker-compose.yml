@@ -3,11 +3,7 @@ services:
   stagingprodfrontendserver:
     env_file: .env
     build:
-      context: ./
-      args: # Environment variables available at build-time
-                - http_proxy
-                - https_proxy
-                - no_proxy
+      context: ./    
       dockerfile: docker/frontendserver/Dockerfile
     volumes:
       - ./certificates:/certificates/
@@ -28,11 +24,7 @@ services:
       - https_proxy
       - no_proxy
     build:
-      context: ./
-      args: # Environment variables available at build-time
-                - http_proxy
-                - https_proxy
-                - no_proxy
+      context: ./    
       dockerfile: docker/pvserver/Dockerfile
     restart: always
     network_mode: host
@@ -109,12 +101,7 @@ services:
       - LOADSAVE_DATABASE=localhost
       - LOADSAVE_DATABASE_REPLICA_SET_NAME=devrs
     build:
-      context: ./
-
-      args: # Environment variables available at build-time
-                - http_proxy
-                - https_proxy
-                - no_proxy
+      context: ./  
       dockerfile: docker/loadSaveDbInit/Dockerfile
     network_mode: "host"
     tty: true

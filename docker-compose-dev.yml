@@ -4,10 +4,6 @@ services:
     env_file: .env
     build:
       context: ./
-      args: # Environment variables available at build-time
-                - http_proxy
-                - https_proxy
-                - no_proxy
       dockerfile: docker/frontendserverDev/Dockerfile
     volumes:
       - ./certificates:/certificates/
@@ -40,10 +36,6 @@ services:
       - no_proxy
     build:
       context: ./
-      args: # Environment variables available at build-time
-                - http_proxy
-                - https_proxy
-                - no_proxy
       dockerfile: docker/pvserver/Dockerfile
     restart: always
     network_mode: host
@@ -68,10 +60,6 @@ services:
 
     build:
       context: ./
-      args: # Environment variables available at build-time
-                - http_proxy
-                - https_proxy
-                - no_proxy
       dockerfile: docker/pvserver/Dockerfile
     restart: always
     network_mode: host
@@ -80,10 +68,6 @@ services:
   stagingdemoioc:
     build:
       context: ./
-      args: # Environment variables available at build-time
-                - http_proxy
-                - https_proxy
-                - no_proxy
       dockerfile: docker/demoioc/Dockerfile
     tty: true
     stdin_open: true
@@ -97,10 +81,6 @@ services:
 
     build:
       context: ./
-      args: # Environment variables available at build-time
-                - http_proxy
-                - https_proxy
-                - no_proxy
       dockerfile: docker/styleguideserver/Dockerfile
     volumes:
 
@@ -190,10 +170,7 @@ services:
     build:
       context: ./
 
-      args: # Environment variables available at build-time
-                - http_proxy
-                - https_proxy
-                - no_proxy
+      
       dockerfile: docker/loadSaveDbInit/Dockerfile
     network_mode: "host"
     tty: true
