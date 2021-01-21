@@ -207,6 +207,13 @@ module.exports = {
           exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
           usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
         },
+        {
+          name: 'Compound Components',
+          content: 'src/React-Automation-Studio/docs/CompoundComponents.md',
+          components: 'src/React-Automation-Studio/components/CompoundComponents/*.js',
+          exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
+          usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
+        },
 
         {
           name: 'Experimental Base Components',
