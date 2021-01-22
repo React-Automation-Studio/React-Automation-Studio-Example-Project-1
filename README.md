@@ -108,9 +108,9 @@ git tag
 ```
 
 
-To checkout version 2.1.0 run:
+To checkout version 2.2.0 run:
 ```bash
- git checkout tags/V2.1.0
+ git checkout tags/V2.2.0
 ```
 
 
@@ -119,7 +119,7 @@ To confirm the correct git submodule version :
 ```bash
 git submodule status
 ```
-Should contain `submodules/React-Automation-Studio (V2.1.0)` in the output for version 2.1.0 .
+Should contain `submodules/React-Automation-Studio (V2.2.0)` in the output for version 2.2.0 .
 
 If not and you previously checked out a different version run:
 ```bash
