@@ -1,4 +1,4 @@
-Current Release: V2.1.0
+Current Release: V2.2.0
 
 # Introduction
 
@@ -500,6 +500,26 @@ Site specific components and app screens should be kept in your repository. If y
 
 Contact us at rasadmin@tlabs.ac.za
 # Changelog
+
+V2.2.0 Wednesday 20 January 2021
+<br />
+Improvements and new features:
+  <br />
+  <ul>
+    <li>AlarmHandler now supports email notifications</li>
+    <li>New Components:
+    <ul>
+        <li>New ArrayContainer</li>
+        <li>New LightPanel</li>
+    </ul>
+    <li>Upgraded to Socket.IO 3.1.0</li>
+    <li>Upgraded pvServer to Flask-SocketIO 5.0.1</li>
+    <li>Package updates</li>
+    <li>Minor Bug Fixes</li>
+    </li>
+  </ul>
+
+
  V2.1.0 Tuesday 20 October 2020
 <br />
   Improvements and new features:
