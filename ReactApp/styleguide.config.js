@@ -169,6 +169,13 @@ module.exports = {
           usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
         },
         {
+          name: 'Compound Components',
+          content: 'src/React-Automation-Studio/docs/CompoundComponents.md',
+          components: 'src/React-Automation-Studio/components/CompoundComponents/*.js',
+          exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
+          usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
+        },
+        {
           name: 'Widget and PV Components',
           content: 'src/React-Automation-Studio/docs/widget/widget.md',
           components: ['src/React-Automation-Studio/components/SystemComponents/Widgets/Widget.js', 'src/React-Automation-Studio/components/SystemComponents/PV.js', 'src/React-Automation-Studio/components/ExperimentalExamples/Mobile/DynamicPvFieldExample.js'],
@@ -195,6 +202,10 @@ module.exports = {
               content: 'src/React-Automation-Studio/components/SystemComponents/database/MongoDB/useMongoDbInsertOne.md',
             },
             {
+              name: 'useMongoDbDeleteOne',
+              content: 'src/React-Automation-Studio/components/SystemComponents/database/MongoDB/useMongoDbDeleteOne.md',
+            },
+            {
               name: 'useMongoDbUpdateOne',
               content: 'src/React-Automation-Studio/components/SystemComponents/database/MongoDB/useMongoDbUpdateOne.md',
             },
@@ -207,13 +218,7 @@ module.exports = {
           exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
           usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
         },
-        {
-          name: 'Compound Components',
-          content: 'src/React-Automation-Studio/docs/CompoundComponents.md',
-          components: 'src/React-Automation-Studio/components/CompoundComponents/*.js',
-          exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
-          usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
-        },
+       
 
         {
           name: 'Experimental Base Components',
@@ -276,6 +281,10 @@ module.exports = {
                     {
                       name: 'Logging of alarm activities',
                       content: 'src/React-Automation-Studio/docs/alarmHandler/serverLogging.md',
+                    },
+                    {
+                      name: 'Notification of alarm events',
+                      content: 'src/React-Automation-Studio/docs/alarmHandler/alarmNotification.md',
                     }
                   ]
                 },
