@@ -1,11 +1,12 @@
 version: '3.2'
 services:
-  stagingfrontendserverdev:
+  frontendserverdev:
     env_file: .env
     build:
       context: ./
       dockerfile: docker/frontendserverDev/Dockerfile
     volumes:
+
       - ./certificates:/certificates/
       - ./ReactApp/jsconfig.json:/frontendserverAppDev/jsconfig.json
       - ./ReactApp/package.json:/frontendserverAppDev/package.json
@@ -20,20 +21,10 @@ services:
       - ./submodules/React-Automation-Studio/ReactApp/src:/frontendserverAppDev/src/React-Automation-Studio/
       - ./ReactApp/public:/frontendserverAppDev/public
     restart: always
-    network_mode: host
-  stagingpvserver:
-    env_file: .env
-    environment:
-      - ALARM_DATABASE=${ALARM_DATABASE-localhost}
-      - ALARM_DATABASE_REPLICA_SET_NAME=${ALARM_DATABASE_REPLICA_SET_NAME-devrs}
-      - LOADSAVE_DATABASE=${ALARM_LOADSAVE_DATABASEDATABASE-localhost}
-      - LOADSAVE_DATABASE_REPLICA_SET_NAME=${LOADSAVE_DATABASE_REPLICA_SET_NAME-devrs}
-      - DEMO_ARCHIVER=http://localhost:17668
-      - pvServerLogLevel=INFO
-      - pvServerLogFile=/pvServer/log/pvServerLogFile
-      - http_proxy
-      - https_proxy
-      - no_proxy
+    #network_mode: host
+    ports:
+      - "3001:3000"
+  pvserver1:
     build:
       context: ./
       dockerfile: docker/pvserver/Dockerfile
@@ -41,23 +32,49 @@ services:
     network_mode: host
     tty: true
     stdin_open: true
+    env_file: .env
+    environment:
+      - ALARM_DATABASE=localhost
+      - ALARM_DATABASE_REPLICA_SET_NAME=devrs
+      - LOADSAVE_DATABASE=localhost
+      - LOADSAVE_DATABASE_REPLICA_SET_NAME=devrs
+      - ADMIN_DATABASE=localhost
+      - ADMIN_DATABASE_REPLICA_SET_NAME=devrs
+      - DEMO_ARCHIVER=http://localhost:17668
+      - pvServerLogLevel=INFO
+      - pvServerLogFile=/pvServer/log/pvServerLogFile
+      - REACT_APP_PyEpicsServerPORT=9001
+      - REACT_APP_PyEpicsServerBASEURL=http://127.0.0.1
     volumes:
       - ./certificates:/certificates/
       - ./users:/pvServer/userAuthentication/users
-      - ./submodules/React-Automation-Studio/ReactApp/src:/frontendserverAppDev/src/React-Automation-Studio/
-      - ./ReactApp/public:/frontendserverAppDev/public
       - ./log/:/pvServer/log
+      - ./build:/pvServer/build
+  nginx:
+    image: nginx:1.19.6
+    restart: always
+    network_mode: host
+    depends_on:
+      - pvserver1
+    entrypoint:
+      - /custom/setupNginx.dev.sh
+      - /docker-entrypoint.sh
+    command: ["nginx", "-g", "daemon off;"] 
+    volumes:
+      - ./submodules/React-Automation-Studio/nginx/setupNginx.dev.sh:/custom/setupNginx.dev.sh
+      - ./submodules/React-Automation-Studio/nginx/nginx.dev.conf:/custom/nginx.dev.conf
+      - ./submodules/React-Automation-Studio/nginx/nginx.httpredirect.conf:/custom/nginx.httpredirect.conf
+      - ./build/styleguide:/var/www/styleguide
+      - ./certificates:/etc/nginx/certificates
+    env_file: .env
+    
   stagingunsecurestylguidepvserver:
     env_file: .env
     environment:
-          - REACT_APP_PyEpicsServerPORT=5001
-          - REACT_APP_EnableLogin=false
-          - DEMO_ARCHIVER=http://localhost:17668
-          - http_proxy
-          - https_proxy
-          - no_proxy
-
-
+      - REACT_APP_PyEpicsServerBASEURL=http://127.0.0.1
+      - REACT_APP_PyEpicsServerPORT=5001
+      - REACT_APP_EnableLogin=false
+      - DEMO_ARCHIVER=http://localhost:17668
     build:
       context: ./
       dockerfile: docker/pvserver/Dockerfile
@@ -73,20 +90,30 @@ services:
     stdin_open: true
     restart: always
     network_mode: host
-  styleguideserver:
+  # styleguideserver:
+  #   env_file: .env
+  #   environment:
+  #           - REACT_APP_PyEpicsServerPORT=5001
+  #           - REACT_APP_EnableLogin=false
+
+  #   build:
+  #     context: ./
+  #     dockerfile: docker/styleguideserver/Dockerfile
+  #   volumes:
+
+  #     - ./certificates:/certificates/
+  #   restart: always
+  #   network_mode: host
+  styleguide:
+    build:
+      context: ./
+      dockerfile: docker/styleguide/Dockerfile    
     env_file: .env
     environment:
             - REACT_APP_PyEpicsServerPORT=5001
             - REACT_APP_EnableLogin=false
-
-    build:
-      context: ./
-      dockerfile: docker/styleguideserver/Dockerfile
     volumes:
-
-      - ./certificates:/certificates/
-    restart: always
-    network_mode: host
+      - ./build/styleguide:/build/
   stagingtestioc:
       build:
         context: ./
@@ -99,7 +126,7 @@ services:
       stdin_open: true
       restart: always
       network_mode: host
-    ## ALL Database related Docker processes -start
+  ## ALL Database related Docker processes -start
   mongo1:
     image: mongo:4.2.3-bionic
     hostname: mongo1
@@ -201,6 +228,31 @@ services:
     stdin_open: true
     tty: true
     env_file: .env
+  initializeadmindb:
+    env_file: .env
+    environment:
+      - ADMIN_DATABASE=localhost
+      - ADMIN_DATABASE_REPLICA_SET_NAME=devrs
+    build:
+      context: ./  
+      dockerfile: ./submodules/React-Automation-Studio/docker/adminDbInit/Dockerfile
+    network_mode: "host"
+    tty: true
+    stdin_open: true
+    depends_on:
+      - mongosetup
+  # signalcli:
+  #   build:
+  #     context: ./submodules/React-Automation-Studio/
+  #     dockerfile: docker/signalcli/Dockerfile
+  #   hostname: signalcli
+  #   restart: always
+  #   network_mode: "host"
+  #   stdin_open: true
+  #   tty: true
+  #   env_file: .env
+  #   volumes:
+  #     - "./signalcli/signal-cli-config:/srv/signal/.local/share/signal-cli"
 
 volumes:
   mongo-db-data1:
@@ -210,4 +262,3 @@ volumes:
   mongo-db-data3:
   mongo-db-configdb3:
 ## ALL Database related Docker processes -end
-
