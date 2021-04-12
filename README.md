@@ -1,4 +1,4 @@
-Current Release: V2.2.0
+Current Release: V3.0.0
 
 # Introduction
 
@@ -108,9 +108,9 @@ git tag
 ```
 
 
-To checkout version 2.2.0 run:
+To checkout version 3.0.0 run:
 ```bash
- git checkout tags/V2.2.0
+ git checkout tags/V3.0.0
 ```
 
 
@@ -119,7 +119,7 @@ To confirm the correct git submodule version :
 ```bash
 git submodule status
 ```
-Should contain `submodules/React-Automation-Studio (V2.2.0)` in the output for version 2.2.0 .
+Should contain `submodules/React-Automation-Studio (V3.0.0)` in the output for version 3.0.0 .
 
 If not and you previously checked out a different version run:
 ```bash
@@ -500,6 +500,9 @@ Site specific components and app screens should be kept in your repository. If y
 
 Contact us at rasadmin@tlabs.ac.za
 # Changelog
+
+
+V3.0.0 Monday 12 April 2021
 
 V2.2.0 Wednesday 20 January 2021
 <br />

@@ -80,10 +80,12 @@ class Main extends Component {
 
 
     const { classes } = this.props;
-
+    const styleguideURL = window.location.protocol + "//" + window.location.hostname + ':6060/';
+    const buttonVariant = "contained";
     return (
+      
       <TraditionalLayout
-      title="React Automation Studio V2.2.0"
+      title="React Automation Studio V3.0.0"
       denseAppBar
       alignTitle="center"
     >
@@ -101,7 +103,7 @@ class Main extends Component {
                   <Button className= {classes.button} component={Link} to="/Staging" color="primary" variant='contained'>  Staging </Button>
               </Grid>
               <Grid item xs={12}  >
-              <Button className= {classes.button} target="_blank" href={AutomationStudioStyleGuideBuildURL}  variant='contained'>  Help </Button>
+              <Button fullWidth className={classes.button} target="_blank" href={styleguideURL} color="default" variant={buttonVariant}> Help and Style Guide </Button>
               </Grid>
             </Grid>
 
