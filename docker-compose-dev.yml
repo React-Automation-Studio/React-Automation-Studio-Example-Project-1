@@ -228,6 +228,8 @@ services:
     stdin_open: true
     tty: true
     env_file: .env
+    volumes:
+        - ./log/:/usr/src/app/log
   initializeadmindb:
     env_file: .env
     environment:
@@ -241,18 +243,18 @@ services:
     stdin_open: true
     depends_on:
       - mongosetup
-  # signalcli:
-  #   build:
-  #     context: ./submodules/React-Automation-Studio/
-  #     dockerfile: docker/signalcli/Dockerfile
-  #   hostname: signalcli
-  #   restart: always
-  #   network_mode: "host"
-  #   stdin_open: true
-  #   tty: true
-  #   env_file: .env
-  #   volumes:
-  #     - "./signalcli/signal-cli-config:/srv/signal/.local/share/signal-cli"
+  signalcli:
+    build:
+      context: ./submodules/React-Automation-Studio/
+      dockerfile: docker/signalcli/Dockerfile
+    hostname: signalcli
+    restart: always
+    network_mode: "host"
+    stdin_open: true
+    tty: true
+    env_file: .env
+    volumes:
+      - "./signalcli/signal-cli-config:/srv/signal/.local/share/signal-cli"
 
 volumes:
   mongo-db-data1:
