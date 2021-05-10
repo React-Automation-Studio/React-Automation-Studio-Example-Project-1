@@ -42,11 +42,11 @@ const styles = theme => ({
 });
 
 let pvServerBASEURL;
-if(typeof process.env.REACT_APP_PyEpicsServerBASEURL==='undefined'){
+if(typeof process.env.pvServerURL==='undefined'){
   pvServerBASEURL= "http://127.0.0.1";
 }
 else{
-  pvServerBASEURL=process.env.REACT_APP_PyEpicsServerBASEURL;
+  pvServerBASEURL=process.env.pvServerURL;
 }
 
 let port;

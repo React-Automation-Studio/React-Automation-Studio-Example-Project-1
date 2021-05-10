@@ -26,4 +26,4 @@ WORKDIR /frontendServer
 
 CMD node frontendServer.js
 
-EXPOSE $REACT_APP_FrontendServerPORT $REACT_APP_PyEpicsServerPORT
+EXPOSE $REACT_APP_FrontendServerPORT $pvServerPort
