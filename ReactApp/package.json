@@ -28,11 +28,6 @@
         "react-plotly.js": "2.5.1",
         "axios":"0.21.1",
         "react-google-login":"5.2.2"
-
-
-
-
-
     },
     "scripts": {
         "start": "react-scripts start",
@@ -41,7 +36,7 @@
         "eject": "react-scripts eject",
         "styleguide": "styleguidist server",
         "styleguide:build": "styleguidist build",
-        "styleguidebuild": "cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 styleguidist build "
+        "styleguidebuild": "cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 GENERATE_SOURCEMAP=false styleguidist build "
     },
     "eslintConfig": {
         "extends": "react-app"

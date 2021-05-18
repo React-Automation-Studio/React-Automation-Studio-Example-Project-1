@@ -258,10 +258,10 @@ module.exports = {
                       name: 'pvList.json',
                       content: 'src/React-Automation-Studio/docs/alarmHandler/pvListJson.md',
                     },
-                    {
-                      name: 'users.json',
-                      content: 'src/React-Automation-Studio/docs/alarmHandler/usersJson.md',
-                    },
+                    // {
+                    //   name: 'users.json',
+                    //   content: 'src/React-Automation-Studio/docs/alarmHandler/usersJson.md',
+                    // },
                   ]
                 },
               ]
