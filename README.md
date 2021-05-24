@@ -4,6 +4,12 @@ Current Release: V3.0.0
 
 This repository pulls in the src from the  React Automation Studio repository https://github.com/wduckitt/React-Automation-Studio.git and acts a standalone boiler plate example project for React Automation Studio without having to delve into the source code of the master repository.
 
+If you wish to create a standalone AlarmHandler project you should clone this project:
+
+**AlarmHandler Boiler plate repository:**
+
+https://github.com/wduckitt/React-Automation-Studio-Alarm-Handler-Standalone
+
 The system has been containerised with Docker and version controlled as a mono-repository using Git.
 
 Each of the Docker containers are deployed as micro services and environment variables can be configured to deploy the system on different ports, or to enable user authentication and authorisation or to serve the application on a unique URL or on the localhost. Separate Docker commands exist to load the development and production version. These containerised environments allows for precise versioning of packages used and prevents deployment dependency issues.
