@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
-import { withRouter } from 'react-router-dom';
+import React  from 'react';
 import {Link} from 'react-router-dom'
 import Button from '@material-ui/core/Button';
-import RedirectToLogIn from 'React-Automation-Studio/components/SystemComponents/RedirectToLogin.js';
 import TraditionalLayout from 'React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout.js';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import { useTheme } from '@material-ui/core/styles';
 // Styles
 
 
@@ -35,11 +31,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom:'auto',
     marginLeft:'auto',
     marginRight:'auto',
-    //  width:'100%',
-    //    marginTop:'auto',
-    //    marginLeft:'auto',
-    //    marginRight:'auto',
-    //    marginBottom:'auto',
+
 
   },
 

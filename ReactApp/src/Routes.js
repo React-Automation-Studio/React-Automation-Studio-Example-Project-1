@@ -42,7 +42,6 @@ const Routes = (props) => {
   /* eslint-disable-next-line no-unused-vars */
   const roles = context.userData.roles;
   const username = context.userData.username;
-  let loggedIn = username !== "" || process.env.REACT_APP_EnableLogin !== 'true';
   let enableDemos = typeof process.env.REACT_APP_DISABLE_DEMOS !== 'undefined' ? !(process.env.REACT_APP_DISABLE_DEMOS.toUpperCase() === 'TRUE') : true;
 
   return (
