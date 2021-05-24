@@ -6,9 +6,14 @@ import Button from '@material-ui/core/Button';
 import RedirectToLogIn from 'React-Automation-Studio/components/SystemComponents/RedirectToLogin.js';
 import TraditionalLayout from 'React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout.js';
 import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
+// Styles
 
 
-const styles = theme => ({
+
+
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
@@ -39,47 +44,15 @@ const styles = theme => ({
   },
 
 
-});
+}));
 
-let pvServerBASEURL;
-if(typeof process.env.pvServerURL==='undefined'){
-  pvServerBASEURL= "http://127.0.0.1";
-}
-else{
-  pvServerBASEURL=process.env.pvServerURL;
-}
 
-let port;
-if(typeof process.env.REACT_APP_StyleguideServerPORT==='undefined'){
-  port= 6060;
-}
-else{
-  port=process.env.REACT_APP_StyleguideServerPORT;
-}
-
-let AutomationStudioStyleGuideBuildURL=pvServerBASEURL+":"+port;
 
 let enableDemos = typeof process.env.REACT_APP_DISABLE_DEMOS!=='undefined'?!(process.env.REACT_APP_DISABLE_DEMOS.toUpperCase() === 'TRUE'):true;
-console.log(process.env.REACT_APP_DISABLE_DEMOS, enableDemos)
-class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.logout=this.logout.bind(this);
-    this.state={redirectToLoginPage:false}
-  }
 
-  logout(){
-    localStorage.removeItem('jwt');
+const Main =(props)=>{
+    const classes=useStyles();
 
-  }
-  componentDidMount()
-  {
-    console.log('main mounted')
-  }
-  render() {
-
-
-    const { classes } = this.props;
     const styleguideURL = window.location.protocol + "//" + window.location.hostname + ':6060/';
     const buttonVariant = "contained";
     return (
@@ -91,7 +64,7 @@ class Main extends Component {
     >
 
 
-      <RedirectToLogIn/>
+     
         <Grid container direction="row" item justify="center" spacing={1} alignItems="center" style={{paddingTop:64}}>
           <Grid item lg={2} sm={4}  xs={8}>
             <Grid container direction="row" justify="center" spacing={3} alignItems="stretch">
@@ -120,6 +93,6 @@ class Main extends Component {
           </TraditionalLayout>
           )
           }
-          }
+          
 
-          export default withRouter(withStyles(styles,{withTheme:true})(Main));
+          export default Main;
