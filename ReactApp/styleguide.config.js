@@ -247,6 +247,14 @@ module.exports = {
                   content: 'src/React-Automation-Studio/docs/alarmHandler/environment.md',
                 },
                 {
+                  name: 'Setting up email notifications',
+                  content: 'src/React-Automation-Studio/docs/alarmHandler/emailNotification.md',
+                },
+                {
+                  name: 'Setting up Signal notifications',
+                  content: 'src/React-Automation-Studio/docs/alarmHandler/signalNotification.md',
+                },
+                {
                   name: 'MongoDB seed data',
                   content: 'src/React-Automation-Studio/docs/alarmHandler/seedData.md',
                   sections: [
@@ -258,12 +266,30 @@ module.exports = {
                       name: 'pvList.json',
                       content: 'src/React-Automation-Studio/docs/alarmHandler/pvListJson.md',
                     },
-                    // {
-                    //   name: 'users.json',
-                    //   content: 'src/React-Automation-Studio/docs/alarmHandler/usersJson.md',
-                    // },
+                    {
+                      name: 'Users',
+                      content: 'src/React-Automation-Studio/docs/alarmHandler/Users.md',
+                    },
                   ]
                 },
+                {
+                  name: 'Alarm users role configuration',
+                  content: 'src/React-Automation-Studio/docs/alarmHandler/alarmRoleConfig.md',
+                  sections: [
+                    {
+                      name: 'alarmAdmin',
+                      content: 'src/React-Automation-Studio/docs/alarmHandler/alarmAdmin.md',
+                    },
+                    {
+                      name: 'alarmUser',
+                      content: 'src/React-Automation-Studio/docs/alarmHandler/alarmUser.md',
+                    },
+                    {
+                      name: 'alarmObserver',
+                      content: 'src/React-Automation-Studio/docs/alarmHandler/alarmObserver.md',
+                    }
+                  ]
+                }
               ]
             },
             {
