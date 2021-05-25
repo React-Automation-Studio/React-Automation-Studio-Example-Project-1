@@ -156,14 +156,20 @@ git pull --recurse-submodules
 The systems uses Docker to create isolated production and development environments. There are several docker-compose configuration files.
 
 
+
+```bash
+
+docker-compose -f docker-compose-prod-with-demoioc.yml up 
+
+```
+Will launch the production build with demoIOCs included.
+
+
 ```bash
 docker-compose  up
 ```
-or
-```bash
-docker-compose -f docker-compose.yml up
-```
-Will launch the compiled production version with the demoIOC's and styleguide
+
+Will launch the compiled production version with out the demoIOC's and styleguide
 
 
 
@@ -192,7 +198,7 @@ Will launch the development version of the styleguide.
 **Initially to check that everything is working only bring up the production version by running**
 
 ```bash
-docker-compose  up
+docker-compose -f docker-compose-prod-with-demoioc.yml up --build
 ```
 
 This installation process of all the docker images may take a while (20-30min) the first time. There after it is fast as all the repeated build and up commands uses cached installations. The longest process is the installation of the node modules. Do not be deterred by the red warnings.
