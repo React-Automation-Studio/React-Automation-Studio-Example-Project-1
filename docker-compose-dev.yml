@@ -126,6 +126,18 @@ services:
       stdin_open: true
       restart: always
       network_mode: host
+  stagingsdp0ioc:
+    build:
+      context: ./
+      args: # Environment variables available at build-time
+                - http_proxy
+                - https_proxy
+                - no_proxy
+      dockerfile: docker/modbussdpIOC/Dockerfile
+    tty: true
+    stdin_open: true
+    restart: always
+    network_mode: host
   ## ALL Database related Docker processes -start
   mongo1:
     image: mongo:4.2.3-bionic

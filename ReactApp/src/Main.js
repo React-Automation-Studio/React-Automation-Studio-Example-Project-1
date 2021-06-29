@@ -50,7 +50,7 @@ const Main =(props)=>{
     return (
       
       <TraditionalLayout
-      title="React Automation Studio V3.0.1"
+      title="React Automation Studio V3.0.0"
       denseAppBar
       alignTitle="center"
     >

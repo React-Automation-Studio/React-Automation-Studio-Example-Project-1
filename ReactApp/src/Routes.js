@@ -25,6 +25,8 @@ import Example from './components/staging/Example/Example';
 import Example1 from './components/staging/Example/Example1';
 import Example2 from './components/staging/Example/Example2';
 import Example3 from './components/staging/Example/Example3';
+import SDP from './components/staging/SDP/SDP';
+import SDP0 from './components/staging/SDP/SDO0';
 //system
 import Login from './React-Automation-Studio/components/SystemComponents/Login';
 import Probe from './React-Automation-Studio/components/SettingsPages/Probe';
@@ -61,7 +63,7 @@ const Routes = (props) => {
               <Login 
                
                footerString= "Login is now customizable"
-               version="V3.0.1"
+               version="V3.0.0"
                timeout={5000}
                />
             }
@@ -100,6 +102,8 @@ const Routes = (props) => {
         <ProtectedRoute path="/Example1" component={Example1} />
         <ProtectedRoute path="/Example2" component={Example2} />
         <ProtectedRoute path="/Example3" component={Example3} />
+        <ProtectedRoute path="/SDP" component={SDP} />
+        <ProtectedRoute path="/SDP0" component={SDP0} />
         {/*staging end*/}
 
 

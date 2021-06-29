@@ -110,6 +110,13 @@ const MobileDemo1 =(props)=> {
                      />
                   </div>
                 </Grid>
+                <Grid item xs={12} >
+                  <div style={{ height: graphVH, width:'96vw',}}>
+                    <GraphY  pvs={['pva://SDP0:ReadG4','pva://SDP0:ReadG2'] } legend={['Sine Wave','Amplitude']}
+                     //lineColor={[this.props.theme.palette.secondary.main,lime['400']]}
+                     />
+                  </div>
+                </Grid>
                 <Grid item xs={12}>
                   <Grid container direction="row" item justify="center" spacing={2} alignItems="stretch">
                     <Grid item xs={6}  >

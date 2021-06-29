@@ -99,6 +99,20 @@ services:
       stdin_open: true
       restart: always
       network_mode: host
+  stagingsdp0ioc:
+    build:
+      context: ./
+      args: # Environment variables available at build-time
+                - http_proxy
+                - https_proxy
+                - no_proxy
+      dockerfile: docker/modbussdpIOC/Dockerfile
+    volumes:
+      - /home/controls/dev/RAS/React-Automation-Studio-SDP/epics/modbusIOC:/epics/modbusIOC  # For Development
+    tty: true
+    stdin_open: true
+    restart: always
+    network_mode: host
  
   styleguideserverdev:
     env_file: .env
