@@ -1,0 +1,105 @@
+# asyn record for the underlying asyn TCP port
+file "$(ASYN)/db/asynRecord.db" { pattern
+{P,           R,               PORT,      ADDR,   IMAX,    OMAX}
+{13RamanPLC:   KoyoOctetAsyn,    Koyo,     0,      80,      80}
+}
+
+# These are the Xn inputs done with bit access X0-X17
+file "$(MODBUS)/db/bi_bit.template" { pattern
+{P,        R,                    PORT,        OFFSET,     ZNAM,     ONAM,  ZSV,         OSV,    SCAN}
+{13RamanPLC:,      ExpertSwitch,  K1_Xn_Bit,    027,   Disabled,  Enabled,  NO_ALARM,    MAJOR,  "I/O Intr"}
+{13RamanPLC:,        PanicStop1,  K1_Xn_Bit,    016,      Panic,       OK,     MAJOR, NO_ALARM,  "I/O Intr"}
+{13RamanPLC:,        PanicStop2,  K1_Xn_Bit,    025,      Panic,       OK,     MAJOR, NO_ALARM,  "I/O Intr"}
+#{13RamanPLC:,        DoorSwitch,  K1_Xn_Bit,    017,     Opened,   Closed,     MINOR, NO_ALARM,  "I/O Intr"}
+}
+file "$(MODBUS)/db/asynRecord.template" { pattern
+{P,           R,       PORT,          ADDR,     TMOD,  IFACE}
+{13RamanPLC:,    XnBAsyn, K1_Xn_Bit,     0,        Read,  asynUInt32Digital}
+}
+file "$(MODBUS)/db/statistics.template" { pattern
+{P,           R,       PORT,       SCAN}
+{13RamanPLC:,    XnB,     K1_Xn_Bit,  "10 second"}
+} 
+file "$(MODBUS)/db/poll_delay.template" { pattern
+{P,           R,            PORT}
+{13RamanPLC:,    XnBPollDelay, K1_Xn_Bit}
+}
+
+# These are the Yn inputs done with bit access Y0-Y27
+file "$(MODBUS)/db/bi_bit.template" { pattern
+{P,                   R,             PORT,            OFFSET,     ZNAM,     ONAM,       ZSV,    OSV,        SCAN}
+{13RamanPLC:,            Buzzer,     K1_Yn_In_Bit,    007,       Off,     On,  NO_ALARM,  MINOR,  "I/O Intr"}
+{13RamanPLC:,    E1ShutterRelay,     K1_Yn_In_Bit,    014,       Off,     On,  NO_ALARM,  MINOR,  "I/O Intr"}
+{13RamanPLC:, E1L1-2EnableRelay,     K1_Yn_In_Bit,    011,       Off,     On,  NO_ALARM,  MINOR,  "I/O Intr"}
+{13RamanPLC:, E1L3-6EnableRelay,     K1_Yn_In_Bit,    000,       Off,     On,  NO_ALARM,  MINOR,  "I/O Intr"}
+{13RamanPLC:,   E2L1EnableRelay,     K1_Yn_In_Bit,    012,       Off,     On,  NO_ALARM,  MINOR,  "I/O Intr"}
+{13RamanPLC:,   E2L2EnableRelay,     K1_Yn_In_Bit,    006,       Off,     On,  NO_ALARM,  MINOR,  "I/O Intr"}
+{13RamanPLC:,   E2L3EnableRelay,     K1_Yn_In_Bit,    013,       Off,     On,  NO_ALARM,  MINOR,  "I/O Intr"}
+{13RamanPLC:,      LaserOnLight,     K1_Yn_In_Bit,    015,       Off,     On,  NO_ALARM,  MINOR,  "I/O Intr"}
+{13RamanPLC:,     LaserOffLight,     K1_Yn_In_Bit,    016,       Off,     On,  NO_ALARM,  MINOR,  "I/O Intr"}
+{13RamanPLC:, LaserCautionLight,     K1_Yn_In_Bit,    017,       Off,     On,  NO_ALARM,  MINOR,  "I/O Intr"}
+}
+file "$(MODBUS)/db/asynRecord.template" { pattern
+{P,           R,         PORT,             ADDR,     TMOD,  IFACE}
+{13RamanPLC:,    YnInBAsyn, K1_Yn_In_Bit,     0,        Read,  asynUInt32Digital}
+}
+file "$(MODBUS)/db/statistics.template" { pattern
+{P,           R,         PORT,          SCAN}
+{13RamanPLC:,    YnInB,     K1_Yn_In_Bit,  "10 second"}
+}
+file "$(MODBUS)/db/poll_delay.template" { pattern
+{P,           R,              PORT}
+{13RamanPLC:,    YnInBPollDelay, K1_Yn_In_Bit}
+}
+
+# These are the Cn inputs done with bit access C200-C207
+file "$(MODBUS)/db/bi_bit.template" { pattern
+{P,                             R,           PORT,   OFFSET,      ZNAM,   ONAM,     ZSV,       OSV,    SCAN}
+{13RamanPLC:, Enclosure1Closed,  K1_Cn_In_Bit,     0200,     Opened,  Closed,     MINOR,  NO_ALARM,  "I/O Intr"}
+{13RamanPLC:, Enclosure2Closed,  K1_Cn_In_Bit,     0220,     Opened,  Closed,     MINOR,  NO_ALARM,  "I/O Intr"}
+{13RamanPLC:,    E1L1-2Enabled,  K1_Cn_In_Bit,     0201,   Disabled, Enabled,  NO_ALARM,     MINOR,  "I/O Intr"}
+{13RamanPLC:,    E1L3-6Enabled,  K1_Cn_In_Bit,     0216,   Disabled, Enabled,  NO_ALARM,     MINOR,  "I/O Intr"}
+{13RamanPLC:, E1ShutterEnabled,  K1_Cn_In_Bit,     0202,   Disabled, Enabled,  NO_ALARM,     MINOR,  "I/O Intr"}
+{13RamanPLC:,      E2L1Enabled,  K1_Cn_In_Bit,     0203,   Disabled, Enabled,  NO_ALARM,     MINOR,  "I/O Intr"}
+{13RamanPLC:,      E2L2Enabled,  K1_Cn_In_Bit,     0204,   Disabled, Enabled,  NO_ALARM,     MINOR,  "I/O Intr"}
+{13RamanPLC:,      E2L3Enabled,  K1_Cn_In_Bit,     0205,   Disabled, Enabled,  NO_ALARM,     MINOR,  "I/O Intr"}
+{13RamanPLC:,         UserMode,  K1_Cn_In_Bit,     0205,   Disabled, Enabled,     MINOR,  NO_ALARM,  "I/O Intr"}
+{13RamanPLC:, E1FaultCondition,  K1_Cn_In_Bit,     0223,         OK,   Fault,  NO_ALARM,     MAJOR,  "I/O Intr"}
+{13RamanPLC:, E2FaultCondition,  K1_Cn_In_Bit,     0224,         OK,   Fault,  NO_ALARM,     MAJOR,  "I/O Intr"}
+{13RamanPLC:,      DoorsClosed,  K1_Cn_In_Bit,     0214,     Opened,  Closed,     MINOR,  NO_ALARM,  "I/O Intr"}
+}
+file "$(MODBUS)/db/asynRecord.template" { pattern
+{P,           R,          PORT,              ADDR,     TMOD,  IFACE}
+{13RamanPLC:,  CnInBAsyn,  K1_Cn_In_Bit,     0,        Read,  asynUInt32Digital}
+}
+file "$(MODBUS)/db/statistics.template" { pattern
+{P,           R,          PORT,           SCAN}
+{13RamanPLC:,  CnInB,      K1_Cn_In_Bit,   "10 second"}
+}
+file "$(MODBUS)/db/poll_delay.template" { pattern
+{P,           R,              PORT}
+{13RamanPLC:,  CnInBPollDelay, K1_Cn_In_Bit}
+}
+
+# These are the Cn outputs done with bit access.  C300-C337 
+file "$(MODBUS)/db/bo_bit.template" { pattern
+{P,                          R,                  PORT,           OFFSET,        ZNAM,    ONAM}
+{13RamanPLC:,      FaultResetRequest,         K1_Cn_Out_Bit,    0300,       Done,    Request}
+{13RamanPLC:,    E1L1-2EnableRequest,         K1_Cn_Out_Bit,    0301,       Done,    Request}
+{13RamanPLC:,    E1L3-6EnableRequest,         K1_Cn_Out_Bit,    0310,       Done,    Request}
+{13RamanPLC:,      E2L1EnableRequest,         K1_Cn_Out_Bit,    0302,       Done,    Request}
+{13RamanPLC:,      E2L2EnableRequest,         K1_Cn_Out_Bit,    0303,       Done,    Request}
+{13RamanPLC:,      E2L3EnableRequest,         K1_Cn_Out_Bit,    0304,       Done,    Request}
+{13RamanPLC:,       E1ShutterRequest,         K1_Cn_Out_Bit,    0305,       Done,    Request}
+{13RamanPLC:,  EmergencyStop1Request,         K1_Cn_Out_Bit,    0306,       Done,    Request}
+{13RamanPLC:,  EmergencyStop2Request,         K1_Cn_Out_Bit,    0307,       Done,    Request}
+}
+file "$(MODBUS)/db/asynRecord.template" { pattern
+{P,           R,          PORT,              ADDR,     TMOD,  IFACE}
+{13RamanPLC:,    CnOutBAsyn, K1_Cn_Out_Bit,     0,        Read,  asynUInt32Digital}
+}
+file "$(MODBUS)/db/statistics.template" { pattern
+{P,           R,          PORT,           SCAN}
+{13RamanPLC:,    CnOutB,     K1_Cn_Out_Bit,  "10 second"}
+}
+

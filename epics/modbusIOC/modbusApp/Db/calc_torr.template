@@ -1,0 +1,9 @@
+record(calc, "$(P)$(R)") {
+    field(DESC, "Volts to Torr for VGC301A Gauges")
+    field(CALC, "10^(A-5)")
+    field(INPA, "$(INPA)")
+    field(EGU, "Torr")
+    field(PREC, "12")
+    field(HOPR, 1000)
+    field(LOPR, 0.0001)
+}

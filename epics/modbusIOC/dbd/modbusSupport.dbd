@@ -1,0 +1,3 @@
+registrar(drvModbusAsynRegister)
+registrar(modbusInterposeRegister)
+
