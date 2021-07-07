@@ -1,0 +1,23 @@
+version: '3.2'
+services:
+  mdsplus-app:
+    build:
+      context: ./
+      dockerfile: docker/mdsplus/mdsplus-app.dockerfile
+    restart: always
+    volumes:
+      - ./mdsplus/trees:/trees:rw
+      - ./mdsplus/config/envsyms:/usr/local/mdsplus/local/envsyms:rw
+    network_mode: host
+    # ports:
+    #   - "8080:8080"
+    
+  mdsplus-web:
+    build:
+      context: ./
+      dockerfile: docker/caddy/mdsplus-web.dockerfile
+    restart: always
+    network_mode: "host"
+    # environment: 
+    #   - APP_USERNAME=operator
+    #   - APP_PASSWORD_HASH=JDJhJDEwJFZZdXVhMjVzQnBJbzJYREVDeTA1V09QVHNGVWZlSVJROUlHNHM3MC55cnh6Lkx1RmJRa2dP

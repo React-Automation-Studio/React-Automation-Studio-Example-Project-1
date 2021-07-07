@@ -1,10 +1,10 @@
 {
     order webdav last
 }
-:8888 {
+:8080 {
     log
     root * /data
-    reverse_proxy mdsplus-app:8888
+    reverse_proxy /* localhost:8080
 
     handle_path /files/* {
         file_server browse
@@ -19,6 +19,8 @@
     redir /webdav /webdav/
 
     basicauth /* {
-        {env.APP_USERNAME} {env.APP_PASSWORD_HASH}
+        operator DJhJDEwJFZZdXVhMjVzQnBJbzJYREVDeTA1V09QVHNGVWZlSVJROUlHNHM3MC55cnh6Lkx1RmJRa2dP
+        raygolingo JDJhJDEwJEFmdnRSOHZvL1hZNjJyb0VWcE1KeGV1VHYva2FlcERzNGc4dnNub0xuMTk3b0ZDZzBMTGVp
+        joshfiddler JDJhJDEwJEFjSnlIRFVIY0JoQmltQWgwbHAuVi5tRFF2ekx5a3NKbHJ3TG1Ccm0uNW1zVjFtWmNLLjRT
     }
 }
