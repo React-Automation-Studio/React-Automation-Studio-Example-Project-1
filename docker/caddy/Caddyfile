@@ -1,0 +1,24 @@
+{
+    order webdav last
+}
+:8888 {
+    log
+    root * /data
+    reverse_proxy mdsplus-app:8888
+
+    handle_path /files/* {
+        file_server browse
+    }
+    redir /files /files/
+
+    handle /webdav/* {
+        webdav {
+            prefix /webdav
+        }
+    }
+    redir /webdav /webdav/
+
+    basicauth /* {
+        {env.APP_USERNAME} {env.APP_PASSWORD_HASH}
+    }
+}
