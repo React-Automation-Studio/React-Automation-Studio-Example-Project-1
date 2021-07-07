@@ -54,6 +54,6 @@ RUN echo $PATH
 WORKDIR /epics/modbusIOC/iocBoot/iocTest/
 
 # CMD ./st.cmd
-# CMD ../../bin/linux-x86_64/modbusApp Koyo1.cmd
+# CMD ../../bin/linux-x86_64/modbusApp st.cmd
 
 EXPOSE 5000 5064 5065 8001
