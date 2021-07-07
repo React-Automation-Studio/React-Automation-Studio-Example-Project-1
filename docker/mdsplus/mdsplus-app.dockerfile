@@ -96,13 +96,8 @@ COPY docker/mdsplus/conf/menu.xml /etc/xdg/openbox/
 COPY docker/mdsplus/conf/supervisord.conf /etc/
 
 # Staging
-EXPOSE 8081
+EXPOSE 8080
 
-# Testing
-# EXPOSE 8082
-
-# production
-# EXPOSE 8080
 
 RUN groupadd --gid 1000 app && \
     useradd --home-dir /data --shell /bin/bash --uid 1000 --gid 1000 app && \
