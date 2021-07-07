@@ -1,0 +1,79 @@
+#-------------------------------------------------------------------#
+# Site Specific Definitions of environment variables for MDSplus
+#
+# How to use this Definition File: From 'usr/local/mdsplus/setup.sh'
+#
+# The definition file should contain the following types of lines:
+#-------------------------------------------------------------------#
+#
+#   1) comment-line
+#   2) variable-definition
+#   3) include-statement
+#   4) source-statement
+#   5) dot-statement
+#
+# where:
+#
+#   1) comment-line:
+#
+#      A comment line beginning with # in first character.
+#
+#   2) variable-definition:
+#
+#      A environment variable definition of the following form:
+#
+#         environment-variable-name  environment-variable-value optional-delimiter-spec
+#
+#         where:
+#
+#            optional-delimiter-spec is the character ">" or "<" followed by a delimiter
+#
+#         Examples:
+#
+#            myvar foo                 (define environment variable myvar to have the value foo)
+#            mytree_path $HOME/mytree  <; (define environment variable mytree_path to have the
+#                                          value $HOME/mytree. If mytree_path was previously
+#                                          defined, mytree_path will become $HOME/mytree followed
+#                                          by a semi-colon followed by the original value.)
+#            PATH $HOME/bin  :>           (Append $HOME/bin to the PATH environment variable.)
+#
+#   3) include-statement:
+#
+#        Include another definition file.
+#
+#        Example:
+#
+#            include $HOME/.mdsplus
+#
+#   4) source-statement
+#
+#        Noop in sh userd when same definition file is sourced from mdsplus.csh
+#
+#   5) dot-statement
+#
+#        Source another file with shell commands
+#
+#        Example:
+#
+#            . $HOME/myscript.csh
+#
+#
+# Define Default tree path here
+# Pass in an Environment Variable for the default tree name
+# Don't terminate with `/` and use '~t' to look for the tree in a 
+# folder with the same name 
+
+#MDS_PATH          /tdi       <;
+#MDS_PYDEVICE_PATH /pydevices <;
+
+# tree_path definitions 
+default_tree_path /trees/~t >;
+
+# TODO VALIDATE: might not even need to worry about these definitions
+# Example tree following the 'Trees and Data' page on MDSplus.org
+my_tree_path /trees/my_tree >;
+
+# Tree from the tutorial
+tutorial_path /trees/tutorial >;
+
+# A folder with name of experimental tree must pre-exist initialization

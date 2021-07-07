@@ -1,0 +1,6 @@
+export tutorial_path=./trees
+export LD_LIBRARY_PATH=./DemoAdc:$LD_LIBRARY_PATH
+jTraverser tutorial&
+jScope -l jScope/Tutorial_1.jscp &
+jScope -l jScope/Tutorial_2.jscp &
+jScope -l jScope/Tutorial_3.jscp &

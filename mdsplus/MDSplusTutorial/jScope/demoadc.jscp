@@ -1,0 +1,120 @@
+Scope.geometry: 750x550+685+0
+Scope.update.disable: false
+Scope.update.disable_when_icon: true
+Scope.font: java.awt.Font[family=Dialog,name=Dialog,style=plain,size=14]
+
+
+Scope.color_0: Black,java.awt.Color[r=0,g=0,b=0]
+Scope.color_1: Blue,java.awt.Color[r=0,g=0,b=255]
+Scope.color_2: Cyan,java.awt.Color[r=0,g=255,b=255]
+Scope.color_3: DarkGray,java.awt.Color[r=64,g=64,b=64]
+Scope.color_4: Gray,java.awt.Color[r=128,g=128,b=128]
+Scope.color_5: Green,java.awt.Color[r=0,g=255,b=0]
+Scope.color_6: LightGray,java.awt.Color[r=192,g=192,b=192]
+Scope.color_7: Magenta,java.awt.Color[r=255,g=0,b=255]
+Scope.color_8: Orange,java.awt.Color[r=255,g=200,b=0]
+Scope.color_9: Pink,java.awt.Color[r=255,g=175,b=175]
+Scope.color_10: Red,java.awt.Color[r=255,g=0,b=0]
+Scope.color_11: Yellow,java.awt.Color[r=255,g=255,b=0]
+
+Scope.data_server_name: local mdsip
+Scope.data_server_class: MdsDataProvider
+Scope.data_server_argument: localhost:8001
+Scope.fast_network_access: false
+Scope.reversed: false
+
+Scope.global_1_1.experiment: tutorial
+Scope.global_1_1.event: ADC1_READY
+Scope.global_1_1.shot: 2
+Scope.global_1_1.horizontal_offset: 0
+Scope.global_1_1.vertical_offset: 0
+
+Scope.columns: 2
+Scope.rows_in_column_1: 2
+
+
+Scope.plot_1_1.height: 216
+Scope.plot_1_1.grid_mode: 0
+Scope.plot_1_1.x_log: false
+Scope.plot_1_1.y_log: false
+Scope.plot_1_1.update_limits: true
+Scope.plot_1_1.palette: Green scale
+Scope.plot_1_1.bitShift: 0
+Scope.plot_1_1.bitClip: false
+Scope.plot_1_1.experiment: null
+Scope.plot_1_1.num_shot: 1
+Scope.plot_1_1.num_expr: 1
+Scope.plot_1_1.continuous_update: 0
+Scope.plot_1_1.global_defaults: 262017
+Scope.plot_1_1.y_expr_1: \TUTORIAL::TOP.DEVICES:ADC_1.CHANNEL_0:DATA
+Scope.plot_1_1.mode_1D_1_1: Line
+Scope.plot_1_1.mode_2D_1_1: xz(y)
+Scope.plot_1_1.color_1_1: 0
+Scope.plot_1_1.marker_1_1: 0
+Scope.plot_1_1.step_marker_1_1: 1
+
+
+Scope.plot_2_1.height: 216
+Scope.plot_2_1.grid_mode: 0
+Scope.plot_2_1.x_log: false
+Scope.plot_2_1.y_log: false
+Scope.plot_2_1.update_limits: true
+Scope.plot_2_1.palette: Green scale
+Scope.plot_2_1.bitShift: 0
+Scope.plot_2_1.bitClip: false
+Scope.plot_2_1.experiment: null
+Scope.plot_2_1.num_shot: 1
+Scope.plot_2_1.num_expr: 1
+Scope.plot_2_1.continuous_update: 0
+Scope.plot_2_1.global_defaults: 262017
+Scope.plot_2_1.y_expr_1: \TUTORIAL::TOP.DEVICES:ADC_1.CHANNEL_1:DATA
+Scope.plot_2_1.mode_1D_1_1: Line
+Scope.plot_2_1.mode_2D_1_1: xz(y)
+Scope.plot_2_1.color_1_1: 0
+Scope.plot_2_1.marker_1_1: 0
+Scope.plot_2_1.step_marker_1_1: 1
+Scope.rows_in_column_2: 2
+
+
+Scope.plot_1_2.height: 216
+Scope.plot_1_2.grid_mode: 0
+Scope.plot_1_2.x_log: false
+Scope.plot_1_2.y_log: false
+Scope.plot_1_2.update_limits: true
+Scope.plot_1_2.palette: Green scale
+Scope.plot_1_2.bitShift: 0
+Scope.plot_1_2.bitClip: false
+Scope.plot_1_2.experiment: null
+Scope.plot_1_2.num_shot: 1
+Scope.plot_1_2.num_expr: 1
+Scope.plot_1_2.continuous_update: 0
+Scope.plot_1_2.global_defaults: 262017
+Scope.plot_1_2.y_expr_1: \TUTORIAL::TOP.DEVICES:ADC_1.CHANNEL_2:DATA
+Scope.plot_1_2.mode_1D_1_1: Line
+Scope.plot_1_2.mode_2D_1_1: xz(y)
+Scope.plot_1_2.color_1_1: 0
+Scope.plot_1_2.marker_1_1: 0
+Scope.plot_1_2.step_marker_1_1: 1
+
+
+Scope.plot_2_2.height: 216
+Scope.plot_2_2.grid_mode: 0
+Scope.plot_2_2.x_log: false
+Scope.plot_2_2.y_log: false
+Scope.plot_2_2.update_limits: true
+Scope.plot_2_2.palette: Green scale
+Scope.plot_2_2.bitShift: 0
+Scope.plot_2_2.bitClip: false
+Scope.plot_2_2.experiment: null
+Scope.plot_2_2.num_shot: 1
+Scope.plot_2_2.num_expr: 1
+Scope.plot_2_2.continuous_update: 0
+Scope.plot_2_2.global_defaults: 262017
+Scope.plot_2_2.y_expr_1: \TUTORIAL::TOP.DEVICES:ADC_1.CHANNEL_3:DATA
+Scope.plot_2_2.mode_1D_1_1: Line
+Scope.plot_2_2.mode_2D_1_1: xz(y)
+Scope.plot_2_2.color_1_1: 0
+Scope.plot_2_2.marker_1_1: 0
+Scope.plot_2_2.step_marker_1_1: 1
+
+Scope.vpane_1: 500
