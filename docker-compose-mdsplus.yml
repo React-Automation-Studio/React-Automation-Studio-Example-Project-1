@@ -1,0 +1,20 @@
+version: '3.2'
+services:
+  mdsplus:
+    # image: 'ras-mdsplus:latest'
+    build:
+      context: ./
+      dockerfile: docker/mdsplus/Dockerfile
+    environment:
+      - DISPLAY=:0
+      - QT_X11_NO_MITSHM=1
+      - XAUTHORITY=/.Xauthority
+    network_mode: host
+    stdin_open: true
+    tty: true
+    volumes:
+    - ~/controls/React-Automation-Studio-Fuse/mdsplus/trees:/trees:rw
+    - ~/controls/React-Automation-Studio-Fuse/mdsplus/config/envsyms:/usr/local/mdsplus/local/envsyms:rw
+    # - ./mdsplus/examples:/usr/local/mdsplus/examples
+    # - ./mdsplus/MDSplusTutorial:/usr/local/mdsplus/tutorial
+    - /tmp/.X11-unix:/tmp/.X11-unix:rw

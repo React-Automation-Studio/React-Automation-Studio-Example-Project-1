@@ -91,42 +91,66 @@ services:
     stdin_open: true
     restart: always
     network_mode: host
+
   stagingtestioc:
-      build:
-        context: ./
-        dockerfile: docker/stagingioc/Dockerfile
-      tty: true
-      stdin_open: true
-      restart: always
-      network_mode: host
-  stagingsdp0ioc:
     build:
       context: ./
-      args: # Environment variables available at build-time
-                - http_proxy
-                - https_proxy
-                - no_proxy
-      dockerfile: docker/modbussdpIOC/Dockerfile
-    volumes:
-      - /home/controls/dev/RAS/React-Automation-Studio-SDP/epics/modbusIOC:/epics/modbusIOC  # For Development
+      dockerfile: docker/stagingioc/Dockerfile
     tty: true
     stdin_open: true
     restart: always
     network_mode: host
- 
+  
   styleguideserverdev:
     env_file: .env
     build:
       context: ./
       dockerfile: docker/styleguideServerDev/Dockerfile
     volumes:
-
       - ./ReactApp/src/components:/app/src/components
       - ./ReactApp/src/docs:/app/src/docs
       - ./ReactApp/styleguide.config.js:/app/styleguide.config.js
     restart: always
     ports:
       - "6061:6060"
+
+  stagingsdp0ioc:
+    build:
+      context: ./
+      args: # Environment variables available at build-time
+        - http_proxy
+        - https_proxy
+        - no_proxy
+      dockerfile: docker/modbussdpIOC/Dockerfile
+    volumes:
+      - ~/controls/React-Automation-Studio-Fuse/epics/modbusIOC:/epics/modbusIOC  # For Development
+    tty: true
+    stdin_open: true
+    restart: always
+    network_mode: host
+
+  mdsplus-app:
+    build:
+      context: ./
+      dockerfile: docker/mdsplus/mdsplus-app.dockerfile
+    restart: always
+    volumes:
+      - ~/controls/React-Automation-Studio-Fuse/mdsplus/trees:/trees:rw
+      - ~/controls/React-Automation-Studio-Fuse/mdsplus/config/envsyms:/usr/local/mdsplus/local/envsyms:rw
+    # network_mode: "host"
+    ports:
+      - "8080:8080"
+    # env_file: .env
+    
+  mdsplus-web:
+    build:
+      context: ./
+      dockerfile: docker/caddy/mdsplus-web.dockerfile
+    restart: always
+    network_mode: "host"
+    environment: 
+      - APP_USERNAME=operator
+      - APP_PASSWORD_HASH=JDJhJDEwJFZZdXVhMjVzQnBJbzJYREVDeTA1V09QVHNGVWZlSVJROUlHNHM3MC55cnh6Lkx1RmJRa2dP
 
   ## ALL Database related Docker processes -start
   mongo1:
@@ -198,8 +222,6 @@ services:
       - LOADSAVE_DATABASE_REPLICA_SET_NAME=devrs
     build:
       context: ./
-
-      
       dockerfile: docker/loadSaveDbInit/Dockerfile
     network_mode: "host"
     tty: true
@@ -266,3 +288,5 @@ volumes:
   mongo-db-data3:
   mongo-db-configdb3:
 ## ALL Database related Docker processes -end
+
+
