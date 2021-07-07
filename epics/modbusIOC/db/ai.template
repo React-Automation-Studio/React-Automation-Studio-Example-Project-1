@@ -10,3 +10,4 @@ record(ai, "$(P)$(R)") {
     field(PREC,"$(PREC)")
     field(SCAN,"$(SCAN)")
 }
+

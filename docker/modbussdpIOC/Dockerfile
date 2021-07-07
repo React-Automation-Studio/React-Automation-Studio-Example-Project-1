@@ -33,7 +33,8 @@ WORKDIR /epics/support
 RUN make release
 RUN make
 
-# While in Development, I prefer to use bind-mounts to make sure that the data is persistent
+# make sure that the data can be updated while running
+# Once the code is testing-ready/prod--ready we ADD instead of volumes
 # ADD ./epics/modbusIOC /epics/modbusIOC
 # WORKDIR /epics/modbusIOC
 # RUN make clean
@@ -51,9 +52,11 @@ RUN echo $PATH
 
 
 # WORKDIR /epics/modbusIOC/iocBoot/iocmodbusIOC/
+
+
 WORKDIR /epics/modbusIOC/iocBoot/iocTest/
 
 # CMD ./st.cmd
-# CMD ../../bin/linux-x86_64/modbusApp st.cmd
+CMD ../../bin/linux-x86_64/modbusApp st.cmd
 
 EXPOSE 5000 5064 5065 8001

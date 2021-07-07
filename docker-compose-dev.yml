@@ -136,7 +136,7 @@ services:
         - no_proxy
       dockerfile: docker/modbussdpIOC/Dockerfile
     volumes:
-      - ~/controls/React-Automation-Studio-Fuse/epics/modbusIOC:/epics/modbusIOC  # For Development
+      - ./epics/modbusIOC:/epics/modbusIOC  # For Development
     tty: true
     stdin_open: true
     restart: always
@@ -148,12 +148,10 @@ services:
       dockerfile: docker/mdsplus/mdsplus-app.dockerfile
     restart: always
     volumes:
-      - ~/controls/React-Automation-Studio-Fuse/mdsplus/trees:/trees:rw
-      - ~/controls/React-Automation-Studio-Fuse/mdsplus/config/envsyms:/usr/local/mdsplus/local/envsyms:rw
-    # network_mode: "host"
+      - ./mdsplus/trees:/trees:rw
+      - ./mdsplus/config/envsyms:/usr/local/mdsplus/local/envsyms:rw
     ports:
       - "8080:8080"
-    # env_file: .env
     
   mdsplus-web:
     build:
