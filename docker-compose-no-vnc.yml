@@ -12,7 +12,6 @@ services:
     ports:
       - "6081:80"
     # network_mode: host
-    # environment:
-    #   - USER="operator"
-    #   - PASSWORD="Ignition!"
-    #   - RESOLUTION="1920x1080
+    environment:
+      - HTTP_PASSWORD=Ignition!
+      - RESOLUTION=1920x1080
