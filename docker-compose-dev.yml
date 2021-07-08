@@ -127,20 +127,20 @@ services:
     restart: always
     network_mode: host
 
-  sdp0_ioc:
-    build:
-      context: ./
-      args: # Environment variables available at build-time
-        - http_proxy
-        - https_proxy
-        - no_proxy
-      dockerfile: docker/modbussdpIOC/Dockerfile
-    volumes:
-      - ./epics/modbusIOC:/epics/modbusIOC  # For Development
-    tty: true
-    stdin_open: true
-    restart: always
-    network_mode: host
+  # sdp0_ioc:
+  #   build:
+  #     context: ./
+  #     args: # Environment variables available at build-time
+  #       - http_proxy
+  #       - https_proxy
+  #       - no_proxy
+  #     dockerfile: docker/modbussdpIOC/Dockerfile
+  #   volumes:
+  #     - ./epics/modbusIOC:/epics/modbusIOC  # For Development
+  #   tty: true
+  #   stdin_open: true
+  #   restart: always
+  #   network_mode: host
 
   # mdsplus-app:
   #   build:
@@ -233,8 +233,6 @@ services:
       - LOADSAVE_DATABASE_REPLICA_SET_NAME=devrs
     build:
       context: ./
-
-      
       dockerfile: docker/loadSaveDbInit/Dockerfile
     network_mode: "host"
     tty: true
