@@ -13,8 +13,7 @@ services:
     stdin_open: true
     tty: true
     volumes:
-    - ~/controls/React-Automation-Studio-Fuse/mdsplus/trees:/trees:rw
-    - ~/controls/React-Automation-Studio-Fuse/mdsplus/config/envsyms:/usr/local/mdsplus/local/envsyms:rw
-    # - ./mdsplus/examples:/usr/local/mdsplus/examples
-    # - ./mdsplus/MDSplusTutorial:/usr/local/mdsplus/tutorial
+    - ./mdsplus/trees:/trees:rw
+    - ./mdsplus/config/envsyms:/usr/local/mdsplus/local/envsyms:rw
+    - ./mdsplus/epics:/usr/local/mdsplus/epics:rw
     - /tmp/.X11-unix:/tmp/.X11-unix:rw

@@ -118,3 +118,5 @@ users/users.json
 users/pvAccess.json
 users/SECRET_PWD_KEY
 tmp.tar.xz
+
+**/tools/**

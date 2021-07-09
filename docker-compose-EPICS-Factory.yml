@@ -1,0 +1,19 @@
+version: '3.2'
+services:
+  epics_factory:
+    build:
+      context: ./
+      args: # Environment variables available at build-time
+        - http_proxy
+        - https_proxy
+        - no_proxy
+      dockerfile: docker/EPICSFactory/Dockerfile
+    volumes:
+      - ./docker/mdsplus/epics:/epics/mdsplus/epics
+      - ./epics/staging:/epics/staging
+      - ./mdsplus/epics:/epics/mdsplus/epics
+      - ./mdsplus/epics:/
+    tty: true
+    stdin_open: true
+    restart: always
+    network_mode: host 

@@ -1,5 +1,5 @@
 # Built following: https://www.mdsplus.org/index.php/Latest_Ubuntu/Debian_Packages
-# FROM ubuntu:focal
+FROM ubuntu:focal
 
 
 # Install MDSplus pre-requisites
