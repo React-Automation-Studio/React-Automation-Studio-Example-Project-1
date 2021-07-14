@@ -19,8 +19,8 @@
     redir /webdav /webdav/
 
     basicauth /* {
-        operator DJhJDEwJFZZdXVhMjVzQnBJbzJYREVDeTA1V09QVHNGVWZlSVJROUlHNHM3MC55cnh6Lkx1RmJRa2dP
-        raygolingo JDJhJDEwJEFmdnRSOHZvL1hZNjJyb0VWcE1KeGV1VHYva2FlcERzNGc4dnNub0xuMTk3b0ZDZzBMTGVp
-        joshfiddler JDJhJDEwJEFjSnlIRFVIY0JoQmltQWgwbHAuVi5tRFF2ekx5a3NKbHJ3TG1Ccm0uNW1zVjFtWmNLLjRT
+        operator JDJhJDEwJG83eDhwUjRkM0FZVTlhMWFIcHc1QXUzcGswblZzbHRFSmdoRjJ2ak8uMEN4b01PbGlqZUpD
+        joshfiddler JDJhJDEwJFFUdFN0enBaVS8vOUc5dkZrMklzQnVhSXFlOFh1eFMzV2FrZWpiazd1MHhlcS5WcE9DckpP
+        rgolingo JDJhJDEwJHpwSGVadmt2dzlQSm1Zd1JHZy9wdC5taWlta0pXVnVWSk9mdllTdjQuTVpiVndvVi9EcmFX
     }
 }

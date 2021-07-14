@@ -11,7 +11,8 @@ FROM debian:buster
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
-    openbox \
+    # openbox \
+    xfce4 \
     tigervnc-standalone-server \
     supervisor \
     gosu && \
@@ -20,7 +21,7 @@ RUN apt-get update -y && \
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
-    lxterminal \
+    # lxterminal \
     nano \
     wget \
     openssh-client \
@@ -46,14 +47,13 @@ RUN apt update && \
     gnupg && \
     curl -fsSL http://www.mdsplus.org/dist/mdsplus.gpg.key | apt-key add -
 
-# 18, alpha release
-RUN sh -c "echo 'deb [arch=amd64] http://www.mdsplus.org/dist/Ubuntu20/repo MDSplus alpha' > /etc/apt/sources.list.d/mdsplus.list"
+# RUN sh -c "echo 'deb [arch=amd64] http://www.mdsplus.org/dist/Ubuntu20/repo MDSplus alpha' > /etc/apt/sources.list.d/mdsplus.list"
+RUN sh -c "echo 'deb [arch=amd64] http://www.mdsplus.org/dist/debian/buster/repo MDSplus alpha' > /etc/apt/sources.list.d/mdsplus.list"
 
 # Install Python3 and set it to default
 RUN apt install -y python3 && \
     update-alternatives --install /usr/bin/python python /usr/bin/python3 1 && \
     apt install -y python3-distutils
-
 
 # Install MDSplus packages
 RUN apt update && apt install -y \
@@ -80,20 +80,24 @@ ENV PATH ${MDS_ROOT}/bin:${PATH}
 ENV MDS_PATH ${MDS_ROOT}/tdi
 
 # Add MDSplus java classes to CLASSPATH: don't overwrite if already exists
-ENV CLASSPATH ${MDS_ROOT}/java/classes/jScope.jar:${MDS_ROOT}/java/classes/jTraverser.jar:${MDS_ROOT}/java/classes/jTraverser2.jar:${MDS_ROOT}/java/classes/jDevices.jar:${MDS_ROOT}/java/classes/mdsobjects.jar:${MDS_ROOT}/java/classes/jDispatcher.jar
-
+ENV MDS_JAVA_CLASSES ${MDS_ROOT}/java/classes
+ENV CLASSPATH ${MDS_JAVA_CLASSES}/jScope.jar:${MDS_JAVA_CLASSES}/jTraverser.jar:${MDS_JAVA_CLASSES}/jTraverser2.jar:${MDS_JAVA_CLASSES}/jDevices.jar:${MDS_JAVA_CLASSES}/mdsobjects.jar:${MDS_JAVA_CLASSES}/jDispatcher.jar
+ENV default_tree_path /trees/~t
 
 # Adds a file to set variables and configure MDSplus 
-ADD docker/mdsplus/entrypoint.sh /entrypoint.sh
+# ADD docker/mdsplus/entrypoint.sh /entrypoint.sh
+RUN . ${MDS_ROOT}/setup.sh
 
 # This is for easy reading
-RUN ln -s ${MDS_ROOT} mdsplus
+RUN ln -s ${MDS_ROOT} /mdsplus
 
 # Continue to configure for remote
 # Enable a non-root user
+RUN cp /etc/supervisor/conf.d/supervisord.conf /etc/supervisor/conf.d/supervisord.conf.j1 && \
+    cp /etc/supervisor/conf.d/supervisord.conf.j2 /etc/supervisor/conf.d/supervisord.conf
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
-COPY docker/mdsplus/conf/menu.xml /etc/xdg/openbox/
-COPY docker/mdsplus/conf/supervisord.conf /etc/
+# COPY docker/mdsplus/conf/menu.xml /etc/xdg/openbox/
+# COPY docker/mdsplus/conf/supervisord.conf /etc/
 
 # Staging
 EXPOSE 8080

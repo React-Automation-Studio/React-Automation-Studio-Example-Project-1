@@ -7,12 +7,13 @@ services:
         - http_proxy
         - https_proxy
         - no_proxy
-      dockerfile: docker/EPICSFactory/Dockerfile
+      # dockerfile: docker/EPICSFactory/EPICS3156.dockerfile
+      dockerfile: docker/EPICSFactory/EPICS7.dockerfile
     volumes:
-      - ./docker/mdsplus/epics:/epics/mdsplus/epics
-      - ./epics/staging:/epics/staging
-      - ./mdsplus/epics:/epics/mdsplus/epics
-      - ./mdsplus/epics:/
+      # - ./docker/mdsplus/epics:/epics/mdsplus/epics
+      - ./mdsplus/epics:/mdsplus/epics
+      - ./epics/support/mdsplusSup:/epics/support/mdsplusSup
+      - ./mdsplus/trees:/trees
     tty: true
     stdin_open: true
     restart: always

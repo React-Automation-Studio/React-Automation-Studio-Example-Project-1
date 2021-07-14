@@ -76,4 +76,3 @@ my_tree_path /trees/my_tree >;
 # Tree from the tutorial
 tutorial_path /trees/tutorial >;
 
-# A folder with name of experimental tree must pre-exist initialization
