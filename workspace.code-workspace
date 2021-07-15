@@ -1,7 +1,13 @@
 {
 	"folders": [
 		{
+			"path": "../eXmdsArXivr"
+		},
+		{
 			"path": "."
+		},
+		{
+			"path": "../mdsplus"
 		}
 	],
 	"settings": {}

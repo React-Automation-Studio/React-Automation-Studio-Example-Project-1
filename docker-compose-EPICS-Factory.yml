@@ -8,10 +8,11 @@ services:
         - https_proxy
         - no_proxy
       # dockerfile: docker/EPICSFactory/EPICS3156.dockerfile
-      dockerfile: docker/EPICSFactory/EPICS7.dockerfile
+      dockerfile: docker/EPICSFactory/EPICS7.dockerfile  
     volumes:
       # - ./docker/mdsplus/epics:/epics/mdsplus/epics
       - ./mdsplus/epics:/mdsplus/epics
+      - ./mdsplus/java/classes:/mdsplus/java/classes
       - ./epics/support/mdsplusSup:/epics/support/mdsplusSup
       - ./mdsplus/trees:/trees
     tty: true
