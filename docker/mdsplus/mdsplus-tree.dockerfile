@@ -44,6 +44,8 @@ ENV LD_LIBRARY_PATH ${MDS_ROOT}/lib:$LD_LIBRARY_PATH
 ENV PATH ${MDS_ROOT}/bin:${PATH}
 ENV MDS_PATH ${MDS_ROOT}/tdi
 
+# This is for easy 
+RUN ln -s ${MDS_ROOT} /mdsplus
 # X11 forwarding from Container to host
 # ENV DISPLAY ${HOST}:0
 # ENV QT_X11_NO_MITSHM 1
@@ -53,34 +55,31 @@ ENV MDS_PATH ${MDS_ROOT}/tdi
 
 # Add MDSplus java classes to CLASSPATH: don't overwrite if already exists
 ENV MDS_JAVA_CLASSES ${MDS_ROOT}/java/classes
-ENV CLASSPATH ${MDS_JAVA_CLASSES}/jScope.jar:${MDS_JAVA_CLASSES}/jTraverser.jar:${MDS_JAVA_CLASSES}/jTraverser2.jar:${MDS_JAVA_CLASSES}/jDevices.jar:${MDS_JAVA_CLASSES}/mdsobjects.jar:${MDS_JAVA_CLASSES}/jDispatcher.jar
-
+# ENV CLASSPATH ${MDS_ROOT}/java/classes/jScope.jar:${MDS_ROOT}/java/classes/jTraverser.jar:${MDS_ROOT}/java/classes/jTraverser2.jar:${MDS_ROOT}/java/classes/jDevices.jar:${MDS_ROOT}/java/classes/mdsobjects.jar:${MDS_ROOT}/java/classes/jDispatcher.jar
+ENV CLASSPATH ${MDS_ROOT}/java/classes
 # Additional JARs for compiling the ChannelArchiver Class
-ENV CLASSPATH ${CLASSPATH}:${MDS_ROOT}/epics/archiver/caj-1.1.15.jar:${MDS_ROOT}/epics/archiver/jca-2.4.6.jar
+# ENV CLASSPATH ${CLASSPATH}:${MDS_ROOT}/epics/archiver/caj-1.1.15.jar:${MDS_ROOT}/epics/archiver/jca-2.4.6.jar
+
+# ADD docker/mdsplus/entrypoint.sh /entrypoint.sh
+# MDSplus treepath for trees
 ENV default_tree_path /trees/~t
 
-
 # Adds a file to set variables and configure MDSplus 
-# ADD docker/mdsplus/entrypoint.sh /entrypoint.sh
 RUN . ${MDS_ROOT}/setup.sh
 
-# This is for easy reading
-RUN ln -s ${MDS_ROOT} /mdsplus
 
-# Expose this port for use by MDSplus for use with Get Started and Tutorial materials
-# EXPOSE 8001
-EXPOSE 8080
+EXPOSE 80 8080
 
 # Enable a non-root user
 # RUN groupadd -g 1000 operator
 # RUN useradd -m -u 1000 -g operator -s /bin/bash operator
 
-RUN groupadd --gid 1000 app && \
-    useradd --home-dir /data --shell /bin/bash --uid 1000 --gid 1000 app && \
-    mkdir -p /data
+# RUN groupadd --gid 1000 app && \
+#     useradd --home-dir /data --shell /bin/bash --uid 1000 --gid 1000 app && \
+#     mkdir -p /data
 
-WORKDIR /data
-CMD ["sh", "-c", "chown app:app /data && exec gosu app /usr/local/bin/caddy run -adapter caddyfile -config /etc/Caddyfile"]
+# WORKDIR /data
+# CMD ["sh", "-c", "chown app:app /data && exec gosu app /usr/local/bin/caddy run -adapter caddyfile -config /etc/Caddyfile"]
 
 
 # ENTRYPOINT ["/entrypoint.sh"]

@@ -9,7 +9,6 @@ services:
     volumes:
       - ./mdsplus/trees:/trees:rw
       - ./mdsplus/config/envsyms:/usr/local/mdsplus/local/envsyms:rw
-      - ./mdsplus/epics/:/usr/local/mdsplus/epics/
       # - ./docker/caddy/supervisord_mds.conf:/etc/supervisor/conf.d/supervisord_mds.conf
       - /dev/shm:/dev/shm
     ports:
