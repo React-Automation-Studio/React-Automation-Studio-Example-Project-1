@@ -1,0 +1,62 @@
+# Database records for SDP Vacuum control via IOC and SNC statemachine
+# related: sdp_vac_snc.stt state machine program 
+
+record(calc, "$(S):ramp")
+{
+  field(CALC, "(A<B)?(A+C):0")
+  field(INPA, "$(S):ramp")
+  field(SCAN, "1 second")
+  field(INPB, "$(S):limit")
+  field(INPC, "$(S):step")
+}
+
+record(ai, "$(S):limit")
+{
+  field(INP, "10")
+  # AUTOSAVE
+  # info(autosaveFields, "VAL")
+}
+
+record(ai, "$(S):step")
+{
+  field(INP, "1")
+  # AUTOSAVE
+  # info(autosaveFields, "VAL")
+}
+
+# Outputs from IOC/Input into PLC system
+# To enable the system: toggle bit in PLC for enabling/disabling RC
+record(bo, "$(S):systemEnable")
+{
+  field(ZNAM, "false")
+  field(ONAM, "true")
+}
+
+
+
+
+# Simulated Inputs (?)
+
+
+# params
+record(ao, "$(S):initTO") {
+  field(SCAN, "1 second")
+  field(VAL, "60")
+  field(EGU, "seconds")
+
+record(ao, "$(S):lightVacTO") {
+  field(SCAN, "1 second")
+  field(VAL, "60")
+  field(EGU, "seconds")
+
+record(ao, "$(S):deepVacTO") {
+  field(SCAN, "1 second")
+  field(VAL, "60")
+  field(EGU, "seconds")
+
+# Set to hold the previous state of the machine
+record(stringout, "{S}:prevState")
+{
+    field(VAL, "unknown")
+}
+

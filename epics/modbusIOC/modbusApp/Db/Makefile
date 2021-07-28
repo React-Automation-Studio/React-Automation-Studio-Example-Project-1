@@ -35,6 +35,14 @@ DB += statistics.template
 DB += asynRecord.template
 DB += poll_delay.template
 DB += poll_trigger.template
+DB += ai_volts.templtate
+DB += ai_torr.template
+DB += calc_ion.template
+DB += calc_torr.template
+
+#----------------------------------------------------
+# DBs for the SNC State Machine
+DB += sdpVac.db
 
 #----------------------------------------------------
 # If <anyname>.db template is not named <anyname>*.template add

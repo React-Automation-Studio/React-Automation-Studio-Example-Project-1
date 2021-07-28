@@ -54,7 +54,7 @@ RUN echo $PATH
 # WORKDIR /epics/modbusIOC/iocBoot/iocmodbusIOC/
 
 
-WORKDIR /epics/modbusIOC/iocBoot/iocTest/
+WORKDIR /epics/modbusIOC/iocBoot/iocSDPVac/
 
 # CMD ./st.cmd
 CMD ../../bin/linux-x86_64/modbusApp st.cmd

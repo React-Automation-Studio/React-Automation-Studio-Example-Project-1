@@ -36,7 +36,7 @@ PROD_IOC = modbusApp
 
 # <name>_registerRecordDeviceDriver.cpp will be created from <name>.dbd
 PROD_SRCS_DEFAULT += modbus_registerRecordDeviceDriver.cpp modbusMain.cpp
-PROD_SRCS_vxWorks += modbus_registerRecordDeviceDriver.cpp
+# PROD_SRCS_vxWorks += modbus_registerRecordDeviceDriver.cpp
 
 PROD_LIBS += modbus
 PROD_LIBS += asyn
@@ -44,7 +44,31 @@ PROD_LIBS += $(EPICS_BASE_IOC_LIBS)
 
 PROD_SYS_LIBS_solaris += socket
 
+
+# To build SNL programs, SNCSEQ must be defined
+# in the <top>/configure/RELEASE file
+ifneq ($(SNCSEQ),)
+    # Build sncExample into sdpSNCSupport
+    sncExample_SNCFLAGS += +r
+    # sdpSNC_DBD += sncExample.dbd
+    sdpS
+    # A .stt sequence program is *not* pre-processed:
+    # sdpSNCSupport_SRCS += sncExample.stt
+    sdpSNCSupport_SRCS += sncsdpVac.stt
+    sdpSNCSupport_LIBS += seq pv
+    sdpSNC_LIBS += seq pv
+
+    # Build sncProgram as a standalone program
+    PROD_HOST += sncProgram
+    sncProgram_SNCFLAGS += +m
+    # A .st sequence program *is* pre-processed:
+    sncProgram_SRCS += sncProgram.st
+    sncProgram_LIBS += seq pv
+    sncProgram_LIBS += $(EPICS_BASE_HOST_LIBS)
+endif
+
 #
 include $(TOP)/configure/RULES
 #----------------------------------------
 #  ADD RULES AFTER THIS LINE
+

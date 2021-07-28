@@ -14,6 +14,7 @@ SUPPORT=/epics/support
 -include $(TOP)/../configure/SUPPORT.$(EPICS_HOST_ARCH)
 
 ASYN=$(SUPPORT)/asyn-R4-33
+SNCSEQ=$(SUPPORT)/seq-2.2.5
 
 # If you don't want to install into $(TOP) then
 # define INSTALL_LOCATION_APP here

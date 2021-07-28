@@ -6,8 +6,8 @@ record(ai, "$(P)$(R)") {
     field(EGU, "Volts")
     field(EGUL,"$(EGUL)")
     field(EGUF,"$(EGUF)")
-    field(HOPR,"$(EGUF)")
+    field(HOPR,"$(HOPR)")
     field(LOPR,"$(LOPR)")
-    field(PREC,"$(HOPR)")
+    field(PREC,"$(PREC)")
     field(SCAN,"$(SCAN)")
 }

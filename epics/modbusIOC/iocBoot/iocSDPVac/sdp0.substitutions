@@ -1,0 +1,114 @@
+
+# This is actually no conversion
+# Reads 12 bit integer. Want to convert to Volts.
+file "../../db/ai_volts.template" { pattern 
+{P,         R,          PORT,         OFFSET,   BITS,   EGUL,   EGUF,  HOPR,  LOPR,  PREC,  SCAN}
+{SDP0:,    ReadG4,    S0_READ_DLV,    000       12,     0,      10,    7,     0.5,   12,    "I/O Intr"}
+{SDP0:,    ReadG2,    S0_READ_DLV,    001       12,     0,      10,    8,     1,     12,    "I/O Intr"}
+{SDP0:,    ReadG3,    S0_READ_DLV,    002       12,     0,      10,    8,     1,     12,    "I/O Intr"}
+}
+
+#TODO: Make a macro for the SDP ID: here it's '0'. 
+file "../../db/calc_torr.template" { pattern
+{P,         R,             INPA}
+{SDP0:,     ForeLine,      "SDP0:ReadG2.VAL CPP NMS"}
+{SDP0:,     TurboExhaust,  "SDP0:ReadG3.VAL CPP NMS"}
+}
+
+file "../../db/calc_ion.template" { pattern
+{P,         R,             INPA}
+{SDP0:,     Chamber,       "SDP0:ReadG4.VAL CPP NMS"}
+}
+#-------- -------- -------- READING BITS -------- -------- -------- #
+
+
+#  Reading  values moved to DLX Memory
+#todo Change the port name and the Record names Hi 
+file "../../db/bi_bit.template" { pattern
+{P,        R,                  PORT,            OFFSET,   ZNAM,    ONAM,  ZSV,       OSV,        SCAN}
+{SDP0:,    ReadCoolerNorm,     S0_READ_DLX,     001,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"}
+{SDP0:,    ReadCoolerWarn,     S0_READ_DLX,     002,      Low,     High,  NO_ALARM,  MAJOR,      "I/O Intr"}
+{SDP0:,    ReadTurboPwr,       S0_READ_DLX,     003,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"}
+{SDP0:,    ReadTurboAccel,     S0_READ_DLX,     004,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"}
+{SDP0:,    ReadTurboNorm,      S0_READ_DLX,     005,      Low,     High,  MAJOR,     NO_ALARM,   "I/O Intr"}
+{SDP0:,    ReadTurboDecel,     S0_READ_DLX,     006,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"}
+{SDP0:,    rDLX10,             S0_READ_DLX,     010,      Low,     High,  NO_ALARM,  MAJOR,      "I/O Intr"}
+{SDP0:,    rDLX11,             S0_READ_DLX,     011,      Low,     High,  NO_ALARM,  MAJOR,      "I/O Intr"} 
+{SDP0:,    V2G,                S0_READ_DLX,     012,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    V2R,                S0_READ_DLX,     013,      Low,     High,  NO_ALARM,  MINOR,      "I/O Intr"} 
+{SDP0:,    V3G,                S0_READ_DLX,     014,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    V3R,                S0_READ_DLX,     015,      Low,     High,  NO_ALARM,  MINOR,      "I/O Intr"} 
+{SDP0:,    V4G,                S0_READ_DLX,     016,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    V4R,                S0_READ_DLX,     017,      Low,     High,  NO_ALARM,  MINOR,      "I/O Intr"} 
+{SDP0:,    RPUG,               S0_READ_DLX,     020,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    RPUR,               S0_READ_DLX,     021,      Low,     High,  NO_ALARM,  MINOR,      "I/O Intr"} 
+{SDP0:,    RPLG,               S0_READ_DLX,     022,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    RPLR,               S0_READ_DLX,     023,      Low,     High,  NO_ALARM,  MINOR,      "I/O Intr"} 
+{SDP0:,    TurboG,             S0_READ_DLX,     024,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    TurboR,             S0_READ_DLX,     025,      Low,     High,  NO_ALARM,  MINOR,      "I/O Intr"} 
+{SDP0:,    CoolerG,            S0_READ_DLX,     026,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    CoolerR,            S0_READ_DLX,     027,      Low,     High,  NO_ALARM,  MINOR,      "I/O Intr"} 
+{SDP0:,    rDLX30,             S0_READ_DLX,     030,      Low,     High,  NO_ALARM,  MAJOR,      "I/O Intr"} 
+{SDP0:,    V2Stat,             S0_READ_DLX,     031,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    V3Stat,             S0_READ_DLX,     032,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    V4Stat,             S0_READ_DLX,     033,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    RPLStat,            S0_READ_DLX,     034,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    RPUStat,            S0_READ_DLX,     035,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    TurboStat,          S0_READ_DLX,     036,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"}  
+}
+
+
+# These are the Xn --> DLY inputs done with bit access MC1-MC8: Cannot access MC0
+file "../../db/bi_bit.template" { pattern
+{P,           R,             PORT,            OFFSET,     ZNAM,   ONAM,  ZSV,       OSV,        SCAN}
+{SDP0:,    ReadRCtrl,        S0_READ_DLY,     000,        Low,    High,  MINOR,     NO_ALARM,   "I/O Intr"}
+{SDP0:,    rDLY1,            S0_READ_DLY,     001,        Low,    High,  NO_ALARM,  MAJOR,      "I/O Intr"}
+{SDP0:,    rDLY2,            S0_READ_DLY,     002,        Low,    High,  NO_ALARM,  MAJOR,      "I/O Intr"}
+{SDP0:,    ReadV2On,         S0_READ_DLY,     003,        Low,    High,  MINOR,     NO_ALARM,   "I/O Intr"}
+{SDP0:,    ReadV2Off,        S0_READ_DLY,     004,        Low,    High,  NO_ALARM,  MINOR,      "I/O Intr"}
+{SDP0:,    ReadV3On,         S0_READ_DLY,     005,        Low,    High,  MINOR,     NO_ALARM,   "I/O Intr"}
+{SDP0:,    ReadV3Off,        S0_READ_DLY,     006,        Low,    High,  NO_ALARM,  MINOR,      "I/O Intr"}
+{SDP0:,    ReadV4On,         S0_READ_DLY,     007,        Low,    High,  MINOR,     NO_ALARM,   "I/O Intr"}
+{SDP0:,    rDLY8,            S0_READ_DLY,     008,        Low,    High,  NO_ALARM,  MAJOR,      "I/O Intr"}
+{SDP0:,    rDLY9,            S0_READ_DLY,     009,        Low,    High,  NO_ALARM,  MAJOR,      "I/O Intr"}
+{SDP0:,    ReadV4Off,        S0_READ_DLY,     010,        Low,    High,  NO_ALARM,  MINOR,      "I/O Intr"}
+{SDP0:,    rDLY11,           S0_READ_DLY,     011,        Low,    High,  NO_ALARM,  MAJOR,      "I/O Intr"}
+{SDP0:,    rDLY12,           S0_READ_DLY,     012,        Low,    High,  NO_ALARM,  MAJOR,      "I/O Intr"}
+{SDP0:,    ReadRPUOn,        S0_READ_DLY,     013,        Low,    High,  MINOR,     NO_ALARM,   "I/O Intr"}
+{SDP0:,    ReadRPUOff,       S0_READ_DLY,     014,        Low,    High,  NO_ALARM,  MINOR,      "I/O Intr"}
+{SDP0:,    ReadRPLOn,        S0_READ_DLY,     015,        Low,    High,  MINOR,     NO_ALARM,   "I/O Intr"}
+{SDP0:,    ReadRPLOff,       S0_READ_DLY,     016,        Low,    High,  NO_ALARM,  MINOR,      "I/O Intr"}
+{SDP0:,    ReadTurboOn,      S0_READ_DLY,     017,        Low,    High,  MINOR,     NO_ALARM,   "I/O Intr"}
+{SDP0:,    rDLY18,           S0_READ_DLY,     018,        Low,    High,  NO_ALARM,  MAJOR,      "I/O Intr"}
+{SDP0:,    rDLY19,           S0_READ_DLY,     019,        Low,    High,  NO_ALARM,  MAJOR,      "I/O Intr"}
+{SDP0:,    ReadTurboOff,     S0_READ_DLY,     020,        Low,    High,  NO_ALARM,  MINOR,      "I/O Intr"}
+}
+
+
+# -------- -------- -------- WRITING BITS -------- -------- -------- #
+
+# For Writing the Operator Inputs (Excluding any external values) to DLY
+file "../../db/bo_bit.template" { pattern
+{P,        R,               PORT,           OFFSET,       ZNAM,        ONAM}
+{SDP0:,    WriteRCtrl,      S0_FORCE_DLY,     000,        DISABLED,    ENABLED} 
+{SDP0:,    wDLY1,           S0_FORCE_DLY,     001,        Low,    High} 
+{SDP0:,    wDLY2,           S0_FORCE_DLY,     002,        Low,    High} 
+{SDP0:,    WriteV2On,       S0_FORCE_DLY,     003,        Low,    High} 
+{SDP0:,    WriteV2Off,      S0_FORCE_DLY,     004,        Low,    High} 
+{SDP0:,    WriteV3On,       S0_FORCE_DLY,     005,        Low,    High} 
+{SDP0:,    WriteV3Off,      S0_FORCE_DLY,     006,        Low,    High} 
+{SDP0:,    WriteV4On,       S0_FORCE_DLY,     007,        Low,    High} 
+{SDP0:,    wDLY8,           S0_FORCE_DLY,     008,        Low,    High} 
+{SDP0:,    wDLY9,           S0_FORCE_DLY,     009,        Low,    High}  
+{SDP0:,    WriteV4Off,      S0_FORCE_DLY,     010,        Low,    High} 
+{SDP0:,    wDLY11,          S0_FORCE_DLY,     011,        Low,    High} 
+{SDP0:,    wDLY12,          S0_FORCE_DLY,     012,        Low,    High}  
+{SDP0:,    WriteRPUOn,      S0_FORCE_DLY,     013,        Low,    High}  
+{SDP0:,    WriteRPUOff,     S0_FORCE_DLY,     014,        Low,    High}  
+{SDP0:,    WriteRPLOn,      S0_FORCE_DLY,     015,        Low,    High}  
+{SDP0:,    WriteRPLOff,     S0_FORCE_DLY,     016,        Low,    High}  
+{SDP0:,    WriteTurboOn,    S0_FORCE_DLY,     017,        Low,    High}  
+{SDP0:,    wDLY18,          S0_FORCE_DLY,     018,        Low,    High}  
+{SDP0:,    wDLY19,          S0_FORCE_DLY,     019,        Low,    High}  
+{SDP0:,    WriteTurboOff,   S0_FORCE_DLY,     020,        Low,    High}  
+}

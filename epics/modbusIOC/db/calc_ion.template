@@ -1,13 +1,13 @@
 record(calc, "$(P)$(R)") {
     field(DESC, "Volts to Torr for VGC301A Gauges")
-    field(CALC, "10^(2* A-5)")
+    field(CALC, "10^((2*0.977462*A)-11)")
     field(INPA, "$(INPA)")
     field(EGU, "Torr")
     field(PREC, "12")
     field(HOPR, 1000)
-    field(LOPR, 0.0001)
+    field(LOPR, 0.000000000001)
     field(HIGH, 760)
     field(HIHI, 800)
-    field(LOW, 0.005)
-    field(LOLO, 0.0001)
+    field(LOW, 0.0001)
+    field(LOLO, 0.000000000001)
 }
