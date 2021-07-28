@@ -1,0 +1,395 @@
+program sncsdpVac
+
+/*
+As a sequence of states. How they transition
+`A, LV`:
+ - `RTF, PF`:
+ - `LV`, n times, for n >= 1
+ - `A`
+ - `DV, IT`:
+    - `RTF, PF,`:
+        - `DV, IT`, n times for n >= 1
+*/
+
+ 
+// Template state
+
+
+//     state <this_state> {
+//         entry {
+//             %% strcpy( seqg_var->stateName, "faulted" );
+//             pvPut( stateName, SYNC );
+//             count = 0;
+//             currState = <this_state>
+//             /* Set anything here that is required for set up */
+//         }
+
+//         when ( ) {
+//             %% strcpy( seqg_var->faultMsg, "initial check failed" );
+//             pvPut( faultMsg, SYNC );
+
+//         } state fault
+
+//         when ( ) {
+//             */ Do these things when the condition is satisfied */
+            
+//         } state <another_state>  // then enter another state
+
+//         when ( ) {
+//             /* actions while in this state */
+//             printf( "filling, level = %-f, count = %-g\n", level, count );
+//             count++;
+//         } state <this_state>
+//      }
+
+%% #define ATMO
+%% #define LIGHTVAC
+%% #define RTF
+%% #define POSTFIRE
+
+
+/* Options */
+// these are defined in the makefile 
+
+/* Variables */
+
+int count;  // a counter may be useful
+int checkOk;
+int currState;
+int ix;
+
+// Parameters
+// Timeouts
+double initTO;
+assign initTO to "{S}:initTO";
+monitor initTO;
+
+double lightVacTO;
+assign lightVacTO to "{S}:lightVacTO";
+monitor lightVacTO;
+
+double atmoTO;
+assign atmoTO to "{S}:atmoTO";
+monitor atmoTO;
+
+double readyToFireTO;
+assign readyToFireTO to "{S}:readyToFireTO";
+monitor readyToFireTO;
+
+double postFireTO;
+assign postFireTO to "{S}:postFireTO";
+monitor postFireTO;
+
+double systemEnable;
+assign systemEnable to "{S}:systemEnable";
+monitor systemEnable;
+
+short faultLEDCtrl;  // to be lit when there is an error in the sequencer
+assign faultLEDCtrl to "{S}:faultLED";
+
+string stateName;
+assign stateName to "{S}:state";
+
+string faultMsg;
+assign faultMsg to "{S}:faultMsg";
+
+
+// controls
+// Save the previous state deep vacuum has some particulars
+int prevState;
+assign prevState to "{S}:prevState";
+monitor prevState;
+
+// constants for later use
+int NUM_GAUGES = 2;
+int NUM_VALVES = 1; 
+int NUM_PUMPS = 3;  // cooler is coupled to pumps. 
+
+// these need to be connected to the Modbus device (ie.PLC)
+double pressures[2];
+assign pressures to { "{S}:gauge4", "{S}:gauge2" };
+monitor pressures;
+
+int valve_leds[1];  // green on == open, green off == closed 
+assign valve_leds to { "{S}:valve2LED" };
+monitor valve_leds;
+
+int pump_leds[3]; // green on or off
+assign pump_leds to { "{S}:coolerLED", "{S}:rplLED", "{S}:rpuLED" };
+monitor pump_leds;
+
+int valve_status[1];  // on or off open or closed
+assign valve_status to {  "{S}:valve2pos" };
+monitor valve_status;
+
+
+// cooler and pump provide input to the plc: cooler_warn/_norm, turbo_norm/warn , etc
+int pump_health[1];
+assign pump_health to { "{S}:coolerHealth" };
+monitor pump_health;
+
+
+// cooler and pump actuation status : on or off, 1 or 0 (PLC output)
+int pump_status[3];
+assign pump_status to { "{S}:coolerStatus", "{S}:rplStatus", "{S}:rpuStatus" };
+monitor pump_status;
+
+int pump_controls[2];
+assign pump_controls to { "{S}:rplCtrl", "{S}:rpuCtrl" };
+monitor pump_controls;
+
+// helper variables that can eb defined and filled at init
+int cooler_status;  // at init must be 'On'
+int cooler_health;  // at init must be 'Normal'
+int rpl_status;  // at init must be 'Off'
+int rpu_status;  // at init must be 'Off'
+int rpl_led;  // at init must be 'Off'
+int rpu_led;  // at init must be 'Off'
+
+
+/* State Sets */
+ss pull_vacuum {
+
+    state init {
+        /*
+        entry {
+        %% strcpy( seqg_var->stateName, "init" );
+        pvPut( stateName, SYNC );
+        } */
+
+        when (delay(10)) {
+        printf("Initializing: Startup\n");
+        } state waitingForAllPvs
+    }
+
+    state waitingForAllPvs {
+        /*
+        entry {
+            %% strcpy( seqg_var->stateName, "waitingForAllPvs" );
+            pvPut( stateName, SYNC );
+            printf( "SDP Vacuum Control: Waiting for PVs to Connect\n");
+        }
+        */
+        when ( pvConnectCount() == pvAssignCount() ) {
+            printf( "All Assigned PVs have connected. Proceding to initialize...\n" );
+        } state initValues
+
+        when ( delay(5) ) {
+            printf( "Waiting for PVs to Connect\n" );
+        
+        } state waitingForAllPvs
+
+    }
+
+    state initValues {
+        /*entry {
+
+		    %% strcpy( seqg_var->stateName, "initValues" );
+		    pvPut( stateName, SYNC );
+
+		    currState = 0;
+        } */
+
+        when () {
+            //get all pressures, valve and pump LED and status PVs
+	 	    for (ix = 0; ix < NUM_GAUGES; ix++) {
+	 	    	pvGet( pressures[ix], ASYNC );
+	 	    	printf( "Current Pressure read from Gauge %-g", pressures[ix] );
+        	}
+
+            for (ix = 0; ix < NUM_VALVES; ix++) {
+                pvGet( valve_leds[ix], ASYNC );
+                pvGet( valve_status[ix], ASYNC );
+            }
+
+            for (ix = 0; ix < NUM_PUMPS; ix++) {
+                pvGet( pump_status[ix], ASYNC );
+                //pvGet( pump_health[ix], ASYNC );
+                pvGet( pump_leds[ix], ASYNC );
+            }
+    	} state initialCheck
+    }
+
+    state initialCheck {
+        /*
+        entry {
+            %% strcpy( seqg_var->stateName, "initValues" );
+            pvPut( stateName, SYNC );
+
+            currState = 0;
+            }
+        */
+        when ( checkOk ) {
+            /* toggle anything needed to be toggled
+            put pvs or read pvs (?)   */
+
+        } state atmospheric
+
+        when ( ) { 	// initTO is reached
+
+        } state fault
+
+        when ( delay(1) ) {
+            checkOk = 1;
+            /* add any conditions that would fail the check
+               and set checkOk = 0, print messages to iocshell 
+                if cooler_g = 0 and cooler_on = 0, checkOk = 0
+                  printf this status
+                if cooler_g = 1 and cooler _on = 0, checkOk = 0
+                  printf this status */
+        } state initialCheck
+
+    }
+
+    state fault {
+        /*
+        entry {
+            %% strcpy( seqg_var->stateName, "faulted" );
+            pvPut( stateName, SYNC );
+            /* Set anything here that is required for set up
+        }
+        
+        when ( ) {
+            %% strcpy( seqg_var->faultMsg, "initial check failed" );
+            pvPut( faultMsg, SYNC );
+
+        } state fault
+        */
+
+        when ( delay(1) ) {
+            printf( "faulted\n" );
+        } state fault
+
+    }
+
+    state atmospheric {
+        /*
+        entry {
+            %% strcpy( seqg_var->stateName, "Atmospheric" );
+            pvPut( stateName, SYNC );
+            count = 0;
+            currState = ATMO;
+            
+            /* Set anything here that is required for set up
+        }
+        
+
+        //TODO ensure right fault message, fault conditions for atmo
+        when ( ) {
+            %% strcpy( seqg_var->faultMsg, "<something> failed" );
+            pvPut( faultMsg, SYNC );
+
+        } state fault
+        */
+
+        when ( ) {
+            /* Do these things when the condition is satisfied */
+            
+        } state lightvacuum  // then enter another state
+
+        when ( ) {
+            /* actions while in this state */
+            for (ix=0; ix<NUM_GAUGES; ix++) {
+                printf( "filling, pressure[%d] = %-f, count = %-d\n", ix, pressures[ix], count );
+            }
+            
+            count++;
+        } state atmospheric
+    }
+
+    
+    state lightvacuum {
+        /*
+        entry {
+            %% strcpy( seqg_var->stateName, "faulted" );
+            pvPut( stateName, SYNC );
+            count = 0;
+            currState = LIGHTVAC;
+            /* Set anything here that is required for set up
+        }
+        
+        /* faulting conditions
+        when ( ) {
+            %% strcpy( seqg_var->faultMsg, "initial check failed" );
+            pvPut( faultMsg, SYNC );
+
+        } state fault
+        */
+
+        // Ready To Fire conditions
+        when ( ) {
+            /* Do these things when the condition is satisfied */
+	        // pvPut( )
+
+        } state readytofire  // then enter another state
+
+        // conditions to return to atmo, from LV
+        when ( ) {
+            // reverse the steps
+        } state atmospheric
+
+        when ( ) {
+            /* actions while in this state */
+            for (ix=0; ix < NUM_GAUGES; ix++) {
+                printf( "pulling light vacuum, pressures[%d] = %-f, count = %-d\n", ix, pressures[ix], count );
+                }
+            // read the gauge values
+            count++;
+        } state lightvacuum
+    }
+
+
+    state readytofire {
+        /*
+        entry {
+
+        }
+        */
+       
+        when () {
+            // only when the firing IOC has said we've fired
+            // 
+        } state postfire
+
+        when () {
+            // return to atmosphere
+            //  can come from the firing IOC
+            //  can come from the
+        } state atmospheric
+
+    }
+
+    state postfire {
+        /*
+        entry {
+
+        }
+        */
+
+        when () {
+            // return to light vacuum
+
+        } state lightvacuum
+
+    }
+}
+
+/*
+As a sequence of states. How they transition
+`A, LV`
+ - `RTF` 
+    - `PF`
+        - `LV`, n times, for n >= 1
+        - `A`
+    - `A`
+*/
+
+/*
+won't need the following as Turbo is being removed
+ - `DV, IT`
+        - `RTF`
+            - `PF`
+                - `DV, IT`, n times for n >= 1
+                -`A`
+        - `A`
+*/
