@@ -23,18 +23,18 @@
 # the CONFIG_SITE file.
 
 # Variables and paths to dependent modules:
-#MODULES = /path/to/modules
-#MYMODULE = $(MODULES)/my-module
+SUPPORT = /epics/support
+#MYMODULE = $(SUPPORT)/my-module
 CALC=/epics/support/calc-R3-7-1
 # If using the sequencer, point SNCSEQ at its top directory:
-#SNCSEQ = $(MODULES)/seq-ver
+#SNCSEQ = $(SUPPORT)/seq-2-2-5
 
 # EPICS_BASE should appear last so earlier modules can override stuff:
 EPICS_BASE = /epics/base
 
 # Set RULES here if you want to use build rules from somewhere
 # other than EPICS_BASE:
-#RULES = $(MODULES)/build-rules
+#RULES = $(SUPPORT)/build-rules
 
 # These allow developers to override the RELEASE variable settings
 # without having to modify the configure/RELEASE file itself.
