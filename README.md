@@ -131,6 +131,12 @@ git tag
 
 To checkout version 3.1.0 run:
 
+# <<<<<<< HEAD
+
+To checkout version 3.1.0 run:
+
+> > > > > > > e50e8cee44e1e93a785518ef636774572ca27d55
+
 ```bash
  git checkout tags/V3.1.0
 ```
@@ -141,7 +147,12 @@ To confirm the correct git submodule version :
 git submodule status
 ```
 
-Should contain `submodules/React-Automation-Studio (V3.1.0)` in the output for version 3.1.0 .
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > e50e8cee44e1e93a785518ef636774572ca27d55
+> > > > > > > Should contain `submodules/React-Automation-Studio (V3.1.0)` in the output for version 3.1.0 .
 
 If not and you previously checked out a different version run:
 
