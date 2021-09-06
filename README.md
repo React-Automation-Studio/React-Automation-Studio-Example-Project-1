@@ -1,8 +1,8 @@
-Current Release: V3.0.0
+Current Release: V3.1.0
 
 # Introduction
 
-This repository pulls in the src from the  React Automation Studio repository https://github.com/wduckitt/React-Automation-Studio.git and acts a standalone boiler plate example project for React Automation Studio without having to delve into the source code of the master repository.
+This repository pulls in the src from the React Automation Studio repository https://github.com/wduckitt/React-Automation-Studio.git and acts a standalone boiler plate example project for React Automation Studio without having to delve into the source code of the master repository.
 
 If you wish to create a standalone AlarmHandler project you should clone this project:
 
@@ -18,17 +18,17 @@ The microservices that form part of React Automation Studio are shown in Fig. 1 
 
 ![picture](./ReactApp/img/microServices.png)
 
-*Fig 1. The microservices that form part of React Automation Studio*
+_Fig 1. The microservices that form part of React Automation Studio_
 
 An overview of the system components are give below:
 
-*1. pvServer*
+_1. pvServer_
 
-This is the python process variable server. It is layered on the Flask and  Flask-Socket-IO web application frameworks to serve the EPICS process variables to clients.
+This is the python process variable server. It is layered on the Flask and Flask-Socket-IO web application frameworks to serve the EPICS process variables to clients.
 
 Communication between clients and the pvServer occurs between the data connection wrapper in the client components and the pvServer as follows:
 
-The client initially makes a Socket-IO connection to the pvServer. Depending if authentication is enabled the client will first be authenticated, thereafter the  data connection wrapper will emit Socket-IO events to the pvServer requesting access to the EPICS variable.
+The client initially makes a Socket-IO connection to the pvServer. Depending if authentication is enabled the client will first be authenticated, thereafter the data connection wrapper will emit Socket-IO events to the pvServer requesting access to the EPICS variable.
 
 Depending on the clients access rights, access is either denied or the socket connection is placed in a Socket-IO room with read-only or read-write privileges but with same name as PV. EPICS CA to the required process variables are established and the PyEpics PV is stored in a list, the connection and value change call backs of the PyEpics CA are used to emit meta-data, connection status and value changes to the read-only and read-write rooms. The PV name is used as the event name.
 
@@ -36,51 +36,47 @@ In the data connection layer of the clients components, an event listener that i
 
 The only difference between the read-only and read-write rooms is that the write-access field of the meta-data has been changed to read-only based on the access rights and that for a read-write room the write access field is inherited from security rights defined by the EPICS IOC or gateway.
 
-Similarly for writes to an EPICS variable, depending on the access rights, the client is either granted  or denied permission to write to the variable.
+Similarly for writes to an EPICS variable, depending on the access rights, the client is either granted or denied permission to write to the variable.
 
-*2. React frontend*
+_2. React frontend_
 
-React was chosen to develop the frontend for the PWA as it enables us to develop the frontend in a single language, i.e JavaScript  as opposed to conventional web development in HTML, JavaScript and CSS. The UI interfaces that we have created are highly responsive and offer a real-time experience as is shown in the example of a mobile view in in Fig. 2.
+React was chosen to develop the frontend for the PWA as it enables us to develop the frontend in a single language, i.e JavaScript as opposed to conventional web development in HTML, JavaScript and CSS. The UI interfaces that we have created are highly responsive and offer a real-time experience as is shown in the example of a mobile view in in Fig. 2.
 
 <img src="./ReactApp/img/MobileView.png" alt="drawing" width="35%"/>
 
-*Fig 2. An example of a Mobile View.
+\*Fig 2. An example of a Mobile View.
 
 We have integrated selected components from the Material-UI React component framework and the React-vis graphing framework with our system to create user interfaces with the same features that we use in our current CS-Studio operator interfaces. These components have been integrated with a data connection layer which handles, input and output, meta-data for labels, limits, precision, alarm sensitivity and initialization from the pvServer.
 
-Some components can handle multiple PVs such as the graph or single PVs such as text inputs. For each of the components the PVs name can be declared using macros. The macros are replaced at component instantiation. This allows the  design of complex user interfaces that can be reused by simply grouping the components and changing the global macro to point to another system.
-
-
+Some components can handle multiple PVs such as the graph or single PVs such as text inputs. For each of the components the PVs name can be declared using macros. The macros are replaced at component instantiation. This allows the design of complex user interfaces that can be reused by simply grouping the components and changing the global macro to point to another system.
 
 <img src="./ReactApp/img/contextMenu.png" alt="drawing" width="90%"/>
 
-
-*Fig 3. An example of a context menu and a diagnostic probe user interface*
+_Fig 3. An example of a context menu and a diagnostic probe user interface_
 
 Many of the components such as TextInputs and TextOutputs have embedded diagnostic features such as a context menu and diagnostic probe as shown in figure 3.
 
 ![picture](./ReactApp/img/beamline.png)
 
-*Fig 4. An example of a desktop beamline control system ui*
+_Fig 4. An example of a desktop beamline control system ui_
 
 Apart form mobile UIs complex UIs suitable for desktop systems can also be created as is shown in figure 4.
 
+_3. Styleguide_
 
-*3. Styleguide*
+A lot of effort was put into the documentation and a style guide based on React Styleguidedist and is used as the help function and to document the use of all the components from the source files. The current style guide is also interactive with a demo IOC. All the properties of each of the components are documented and examples of their usage are shown.
 
-A lot of effort was put into the documentation and a style guide based on React Styleguidedist and is used as the help function and to document the use of all the components from the source files. The current style guide is also  interactive with a demo IOC. All the properties of each of the components are documented and examples of their usage are shown.
-
-*4. Access rights and Administration*
+_4. Access rights and Administration_
 
 The URL, protocol selection for HTTPS or HTTP , authentication and server ports are controlled through the environment variables.
 
 If React Automation Studio is installed on the localhost then there is no need to enable authentication as the host authentication system will protect access.
 
-Since Release V3.0.0 React-Automation-Studio supports web based administration of user access rights. It also supports  external authentication through Active Directory and Google and local authentication. For the local authentication passwords are stored in the database using encrypted format using Bcrypt. The client is kept authenticated using an encrypted Jason Web Token (JWT) resfresh and access tokens. When serve over HTTPS, the refresh tokens are store in cookie with http only mode and the access tokens are kep in memory. This access token is used to check authorisation and access rights for every PV request and write. If the JWT is invalidated by the server then user will be required to login.
+Since Release V3.0.0 React-Automation-Studio supports web based administration of user access rights. It also supports external authentication through Active Directory and Google and local authentication. For the local authentication passwords are stored in the database using encrypted format using Bcrypt. The client is kept authenticated using an encrypted Jason Web Token (JWT) resfresh and access tokens. When serve over HTTPS, the refresh tokens are store in cookie with http only mode and the access tokens are kep in memory. This access token is used to check authorisation and access rights for every PV request and write. If the JWT is invalidated by the server then user will be required to login.
 
 Access rights can be controlled though web based administrator which contains user access groups,roles and rules for defining PV access using regular expressions in the same way that the EPICS Gatewayaccess is defined. All of the components in React Automation studio currently indicate access rights to the PV.
 
-*5. MongoDB*
+_5. MongoDB_
 
 Since V2.0.0, React-Automation-Studio is integrated with MongoDB to store persistent data. The PyMongo driver is used within the pvServer to connect to a MongoDB replica set.
 
@@ -88,24 +84,22 @@ React hooks are available that setup a watch, perform an update or an insert to 
 
 See the documentation in the style guide.
 
-Currently the Alarm Handler component  and LoadSave component make use of the MongoDB database.
+Currently the Alarm Handler component and LoadSave component make use of the MongoDB database.
 
-*6. AlarmHandler
+\*6. AlarmHandler
 
-
-
-*7. Since Release 3.0.0, Nginx serves the static files for ReactApp and the styleguide, it also handles the transport layer security and performs load balancing. Scripts were created to dynamically configure Nginx based on the enviroment variables in Section 3.
+\*7. Since Release 3.0.0, Nginx serves the static files for ReactApp and the styleguide, it also handles the transport layer security and performs load balancing. Scripts were created to dynamically configure Nginx based on the enviroment variables in Section 3.
 For load balancing, Nginx balances between 3 pvServers in the production versions and 1 in the dev versions.
 
 ## YouTube Channel:
+
 [![React Automation Studio Youtube](http://img.youtube.com/vi/djTPrkRxgAo/0.jpg)](https://www.youtube.com/playlist?list=PL7x0LbUrw5BIgc2PUN3h1D0QRRqRuGzEO "React Automation Studio")
 
 # 1 Installation
+
 The development and production versions of React Automation Studio have been containerized with Docker.
 
 It is advised to only use the containerized version.
-
-
 
 **Prerequisites: git , latest version of docker-ce and docker compose**
 
@@ -117,8 +111,8 @@ And docker-compose:
 
 https://docs.docker.com/compose/install/
 
-
 Then first clone this repo:
+
 ```bash
 git clone --recurse-submodules https://github.com/wduckitt/React-Automation-Studio-Example-Project-1.git
 ```
@@ -130,40 +124,42 @@ Then checkout the correct version with the correct tagname:
 ```
 
 To list the tags run:
+
 ```bash
 git tag
 ```
 
+To checkout version 3.1.0 run:
 
-To checkout version 3.0.0 run:
 ```bash
- git checkout tags/V3.0.0
+ git checkout tags/V3.1.0
 ```
 
-
-
 To confirm the correct git submodule version :
+
 ```bash
 git submodule status
 ```
-Should contain `submodules/React-Automation-Studio (V3.0.0)` in the output for version 3.0.0 .
+
+Should contain `submodules/React-Automation-Studio (V3.1.0)` in the output for version 3.1.0 .
 
 If not and you previously checked out a different version run:
+
 ```bash
 git pull --recurse-submodules
 ```
+
 # 2 Launching the Docker compose files
+
 The systems uses Docker to create isolated production and development environments. There are several docker-compose configuration files.
-
-
 
 ```bash
 
-docker-compose -f docker-compose-prod-with-demoioc.yml up 
+docker-compose -f docker-compose-prod-with-demoioc.yml up
 
 ```
-Will launch the production build with demoIOCs included.
 
+Will launch the production build with demoIOCs included.
 
 ```bash
 docker-compose  up
@@ -171,29 +167,21 @@ docker-compose  up
 
 Will launch the compiled production version with out the demoIOC's and styleguide
 
-
-
 ```bash
 docker-compose -f docker-compose-dev.yml up
 ```
+
 Will launch the development version with the demoIOC's and styleguide.
-
-
-
 
 And:
 
 ```bash
 docker-compose -f docker-compose-dev-styleguide-dev.yml up
 ```
+
 Will launch the development version of the styleguide.
 
 **Note**: Any of the above containers can be rebuilt by add **--build** at the end of the command.
-
-
-
-
-
 
 **Initially to check that everything is working only bring up the production version by running**
 
@@ -203,13 +191,14 @@ docker-compose -f docker-compose-prod-with-demoioc.yml up --build
 
 This installation process of all the docker images may take a while (20-30min) the first time. There after it is fast as all the repeated build and up commands uses cached installations. The longest process is the installation of the node modules. Do not be deterred by the red warnings.
 
-This default installation will serve the  app at http://127.0.0.1:5000 and the style guide at http://127.0.0.1:6060.
-
+This default installation will serve the app at http://127.0.0.1:5000 and the style guide at http://127.0.0.1:6060.
 
 To launch the development environment make sure the production version is stopped,and the run :
+
 ```bash
 docker-compose -f docker-compose-dev.yml up
 ```
+
 This will launch the pvServer, demo IOC ,style guide and the React Development environment. As with the production version the first run may take awhile. There after it is fast as all the repeated build and up commands uses cached installations.
 
 The react development environment app will be served on http://127.0.0.1:3000 and the styleguide at http://127.0.0.1:6060.
@@ -221,19 +210,15 @@ Bug fixes and contributions can be submitted via pull requests.
 
 To change the URL, ports, and enable user authentication See section 6.1 and 6.2
 
-
-
-
 # 3 Enabling user login, authentication and https
 
 If it is intended to run the application locally on a pc then no authentication is needed and the users' system login will protect access.
 
 If access is required on a mobile device or from another pc then is encourage to enable HTTPS and user authentication.
 
-
 To enable secure transmission of usernames and passwords it is highly recommend to enabled HTTPS as in section 3.3.
 
-With this release the authentication  feature is quite open for customization. The authentication is handled in python backend and the authentication procedure can easily be modified to use another authentication procedure.
+With this release the authentication feature is quite open for customization. The authentication is handled in python backend and the authentication procedure can easily be modified to use another authentication procedure.
 
 The current authentication method works as follows:
 
@@ -241,23 +226,22 @@ _Note: The administrator must first enable login ability and setup the users and
 
 The administrator page in 3.1 is used to create users or link with an external authenticator.
 
-
 If the system is configured correctly then the user will be directed to the login page initially.
 
 They will be prompted to enter the username and password or authenticate useing the external authenticator.
 
-The username and password or token is then  transmitted to the backend for authentication. If authenticated, the server returns  encrypted Jason web token (JWT) in the form on an access and refresh token. This is used to keep the user logged in between session. No username or password is stored in the browser. The user must logout in order cancel the session.
-
+The username and password or token is then transmitted to the backend for authentication. If authenticated, the server returns encrypted Jason web token (JWT) in the form on an access and refresh token. This is used to keep the user logged in between session. No username or password is stored in the browser. The user must logout in order cancel the session.
 
 If the access token is invalid the user will be redirected to the login screen. The default access, and refresh token expiry is 300 seconds and 1 week. By default the access token and refresh tokens are rfreshed once a minute.
 
-All tokens of all users can also be invalidated by declaring a new secret key in the  environment variable: SECRET_PWD_KEY . If the SECRET_PWD_KEY  is not defined then a predefined key will be used .
+All tokens of all users can also be invalidated by declaring a new secret key in the environment variable: SECRET_PWD_KEY . If the SECRET_PWD_KEY is not defined then a predefined key will be used .
 
 For every process variable write the access rights are first checked to confirm if the process variable can be written to. And for every user at the initial data connection to each process variable the read access rights are checked.
 
 If no read access rights are granted the widget on the client will display "connecting" permanently. And if no write access is granted the widget is indicated as read only.
 
 ## 3.1 Enabling https
+
 The system is by default configured to serve the socket connections and client webserver over HTTP on localhost.
 
 To enable secure login and installation as a PWA, a certificate and key needs to be installed that is bound to your hostname and the .env environment variables needs to be edited to serve overs HTTPS .
@@ -267,6 +251,7 @@ Inside the React Automation Studio installation folder:
 ```bash
 ls .env
 ```
+
 If it exists edit the .env file, otherwise copy example.env to .env and set
 
 ```bash
@@ -276,6 +261,7 @@ SECURE=true
 HTTP_REDIRECT_TO_HTTPS=true
 
 ```
+
 Alternately set SERVER_PORT to 443 which is the standard ssl port.
 
 The certificates need to be placed in the the React Automation Studio installation folder under the certificates folder.
@@ -284,7 +270,7 @@ The certificate needs to be called: server.cer And the key needs to be called: s
 
 It is recommended to use a CA signed certificate, otherwise you can generate a self signed certificate using:
 
- openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes -keyout server.key -out server.cer -subj "/CN=selfsigned" -addext "subjectAltName=DNS:localhost,IP:xxx.xxx.xxx.xxx"
+openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes -keyout server.key -out server.cer -subj "/CN=selfsigned" -addext "subjectAltName=DNS:localhost,IP:xxx.xxx.xxx.xxx"
 
 In chrome you will need to add the certificate manually:
 In Chrome go to
@@ -293,41 +279,47 @@ Navigate to Manage certificates > Authorities and click on Import
 Browse to where the self signed certificate and key and stored (certificates) and click OPEN
 Ensure all Trust settings for the Certificate authority is ticked
 
-The docker-compose  environment, will need to be restarted. Nginx will detect the change and serve the app over https.
+The docker-compose environment, will need to be restarted. Nginx will detect the change and serve the app over https.
 
-
-The built client will be then served  https://(hostname or ip):SERVER_PORT/, the styleguide at https://(hostname or ip):6060/ and the dev client at https://(hostname or ip):3000
-
-
+The built client will be then served https://(hostname or ip):SERVER_PORT/, the styleguide at https://(hostname or ip):6060/ and the dev client at https://(hostname or ip):3000
 
 ## 3.2 Enabling login and authentication
 
-After enabling HTTPS 
+After enabling HTTPS
 
 Set up the .env to enable login:
+
 ```bash
 cd ..
 ls .env
 ```
+
 If the .env file exists in the root folder, then edit it and set :
+
 ```bash
 REACT_APP_EnableLogin=true
 ```
+
 If the .env file does not exist in the root folder, then:
+
 ```bash
 cp example.env .env
 ```
- then edit .env and set:
+
+then edit .env and set:
+
 ```bash
 REACT_APP_EnableLogin=true
 ```
+
 Make sure that the other parameters in the file are correct. Or see 4.1:
 
-The default username and password  will be admin / admin
+The default username and password will be admin / admin
 
 The admin user will have full read and write access, whilst any other user will have read access by default.
 
 To enable Active Directory Authentication open the .env and add, (You will need to rebuild the docker images):
+
 ```bash
 REACT_APP_EnableActiveDirectoryLogin=true
 LDAP_HOST=ldap://xxxxxx
@@ -336,27 +328,28 @@ LDAP_PORT=389
 ```
 
 To enable Active Directory Authentication open the .env and add, (You will need to rebuild the docker images):
+
 ```bash
 Set REACT_APP_EnableGoogleLogin=true
 REACT_APP_EnableGoogleLoginId= xxxxx
 ```
+
 Set REACT_APP_EnableGoogleLoginId to your google client id for your domain
-at https://console.developers.google.com/apis/credentials/           
-click create new credentials and the create a new oAuth id  for the web app
-It needs an https domain. 
+at https://console.developers.google.com/apis/credentials/  
+click create new credentials and the create a new oAuth id for the web app
+It needs an https domain.
 you can enter multiple domains:
 for example: https://mydomain
 https://mydomain:5000
 https://mydomain:3000
-
 
 It is envisioned that in the future more external authentication mechanisms will be added. In this case one may want to disable the standard authentication. This can be done by setting:
 
 ```bash
 REACT_APP_DisableStandardLogin=true
 ```
-in the .env file.
 
+in the .env file.
 
 ## 3.3 Default user access rights
 
@@ -374,22 +367,21 @@ The table display in the user interface allows one ot edit the access rights in 
 
 <img src="./ReactApp/img/UAGSdefault.png" alt="drawing" width="80%"/>
 
-*Fig 3.3.1. The administrator access control page showing the default UAG*
+_Fig 3.3.1. The administrator access control page showing the default UAG_
 
-To enable write access for everyone one could check the write access check boxes. To disable read access and therefore prevent access by anyone by default one could deselect the read checkboxes. The username set in DEFAULT UAG is '*' and by setting any of the UAG usernames to '*' implies that all users will get the rules defined in the UAG. 
+To enable write access for everyone one could check the write access check boxes. To disable read access and therefore prevent access by anyone by default one could deselect the read checkboxes. The username set in DEFAULT UAG is '_' and by setting any of the UAG usernames to '_' implies that all users will get the rules defined in the UAG.
 In the pvServer, the read and write access of the rules in the UAG are applied if the username is defined in the UAG and the following match function is satisfied:<br/><br/>
-   match=re.search(rule,pv)
-   <br/>
-   <br/>
-   If the match is true, then the rule is applied.
-   <br/>
-    
+match=re.search(rule,pv)
+<br/>
+<br/>
+If the match is true, then the rule is applied.
+<br/>
+
   <br/>
   In theory, all regular expression searches allowed by Python regex can be used although this has not been tested. More examples are available at:<br/>
   <br/>
 https://www.w3schools.com/python/python_regex.asp
 
-  
    <br/>
    <br/>
    In the two examples shown below in Fig 3.3.2 and 3.3.3, the ENGINEERS UAG, with roles as 'engineers' and user name user1 get read and write access to every pv, whilst the OPERATORS UAG, with roles as operators and username operator1 only gets read access for all pvs and write access for the two setpoint pvs.
@@ -419,32 +411,38 @@ https://www.w3schools.com/python/python_regex.asp
 By default, unless a user logs out the refresh token will keep as user logged in for 1 week. And whilst the user is logged in the access tokens and refresh tokens are refreshed once a minute.
 <br/>
 <br/>
-The token expiry is controlled by the following variables in the .env file. 
+The token expiry is controlled by the following variables in the .env file.
 
 <br/>
 <br/>
 
-| Variable Name |Default [s] | Description |
-|-|-|-|
-|REFRESH_COOKIE_MAX_AGE_SECS|604800|The refresh token will expire by default after 1 week.
-|ACCESS_TOKEN_MAX_AGE_SECS|300|The access token will expire by default after 5 minutes.
-|REFRESH_TIMEOUT|60|If the user is logged in then the refresh token and access token will be refresh by default once a minute.
+| Variable Name               | Default [s] | Description                                                                                                |
+| --------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------- |
+| REFRESH_COOKIE_MAX_AGE_SECS | 604800      | The refresh token will expire by default after 1 week.                                                     |
+| ACCESS_TOKEN_MAX_AGE_SECS   | 300         | The access token will expire by default after 5 minutes.                                                   |
+| REFRESH_TIMEOUT             | 60          | If the user is logged in then the refresh token and access token will be refresh by default once a minute. |
 
 <br/>
    <br/>
 
 # 3.5 Disabling the demo components
-  To disable the demo React components and links in development and production, in the .env file set
+
+To disable the demo React components and links in development and production, in the .env file set
+
 ```bash
   REACT_APP_DISABLE_DEMOS=true
 ```
-# 4 Folder structure
-This section has some notes on  systems folder structure:
 
-The installation folder is referenced below  as:
+# 4 Folder structure
+
+This section has some notes on systems folder structure:
+
+The installation folder is referenced below as:
+
 ```bash
 ./
 ```
+
 Inside: `./certificates`the certificates according to 3.3 are placed.
 
 Inside: `./docker`the docker files that build the conatiners that are used by the docker-compose files are placed.
@@ -457,7 +455,6 @@ Inside: `./epics`the demo and staging IOCs that interact with the Demo react scr
 
 `./users` contains the user access configuration files as per section 3.
 
-
 # 5 Running the web app as PWA
 
 The automatic PWA installation notification is currently disabled. Installation can still occur manually.
@@ -468,22 +465,56 @@ On a desktop running Chrome, whilst viewing the website, click on the 3 dots at 
 
 **Note**: Unless HTTPS is enabled then when viewing the PWA, a banner at the top stating that the webapp is unsecure will appear,
 
-
-
-
 # 6 Theme and color scheme
-See the style guide on theming.
 
+See the style guide on theming.
 
 # 7 Contributing
 
-Site specific components and app screens should be kept in your repository. If you wish to contribute to the main repository for bug fixes then this must be done in  the main repository at https://github.com/wduckitt/React-Automation-Studio. If you wish to add in new components then please create them in the staging folder. If the new component requires custom EPICS code then please add it to the demo IOC.
+Site specific components and app screens should be kept in your repository. If you wish to contribute to the main repository for bug fixes then this must be done in the main repository at https://github.com/wduckitt/React-Automation-Studio. If you wish to add in new components then please create them in the staging folder. If the new component requires custom EPICS code then please add it to the demo IOC.
 
 # 8 Contact
 
 Contact us at rasadmin@tlabs.ac.za
+
 # Changelog
-                  V3.0.0 Monday 24 May 2021
+
+V3.1.0 Wednesday 25 August 2021
+<br />
+<br />
+Minor Bug Fixes and Updates:
+
+<ul>
+<li>Hot fix in NodeJs Docker files for new npm registry requirements, previous releases will fail to build after 1 October 2021 </li>
+</ul>
+<br />
+
+V3.0.2 Monday 23 August 2021
+<br />
+<br />
+Minor Bug Fixes and Updates:
+
+<ul>
+<li>pvServer: minor bug fix</li>
+<li>StyledIconIndicator: non zero values default to onColor</li>
+<li>Docker: standardised to Python 3.8.7 in all Python images</li>
+</ul>
+<br />
+
+V3.0.1 Monday 28 June 2021
+<br />
+<br />
+Minor Bug Fixes and Updates:
+
+<ul>
+<li>GraphY: Fixed timestamp issue</li>
+<li>Alarmhandler: Minor bug fixes- Implemented non blocking queue to improve Signal notification throughput</li>
+<li>Nginx: Fixed a waring on a script</li>
+<li>pvServer: minor bug fix</li>
+</ul>
+
+<br />
+V3.0.0 Monday 24 May 2021
 <br />
 <br />
 Improvements and new features:
@@ -515,7 +546,6 @@ Breaking changes:
     
 </ul>
 
-
 <br />
 V2.2.0 Wednesday 20 January 2021
 <br />
@@ -535,11 +565,11 @@ Improvements and new features:
     </li>
   </ul>
 
+V2.1.0 Tuesday 20 October 2020
+<br />
+Improvements and new features:
+<br />
 
- V2.1.0 Tuesday 20 October 2020
-<br />
-  Improvements and new features:
-<br />
 <ul>
   <li>Added Epics Archiver Viewer component</li>
   <li>Package updates</li>
@@ -547,9 +577,10 @@ Improvements and new features:
 <br/>
 
 V2.0.1 Tuesday 29 September 2020
-  <br />
-  Improvements and new features:
-  <br />
+<br />
+Improvements and new features:
+<br />
+
   <ul>
     <li>Added logging to pvServer</li>
     <li>Minor bug fix to pvServer</li>
@@ -560,6 +591,7 @@ V2.0.0 Wednesday 5 August 2020
 
 Improvements and new features:
 <br />
+
 <ul>
   <li>Updated to React Hooks based  components</li>
   <li>Introduction of new RasAppCore component, the logic in App.js is replaced by this component</li>
@@ -585,7 +617,6 @@ Improvements and new features:
       </li>
     </ul>
   </li>
-
 
   <li> Deprecated Components: These components will be removed in future releases                  <br />
     <ul>
@@ -637,12 +668,10 @@ Material UI 4.9.5
 React-style-guidist 11.0.1
 Fixed height props and added in an aspect ratio in the progress bar and tank components
 
-
 **V1.2.2 Monday 17 February 2020**
 Minor updates
 
 Changed Node-sass 16.12.0 to sass 1.25.0
-
 
 **V1.2.1 Monday 17 February 2020**
 Minor updates
@@ -657,7 +686,6 @@ Updated to Material-UI 4.9.2
 Updated to Node LTS 12.15.0
 
 Changed the version of Python in pvServer to 3.7.5 from 3.7
-
 
 **V1.1.0 Thursday 28 November 2019**
 Note: The compile of PyEpics breaks with the latest version of the Python 3.7 docker image and appears to be an issue in Python 3.7.6.
