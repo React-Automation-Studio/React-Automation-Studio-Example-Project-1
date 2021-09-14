@@ -73,6 +73,11 @@ yarn-error.log*
 *.cer
 *.key
 
+**/src/O.Common/*
+**/dbd/*.dbd
+**/O.*
+**/bin/*
+
 epics/testIOC/configure/O.linux-x86_64/
 epics/testIOC/iocBoot/iocexample/envPaths
 epics/testIOC/iocBoot/ioctestIOC/envPaths
