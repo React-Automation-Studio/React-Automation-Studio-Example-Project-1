@@ -4,4 +4,5 @@ record(bo,"$(P)$(R)") {
     field(OUT,"@asynMask($(PORT) $(OFFSET) 0x1)")
     field(ZNAM,"$(ZNAM)")
     field(ONAM,"$(ONAM)")
+    info(asyn:READBACK, "1")
 }
