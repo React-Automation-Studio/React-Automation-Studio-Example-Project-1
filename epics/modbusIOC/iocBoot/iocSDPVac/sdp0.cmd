@@ -10,7 +10,7 @@ modbus_registerRecordDeviceDriver(pdbbase)
 #                       int noAutoConnect,
 #                       int noProcessEos);
 
-drvAsynIPPortConfigure("sdp0","10.1.0.23:502",0,0,1)
+drvAsynIPPortConfigure("sdp0","42.57.51.23:502",0,0,1)
 asynSetOption("sdp0",0, "disconnectOnReadTimeout", "Y")
 
 #modbusInterposeConfig(const char *portName, 
