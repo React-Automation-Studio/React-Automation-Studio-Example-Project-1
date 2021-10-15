@@ -224,10 +224,19 @@ services:
     volumes:
       - "./signalcli/signal-cli-config:/srv/signal/.local/share/signal-cli"
 
-stagingdemoioc:
+  stagingdemoioc:
     build:
       context: ./  
       dockerfile: docker/demoioc/Dockerfile
+    tty: true
+    stdin_open: true
+    restart: always
+    network_mode: host
+
+  high_voltageioc:
+    build:
+      context: ./  
+      dockerfile: docker/hvpsioc/Dockerfile
     tty: true
     stdin_open: true
     restart: always
