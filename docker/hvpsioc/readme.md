@@ -170,7 +170,7 @@ The communication is Serial so I assume `Async` will have the support needed. Pe
 
 #### **StreamDevice**
 
-Prerequisites:
+[*Prerequisites*](https://paulscherrerinstitute.github.io/StreamDevice/setup.html#pre):
 
 - `ASYN` listed in `configure/RELEASE` in the *<top>* directory
 - `CALC` record also needed from `synApps` also in the *<top>* directory
@@ -181,8 +181,13 @@ Presently, we have:
 - `ASYN=$(SUPPORT)/asyn-R4-33`
 - `STREAM=$(SUPPORT)/stream-R2-7-7c`
 
+#### **Startup**
+
+`STREAM_PROTOCOL_PATH` controls where StreamDevice looks for the protocol path
 
 ## Questions for EPICS TechTalk
 
 1. What is the difference between defining
    PROD_LIB or mysoftIOC_LIB?
+
+2. Use Cases for `PCRE` (`PROD_LIBS += pcre`)
