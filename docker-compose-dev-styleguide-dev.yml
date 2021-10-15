@@ -6,7 +6,6 @@ services:
       context: ./
       dockerfile: docker/frontendserverDev/Dockerfile
     volumes:
-
       - ./certificates:/certificates/
       - ./ReactApp/jsconfig.json:/frontendserverAppDev/jsconfig.json
       - ./ReactApp/package.json:/frontendserverAppDev/package.json
@@ -68,7 +67,6 @@ services:
       - ./build/styleguide:/var/www/styleguide
       - ./certificates:/etc/nginx/certificates
     env_file: .env
-  
   stagingunsecurestylguidepvserver:
     env_file: .env
     environment:
@@ -91,15 +89,6 @@ services:
     stdin_open: true
     restart: always
     network_mode: host
-
-  stagingtestioc:
-    build:
-      context: ./
-      dockerfile: docker/stagingioc/Dockerfile
-    tty: true
-    stdin_open: true
-    restart: always
-    network_mode: host
   
   styleguideserverdev:
     env_file: .env
@@ -114,43 +103,6 @@ services:
     ports:
       - "6061:6060"
 
-  sdpSNC0ioc:
-    build:
-      context: ./
-      args: # Environment variables available at build-time
-        - http_proxy
-        - https_proxy
-        - no_proxy
-      dockerfile: docker/modbussdpIOC/Dockerfile
-    volumes:
-      - ./epics/modbusIOC:/epics/modbusIOC  # For Development
-    tty: true
-    stdin_open: true
-    restart: always
-    network_mode: host
-
-  mdsplus-app:
-    build:
-      context: ./
-      dockerfile: docker/mdsplus/mdsplus-app.dockerfile
-    restart: always
-    volumes:
-      - ~/controls/React-Automation-Studio-Fuse/mdsplus/trees:/trees:rw
-      - ~/controls/React-Automation-Studio-Fuse/mdsplus/config/envsyms:/usr/local/mdsplus/local/envsyms:rw
-    # network_mode: "host"
-    ports:
-      - "8080:8080"
-    # env_file: .env
-    
-  mdsplus-web:
-    build:
-      context: ./
-      dockerfile: docker/caddy/mdsplus-web.dockerfile
-    restart: always
-    network_mode: "host"
-    environment: 
-      - APP_USERNAME=operator
-      - APP_PASSWORD_HASH=JDJhJDEwJFZZdXVhMjVzQnBJbzJYREVDeTA1V09QVHNGVWZlSVJROUlHNHM3MC55cnh6Lkx1RmJRa2dP
 
   ## ALL Database related Docker processes -start
   mongo1:
