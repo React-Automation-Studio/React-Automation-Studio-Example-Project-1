@@ -46,13 +46,15 @@ Stop Bits:      1
 
 Checksum confirms the command and data message are all characters
 
-Once all bits are accumulated, converted to binary, then hex
+Once all bits are converted to binary and accumulated, then a HEX value is returned. Here's an example
 
 Eg. 
 - instruction:    7000
-- as binary:      "0011"+"0000"+"0000"+"0000"
+- as binary:      "0111"+"0000"+"0000"+"0000"
 - as hex:         0x03
 - checksum:       3
+
+The Accumulation is literally the addition of each bit as integers
 
 ### Instruction List
 
