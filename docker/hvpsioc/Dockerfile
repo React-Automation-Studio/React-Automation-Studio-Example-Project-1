@@ -33,8 +33,8 @@ WORKDIR /epics/support
 RUN make release
 RUN make
 
-ADD ./epics/stagingTestIOC /epics/stagingTestIOC
-WORKDIR /epics/stagingTestIOC
+ADD ./epics/hvpsIOC /epics/hvpsIOC
+WORKDIR /epics/hvpsIOC
 RUN make clean
 RUN make
 
@@ -49,7 +49,7 @@ RUN echo $PATH
 #RUN ls /epics/base/lib/linux-x86_64/
 
 
-WORKDIR /epics/stagingTestIOC/iocBoot/iocstagingTestIOC/
+WORKDIR /epics/hvpsIOC/iocBoot/iochvpsIOC/
 
 CMD ./st.cmd
 

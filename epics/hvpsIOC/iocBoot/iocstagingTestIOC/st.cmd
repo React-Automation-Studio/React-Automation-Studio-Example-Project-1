@@ -1,6 +1,6 @@
-#!../../bin/linux-x86_64/stagingTestIOC
+#!../../bin/linux-x86_64/hvpsIOC
 
-## You may have to change stagingTestIOC to something else
+## You may have to change hvpsIOC to something else
 ## everywhere it appears in this file
 
 < envPaths
@@ -8,11 +8,11 @@ epicsEnvSet EPICS_CA_SERVER_PORT 8002
 cd "${TOP}"
 
 ## Register all support components
-dbLoadDatabase "dbd/stagingTestIOC.dbd"
-stagingTestIOC_registerRecordDeviceDriver pdbbase
+dbLoadDatabase "dbd/hvpsIOC.dbd"
+hvpsIOC_registerRecordDeviceDriver pdbbase
 
 ## Load record instances
-dbLoadRecords "db/test.db", "device=stagingTestIOC"
+dbLoadRecords "db/test.db", "device=hvpsIOC"
 
 ## Set this to see messages from mySub
 #var mySubDebug 1

@@ -11,55 +11,55 @@ DBDINC += xxxRecord
 DBD += xxxSupport.dbd
 
 # Build an IOC support library
-LIBRARY_IOC += stagingTestIOCSupport
+LIBRARY_IOC += hvpsIOCSupport
 
 # Compile and add the code to the support library
-stagingTestIOCSupport_SRCS += xxxRecord.c
-stagingTestIOCSupport_SRCS += devXxxSoft.c
+hvpsIOCSupport_SRCS += xxxRecord.c
+hvpsIOCSupport_SRCS += devXxxSoft.c
 
 # Link locally-provided code into the support library,
 # rather than directly into the IOC application.
 # This is required for Windows DLL builds.
-stagingTestIOCSupport_SRCS += dbSubExample.c
-stagingTestIOCSupport_SRCS += stagingTestIOCHello.c
-stagingTestIOCSupport_SRCS += initTrace.c
+hvpsIOCSupport_SRCS += dbSubExample.c
+hvpsIOCSupport_SRCS += hvpsIOCHello.c
+hvpsIOCSupport_SRCS += initTrace.c
 
-stagingTestIOCSupport_LIBS += $(EPICS_BASE_IOC_LIBS)
+hvpsIOCSupport_LIBS += $(EPICS_BASE_IOC_LIBS)
 
 
 # Build the IOC application
-PROD_IOC = stagingTestIOC
+PROD_IOC = hvpsIOC
 
-# stagingTestIOC.dbd will be created and installed
-DBD += stagingTestIOC.dbd
+# hvpsIOC.dbd will be created and installed
+DBD += hvpsIOC.dbd
 
-# stagingTestIOC.dbd will include these files:
-stagingTestIOC_DBD += base.dbd
-stagingTestIOC_DBD += xxxSupport.dbd
-stagingTestIOC_DBD += dbSubExample.dbd
-stagingTestIOC_DBD += stagingTestIOCHello.dbd
-stagingTestIOC_DBD += initTrace.dbd
-stagingTestIOC_DBD += calcSupport.dbd
-# stagingTestIOC_registerRecordDeviceDriver.cpp derives from stagingTestIOC.dbd
-stagingTestIOC_SRCS += stagingTestIOC_registerRecordDeviceDriver.cpp
+# hvpsIOC.dbd will include these files:
+hvpsIOC_DBD += base.dbd
+hvpsIOC_DBD += xxxSupport.dbd
+hvpsIOC_DBD += dbSubExample.dbd
+hvpsIOC_DBD += hvpsIOCHello.dbd
+hvpsIOC_DBD += initTrace.dbd
+hvpsIOC_DBD += calcSupport.dbd
+# hvpsIOC_registerRecordDeviceDriver.cpp derives from hvpsIOC.dbd
+hvpsIOC_SRCS += hvpsIOC_registerRecordDeviceDriver.cpp
 
 # Build the main IOC entry point where needed
-stagingTestIOC_SRCS_DEFAULT += stagingTestIOCMain.cpp
-stagingTestIOC_SRCS_vxWorks += -nil-
+hvpsIOC_SRCS_DEFAULT += hvpsIOCMain.cpp
+hvpsIOC_SRCS_vxWorks += -nil-
 
 # Link in the code from our support library
-stagingTestIOC_LIBS += stagingTestIOCSupport
-stagingTestIOC_LIBS += calc
+hvpsIOC_LIBS += hvpsIOCSupport
+hvpsIOC_LIBS += calc
 # To build SNL programs, SNCSEQ must be defined
 # in the <top>/configure/RELEASE file
 ifneq ($(SNCSEQ),)
-    # Build sncExample into stagingTestIOCSupport
+    # Build sncExample into hvpsIOCSupport
     sncExample_SNCFLAGS += +r
-    stagingTestIOC_DBD += sncExample.dbd
+    hvpsIOC_DBD += sncExample.dbd
     # A .stt sequence program is *not* pre-processed:
-    stagingTestIOCSupport_SRCS += sncExample.stt
-    stagingTestIOCSupport_LIBS += seq pv
-    stagingTestIOC_LIBS += seq pv
+    hvpsIOCSupport_SRCS += sncExample.stt
+    hvpsIOCSupport_LIBS += seq pv
+    hvpsIOC_LIBS += seq pv
 
     # Build sncProgram as a standalone program
     PROD_HOST += sncProgram
@@ -71,7 +71,7 @@ ifneq ($(SNCSEQ),)
 endif
 
 # Finally link IOC to the EPICS Base libraries
-stagingTestIOC_LIBS += $(EPICS_BASE_IOC_LIBS)
+hvpsIOC_LIBS += $(EPICS_BASE_IOC_LIBS)
 
 include $(TOP)/configure/RULES
 #----------------------------------------
