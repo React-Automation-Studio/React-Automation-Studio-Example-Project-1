@@ -137,7 +137,7 @@ From Most significant bit to least
 
 ## EPICS and Control
 
-### Flow
+### Flows
 
 #### Setting HV Pin Values
 
@@ -163,3 +163,26 @@ From Most significant bit to least
    1. If passes then send instruction to turn pin off with `0x6200`
    2. Confirm off with `0x6210A`
 2. Report Parameters as 0 (?)
+
+### Support: Modules, Drivers Etc
+
+The communication is Serial so I assume `Async` will have the support needed. Perhaps `StreamDevice`. 
+
+#### **StreamDevice**
+
+Prerequisites:
+
+- `ASYN` listed in `configure/RELEASE` in the *<top>* directory
+- `CALC` record also needed from `synApps` also in the *<top>* directory
+  
+Presently, we have:
+
+- `CALC=$(SUPPORT)/calc-R3-7-1`
+- `ASYN=$(SUPPORT)/asyn-R4-33`
+- `STREAM=$(SUPPORT)/stream-R2-7-7c`
+
+
+## Questions for EPICS TechTalk
+
+1. What is the difference between defining
+   PROD_LIB or mysoftIOC_LIB?
