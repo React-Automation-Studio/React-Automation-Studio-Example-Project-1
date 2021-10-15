@@ -81,14 +81,6 @@ services:
     network_mode: host
     volumes:
       - ./certificates:/certificates/
-  stagingdemoioc:
-    build:
-      context: ./  
-      dockerfile: docker/demoioc/Dockerfile
-    tty: true
-    stdin_open: true
-    restart: always
-    network_mode: host
   
   styleguideserverdev:
     env_file: .env
@@ -231,6 +223,15 @@ services:
     env_file: .env
     volumes:
       - "./signalcli/signal-cli-config:/srv/signal/.local/share/signal-cli"
+
+stagingdemoioc:
+    build:
+      context: ./  
+      dockerfile: docker/demoioc/Dockerfile
+    tty: true
+    stdin_open: true
+    restart: always
+    network_mode: host
 
 volumes:
   mongo-db-data1:
