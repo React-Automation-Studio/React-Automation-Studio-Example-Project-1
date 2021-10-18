@@ -9,7 +9,7 @@ modbus_registerRecordDeviceDriver(pdbbase)
 #                       unsigned int priority, 
 #                       int noAutoConnect,
 #                       int noProcessEos);
-
+# TODO: Make The address an envPath for use here?
 drvAsynIPPortConfigure("sdp0","42.57.51.23:502",0,0,1)
 asynSetOption("sdp0",0, "disconnectOnReadTimeout", "Y")
 

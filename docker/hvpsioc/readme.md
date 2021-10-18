@@ -12,6 +12,7 @@
 ## Communications
 
 Uses 13 Bytes to communicate back and forth between Controller and the PS.
+
 0. Address
 1. Command
 2. Command
