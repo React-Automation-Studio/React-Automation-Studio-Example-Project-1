@@ -1,0 +1,13 @@
+
+record (ao, "$(D)${P}${R}"))
+{
+    field (DESC, "$(DESC)")
+    field (DTYP, "stream")
+    field (OUT, "$(PROTO_OUT)")  #"@ExamplePS.proto setHVOn(voltage, current) PS1"
+    field (EGU,  "$(EGU)")
+    field (PREC, "2")
+    field (LOPR, "$(LOPR)")
+    field (HOPR, "$(HOPR)")
+    field (DRVL, "0")
+    field (DRVH, "60")
+}

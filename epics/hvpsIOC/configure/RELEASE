@@ -24,8 +24,11 @@
 
 # Variables and paths to dependent modules:
 SUPPORT = /epics/support
-#MYMODULE = $(SUPPORT)/my-module
+
 CALC=/epics/support/calc-R3-7-1
+STREAM=/epics/support/stream-R2-7-7c
+ASYN=/epics/support/asyn-R4-33
+
 # If using the sequencer, point SNCSEQ at its top directory:
 #SNCSEQ = $(SUPPORT)/seq-2-2-5
 

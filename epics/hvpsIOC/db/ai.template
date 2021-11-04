@@ -1,0 +1,12 @@
+record (ai, "$(P)$(R)")
+{
+    field (DESC, "$(DESC)")
+    field (DTYP, "stream")
+    field (INP,  "$(PROTO_INP)")
+    field (EGU,  "$(EGU)")
+    field (PREC, "2")
+    field (LOPR, "$(LOPR)")
+    field (HOPR, "$(HOPR)")
+    field (PINI, "YES")
+    field (SCAN, "$(SCAN)")
+}

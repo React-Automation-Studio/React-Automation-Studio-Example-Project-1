@@ -1,0 +1,17 @@
+Terminator = 00 0D;
+
+
+setHVOn {
+    out "A1 61 00  ";
+    
+}
+
+setHVOff{
+    out "A1 62 00 00 00 00 00 00 00 00 06";
+}
+   
+getParameters{
+    out "";
+    @init ""
+}
+

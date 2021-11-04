@@ -1,0 +1,5 @@
+record(calc, "$(D)$(P)$(R)") {
+    field(DESC, "Convert 2 digit voltage value to Hex kV")
+    field(CALC, "$(CALC)")
+    field(INPA, "$(INPA)")
+}

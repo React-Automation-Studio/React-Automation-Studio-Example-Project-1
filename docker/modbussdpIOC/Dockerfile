@@ -33,10 +33,11 @@ WORKDIR /epics/support
 RUN make release
 RUN make
 
+
 # make sure that the data can be updated while running
 # Once the code is testing-ready/prod--ready we ADD instead of volumes
 # ADD ./epics/modbusIOC /epics/modbusIOC
-# WORKDIR /epics/modbusIOC
+# WORKDIR /epics/modbusIOC/
 # RUN make clean
 # RUN make
 
@@ -51,12 +52,11 @@ RUN echo $PATH
 #RUN ls /epics/base/lib/linux-x86_64/
 
 
-# WORKDIR /epics/modbusIOC/iocBoot/iocmodbusIOC/
 
 
 WORKDIR /epics/modbusIOC/iocBoot/iocSDPVac/
 
 # CMD ./st.cmd
-CMD ../../bin/linux-x86_64/modbusApp st.cmd
+CMD /epics/modbusIOC/bin/linux-x86_64/modbusApp st.cmd
 
 EXPOSE 5000 5064 5065 8001

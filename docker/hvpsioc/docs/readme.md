@@ -192,3 +192,42 @@ Presently, we have:
    PROD_LIB or mysoftIOC_LIB?
 
 2. Use Cases for `PCRE` (`PROD_LIBS += pcre`)
+
+
+## StreamDevice Proto File
+
+The File, in a basic form looks like
+
+```
+Terminator = CR LF;
+
+getCurent {
+        out "CURRENT?";
+        in "CURRENT %f A";
+    }
+
+setCurrent {
+    out "CURRENT %.2f";
+    @init {
+        getCurent;
+    }
+}
+```
+
+Notice the `Terminator = CR LF;` line. Stream sends characters. So, At this time, I assume that we need the character string to send, The device expects HEX. 
+
+A command to set 15kv 600mA
+
+```# Set HV Pin: charge: 
+power_on_test = [
+    0xA1,
+    0x61, 0x00,  # command
+    0x00, 0x00,  # Header
+    0x03, 0x84,  # Set Voltage 9kV
+    0x00, 0x64,  # Set Current 100mA
+    0x00, 0x00,  # Checksum computed before sending
+    0x00, 0x0D,  # EOM
+]```
+
+We can convert this to an array of bytes to send in the serial command. 
+

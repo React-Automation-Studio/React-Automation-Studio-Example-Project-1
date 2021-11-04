@@ -1,4 +1,17 @@
 # Subsitutitions Template for the -15kV MU PowerSupply
 
-file "../../db/" { pattern
-{P, R, }}
+# We need to:
+# Set Voltages and Currents
+# Request parameters
+
+# For turning HV off
+# file "../../db/ao.template" { pattern
+# {D, P, R, V, I, }
+# {MU:, PS0:, hv_off, }
+# }
+
+file "../../db/calc.template" { pattern 
+{D,   P,    R,         CALC,                INPA}
+{MU:, PS0:, byte0,     "(A >> 8) & 0xFF",     1500}
+{MU:, PS0:, byte1,     "A & 0xFF",            1500}
+}

@@ -127,16 +127,16 @@ services:
     restart: always
     network_mode: host
 
-  sdp_ioc:
+  mu_hv_ioc:
     build:
       context: ./
       args: # Environment variables available at build-time
           - http_proxy
           - https_proxy
           - no_proxy
-      dockerfile: docker/modbussdpIOC/Dockerfile
+      dockerfile: docker/hvpsioc/Dockerfile
     volumes:
-    - ./epics/modbusIOC:/epics/modbusIOC  # For Development
+    - ./epics/hvpsIOC:/epics/hvpsIOC  # For Development
     tty: true
     stdin_open: true
     restart: always
@@ -156,27 +156,6 @@ services:
   #   stdin_open: true
   #   restart: always
   #   network_mode: host
-
-  # mdsplus-app:
-  #   build:
-  #     context: ./
-  #     dockerfile: docker/mdsplus/mdsplus-app.dockerfile
-  #   restart: always
-  #   volumes:
-  #     - ./mdsplus/trees:/trees:rw
-  #     - ./mdsplus/config/envsyms:/usr/local/mdsplus/local/envsyms:rw
-  #   ports:
-  #     - "8080:8080"
-    
-  # mdsplus-web:
-  #   build:
-  #     context: ./
-  #     dockerfile: docker/caddy/mdsplus-web.dockerfile
-  #   restart: always
-  #   network_mode: "host"
-  #   environment: 
-  #     - APP_USERNAME=operator
-  #     - APP_PASSWORD_HASH=JDJhJDEwJFZZdXVhMjVzQnBJbzJYREVDeTA1V09QVHNGVWZlSVJROUlHNHM3MC55cnh6Lkx1RmJRa2dP
 
   ## ALL Database related Docker processes -start
   mongo1:

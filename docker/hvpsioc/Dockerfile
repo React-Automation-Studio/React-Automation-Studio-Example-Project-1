@@ -49,7 +49,7 @@ RUN echo $PATH
 #RUN ls /epics/base/lib/linux-x86_64/
 
 
-WORKDIR /epics/hvpsIOC/iocBoot/iochvpsIOC/
+WORKDIR /epics/hvpsIOC/iocBoot/iochvpsIOC/ iocBoot/iochvpsIOC/
 
 CMD ./st.cmd
 

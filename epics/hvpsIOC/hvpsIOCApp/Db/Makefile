@@ -8,6 +8,10 @@ DB += dbExample1.db
 DB += dbExample2.db
 DB += dbSubExample.db
 DB += user.substitutions
+DB += ao.template
+DB += ai.template
+DB += calc.template
+
 
 # If <anyname>.db template is not named <anyname>*.template add
 # <anyname>_TEMPLATE = <templatename>
