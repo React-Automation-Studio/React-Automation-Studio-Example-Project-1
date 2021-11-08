@@ -1,6 +1,5 @@
 
-# This is actually no conversion
-# Reads 12 bit integer. Want to convert to Volts.
+
 file "../../db/ai_volts.template" { pattern 
 {P,         R,          PORT,         OFFSET,   BITS,   EGUL,   EGUF,  HOPR,  LOPR,  PREC,  SCAN}
 {SDP0:,    ReadG4,    S0_READ_DLV,    000       12,     0,      10,    7,     0.5,   12,    "I/O Intr"}
@@ -10,14 +9,14 @@ file "../../db/ai_volts.template" { pattern
 
 #TODO: Make a macro for the SDP ID: here it's '0'. 
 file "../../db/calc_torr.template" { pattern
-{P,         R,             INPA                         FLNK}
-{SDP0:,     ForeLine,      "SDP0:ReadG2.VAL CPP NMS"    "SDP0:BufferForeLine"}
-{SDP0:,     TurboExhaust,  "SDP0:ReadG3.VAL CPP NMS"    "SDP0:BufferTurbo"}
+{P,         R,             INPA}
+{SDP0:,     ForeLine,      "SDP0:ReadG2.VAL CPP NMS"}
+{SDP0:,     TurboExhaust,  "SDP0:ReadG3.VAL CPP NMS"}
 }
 
 file "../../db/calc_ion.template" { pattern
-{P,         R,             INPA                         FLNK}
-{SDP0:,     Chamber,       "SDP0:ReadG4.VAL CPP NMS"    "SDP0:BufferChamber"}
+{P,         R,             INPA}
+{SDP0:,     Chamber,       "SDP0:ReadG4.VAL CPP NMS"}
 }
 #-------- -------- -------- READING BITS -------- -------- -------- #
 
@@ -25,36 +24,36 @@ file "../../db/calc_ion.template" { pattern
 #  Reading  values moved to DLX Memory
 #todo Change the port name and the Record names Hi 
 file "../../db/bi_bit.template" { pattern
-{P,        R,                  PORT,            OFFSET,   ZNAM,      ONAM,          ZSV,       OSV,        SCAN}
-{SDP0:,    ReadCoolerNorm,     S0_READ_DLX,     001,      Check,     Normal,        MINOR,     NO_ALARM,   "I/O Intr"}
-{SDP0:,    ReadCoolerWarn,     S0_READ_DLX,     002,      Normal,    Warning,       NO_ALARM,  MAJOR,      "I/O Intr"}
-{SDP0:,    ReadTurboPwr,       S0_READ_DLX,     003,      "Power Off", "Power On",  MINOR,     NO_ALARM,   "I/O Intr"}
-{SDP0:,    ReadTurboAccel,     S0_READ_DLX,     004,      No,        Yes,           MINOR,     NO_ALARM,   "I/O Intr"}
-{SDP0:,    ReadTurboNorm,      S0_READ_DLX,     005,      Check,     Normal,        MAJOR,     NO_ALARM,   "I/O Intr"}
-{SDP0:,    ReadTurboDecel,     S0_READ_DLX,     006,      No,        Yes,           MINOR,     NO_ALARM,   "I/O Intr"}
-{SDP0:,    rDLX10,             S0_READ_DLX,     010,      Low,       High,          NO_ALARM,  MAJOR,      "I/O Intr"}
-{SDP0:,    rDLX11,             S0_READ_DLX,     011,      Low,       High,          NO_ALARM,  MAJOR,      "I/O Intr"} 
-{SDP0:,    V2G,                S0_READ_DLX,     012,      Closed,    Open,          MINOR,     NO_ALARM,   "I/O Intr"} 
-{SDP0:,    V2R,                S0_READ_DLX,     013,      Low,       Closed,        NO_ALARM,  MINOR,      "I/O Intr"} 
-{SDP0:,    V3G,                S0_READ_DLX,     014,      Closed,    Open,          MINOR,     NO_ALARM,   "I/O Intr"} 
-{SDP0:,    V3R,                S0_READ_DLX,     015,      Low,       High,          NO_ALARM,  MINOR,      "I/O Intr"} 
-{SDP0:,    V4G,                S0_READ_DLX,     016,      Closed,    Open,          MINOR,     NO_ALARM,   "I/O Intr"} 
-{SDP0:,    V4R,                S0_READ_DLX,     017,      Low,       High,          NO_ALARM,  MINOR,      "I/O Intr"} 
-{SDP0:,    RPUG,               S0_READ_DLX,     020,      Off,       On,            MINOR,     NO_ALARM,   "I/O Intr"} 
-{SDP0:,    RPUR,               S0_READ_DLX,     021,      Low,       High,          NO_ALARM,  MINOR,      "I/O Intr"} 
-{SDP0:,    RPLG,               S0_READ_DLX,     022,      Off,       On,            MINOR,     NO_ALARM,   "I/O Intr"} 
-{SDP0:,    RPLR,               S0_READ_DLX,     023,      Low,       High,          NO_ALARM,  MINOR,      "I/O Intr"} 
-{SDP0:,    TurboG,             S0_READ_DLX,     024,      Off,       On,            MINOR,     NO_ALARM,   "I/O Intr"} 
-{SDP0:,    TurboR,             S0_READ_DLX,     025,      Low,       High,          NO_ALARM,  MINOR,      "I/O Intr"} 
-{SDP0:,    CoolerG,            S0_READ_DLX,     026,      Low,       High,          MINOR,     NO_ALARM,   "I/O Intr"} 
-{SDP0:,    CoolerR,            S0_READ_DLX,     027,      Low,       High,          NO_ALARM,  MINOR,      "I/O Intr"} 
-{SDP0:,    rDLX30,             S0_READ_DLX,     030,      Low,       High,          NO_ALARM,  MAJOR,      "I/O Intr"} 
-{SDP0:,    V2Stat,             S0_READ_DLX,     031,      Low,       High,          MINOR,     NO_ALARM,   "I/O Intr"} 
-{SDP0:,    V3Stat,             S0_READ_DLX,     032,      Low,       High,          MINOR,     NO_ALARM,   "I/O Intr"} 
-{SDP0:,    V4Stat,             S0_READ_DLX,     033,      Low,       High,          MINOR,     NO_ALARM,   "I/O Intr"} 
-{SDP0:,    RPLStat,            S0_READ_DLX,     034,      Low,       High,          MINOR,     NO_ALARM,   "I/O Intr"} 
-{SDP0:,    RPUStat,            S0_READ_DLX,     035,      Low,       High,          MINOR,     NO_ALARM,   "I/O Intr"} 
-{SDP0:,    TurboStat,          S0_READ_DLX,     036,      Low,       High,          MINOR,     NO_ALARM,   "I/O Intr"}  
+{P,        R,                  PORT,            OFFSET,   ZNAM,    ONAM,  ZSV,       OSV,        SCAN}
+{SDP0:,    ReadCoolerNorm,     S0_READ_DLX,     001,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"}
+{SDP0:,    ReadCoolerWarn,     S0_READ_DLX,     002,      Low,     High,  NO_ALARM,  MAJOR,      "I/O Intr"}
+{SDP0:,    ReadTurboPwr,       S0_READ_DLX,     003,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"}
+{SDP0:,    ReadTurboAccel,     S0_READ_DLX,     004,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"}
+{SDP0:,    ReadTurboNorm,      S0_READ_DLX,     005,      Low,     High,  MAJOR,     NO_ALARM,   "I/O Intr"}
+{SDP0:,    ReadTurboDecel,     S0_READ_DLX,     006,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"}
+{SDP0:,    rDLX10,             S0_READ_DLX,     010,      Low,     High,  NO_ALARM,  MAJOR,      "I/O Intr"}
+{SDP0:,    rDLX11,             S0_READ_DLX,     011,      Low,     High,  NO_ALARM,  MAJOR,      "I/O Intr"} 
+{SDP0:,    V2G,                S0_READ_DLX,     012,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    V2R,                S0_READ_DLX,     013,      Low,     High,  NO_ALARM,  MINOR,      "I/O Intr"} 
+{SDP0:,    V3G,                S0_READ_DLX,     014,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    V3R,                S0_READ_DLX,     015,      Low,     High,  NO_ALARM,  MINOR,      "I/O Intr"} 
+{SDP0:,    V4G,                S0_READ_DLX,     016,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    V4R,                S0_READ_DLX,     017,      Low,     High,  NO_ALARM,  MINOR,      "I/O Intr"} 
+{SDP0:,    RPUG,               S0_READ_DLX,     020,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    RPUR,               S0_READ_DLX,     021,      Low,     High,  NO_ALARM,  MINOR,      "I/O Intr"} 
+{SDP0:,    RPLG,               S0_READ_DLX,     022,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    RPLR,               S0_READ_DLX,     023,      Low,     High,  NO_ALARM,  MINOR,      "I/O Intr"} 
+{SDP0:,    TurboG,             S0_READ_DLX,     024,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    TurboR,             S0_READ_DLX,     025,      Low,     High,  NO_ALARM,  MINOR,      "I/O Intr"} 
+{SDP0:,    CoolerG,            S0_READ_DLX,     026,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    CoolerR,            S0_READ_DLX,     027,      Low,     High,  NO_ALARM,  MINOR,      "I/O Intr"} 
+{SDP0:,    rDLX30,             S0_READ_DLX,     030,      Low,     High,  NO_ALARM,  MAJOR,      "I/O Intr"} 
+{SDP0:,    V2Stat,             S0_READ_DLX,     031,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    V3Stat,             S0_READ_DLX,     032,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    V4Stat,             S0_READ_DLX,     033,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    RPLStat,            S0_READ_DLX,     034,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    RPUStat,            S0_READ_DLX,     035,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"} 
+{SDP0:,    TurboStat,          S0_READ_DLX,     036,      Low,     High,  MINOR,     NO_ALARM,   "I/O Intr"}  
 }
 
 

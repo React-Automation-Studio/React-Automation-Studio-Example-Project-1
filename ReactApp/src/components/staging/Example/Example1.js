@@ -100,7 +100,7 @@ const MobileDemo1 = (props) => {
                   <Grid item xs={12}>
                     <div style={{ height: graphVH, width: "96vw" }}>
                       <GraphY
-                        pvs={["pva://SDP0:ReadG4", "pva://SDP0:ReadG2"]}
+                        pvs={["pva://testIOC:test4", "pva://testIOC:test5"]}
                         legend={["Sine Wave", "Amplitude"]}
                         //lineColor={[this.props.theme.palette.secondary.main,lime['400']]}
                       />

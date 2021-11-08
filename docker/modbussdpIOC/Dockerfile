@@ -57,6 +57,6 @@ RUN echo $PATH
 WORKDIR /epics/modbusIOC/iocBoot/iocSDPVac/
 
 # CMD ./st.cmd
-CMD /epics/modbusIOC/bin/linux-x86_64/modbusApp st.cmd
+# CMD /epics/modbusIOC/bin/linux-x86_64/modbusApp st.cmd
 
 EXPOSE 5000 5064 5065 8001

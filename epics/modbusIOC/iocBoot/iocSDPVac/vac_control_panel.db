@@ -1,0 +1,123 @@
+# Pressure Gauge Buffers for Graphing
+record(compress,"$(device):BufferForeLine")
+{
+	field(DESC, "ForeLine Pressure Circular buffer")
+	field(INP,"$(device):ForeLine")
+	field(ALG,"Circular Buffer")
+	field(NSAM,"1000")
+    field(FLNK,"$(device):ForeLineSetPoint")
+}
+
+
+
+record(compress,"$(device):BufferChamber")
+{
+	field(DESC, "Chamber Pressure Circular buffer")
+	field(INP,"$(device):Chamber")
+	field(ALG,"Circular Buffer")
+	field(NSAM,"1000")
+    field(FLNK,"$(device):ChamberSetPoint")
+}
+
+
+record(compress,"$(device):BufferTurbo")
+{
+	field(DESC, "Exponential Decay Circular buffer")
+	field(INP,"$(device):TurboExhaust")
+	field(ALG,"Circular Buffer")
+	field(NSAM,"1000")
+    field(FLNK,"$(device):TurboSetPoint")
+}
+
+
+
+# Set Points
+record(ao, "$(device):ForeLineSetPoint")
+{       field(DTYP,"Soft Channel")
+        field(DESC, "Foreline Pressure Threshold")
+        field(EGU, "Torr")
+        field(HOPR, "800")
+        field(DRVH, "800")
+        field(DRVL, "0")
+        field(LOPR, "0")
+        field(HIHI, "1000")
+        field(HIGH, "900")
+        field(LOW, "0.00001")
+        field(LOLO, "0.0000000001")
+        field(HHSV, "MAJOR")
+        field(HSV, "MINOR")
+        field(LSV, "MINOR")
+        field(LLSV, "MAJOR")
+        field(VAL,".750")
+        field(FLNK,"$(device):BufferForeLineSetPoint")
+}
+
+record(ao, "$(device):ChamberSetPoint")
+{       field(DTYP,"Soft Channel")
+        field(DESC, "Amplitude of Sine wave")
+        field(EGU, "Torr")
+        field(HOPR, "800")
+        field(DRVH, "800")
+        field(DRVL, "0")
+        field(LOPR, "0")
+        field(HIHI, "1000")
+        field(HIGH, "900")
+        field(LOW, "0.00001")
+        field(LOLO, "0.0000000001")
+        field(HHSV, "MAJOR")
+        field(HSV, "MINOR")
+        field(LSV, "MINOR")
+        field(LLSV, "MAJOR")
+        field(VAL,".050")
+        field(FLNK,"$(device):BufferChamberSetPoint")
+}
+
+record(ao, "$(device):TurboSetPoint")
+{       field(DTYP,"Soft Channel")
+        field(DESC, "Turbo Safety Threshold")
+        field(EGU, "Torr")
+        field(HOPR, "1")
+        field(DRVH, "1")
+        field(DRVL, "0")
+        field(LOPR, "0")
+        field(HIHI, "0.99")
+        field(HIGH, "0.9")
+        field(LOW, "0.00001")
+        field(LOLO, "0.000001")
+        field(HHSV, "MAJOR")
+        field(HSV, "MINOR")
+        field(LSV, "MINOR")
+        field(LLSV, "MAJOR")
+        field(VAL,"1")
+        field(FLNK,"$(device):BufferTurboSetPoint")
+}
+
+# Buffers for Set Points
+record(compress,"$(device):BufferForeLineSetPoint")
+{
+	field(DESC, "ForeLine Setpoint Circular buffer")
+	field(INP,"$(device):ForeLineSetPoint")
+	field(ALG,"Circular Buffer")
+	field(NSAM,"1000")
+    field(SCAN, ".1 second")
+      #  field(FLNK,"$(device):test4_wav")
+}
+record(compress,"$(device):BufferChamberSetPoint")
+{
+	field(DESC, "Chamber Set Point Circular Buffer")
+	field(INP,"$(device):ChamberSetPoint")
+	field(ALG,"Circular Buffer")
+	field(NSAM,"1000")
+    field(SCAN, ".1 second")
+      #  field(FLNK,"$(device):test4_wav")
+}
+
+record(compress,"$(device):BufferTurboSetPoint")
+{
+	field(DESC, "Turbo Set Point Circular Buffer")
+	field(INP,"$(device):TurboSetPoint")
+	field(ALG,"Circular Buffer")
+	field(NSAM,"1000")
+    field(SCAN, ".1 second")
+      #  field(FLNK,"$(device):test4_wav")
+}

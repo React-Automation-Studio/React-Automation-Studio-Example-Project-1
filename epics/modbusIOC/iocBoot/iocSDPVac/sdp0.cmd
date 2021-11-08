@@ -1,6 +1,7 @@
 # sdp0.cmd
 
 dbLoadDatabase("../../dbd/modbus.dbd")
+
 modbus_registerRecordDeviceDriver(pdbbase)
 
 # Use the following commands for TCP/IP
@@ -72,9 +73,9 @@ asynSetTraceIOMask("sdp0",0,4)
 # asynSetTraceIOTruncateSize("S0_READ_DLV",0,512)
 # asynSetTraceIOTruncateSize("S0_HEALTH_DLX",0,512)
 
-
-dbLoadTemplate("sdp0.substitutions")
+dbLoadRecords("./vac_control_panel.db", "device=SDP0")
+dbLoadTemplate("./sdp0.substitutions")
+# dbLoadTemplate("vac_control_panel.substitutions")
 # dbLoadTemplate("")
 
 iocInit
-

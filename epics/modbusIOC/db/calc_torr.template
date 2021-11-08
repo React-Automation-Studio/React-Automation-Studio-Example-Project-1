@@ -6,4 +6,5 @@ record(calc, "$(P)$(R)") {
     field(PREC, "12")
     field(HOPR, 1000)
     field(LOPR, 0.0001)
+    field(FLNK, "$(FLNK)")
 }

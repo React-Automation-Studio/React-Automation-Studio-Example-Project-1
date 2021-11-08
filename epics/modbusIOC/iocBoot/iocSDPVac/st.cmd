@@ -1,6 +1,6 @@
 < envPaths
 
-# Fuse Staging/testIOC
+# sdp0 staging IOC
 < sdp0.cmd
 
 # dbLoadRecords "../../db/sdpsncVac.db", "user=operator", "S=SDPSNC"

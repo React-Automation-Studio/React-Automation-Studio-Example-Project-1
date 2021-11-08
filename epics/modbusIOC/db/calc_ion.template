@@ -10,4 +10,5 @@ record(calc, "$(P)$(R)") {
     field(HIHI, 800)
     field(LOW, 0.0001)
     field(LOLO, 0.000000000001)
+    field(FLNK, "$(FLNK)")
 }

@@ -67,6 +67,7 @@ services:
       - ./build/styleguide:/var/www/styleguide
       - ./certificates:/etc/nginx/certificates
     env_file: .env
+
   stagingunsecurestylguidepvserver:
     env_file: .env
     environment:

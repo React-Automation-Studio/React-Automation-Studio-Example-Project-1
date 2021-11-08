@@ -73,8 +73,7 @@ module.exports = {
             },
             {
               name: " Enabling HTTPS",
-              content:
-                "srcWidget/React-Automation-Studio/docs/installation/https.md",
+              content: "src/React-Automation-Studio/docs/installation/https.md",
             },
           ],
         },
