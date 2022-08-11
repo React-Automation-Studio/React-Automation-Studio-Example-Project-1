@@ -3,7 +3,7 @@ import RedirectToLogIn from 'React-Automation-Studio/components/SystemComponents
 
 import TraditionalLayout from 'React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout.js';
 
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 

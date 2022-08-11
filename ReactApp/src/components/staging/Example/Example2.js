@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import withStyles from '@material-ui/core/styles/withStyles';
+import withStyles from '@mui/styles/withStyles';
 
 import RedirectToLogIn from 'React-Automation-Studio/components/SystemComponents/RedirectToLogin.js';
 

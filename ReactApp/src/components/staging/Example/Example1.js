@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
+import withStyles from '@mui/styles/withStyles';
+import Grid from '@mui/material/Grid';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
 import TextInput from 'React-Automation-Studio/components/BaseComponents/TextInput';
 import TextOutput from 'React-Automation-Studio/components/BaseComponents/TextOutput';
 import Slider from 'React-Automation-Studio/components/BaseComponents/Slider';
@@ -12,14 +12,16 @@ import SelectionList from 'React-Automation-Studio/components/BaseComponents/Sel
 import ThumbWheel from 'React-Automation-Studio/components/BaseComponents/ThumbWheel';
 import ToggleButton from 'React-Automation-Studio/components/BaseComponents/ToggleButton';
 import Gauge from 'React-Automation-Studio/components/BaseComponents/Gauge';
-import AppBar from '@material-ui/core/AppBar';
-import AccountCircle from '@material-ui/icons/AccountCircleOutlined';
-import Settings from '@material-ui/icons/SettingsOutlined';
-import Divider from '@material-ui/core/Divider';
-import withWidth from '@material-ui/core/withWidth';
+import AppBar from '@mui/material/AppBar';
+import AccountCircle from '@mui/icons-material/AccountCircleOutlined';
+import Settings from '@mui/icons-material/SettingsOutlined';
+import Divider from '@mui/material/Divider';
 import StyledIconIndicator from 'React-Automation-Studio/components/BaseComponents/StyledIconIndicator';
 import TraditionalLayout from 'React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout.js';
 import {useLocalPV} from 'React-Automation-Studio/components/SystemComponents/LocalPV'
+
+// FIXME checkout https://mui.com/components/use-media-query/#migrating-from-withwidth
+const withWidth = () => (WrappedComponent) => (props) => <WrappedComponent {...props} width="xs" />;
 
 function TabContainer(props) {
   return (
@@ -81,7 +83,6 @@ const MobileDemo1 =(props)=> {
     }
 
     return (
-
       <TraditionalLayout
       title="Mobile Layout Example"
       denseAppBar
@@ -99,7 +100,7 @@ const MobileDemo1 =(props)=> {
                 spacing={2}
                 alignItems={'stretch'}
                 direction={'row'}
-                justify={'flex-start'}
+                justifyContent={'flex-start'}
               >
 
 
@@ -111,7 +112,7 @@ const MobileDemo1 =(props)=> {
                   </div>
                 </Grid>
                 <Grid item xs={12}>
-                  <Grid container direction="row" item justify="center" spacing={2} alignItems="stretch">
+                  <Grid container direction="row" item justifyContent="center" spacing={2} alignItems="stretch">
                     <Grid item xs={6}  >
                       <TextInput  pv='pva://$(device):amplitude' macros={{'$(device)':'testIOC'}}   usePvLabel={true} prec={3} alarmSensitive={true}/>
                     </Grid>
@@ -128,7 +129,7 @@ const MobileDemo1 =(props)=> {
                 </Grid>
 
                 <Grid item xs={2} sm={4}  lg={5} >
-                  <Grid container direction="column" justify="space-evenly" spacing={2} alignItems="stretch">
+                  <Grid container direction="column" justifyContent="space-evenly" spacing={2} alignItems="stretch">
                     <Grid item>
                       <StyledIconIndicator  pv='pva://$(device)' macros={{'$(device)':'testIOC:BO1'}} onColor={props.theme.palette.ok.main} offColor='default' label={'On'} labelPlacement={'end'}/>
 
@@ -193,12 +194,12 @@ const MobileDemo1 =(props)=> {
         {showAdvancedSettings === 1 && <TabContainer key={'tabContainer1'}>
           <Grid   container className={classes.root}>
             <Grid item xs={12}>
-              <Grid container spacing={2} alignItems={'stretch'} direction={'column'} justify={'flex-start'}>
+              <Grid container spacing={2} alignItems={'stretch'} direction={'column'} justifyContent={'flex-start'}>
 
 
                 <Grid item >
                   <div style={{marginBottom:8}}>Settings</div>
-                  <Grid container spacing={2} alignItems={'stretch'} direction={'row'} justify={'flex-start'}>
+                  <Grid container spacing={2} alignItems={'stretch'} direction={'row'} justifyContent={'flex-start'}>
                     <Grid item xs={12} lg={4}>
                       <TextInput   pv='pva://$(device):frequency' macros={{'$(device)':'testIOC'}}    usePvUnits={true} prec={1} usePvLabel={true}/>
                     </Grid>
@@ -217,7 +218,7 @@ const MobileDemo1 =(props)=> {
         </div>
 
         <AppBar className={classes.body1} style={{position:'fixed',bottom:0,top:'auto'}} color='inherit'>
-          <Tabs value={showAdvancedSettings} onChange={handleChange} variant="fullWidth" scrollButtons="off">
+          <Tabs value={showAdvancedSettings} onChange={handleChange} variant="fullWidth" scrollButtons={false}>
             {/* <Tab icon={<SupervisorAccount />} /> */}
             <Tab icon={<AccountCircle />} />
             <Tab icon={<Settings />} />
@@ -225,11 +226,10 @@ const MobileDemo1 =(props)=> {
         </AppBar>
         
       </TraditionalLayout>
-
-      );
+    );
     }
-  
 
-  
 
-  export default withWidth()(withStyles(styles,{withTheme:true})(MobileDemo1));
+
+
+export default withWidth()(withStyles(styles,{withTheme:true})(MobileDemo1));
