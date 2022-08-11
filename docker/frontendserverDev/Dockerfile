@@ -1,27 +1,11 @@
-FROM node:14.15.3
-
-
-
+FROM node:16.6.0
 ADD ./ReactApp/package.json /frontendserverAppDev/package.json
 ADD ./ReactApp/jsconfig.json /frontendserverAppDev/jsconfig.json
 WORKDIR /frontendserverAppDev
 ENV PATH /frontendserverAppDev/node_modules/.bin:$PATH
-
-RUN npm install
-
+RUN npm install --legacy-peer-dep
 ADD .env /frontendserverAppDev/
-
-
-
 WORKDIR /
-
-
-
-
-
-
-
-
 WORKDIR /frontendserverAppDev
 RUN mkdir src
 WORKDIR /frontendserverAppDev/src
