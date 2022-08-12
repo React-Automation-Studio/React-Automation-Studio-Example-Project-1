@@ -2,13 +2,13 @@ Current Release: V3.1.0
 
 # Introduction
 
-This repository pulls in the src from the  React Automation Studio repository https://github.com/wduckitt/React-Automation-Studio.git and acts a standalone boiler plate example project for React Automation Studio without having to delve into the source code of the master repository.
+This repository pulls in the src from the  React Automation Studio repository https://github.com/React-Automation-Studio/React-Automation-Studio and acts a standalone boiler plate example project for React Automation Studio without having to delve into the source code of the master repository.
 
 If you wish to create a standalone AlarmHandler project you should clone this project:
 
 **AlarmHandler Boiler plate repository:**
 
-https://github.com/wduckitt/React-Automation-Studio-Alarm-Handler-Standalone
+https://github.com/React-Automation-Studio/React-Automation-Studio-Alarm-Handler-Standalone
 
 The system has been containerised with Docker and version controlled as a mono-repository using Git.
 
@@ -110,18 +110,33 @@ It is advised to only use the containerized version with a Linux environment. (S
 
 **Prerequisites: git , latest version of docker-ce and docker compose**
 
-To install docker-ce follow:
+# 1 Installation
+The development and production versions of React Automation Studio have been containerized with Docker.
 
-https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
+It is advised to only use the containerized version with a Linux environment. (See the FAQ section on other operating systems).
 
-And docker-compose:
 
-https://docs.docker.com/compose/install/
+Prerequisites: git, latest version of docker-ce and docker compose 
+
+( At the time of writing the system used Docker V20.10.17 and docker compose V2.6.0 )
+
+To install docker-ce on Unbuntu follow:
+
+https://docs.docker.com/engine/install/ubuntu/
+
+It is advised to the follow the Post Installation steps for Linux:
+
+https://docs.docker.com/engine/install/linux-postinstall/
+
+
+And docker compose (if it is not installed via the previous steps):
+
+https://docs.docker.com/compose/install/compose-plugin/#installing-compose-on-linux-systems
 
 
 Then first clone this repo:
 ```bash
-git clone --recurse-submodules https://github.com/wduckitt/React-Automation-Studio-Example-Project-1.git
+git clone --recurse-submodules https://github.com/React-Automation-Studio/React-Automation-Studio-Example-Project-1.git
 ```
 
 Then checkout the correct version with the correct tagname:
@@ -160,14 +175,14 @@ The systems uses Docker to create isolated production and development environmen
 
 ```bash
 
-docker-compose -f docker-compose-prod-with-demoioc.yml up 
+docker compose -f docker-compose-prod-with-demoioc.yml up 
 
 ```
 Will launch the production build with demoIOCs included.
 
 
 ```bash
-docker-compose  up
+docker compose  up
 ```
 
 Will launch the compiled production version with out the demoIOC's and styleguide
@@ -175,7 +190,7 @@ Will launch the compiled production version with out the demoIOC's and styleguid
 
 
 ```bash
-docker-compose -f docker-compose-dev.yml up
+docker compose -f docker-compose-dev.yml up
 ```
 Will launch the development version with the demoIOC's and styleguide.
 
@@ -185,7 +200,7 @@ Will launch the development version with the demoIOC's and styleguide.
 And:
 
 ```bash
-docker-compose -f docker-compose-dev-styleguide-dev.yml up
+docker compose -f docker-compose-dev-styleguide-dev.yml up
 ```
 Will launch the development version of the styleguide.
 
@@ -199,7 +214,7 @@ Will launch the development version of the styleguide.
 **Initially to check that everything is working only bring up the production version by running**
 
 ```bash
-docker-compose -f docker-compose-prod-with-demoioc.yml up --build
+docker compose -f docker-compose-prod-with-demoioc.yml up --build
 ```
 
 This installation process of all the docker images may take a while (20-30min) the first time. There after it is fast as all the repeated build and up commands uses cached installations. The longest process is the installation of the node modules. Do not be deterred by the red warnings.
@@ -209,7 +224,7 @@ This default installation will serve the  app at http://127.0.0.1:5000 and the s
 
 To launch the development environment make sure the production version is stopped,and the run :
 ```bash
-docker-compose -f docker-compose-dev.yml up
+docker compose -f docker-compose-dev.yml up
 ```
 This will launch the pvServer, demo IOC ,style guide and the React Development environment. As with the production version the first run may take awhile. There after it is fast as all the repeated build and up commands uses cached installations.
 
@@ -294,7 +309,7 @@ Navigate to Manage certificates > Authorities and click on Import
 Browse to where the self signed certificate and key and stored (certificates) and click OPEN
 Ensure all Trust settings for the Certificate authority is ticked
 
-The docker-compose  environment, will need to be restarted. Nginx will detect the change and serve the app over https.
+The docker compose  environment, will need to be restarted. Nginx will detect the change and serve the app over https.
 
 
 The built client will be then served  https://(hostname or ip):SERVER_PORT/, the styleguide at https://(hostname or ip):6060/ and the dev client at https://(hostname or ip):3000
@@ -478,7 +493,7 @@ See the style guide on theming.
 
 # 7 Contributing
 
-Site specific components and app screens should be kept in your repository. If you wish to contribute to the main repository for bug fixes then this must be done in  the main repository at https://github.com/wduckitt/React-Automation-Studio. If you wish to add in new components then please create them in the staging folder. If the new component requires custom EPICS code then please add it to the demo IOC.
+Site specific components and app screens should be kept in your repository. If you wish to contribute to the main repository for bug fixes then this must be done in  the main repository at https://github.com/React-Automation-Studio/React-Automation-Studio. If you wish to add in new components then please create them in the staging folder. If the new component requires custom EPICS code then please add it to the demo IOC.
 
 # 8 Contact
 
@@ -497,6 +512,43 @@ Contact us at rasadmin@tlabs.ac.za
   The docker containers for RAS run in network  mode host. This is done to enable EPICS to communicate seamlessly with any IOC's on the same subnet as the host. Other OSes such as Windows may not support the host mode and will run in the bridged mode. This may break the communication between the micro services. It is therefore recommended to run the RAS containers on a Linux VM that is minimally running Ubuntu Server. Please ensure the the VM network interface is assigned an IP on the same subnet as your EPICS network in order for communication with the IOC's to occur seamlessly.
 
 # Changelog
+V4.0.0 Wednesday 3 August 2022
+
+Major Updates:
+<ul>
+  <li>Update to React 18.2.0 </li>
+  <li>Update to MUI 5.9.2,  see the section on breaking changes below</li>
+  <li>All NodeJs packages have been updated to latest versions except react-router-dom.</li>
+  <li>ReactVis was dropped and components have been updated to use Plotly.js </li>
+</ul>
+
+Minor Bug Fixes and Updates:
+<ul>
+  <li>Minor formatting and theme changes due  MUI update</li>
+  <li>General clean up of code formatting in both pvServer and React (prior upgrading the MUI library)</li>
+  <li>Addition of Poetry as Python package manager</li>
+  <li>Addition of Black as a formating tool for Python. A merge request will fail if Python is not formatted accordingly. The tool Black is included into development section of Poetry.</li>
+  <li>Restoration of GitHub pages build. The build excludes documents used with the style guide due to use of "{{"
+    in examples.
+  </li>
+  <li>Minor documentation clean up: links to repositories/ projects up to date.</li>
+</ul>
+
+Breaking Changes:
+<ul>
+  <li>ReactVis was dropped</li>
+  <li>Update to MUI 5.9.2 from Material UI 4<br/>
+  Follow the migration guide at: https://mui.com/material-ui/migration/migration-v4/
+  and apply the preset-safe code mods https://mui.com/material-ui/migration/migration-v4/#preset-safe
+  </li>
+  <li>
+    If you customized any of the themes be sure to update it in line with the base themes  that come with the master repo
+  </li>
+  <li>Removed Deprecated ActionFanoutButton - use ActionButton instead</li>
+  <li>Removed Deprecated SwitchComponent - use Switch instead</li>
+  <li>Removed Deprecated SimpleSlider - use Slider instead</li>
+</ul>
+
 V3.1.0 Wednesday 25 August 2021
 <br />
 <br />
