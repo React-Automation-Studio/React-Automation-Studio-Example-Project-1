@@ -18,12 +18,16 @@ services:
       - ./ReactApp/src/MainPublic.js:/frontendserverAppDev/src/MainPublic.js
       - ./ReactApp/src/Routes.js:/frontendserverAppDev/src/Routes.js
       - ./ReactApp/src/serviceWorker.js:/frontendserverAppDev/src/serviceWorker.js
+      - ./ReactApp/src/reportWebVitals.js:/frontendserverAppDev/src/reportWebVitals.js
       - ./submodules/React-Automation-Studio/ReactApp/src:/frontendserverAppDev/src/React-Automation-Studio/
       - ./ReactApp/public:/frontendserverAppDev/public
     restart: always
     #network_mode: host
     ports:
       - "3001:3000"
+    environment:
+      - FAST_REFRESH=false
+      - NODE_OPTIONS=--max_old_space_size=4096
   pvserver1:
     build:
       context: ./
@@ -90,20 +94,6 @@ services:
     stdin_open: true
     restart: always
     network_mode: host
-  # styleguideserver:
-  #   env_file: .env
-  #   environment:
-  #           - pvServerPort=5001
-  #           - REACT_APP_EnableLogin=false
-
-  #   build:
-  #     context: ./
-  #     dockerfile: docker/styleguideserver/Dockerfile
-  #   volumes:
-
-  #     - ./certificates:/certificates/
-  #   restart: always
-  #   network_mode: host
   styleguide:
     build:
       context: ./

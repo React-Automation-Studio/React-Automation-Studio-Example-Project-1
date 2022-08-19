@@ -1,6 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
+
+/ReactApp/node_modules/
+/ReactApp/package-lock.json
 /frontendServer/node_modules
 /styleguideServer/node_modules
 /node_modules
