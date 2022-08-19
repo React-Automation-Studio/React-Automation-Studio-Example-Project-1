@@ -1,4 +1,4 @@
-Current Release: V3.1.0
+Current Release: V4.0.0
 
 # Introduction
 
@@ -528,7 +528,7 @@ Minor Bug Fixes and Updates:
   <li>General clean up of code formatting in both pvServer and React (prior upgrading the MUI library)</li>
   <li>Addition of Poetry as Python package manager</li>
   <li>Addition of Black as a formating tool for Python. A merge request will fail if Python is not formatted accordingly. The tool Black is included into development section of Poetry.</li>
-  <li>Restoration of GitHub pages build. The build excludes documents used with the style guide due to use of "{{"
+  <li>Restoration of GitHub pages build. The build excludes documents used with the style guide due to use of  multiple "{"
     in examples.
   </li>
   <li>Minor documentation clean up: links to repositories/ projects up to date.</li>
