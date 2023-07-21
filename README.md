@@ -162,7 +162,7 @@ To confirm the correct git submodule version :
 ```bash
 git submodule status
 ```
-Should contain `submodules/React-Automation-Studio (V4.0.0)` in the output for version 4.0.0 .
+Should contain `submodules/React-Automation-Studio (V4.0.2)` in the output for version 4.0.2 .
 
 If not and you previously checked out a different version run:
 ```bash
