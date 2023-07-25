@@ -40,6 +40,7 @@ const Routes = (props) => {
   const userData = context.userData;
   /* eslint-disable-next-line no-unused-vars */
   const roles = context.userData.roles;
+  /* eslint-disable-next-line no-unused-vars */
   const username = context.userData.username;
   let enableDemos =
     typeof process.env.REACT_APP_DISABLE_DEMOS !== "undefined"
@@ -64,7 +65,7 @@ const Routes = (props) => {
             path="/Login"
             component={() => (
               <Login
-                version="V4.0.1"
+                version="V4.0.2"
                 timeout={5000}
               />
             )}
