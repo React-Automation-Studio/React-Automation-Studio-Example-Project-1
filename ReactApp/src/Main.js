@@ -40,7 +40,7 @@ const Main = (props) => {
   const buttonVariant = "contained";
   return (
     <TraditionalLayout
-      title="React Automation Studio V4.0.2"
+      title="React Automation Studio V4.0.3"
       denseAppBar
       alignTitle="center"
     >
