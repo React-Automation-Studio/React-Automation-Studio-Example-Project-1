@@ -1,12 +1,14 @@
 import React from "react";
+
+import withStyles from "@mui/styles/withStyles";
+
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
-import TraditionalLayout from "React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout.js";
-import Grid from "@mui/material/Grid";
-import makeStyles from "@mui/styles/makeStyles";
-// Styles
 
-const useStyles = makeStyles((theme) => ({
+import TraditionalLayout from "React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout";
+import Grid from "@mui/material/Grid";
+
+const styles = (theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
@@ -25,22 +27,14 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "auto",
     marginRight: "auto",
   },
-}));
+});
 
-let enableDemos =
-  typeof process.env.REACT_APP_DISABLE_DEMOS !== "undefined"
-    ? !(process.env.REACT_APP_DISABLE_DEMOS.toUpperCase() === "TRUE")
-    : true;
+const Example = (props) => {
+  const { classes } = props;
 
-const Main = (props) => {
-  const classes = useStyles();
-
-  const styleguideURL =
-    window.location.protocol + "//" + window.location.hostname + ":6060/";
-  const buttonVariant = "contained";
   return (
     <TraditionalLayout
-      title="React Automation Studio V4.0.3"
+      title="React Automation Studio Example Staging Area"
       denseAppBar
       alignTitle="center"
     >
@@ -53,6 +47,7 @@ const Main = (props) => {
         alignItems="center"
         style={{ paddingTop: 64 }}
       >
+        <Grid item lg={4} sm={4} xs={2}></Grid>
         <Grid item lg={2} sm={4} xs={8}>
           <Grid
             container
@@ -61,50 +56,53 @@ const Main = (props) => {
             spacing={3}
             alignItems="stretch"
           >
-            {enableDemos && (
-              <Grid item xs={12}>
-                <Button
-                  className={classes.button}
-                  component={Link}
-                  to="/DemosDashboard"
-                  color="primary"
-                  variant="contained"
-                >
-                  {" "}
-                  Demos Dashboard{" "}
-                </Button>
-              </Grid>
-            )}
-
             <Grid item xs={12}>
               <Button
+                fullWidth
                 className={classes.button}
                 component={Link}
-                to="/Staging"
+                to="/Example1"
                 color="primary"
                 variant="contained"
               >
                 {" "}
-                Staging{" "}
+                Example1{" "}
               </Button>
             </Grid>
             <Grid item xs={12}>
               <Button
                 fullWidth
                 className={classes.button}
-                target="_blank"
-                href={styleguideURL}
-                variant={buttonVariant}
+                component={Link}
+                to="/Example2"
+                color="primary"
+                variant="contained"
               >
                 {" "}
-                Help and Style Guide{" "}
+                Example2{" "}
+              </Button>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Button
+                fullWidth
+                className={classes.button}
+                component={Link}
+                to="/Example3"
+                color="primary"
+                variant="contained"
+              >
+                {" "}
+                Example3{" "}
               </Button>
             </Grid>
           </Grid>
         </Grid>
+
+        <Grid item lg={4} sm={4} xs={2}></Grid>
       </Grid>
     </TraditionalLayout>
   );
 };
 
-export default Main;
+export default withStyles(styles)(Example);

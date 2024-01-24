@@ -1,13 +1,10 @@
 import React from "react";
 
 import withStyles from "@mui/styles/withStyles";
-import { withRouter } from "react-router-dom";
-
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
-import RedirectToLogIn from "React-Automation-Studio/components/SystemComponents/RedirectToLogin.js";
 
-import TraditionalLayout from "React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout.js";
+import TraditionalLayout from "React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout";
 import Grid from "@mui/material/Grid";
 
 const styles = (theme) => ({
@@ -39,10 +36,10 @@ if (typeof process.env.pvServerURL === "undefined") {
 }
 
 let port;
-if (typeof process.env.REACT_APP_StyleguideServerPORT === "undefined") {
+if (typeof import.meta.env.VITE__StyleguideServerPORT === "undefined") {
   port = 6060;
 } else {
-  port = process.env.REACT_APP_StyleguideServerPORT;
+  port = import.meta.env.VITE__StyleguideServerPORT;
 }
 
 let AutomationStudioStyleGuideBuildURL = pvServerBASEURL + ":" + port;
@@ -56,7 +53,6 @@ const Demos = (props) => {
       denseAppBar
       alignTitle="center"
     >
-      <RedirectToLogIn />
       <Grid
         container
         direction="row"
@@ -179,4 +175,4 @@ const Demos = (props) => {
   );
 };
 
-export default withRouter(withStyles(styles)(Demos));
+export default withStyles(styles)(Demos);

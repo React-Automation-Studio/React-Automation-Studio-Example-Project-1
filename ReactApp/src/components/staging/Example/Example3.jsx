@@ -2,9 +2,8 @@ import React from "react";
 
 import withStyles from "@mui/styles/withStyles";
 
-import RedirectToLogIn from "React-Automation-Studio/components/SystemComponents/RedirectToLogin.js";
 
-import TraditionalLayout from "React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout.js";
+import TraditionalLayout from "React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout";
 
 const styles = (theme) => ({
   root: {
@@ -30,7 +29,6 @@ const styles = (theme) => ({
 const Example3 = (props) => {
   return (
     <TraditionalLayout title="Example 3" denseAppBar alignTitle="center">
-      <RedirectToLogIn />
       <div style={{ paddingTop: 64 }}> Hello World</div>
     </TraditionalLayout>
   );

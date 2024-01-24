@@ -17,7 +17,7 @@ import AccountCircle from "@mui/icons-material/AccountCircleOutlined";
 import Settings from "@mui/icons-material/SettingsOutlined";
 import Divider from "@mui/material/Divider";
 import StyledIconIndicator from "React-Automation-Studio/components/BaseComponents/StyledIconIndicator";
-import TraditionalLayout from "React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout.js";
+import TraditionalLayout from "React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout";
 import { useLocalPV } from "React-Automation-Studio/components/SystemComponents/LocalPV";
 
 // FIXME checkout https://mui.com/components/use-media-query/#migrating-from-withwidth

@@ -2,10 +2,9 @@ import React from "react";
 
 import withStyles from "@mui/styles/withStyles";
 
-import RedirectToLogIn from "React-Automation-Studio/components/SystemComponents/RedirectToLogin.js";
 
-import TraditionalLayout from "React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout.js";
-import CustomTextInput from "components/customComponents/CustomTextInput";
+import TraditionalLayout from "React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout";
+import CustomTextInput from "../../../components/customComponents/CustomTextInput";
 
 const styles = (theme) => ({
   root: {
@@ -35,7 +34,6 @@ const Example2 = (props) => {
       denseAppBar
       alignTitle="center"
     >
-      <RedirectToLogIn />
 
       <div style={{ paddingTop: 64, paddingBottom: 8 }}>
         This example imports the site specific custom TextInput in the
