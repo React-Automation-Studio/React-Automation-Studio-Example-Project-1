@@ -1,4 +1,4 @@
-FROM node:18.18.2
+FROM node:20.11.0
 ADD ./ReactApp/package.json /frontendserverAppDev/package.json
 ADD ./ReactApp/jsconfig.json /frontendserverAppDev/jsconfig.json
 WORKDIR /frontendserverAppDev
@@ -11,7 +11,8 @@ RUN mkdir src
 WORKDIR /frontendserverAppDev/src
 RUN mkdir React-Automation-Studio
 WORKDIR /frontendserverAppDev/
-CMD npm start
+CMD npm run dev -- --host
 
 
-EXPOSE 3001 3000
+EXPOSE 3000
+
