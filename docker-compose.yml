@@ -91,7 +91,7 @@ services:
       - ./log/:/pvServer/log
       - ./build:/pvServer/build
   nginx:
-    image: nginx:1.19.6
+    image: nginx:1.23
     restart: always
     network_mode: host
     depends_on:
@@ -116,7 +116,7 @@ services:
 
   ## ALL Database related Docker processes -start
   mongo1:
-    image: mongo:4.2.3-bionic
+    image: mongo:7.0.3
     hostname: mongo1
     restart: always
     network_mode: "host"
@@ -132,7 +132,7 @@ services:
     command: "--bind_ip_all --port 27017 --replSet ${REPLICA_SET_NAME-devrs}"
 
   mongo2:
-    image: mongo:4.2.3-bionic
+    image: mongo:7.0.3
     hostname: mongo2
     restart: always
     network_mode: "host"
@@ -148,7 +148,7 @@ services:
     command: "--bind_ip_all --port 27018 --replSet ${REPLICA_SET_NAME-devrs}"
 
   mongo3:
-    image: mongo:4.2.3-bionic
+    image: mongo:7.0.3
     hostname: mongo3
     restart: always
     network_mode: "host"
