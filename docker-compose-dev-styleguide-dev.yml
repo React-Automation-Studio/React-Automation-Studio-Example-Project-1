@@ -1,4 +1,4 @@
-version: '3.2'
+version: "3.2"
 services:
   frontendserverdev:
     env_file: .env
@@ -54,7 +54,7 @@ services:
     entrypoint:
       - /custom/setupNginx.styleguide.dev.sh
       - /docker-entrypoint.sh
-    command: ["nginx", "-g", "daemon off;"] 
+    command: ["nginx", "-g", "daemon off;"]
     volumes:
       - ./submodules/React-Automation-Studio/nginx/setupNginx.styleguide.dev.sh:/custom/setupNginx.styleguide.dev.sh
       - ./submodules/React-Automation-Studio/nginx/nginx.styleguide.dev.conf:/custom/nginx.styleguide.dev.conf
@@ -62,7 +62,7 @@ services:
       - ./build/styleguide:/var/www/styleguide
       - ./certificates:/etc/nginx/certificates
     env_file: .env
-  
+
   stagingunsecurestylguidepvserver:
     build:
       context: ./
@@ -71,37 +71,37 @@ services:
     network_mode: host
     env_file: .env
     environment:
-          - ALARM_DATABASE=localhost
-          - ALARM_DATABASE_REPLICA_SET_NAME=devrs
-          - LOADSAVE_DATABASE=localhost
-          - LOADSAVE_DATABASE_REPLICA_SET_NAME=devrs
-          - ADMIN_DATABASE=localhost
-          - ADMIN_DATABASE_REPLICA_SET_NAME=devrs
-          - WATCH_DEBUG_DATABASE=localhost
-          - WATCH_DEBUG_DATABASE_REPLICA_SET_NAME=devrs
-          - DEMO_ARCHIVER=http://localhost:17668
-          - pvServerURL=http://127.0.0.1
-          - pvServerPort=5001
-          - VITE_EnableLogin=false
+      - ALARM_DATABASE=localhost
+      - ALARM_DATABASE_REPLICA_SET_NAME=devrs
+      - LOADSAVE_DATABASE=localhost
+      - LOADSAVE_DATABASE_REPLICA_SET_NAME=devrs
+      - ADMIN_DATABASE=localhost
+      - ADMIN_DATABASE_REPLICA_SET_NAME=devrs
+      - WATCH_DEBUG_DATABASE=localhost
+      - WATCH_DEBUG_DATABASE_REPLICA_SET_NAME=devrs
+      - DEMO_ARCHIVER=http://localhost:17668
+      - pvServerURL=http://127.0.0.1
+      - pvServerPort=5001
+      - VITE_EnableLogin=false
     volumes:
       - ./certificates:/certificates/
   stagingdemoioc:
     build:
-      context: ./  
+      context: ./
       dockerfile: docker/demoioc/Dockerfile
     tty: true
     stdin_open: true
     restart: always
     network_mode: host
   stagingtestioc:
-      build:
-        context: ./
-        dockerfile: docker/stagingioc/Dockerfile
-      tty: true
-      stdin_open: true
-      restart: always
-      network_mode: host
- 
+    build:
+      context: ./
+      dockerfile: docker/stagingioc/Dockerfile
+    tty: true
+    stdin_open: true
+    restart: always
+    network_mode: host
+
   # styleguideserverdev:
   #   env_file: .env
   #   build:
@@ -187,13 +187,30 @@ services:
     build:
       context: ./
 
-      
       dockerfile: docker/loadSaveDbInit/Dockerfile
     network_mode: "host"
     tty: true
     stdin_open: true
     depends_on:
       - mongosetup
+
+  storybookserverdev:
+    env_file: .env
+    build:
+      context: ./
+
+      dockerfile: docker/storybookServerDev/Dockerfile
+    volumes:
+      - ./ReactApp/src:/frontendserverAppDev/src
+      - ./submodules/React-Automation-Studio/ReactApp/src:/frontendserverAppDev/React-Automation-Studio/
+      - ./ReactApp/public:/frontendserverAppDev/public
+      - ./ReactApp/vite.config.js:/frontendserverAppDev/vite.config.js
+      - ./ReactApp/index.html:/frontendserverAppDev/index.html
+      - ./ReactApp/.storybook:/frontendserverAppDev/.storybook
+    restart: always
+    ports:
+      - "6061:6006"
+
   initializealarmhandlerdb:
     build:
       context: ./
@@ -226,7 +243,7 @@ services:
       - ADMIN_DATABASE=localhost
       - ADMIN_DATABASE_REPLICA_SET_NAME=devrs
     build:
-      context: ./  
+      context: ./
       dockerfile: ./submodules/React-Automation-Studio/docker/adminDbInit/Dockerfile
     network_mode: "host"
     tty: true
