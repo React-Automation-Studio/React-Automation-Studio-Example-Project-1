@@ -1,13 +1,10 @@
-FROM node:20.11.0
-
-ADD ./ReactApp/package.json /app/package.json
-
-WORKDIR /app
-ENV PATH /app/node_modules/.bin:$PATH
-
+FROM node:20.11.0 as node_cache
+ADD ./ReactApp/package.json /ReactApp/package.json
+WORKDIR /ReactApp
+ENV PATH /ReactApp/node_modules/.bin:$PATH
 RUN npm install --legacy-peer-dep
-ADD ./ReactApp/public /app/public
 
+FROM node_cache
 ADD  ./.env /app/
 ADD ./submodules/React-Automation-Studio/ReactApp/src /app/React-Automation-Studio
 ADD ./ReactApp/src /app/src
