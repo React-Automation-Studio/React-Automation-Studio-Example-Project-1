@@ -1,4 +1,3 @@
-version: "3.2"
 services:
   frontendserverdev:
     env_file: .env
@@ -6,14 +5,14 @@ services:
       context: ./
       dockerfile: docker/frontendserverDev/Dockerfile
     volumes:
-      # mount ReactApp folder contents to frontendserverAppDev folder
-      - ./ReactApp/package.json:/frontendserverAppDev/package.json
-      - ./ReactApp/src:/frontendserverAppDev/src
-      - ./ReactApp/public:/frontendserverAppDev/public
-      - ./ReactApp/vite.config.js:/frontendserverAppDev/vite.config.js
-      - ./ReactApp/index.html:/frontendserverAppDev/index.html
-      # mount React-Automation-Studio submoule ReactApp folder contents to frontendserverAppDev folder
-      - ./submodules/React-Automation-Studio/ReactApp/src:/frontendserverAppDev/React-Automation-Studio/
+      # mount ReactApp folder contents to ReactApp folder
+      - ./ReactApp/package.json:/ReactApp/package.json
+      - ./ReactApp/src:/ReactApp/src
+      - ./ReactApp/public:/ReactApp/public
+      - ./ReactApp/vite.config.js:/ReactApp/vite.config.js
+      - ./ReactApp/index.html:/ReactApp/index.html
+      # mount React-Automation-Studio submoule ReactApp folder contents to ReactApp folder
+      - ./submodules/React-Automation-Studio/ReactApp/src:/ReactApp/React-Automation-Studio/
     restart: always
     ports:
       - "3001:3000"

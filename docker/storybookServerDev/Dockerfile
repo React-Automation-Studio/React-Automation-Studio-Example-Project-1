@@ -1,12 +1,12 @@
-FROM node:20.11.0
-
-ADD ./ReactApp/package.json /frontendserverAppDev/package.json
-WORKDIR /frontendserverAppDev
-ENV PATH /frontendserverAppDev/node_modules/.bin:$PATH
+FROM node:20.11.0 as node_cache
+ADD ./ReactApp/package.json /ReactApp/package.json
+WORKDIR /ReactApp
+ENV PATH /ReactApp/node_modules/.bin:$PATH
 RUN npm install --legacy-peer-dep
-ADD ./.env /frontendserverAppDev/
-WORKDIR /
-WORKDIR /frontendserverAppDev
-ADD ./ReactApp/img /frontendserverAppDev/img
+
+FROM node_cache
+ADD .env /ReactApp/
+WORKDIR /ReactApp
+ADD ./ReactApp/img /ReactApp/img
 CMD npm run storybook
 EXPOSE 6006

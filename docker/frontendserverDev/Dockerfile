@@ -1,16 +1,17 @@
-FROM node:20.11.0
-ADD ./ReactApp/package.json /frontendserverAppDev/package.json
-ADD ./ReactApp/jsconfig.json /frontendserverAppDev/jsconfig.json
-WORKDIR /frontendserverAppDev
-ENV PATH /frontendserverAppDev/node_modules/.bin:$PATH
+FROM node:20.11.0 as node_cache
+ADD ./ReactApp/package.json /ReactApp/package.json
+WORKDIR /ReactApp
+ENV PATH /ReactApp/node_modules/.bin:$PATH
 RUN npm install --legacy-peer-dep
-ADD .env /frontendserverAppDev/
-WORKDIR /
-WORKDIR /frontendserverAppDev
-RUN mkdir src
-WORKDIR /frontendserverAppDev/src
-RUN mkdir React-Automation-Studio
-WORKDIR /frontendserverAppDev/
+
+FROM node_cache
+ADD .env /ReactApp/
+# WORKDIR /
+# WORKDIR /ReactApp
+# RUN mkdir src
+# WORKDIR /ReactApp/src
+# RUN mkdir React-Automation-Studio
+WORKDIR /ReactApp/
 CMD npm run dev -- --host
 
 
