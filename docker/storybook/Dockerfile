@@ -5,13 +5,13 @@ ENV PATH /ReactApp/node_modules/.bin:$PATH
 RUN npm install --legacy-peer-dep
 
 FROM node_cache
-ADD  ./.env /app/
-ADD ./submodules/React-Automation-Studio/ReactApp/src /app/React-Automation-Studio
-ADD ./ReactApp/src /app/src
-ADD ./ReactApp/vite.config.js /app/vite.config.js
-ADD ./ReactApp/.storybook /app/.storybook
-COPY ./submodules/React-Automation-Studio/ReactApp/img /app/img
+ADD  ./.env /ReactApp/
+ADD ./submodules/React-Automation-Studio/ReactApp/src /ReactApp/React-Automation-Studio
+ADD ./ReactApp/src /ReactApp/src
+ADD ./ReactApp/vite.config.js /ReactApp/vite.config.js
+ADD ./ReactApp/.storybook /ReactApp/.storybook
+COPY ./submodules/React-Automation-Studio/ReactApp/img /ReactApp/img
 RUN npm run build-storybook
-ADD ./ReactApp/img /app/storybook-static/img
+ADD ./ReactApp/img /ReactApp/storybook-static/img
 VOLUME /build
-CMD cp -R /app/storybook-static/* /build
+CMD cp -R /ReactApp/storybook-static/* /build
