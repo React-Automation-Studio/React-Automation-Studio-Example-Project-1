@@ -6,28 +6,17 @@ services:
       context: ./
       dockerfile: docker/frontendserverDev/Dockerfile
     volumes:
-
-      - ./certificates:/certificates/
       - ./ReactApp/jsconfig.json:/frontendserverAppDev/jsconfig.json
       - ./ReactApp/package.json:/frontendserverAppDev/package.json
-      - ./ReactApp/src/components:/frontendserverAppDev/src/components
-      - ./ReactApp/src/App.jsx:/frontendserverAppDev/src/App.jsx
-      - ./ReactApp/src/index.css:/frontendserverAppDev/src/index.css
-      - ./ReactApp/src/main.jsx:/frontendserverAppDev/src/main.jsx
-      - ./ReactApp/src/AppMain.jsx:/frontendserverAppDev/src/AppMain.jsx
-      - ./ReactApp/src/AppRoutes.jsx:/frontendserverAppDev/src/AppRoutes.jsx
-      - ./ReactApp/src/serviceWorker.js:/frontendserverAppDev/src/serviceWorker.js
-      - ./ReactApp/src/reportWebVitals.js:/frontendserverAppDev/src/reportWebVitals.js
-      - ./submodules/React-Automation-Studio/ReactApp/src:/frontendserverAppDev/src/React-Automation-Studio/
+      - ./ReactApp/src:/frontendserverAppDev/src
+      - ./submodules/React-Automation-Studio/ReactApp/src:/frontendserverAppDev/React-Automation-Studio/
       - ./ReactApp/public:/frontendserverAppDev/public
       - ./ReactApp/vite.config.js:/frontendserverAppDev/vite.config.js
       - ./ReactApp/index.html:/frontendserverAppDev/index.html
     restart: always
-    # network_mode: host
     ports:
       - "3001:3000"
     environment:
-      - FAST_REFRESH=false
       - NODE_OPTIONS=--max_old_space_size=4096
 
   pvserver1:
