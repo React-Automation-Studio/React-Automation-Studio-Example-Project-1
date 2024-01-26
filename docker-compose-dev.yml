@@ -1,4 +1,4 @@
-version: '3.2'
+version: "3.2"
 services:
   frontendserverdev:
     env_file: .env
@@ -6,26 +6,18 @@ services:
       context: ./
       dockerfile: docker/frontendserverDev/Dockerfile
     volumes:
-
-      - ./certificates:/certificates/
-      - ./ReactApp/jsconfig.json:/frontendserverAppDev/jsconfig.json
+      # mount ReactApp folder contents to frontendserverAppDev folder
       - ./ReactApp/package.json:/frontendserverAppDev/package.json
-      - ./ReactApp/src/components:/frontendserverAppDev/src/components
-      - ./ReactApp/src/App.js:/frontendserverAppDev/src/App.js
-      - ./ReactApp/src/index.css:/frontendserverAppDev/src/index.css
-      - ./ReactApp/src/index.js:/frontendserverAppDev/src/index.js
-      - ./ReactApp/src/Main.js:/frontendserverAppDev/src/Main.js
-      - ./ReactApp/src/Routes.js:/frontendserverAppDev/src/Routes.js
-      - ./ReactApp/src/serviceWorker.js:/frontendserverAppDev/src/serviceWorker.js
-      - ./ReactApp/src/reportWebVitals.js:/frontendserverAppDev/src/reportWebVitals.js
-      - ./submodules/React-Automation-Studio/ReactApp/src:/frontendserverAppDev/src/React-Automation-Studio/
+      - ./ReactApp/src:/frontendserverAppDev/src
       - ./ReactApp/public:/frontendserverAppDev/public
+      - ./ReactApp/vite.config.js:/frontendserverAppDev/vite.config.js
+      - ./ReactApp/index.html:/frontendserverAppDev/index.html
+      # mount React-Automation-Studio submoule ReactApp folder contents to frontendserverAppDev folder
+      - ./submodules/React-Automation-Studio/ReactApp/src:/frontendserverAppDev/React-Automation-Studio/
     restart: always
-    #network_mode: host
     ports:
       - "3001:3000"
     environment:
-      - FAST_REFRESH=false
       - NODE_OPTIONS=--max_old_space_size=4096
   pvserver1:
     build:
@@ -54,7 +46,7 @@ services:
       - ./log/:/pvServer/log
       - ./build:/pvServer/build
   nginx:
-    image: nginx:1.19.6
+    image: nginx:1.23
     restart: always
     network_mode: host
     depends_on:
@@ -62,7 +54,7 @@ services:
     entrypoint:
       - /custom/setupNginx.dev.sh
       - /docker-entrypoint.sh
-    command: ["nginx", "-g", "daemon off;"] 
+    command: ["nginx", "-g", "daemon off;"]
     volumes:
       - ./submodules/React-Automation-Studio/nginx/setupNginx.dev.sh:/custom/setupNginx.dev.sh
       - ./submodules/React-Automation-Studio/nginx/nginx.dev.conf:/custom/nginx.dev.conf
@@ -70,13 +62,13 @@ services:
       - ./build/styleguide:/var/www/styleguide
       - ./certificates:/etc/nginx/certificates
     env_file: .env
-    
+
   stagingunsecurestylguidepvserver:
     env_file: .env
     environment:
       - pvServerURL=http://127.0.0.1
       - pvServerPort=5001
-      - REACT_APP_EnableLogin=false
+      - VITE_EnableLogin=false
       - DEMO_ARCHIVER=http://localhost:17668
     build:
       context: ./
@@ -93,31 +85,31 @@ services:
     stdin_open: true
     restart: always
     network_mode: host
-  styleguide:
+  # styleguide:
+  #   build:
+  #     context: ./
+  #     dockerfile: docker/styleguide/Dockerfile
+  #   env_file: .env
+  #   environment:
+  #           - pvServerPort=5001
+  #           - VITE_EnableLogin=false
+  #   volumes:
+  #     - ./build/styleguide:/build/
+  stagingtestioc:
     build:
       context: ./
-      dockerfile: docker/styleguide/Dockerfile    
-    env_file: .env
-    environment:
-            - pvServerPort=5001
-            - REACT_APP_EnableLogin=false
-    volumes:
-      - ./build/styleguide:/build/
-  stagingtestioc:
-      build:
-        context: ./
-        args: # Environment variables available at build-time
-                  - http_proxy
-                  - https_proxy
-                  - no_proxy
-        dockerfile: docker/stagingioc/Dockerfile
-      tty: true
-      stdin_open: true
-      restart: always
-      network_mode: host
+      args: # Environment variables available at build-time
+        - http_proxy
+        - https_proxy
+        - no_proxy
+      dockerfile: docker/stagingioc/Dockerfile
+    tty: true
+    stdin_open: true
+    restart: always
+    network_mode: host
   ## ALL Database related Docker processes -start
   mongo1:
-    image: mongo:4.2.3-bionic
+    image: mongo:7.0.3
     hostname: mongo1
     restart: always
     network_mode: "host"
@@ -133,7 +125,7 @@ services:
     command: "--bind_ip_all --port 27017 --replSet ${REPLICA_SET_NAME-devrs}"
 
   mongo2:
-    image: mongo:4.2.3-bionic
+    image: mongo:7.0.3
     hostname: mongo2
     restart: always
     network_mode: "host"
@@ -149,7 +141,7 @@ services:
     command: "--bind_ip_all --port 27018 --replSet ${REPLICA_SET_NAME-devrs}"
 
   mongo3:
-    image: mongo:4.2.3-bionic
+    image: mongo:7.0.3
     hostname: mongo3
     restart: always
     network_mode: "host"
@@ -186,7 +178,6 @@ services:
     build:
       context: ./
 
-      
       dockerfile: docker/loadSaveDbInit/Dockerfile
     network_mode: "host"
     tty: true
@@ -218,14 +209,14 @@ services:
     tty: true
     env_file: .env
     volumes:
-        - ./log/:/usr/src/app/log
+      - ./log/:/usr/src/app/log
   initializeadmindb:
     env_file: .env
     environment:
       - ADMIN_DATABASE=localhost
       - ADMIN_DATABASE_REPLICA_SET_NAME=devrs
     build:
-      context: ./  
+      context: ./
       dockerfile: ./submodules/React-Automation-Studio/docker/adminDbInit/Dockerfile
     network_mode: "host"
     tty: true
