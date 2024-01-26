@@ -102,23 +102,15 @@ services:
     restart: always
     network_mode: host
 
-  # styleguideserverdev:
-  #   env_file: .env
-  #   build:
-  #     context: ./
-  #     dockerfile: docker/styleguideServerDev/Dockerfile
-  #   volumes:
+  # As of RAS V5.0.0 MongoDB the mongodb version is now defined by the RAS_MONGODB_VERSION variable in the .env file
+  # This allows you customize the mongodb version, for example should you want to stay on an older version of mongodb
 
-  #     - ./ReactApp/src/components:/app/src/components
-  #     - ./ReactApp/src/docs:/app/src/docs
-  #     - ./ReactApp/styleguide.config.js:/app/styleguide.config.js
-  #   restart: always
-  #   ports:
-  #     - "6061:6060"
+  # In the volumes section, the mogodb volumes are now defined by the compose project name and mongodb version
+  # It allows for multiple RAS instances to be run on the same machine.
+  # In this case, make sure to set the COMPOSE_PROJECT_NAME variable in the .env file or make sure project folder names are unique between instances
 
-  ## ALL Database related Docker processes -start
   mongo1:
-    image: mongo:7.0.3
+    image: mongo:${RAS_MONGODB_VERSION-7.0.3}
     hostname: mongo1
     restart: always
     network_mode: "host"
@@ -134,7 +126,7 @@ services:
     command: "--bind_ip_all --port 27017 --replSet ${REPLICA_SET_NAME-devrs}"
 
   mongo2:
-    image: mongo:7.0.3
+    image: mongo:${RAS_MONGODB_VERSION-7.0.3}
     hostname: mongo2
     restart: always
     network_mode: "host"
@@ -150,7 +142,7 @@ services:
     command: "--bind_ip_all --port 27018 --replSet ${REPLICA_SET_NAME-devrs}"
 
   mongo3:
-    image: mongo:7.0.3
+    image: mongo:${RAS_MONGODB_VERSION-7.0.3}
     hostname: mongo3
     restart: always
     network_mode: "host"
@@ -263,11 +255,21 @@ services:
     volumes:
       - "./signalcli/signal-cli-config:/srv/signal/.local/share/signal-cli"
 
+# As of RAS V5.0.0 MongoDB volumes are now defined by the compose project name and mongodb version
+# This allows you customize the mongodb version, for example should you want to stay on an older version of mongodb
+# It allows for multiple RAS instances to be run on the same machine.
+# In this case, make sure to set the COMPOSE_PROJECT_NAME variable in the .env file or make sure project folder names are unique between instances
+
 volumes:
   mongo-db-data1:
+    name: ${COMPOSE_PROJECT_NAME}-mongo-db-data1-mongo-${RAS_MONGODB_VERSION-7.0.3}
   mongo-db-configdb1:
+    name: ${COMPOSE_PROJECT_NAME}-mongo-db-configdb1-mongo-${RAS_MONGODB_VERSION-7.0.3}
   mongo-db-data2:
+    name: ${COMPOSE_PROJECT_NAME}-mongo-db-data2-mongo-${RAS_MONGODB_VERSION-7.0.3}
   mongo-db-configdb2:
+    name: ${COMPOSE_PROJECT_NAME}-mongo-db-configdb2-mongo-${RAS_MONGODB_VERSION-7.0.3}
   mongo-db-data3:
+    name: ${COMPOSE_PROJECT_NAME}-mongo-db-data3-mongo-${RAS_MONGODB_VERSION-7.0.3}
   mongo-db-configdb3:
-## ALL Database related Docker processes -end
+    name: ${COMPOSE_PROJECT_NAME}-mongo-db-configdb3-mongo-${RAS_MONGODB_VERSION-7.0.3}
