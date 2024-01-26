@@ -1,0 +1,20 @@
+FROM node:20.11.0
+
+ADD ./ReactApp/package.json /app/package.json
+
+WORKDIR /app
+ENV PATH /app/node_modules/.bin:$PATH
+
+RUN npm install --legacy-peer-dep
+ADD ./ReactApp/public /app/public
+
+ADD  ./.env /app/
+ADD ./submodules/React-Automation-Studio/ReactApp/src /app/React-Automation-Studio
+ADD ./ReactApp/src /app/src
+ADD ./ReactApp/vite.config.js /app/vite.config.js
+ADD ./ReactApp/.storybook /app/.storybook
+COPY ./submodules/React-Automation-Studio/ReactApp/img /app/img
+RUN npm run build-storybook
+ADD ./ReactApp/img /app/storybook-static/img
+VOLUME /build
+CMD cp -R /app/storybook-static/* /build
