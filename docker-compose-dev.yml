@@ -1,4 +1,9 @@
 services:
+  node_cache:
+    image: node_cache
+    build:
+      context: ./
+      dockerfile: docker/node_cache/Dockerfile
   frontendserverdev:
     env_file: .env
     build:
@@ -18,6 +23,8 @@ services:
       - "3001:3000"
     environment:
       - NODE_OPTIONS=--max_old_space_size=4096
+    depends_on:
+      - node_cache
   pvserver1:
     build:
       context: ./
@@ -112,6 +119,8 @@ services:
       - VITE_EnableLogin=false
     volumes:
       - ./build/styleguide:/build/
+    depends_on:
+      - node_cache
   stagingtestioc:
     build:
       context: ./

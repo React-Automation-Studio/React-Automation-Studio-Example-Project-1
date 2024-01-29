@@ -1,4 +1,9 @@
 services:
+  node_cache:
+    image: node_cache
+    build:
+      context: ./
+      dockerfile: docker/node_cache/Dockerfile
   frontend:
     build:
       context: ./
@@ -10,6 +15,8 @@ services:
     #restart: always
     network_mode: host
     env_file: .env
+    depends_on:
+      - node_cache
 
   pvserver1:
     build:
