@@ -174,7 +174,6 @@ services:
       - ./build/styleguide:/build/
     depends_on:
       - node_cache
-      - epicsbase
   stagingtestioc:
     build:
       context: ./
