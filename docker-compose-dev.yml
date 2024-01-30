@@ -1,4 +1,9 @@
 services:
+  epicsbase:
+    image: epicsbase
+    build:
+      context: ./
+      dockerfile: docker/epicsBase/Dockerfile
   node_cache:
     image: node_cache
     build:
@@ -51,6 +56,8 @@ services:
       - ./users:/pvServer/userAuthentication/users
       - ./log/:/pvServer/log
       - ./build:/pvServer/build
+    depends_on:
+      - epicsbase
   nginx:
     image: nginx:1.23
     restart: always
@@ -91,6 +98,8 @@ services:
       - VITE_EnableLogin=false
     volumes:
       - ./certificates:/certificates/
+    depends_on:
+      - epicsbase
   stagingdemoioc:
     build:
       context: ./
@@ -99,16 +108,7 @@ services:
     stdin_open: true
     restart: always
     network_mode: host
-  # styleguide:
-  #   build:
-  #     context: ./
-  #     dockerfile: docker/styleguide/Dockerfile
-  #   env_file: .env
-  #   environment:
-  #           - pvServerPort=5001
-  #           - VITE_EnableLogin=false
-  #   volumes:
-  #     - ./build/styleguide:/build/
+
   storybook:
     build:
       context: ./
@@ -133,6 +133,9 @@ services:
     stdin_open: true
     restart: always
     network_mode: host
+    depends_on:
+      - epicsbase
+
   # As of RAS V5.0.0 MongoDB the mongodb version is now defined by the RAS_MONGODB_VERSION variable in the .env file
   # This allows you customize the mongodb version, for example should you want to stay on an older version of mongodb
 
@@ -236,6 +239,7 @@ services:
     restart: always
     depends_on:
       - initializealarmhandlerdb
+      - epicsbase
     network_mode: "host"
     stdin_open: true
     tty: true
