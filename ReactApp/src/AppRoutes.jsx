@@ -18,6 +18,7 @@ import SettingsSteererXY from "React-Automation-Studio/components/SettingsPages/
 import SettingsSinglePS from "React-Automation-Studio/components/SettingsPages/SettingsSinglePS";
 import AdvancedSettingsSinglePS from "React-Automation-Studio/components/ExperimentalControlScreens/SettingsPages/AdvancedSettingsSinglePS";
 import Vault from "React-Automation-Studio/components/AlarmHandler/Vault";
+import AreaDetectorSimExample from "React-Automation-Studio/components/Examples/AreaDetectorSimExample";
 //staging
 import Staging from "./components/staging/Staging";
 import Example from "./components/staging/Example/Example";
@@ -311,6 +312,14 @@ const AppRoutes = (props) => {
           }
         />
         {/*staging end*/}
+        <Route
+          path="/AreaDetectorSimExample"
+          element={
+            <ProtectedRoute>
+              <AreaDetectorSimExample />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
