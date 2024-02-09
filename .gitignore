@@ -111,7 +111,7 @@ __pycache__/
 /styleguide/build/
 !/styleguide/
 
-.env
+#.env
 pvServer/userAuthentication/SECRET_PWD_KEY
 pvServer/userAuthentication/SECRET_KEY
 pvServer/userAuthentication/USERS

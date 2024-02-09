@@ -27,7 +27,7 @@ services:
       - ./build/frontend:/build
     #restart: always
     # network_mode: host
-    env_file: .devcontainer/.env
+    env_file: .env
     depends_on:
       - node_cache
 
@@ -39,7 +39,7 @@ services:
     # network_mode: host
     tty: true
     stdin_open: true
-    env_file: .devcontainer/.env
+    env_file: .env
     environment:
       - ALARM_DATABASE=mongo1
       - ALARM_DATABASE_REPLICA_SET_NAME=devrs
@@ -70,7 +70,7 @@ services:
     # network_mode: host
     tty: true
     stdin_open: true
-    env_file: .devcontainer/.env
+    env_file: .env
     environment:
       - ALARM_DATABASE=mongo1
       - ALARM_DATABASE_REPLICA_SET_NAME=devrs
@@ -101,7 +101,7 @@ services:
     # network_mode: host
     tty: true
     stdin_open: true
-    env_file: .devcontainer/.env
+    env_file: .env
     environment:
       - ALARM_DATABASE=mongo1
       - ALARM_DATABASE_REPLICA_SET_NAME=devrs
@@ -148,7 +148,7 @@ services:
     ports:
       - "5000:5000"
       - "6060:6060"
-    env_file: .devcontainer/.env
+    env_file: .env
     networks:
       - backend 
 
@@ -158,7 +158,7 @@ services:
       dockerfile: docker/pvserver/Dockerfile
     restart: always
     # network_mode: host
-    env_file: .devcontainer/.env
+    env_file: .env
     environment:
       - ALARM_DATABASE=mongo1
       - ALARM_DATABASE_REPLICA_SET_NAME=devrs
@@ -197,7 +197,7 @@ services:
     build:
       context: ./
       dockerfile: docker/storybook/Dockerfile
-    env_file: .devcontainer/.env
+    env_file: .env
     environment:
       - pvServerPort=5001
       - VITE_EnableLogin=false
@@ -223,19 +223,19 @@ services:
       - backend
 
     
-  # As of RAS V5.0.0 MongoDB the mongodb version is now defined by the RAS_MONGODB_VERSION variable in the .devcontainer/.env file
+  # As of RAS V5.0.0 MongoDB the mongodb version is now defined by the RAS_MONGODB_VERSION variable in the .env file
   # This allows you customize the mongodb version, for example should you want to stay on an older version of mongodb
 
   # In the volumes section, the mogodb volumes are now defined by the compose project name and mongodb version
   # It allows for multiple RAS instances to be run on the same machine.
-  # In this case, make sure to set the COMPOSE_PROJECT_NAME variable in the .devcontainer/.env file or make sure project folder names are unique between instances
+  # In this case, make sure to set the COMPOSE_PROJECT_NAME variable in the .env file or make sure project folder names are unique between instances
 
   mongo1:
     image: mongo:${RAS_MONGODB_VERSION-7.0.5}
     hostname: mongo1
     restart: always
     # network_mode: "host"
-    env_file: .devcontainer/.env
+    env_file: .env
     # environment:
     #   MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME-admin}
     #   MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD-password}
@@ -253,7 +253,7 @@ services:
     hostname: mongo2
     restart: always
     # network_mode: "host"
-    env_file: .devcontainer/.env
+    env_file: .env
     # environment:
     #   MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME-admin}
     #   MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD-password}
@@ -271,7 +271,7 @@ services:
     hostname: mongo3
     restart: always
     # network_mode: "host"
-    env_file: .devcontainer/.env
+    env_file: .env
     # environment:
     #   MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME-admin}
     #   MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD-password}
@@ -285,7 +285,7 @@ services:
         - backend
 
   mongosetup:
-    env_file: .devcontainer/.env
+    env_file: .env
     build:
       context: ./submodules/React-Automation-Studio/
       dockerfile: docker/mongoSetup/Dockerfile
@@ -305,7 +305,7 @@ services:
       - backend
 
   initializeloadsavedb: ### This is copy of the main repos loadsavedb init routine and can be fully customized
-    env_file: .devcontainer/.env
+    env_file: .env
     environment:
       - LOADSAVE_DATABASE=mongo1
       - LOADSAVE_DATABASE_REPLICA_SET_NAME=devrs
@@ -330,7 +330,7 @@ services:
       - mongosetup
     stdin_open: true
     tty: true
-    env_file: .devcontainer/.env
+    env_file: .env
     environment:
       - ALARM_DATABASE=mongo1
       - ALARM_DATABASE_REPLICA_SET_NAME=devrs
@@ -350,7 +350,7 @@ services:
     # network_mode: "host"
     stdin_open: true
     tty: true
-    env_file: .devcontainer/.env
+    env_file: .env
     volumes:
       - ./log/:/usr/src/app/log
     environment:
@@ -362,7 +362,7 @@ services:
     networks:
       - backend
   initializeadmindb:
-    env_file: .devcontainer/.env
+    env_file: .env
     environment:
       - ADMIN_DATABASE=mongo1
       - ADMIN_DATABASE_REPLICA_SET_NAME=devrs
@@ -385,7 +385,7 @@ services:
   #   network_mode: "host"
   #   stdin_open: true
   #   tty: true
-  #   env_file: .devcontainer/.env
+  #   env_file: .env
   #   volumes:
   #     - "./signalcli/signal-cli-config:/srv/signal/.local/share/signal-cli"
 
@@ -404,7 +404,7 @@ services:
 # As of RAS V5.0.0 MongoDB volumes are now defined by the compose project name and mongodb version
 # This allows you customize the mongodb version, for example should you want to stay on an older version of mongodb
 # It allows for multiple RAS instances to be run on the same machine.
-# In this case, make sure to set the COMPOSE_PROJECT_NAME variable in the .devcontainer/.env file or make sure project folder names are unique between instances
+# In this case, make sure to set the COMPOSE_PROJECT_NAME variable in the .env file or make sure project folder names are unique between instances
 
 networks:
   backend:
