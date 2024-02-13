@@ -2,7 +2,7 @@ Current Release: V5.0.0
 
 # Introduction
 
-[Migrate from V4.0.3 to V5.0.0](submodules/React-Automation-Studio/docs/migrate-from-V4-to-V5.md)
+[Migrate from V4.0.3 to V5.0.0](docs/migrate-from-V4-to-V5.md)
 
 This repository pulls in the src from the  React Automation Studio repository https://github.com/React-Automation-Studio/React-Automation-Studio and acts a standalone boiler plate example project for React Automation Studio without having to delve into the source code of the master repository.
 
@@ -600,7 +600,7 @@ or: https://doi.org/10.18429/JACoW-ICALEPCS2023-FR2BCO01
     </li>
   </ul>
 
- [Migrate from V4.0.3 to V5.0.0](submodules/React-Automation-Studio/docs/migrate-from-V4-to-V5.md)
+ [Migrate from V4.0.3 to V5.0.0](docs/migrate-from-V4-to-V5.md)
 
   <br />
 
