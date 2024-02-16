@@ -108,6 +108,8 @@ services:
     stdin_open: true
     restart: always
     network_mode: host
+    depends_on:
+      - epicsbase
 
   storybook:
     build:
