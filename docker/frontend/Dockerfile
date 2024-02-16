@@ -1,16 +1,11 @@
-FROM node:18.18.2
-WORKDIR /frontend
-ENV PATH /frontend/node_modules/.bin:$PATH
-ADD ./ReactApp/package.json /frontend/package.json
-ADD ./ReactApp/jsconfig.json /frontend/jsconfig.json
-ENV PATH /frontend/node_modules/.bin:$PATH
-
-RUN npm install --legacy-peer-dep
-ADD ./ReactApp/public /frontend/public
-ADD ./ReactApp/src /frontend/src
-COPY ./submodules/React-Automation-Studio/ReactApp/src /frontend/src/React-Automation-Studio
-ADD .env /frontend/
+FROM node_cache
+ADD ./ReactApp/public /ReactApp/public
+ADD ./ReactApp/src /ReactApp/src
+ADD ./ReactApp/index.html /ReactApp/index.html
+ADD ./ReactApp/vite.config.js /ReactApp/vite.config.js
+COPY ./submodules/React-Automation-Studio/ReactApp/src /ReactApp/React-Automation-Studio
+ADD .env /ReactApp/
 RUN npm run build
 VOLUME /build
-CMD cp -R /frontend/build/* /build/
+CMD cp -R /ReactApp/dist/* /build/
 

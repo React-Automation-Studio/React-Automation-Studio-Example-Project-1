@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
-import TraditionalLayout from "React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout.js";
+import TraditionalLayout from "React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout";
 import Grid from "@mui/material/Grid";
 import makeStyles from "@mui/styles/makeStyles";
 // Styles
@@ -28,11 +28,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 let enableDemos =
-  typeof process.env.REACT_APP_DISABLE_DEMOS !== "undefined"
-    ? !(process.env.REACT_APP_DISABLE_DEMOS.toUpperCase() === "TRUE")
+  typeof import.meta.env.VITE__DISABLE_DEMOS !== "undefined"
+    ? !(import.meta.env.VITE__DISABLE_DEMOS.toUpperCase() === "TRUE")
     : true;
 
-const Main = (props) => {
+const AppMain = (props) => {
   const classes = useStyles();
 
   const styleguideURL =
@@ -40,7 +40,7 @@ const Main = (props) => {
   const buttonVariant = "contained";
   return (
     <TraditionalLayout
-      title="React Automation Studio V4.0.3"
+      title="React Automation Studio V5.0.0"
       denseAppBar
       alignTitle="center"
     >
@@ -107,4 +107,4 @@ const Main = (props) => {
   );
 };
 
-export default Main;
+export default AppMain;

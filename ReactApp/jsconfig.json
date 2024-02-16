@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
-    "baseUrl": "src"
-  },
-  "include": ["src"]
+    "paths": {
+      "React-Automation-Studio": [
+        "../submodules/React-Automation-Studio/ReactApp/src"
+      ]
+    }
+  }
 }

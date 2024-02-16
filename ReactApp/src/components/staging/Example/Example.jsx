@@ -1,13 +1,11 @@
 import React from "react";
 
 import withStyles from "@mui/styles/withStyles";
-import { withRouter } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
-import RedirectToLogIn from "React-Automation-Studio/components/SystemComponents/RedirectToLogin.js";
 
-import TraditionalLayout from "React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout.js";
+import TraditionalLayout from "React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout";
 import Grid from "@mui/material/Grid";
 
 const styles = (theme) => ({
@@ -40,7 +38,6 @@ const Example = (props) => {
       denseAppBar
       alignTitle="center"
     >
-      <RedirectToLogIn />
       <Grid
         container
         direction="row"
@@ -108,4 +105,4 @@ const Example = (props) => {
   );
 };
 
-export default withRouter(withStyles(styles)(Example));
+export default withStyles(styles)(Example);
