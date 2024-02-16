@@ -14,23 +14,18 @@ const preview: Preview = {
   decorators: [
     (Story) => (
       <Wrapper>
-        {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
         <Story />
       </Wrapper>
     ),
   ],
   parameters: {
-   
-     
-    
-   
     docs: {
       page: () => (
         <>
           <Title />
           <Subtitle />
           <Description />
-          <ImportPath  />
+          <ImportPath />
           <Primary />
           <Controls />
           <Stories />
@@ -41,5 +36,3 @@ const preview: Preview = {
 };
 
 export default preview;
-
-
