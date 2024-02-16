@@ -68,18 +68,10 @@ export default {
   '../React-Automation-Studio/docs/alarmHandler/filterPvList.mdx',
   '../React-Automation-Studio/components/LoadSaveComponent/LoadSave.mdx',
   '../React-Automation-Studio/components/ArchiverDataViewer/ArchiverDataViewer.mdx',
-  // '../React-Automation-Studio/components/AlarmHandler/AlarmHandler.stories.tsx',
-  // '../React-Automation-Studio/**/**/*.stories.@(js|jsx|mjs|ts|tsx)',
   '../React-Automation-Studio/**/**/**/*.stories.@(js|jsx|mjs|ts|tsx)',
   
-  // '../React-Automation-Studio/components/SystemComponents/Widgets/Widget.stories.js',
-  // '../React-Automation-Studio/components/**/*.mdx',
 ],
   addons: [
-    // "@storybook/addon-links",
-    // "@storybook/addon-essentials",
-    // "@storybook/addon-onboarding",
-    // "@storybook/addon-interactions",
     "@storybook/addon-docs"
   ],
   async viteFinal(config, { configType }) {
