@@ -49,18 +49,19 @@ const AppRoutes = (props) => {
       : true;
 
   return (
+    //For all changes see the migration stragey from V4.0.3 to V5.0.5 in the documentation
     <BrowserRouter>
       <Routes>
-      <Route
+        <Route
           exact
           path="/"
           element={
             <ProtectedRoute>
-              <AppMain/>
+              <AppMain />
             </ProtectedRoute>
           }
         />
-       <Route
+        <Route
           exact
           path="/MainDashboard"
           element={
@@ -78,17 +79,12 @@ const AppRoutes = (props) => {
             </ProtectedRoute>
           }
         />
-        {/* <ProtectedRoute path="/UserProfile" component={UserProfile} /> */}
+       
         {import.meta.env.VITE__EnableLogin === "true" && (
           <Route
             exact
             path="/Login"
-            component={() => (
-              <Login
-                version="V4.0.3"
-                timeout={5000}
-              />
-            )}
+            component={() => <Login version="V4.0.3" timeout={5000} />}
           />
         )}
         <Route
@@ -128,142 +124,147 @@ const AppRoutes = (props) => {
         {/*demos start*/}
         {enableDemos && (
           <Route
-          exact
-          path="/DemosDashboard"
-          element={
-            <ProtectedRoute>
-              <MainDashboard />
-            </ProtectedRoute>
-          }
-        />
+            exact
+            path="/DemosDashboard"
+            element={
+              <ProtectedRoute>
+                <MainDashboard />
+              </ProtectedRoute>
+            }
+          />
         )}
-        {/* {enableDemos && <ProtectedRoute path="/Demos" component={Demos} />} */}
-        {enableDemos && (
-           <Route
-           path="/MobileDemo1"
-           element={
-             <ProtectedRoute>
-               <MobileDemo1 />
-             </ProtectedRoute>
-           }
-         />)}
+        
         {enableDemos && (
           <Route
-          path="/MobileDemo2"
-          element={
-            <ProtectedRoute>
-              <MobileDemo2 />
-            </ProtectedRoute>
-          }
-        />
+            path="/MobileDemo1"
+            element={
+              <ProtectedRoute>
+                <MobileDemo1 />
+              </ProtectedRoute>
+            }
+          />
         )}
         {enableDemos && (
-           <Route
-           path="/EpicsDemos"
-           element={
-             <ProtectedRoute>
-               <EpicsDemos />
-             </ProtectedRoute>
-           }
-         />
+          <Route
+            path="/MobileDemo2"
+            element={
+              <ProtectedRoute>
+                <MobileDemo2 />
+              </ProtectedRoute>
+            }
+          />
         )}
-        {enableDemos && <Route
-          path="/Test3D"
-          element={
-            <ProtectedRoute>
-              <Test3D />
-            </ProtectedRoute>
-          }
-        />}
+        {enableDemos && (
+          <Route
+            path="/EpicsDemos"
+            element={
+              <ProtectedRoute>
+                <EpicsDemos />
+              </ProtectedRoute>
+            }
+          />
+        )}
+        {enableDemos && (
+          <Route
+            path="/Test3D"
+            element={
+              <ProtectedRoute>
+                <Test3D />
+              </ProtectedRoute>
+            }
+          />
+        )}
 
         {enableDemos && (
-           <Route
-          path="/AlarmHandlerDemo"
-          element={
-            <ProtectedRoute>
-              <AlarmHandlerDemo />
-            </ProtectedRoute>
-          }
-        />
-        )}
-        {enableDemos &&  <Route
-          path="/VaultDemo"
-          element={
-            <ProtectedRoute>
-              <Vault />
-            </ProtectedRoute>
-          }
-        />}
-        {enableDemos && (
-           <Route
-           path="/LoadSaveExample"
-           element={
-             <ProtectedRoute>
-               <LoadSaveExample />
-             </ProtectedRoute>
-           }
-         />
+          <Route
+            path="/AlarmHandlerDemo"
+            element={
+              <ProtectedRoute>
+                <AlarmHandlerDemo />
+              </ProtectedRoute>
+            }
+          />
         )}
         {enableDemos && (
-           <Route
-           path="/ArchiverDataViewerDemo"
-           element={
-             <ProtectedRoute>
-               <ArchiverDataViewerDemo />
-             </ProtectedRoute>
-           }
-         />
+          <Route
+            path="/VaultDemo"
+            element={
+              <ProtectedRoute>
+                <Vault />
+              </ProtectedRoute>
+            }
+          />
+        )}
+        {enableDemos && (
+          <Route
+            path="/LoadSaveExample"
+            element={
+              <ProtectedRoute>
+                <LoadSaveExample />
+              </ProtectedRoute>
+            }
+          />
+        )}
+        {enableDemos && (
+          <Route
+            path="/ArchiverDataViewerDemo"
+            element={
+              <ProtectedRoute>
+                <ArchiverDataViewerDemo />
+              </ProtectedRoute>
+            }
+          />
         )}
         {/* new Beamline and table control System routes start*/}
         {enableDemos && (
-         <Route
-         path="/BeamlineControlSystem"
-         element={
-           <ProtectedRoute>
-             <BeamlineControlSystem />
-           </ProtectedRoute>
-         }
-       />
+          <Route
+            path="/BeamlineControlSystem"
+            element={
+              <ProtectedRoute>
+                <BeamlineControlSystem />
+              </ProtectedRoute>
+            }
+          />
         )}
         {enableDemos && (
           <Route
-          path="/AdvancedSettingsSinglePS"
-          element={
-            <ProtectedRoute>
-              <AdvancedSettingsSinglePS />
-            </ProtectedRoute>
-          }
-        />
-        )}
-        {enableDemos && (
-           <Route
-           path="/TableControlSystem"
-           element={
-             <ProtectedRoute>
-               <TableControlSystem />
-             </ProtectedRoute>
-           }
-         />
+            path="/AdvancedSettingsSinglePS"
+            element={
+              <ProtectedRoute>
+                <AdvancedSettingsSinglePS />
+              </ProtectedRoute>
+            }
+          />
         )}
         {enableDemos && (
           <Route
-          path="/SettingsSinglePS"
-          element={
-            <ProtectedRoute>
-              <SettingsSinglePS />
-            </ProtectedRoute>
-          }
-        />
+            path="/TableControlSystem"
+            element={
+              <ProtectedRoute>
+                <TableControlSystem />
+              </ProtectedRoute>
+            }
+          />
         )}
         {enableDemos && (
-        <Route
-        path="/SettingsSteererXY"
-        element={
-          <ProtectedRoute>
-            <SettingsSteererXY />
-          </ProtectedRoute>
-        }
-      />
+          <Route
+            path="/SettingsSinglePS"
+            element={
+              <ProtectedRoute>
+                <SettingsSinglePS />
+              </ProtectedRoute>
+            }
+          />
+        )}
+        {enableDemos && (
+          <Route
+            path="/SettingsSteererXY"
+            element={
+              <ProtectedRoute>
+                <SettingsSteererXY />
+              </ProtectedRoute>
+            }
+          />
         )}
 
         {/* new Beamline and table control System routes end*/}
