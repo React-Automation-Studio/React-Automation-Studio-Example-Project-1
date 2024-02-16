@@ -79,14 +79,7 @@ const AppRoutes = (props) => {
             </ProtectedRoute>
           }
         />
-       
-        {import.meta.env.VITE__EnableLogin === "true" && (
-          <Route
-            exact
-            path="/Login"
-            component={() => <Login version="V4.0.3" timeout={5000} />}
-          />
-        )}
+
         <Route
           path="/UserProfile"
           element={
@@ -133,7 +126,7 @@ const AppRoutes = (props) => {
             }
           />
         )}
-        
+
         {enableDemos && (
           <Route
             path="/MobileDemo1"
