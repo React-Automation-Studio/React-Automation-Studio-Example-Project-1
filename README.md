@@ -1,8 +1,8 @@
-Current Release: V5.0.0
+Current Release: V5.0.1
 
 # Introduction
 
-[Migrate from V4.0.3 to V5.0.0](docs/migrate-from-V4-to-V5.md)
+[Migrate from V4.0.3 to V5.0.X](docs/migrate-from-V4-to-V5.md)
 
 This repository pulls in the src from the  React Automation Studio repository https://github.com/React-Automation-Studio/React-Automation-Studio and acts a standalone boiler plate example project for React Automation Studio without having to delve into the source code of the master repository.
 
@@ -153,9 +153,9 @@ git tag
 ```
 
 
-To checkout version 5.0.0 run:
+To checkout version 5.0.1 run:
 ```bash
- git checkout tags/V5.0.0
+ git checkout tags/V5.0.1
 ```
 
 
@@ -164,7 +164,7 @@ To confirm the correct git submodule version :
 ```bash
 git submodule status
 ```
-Should contain `submodules/React-Automation-Studio (V5.0.0)` in the output for version 5.0.0 .
+Should contain `submodules/React-Automation-Studio (V5.0.1)` in the output for version 5.0.1 .
 
 If not and you previously checked out a different version run:
 ```bash
@@ -226,7 +226,7 @@ This default installation will serve the  app at http://127.0.0.1:5000 and the s
 
 To launch the development environment make sure the production version is stopped,and the run :
 ```bash
-docker compose -f docker-compose-dev.yml up
+docker compose -f docker-compose-dev.yml up --build
 ```
 This will launch the pvServer, demo IOC ,style guide and the React Development environment. As with the production version the first run may take awhile. There after it is fast as all the repeated build and up commands uses cached installations.
 
@@ -570,6 +570,16 @@ or: https://doi.org/10.18429/JACoW-ICALEPCS2023-FR2BCO01
   The docker containers for RAS run in network  mode host. This is done to enable EPICS to communicate seamlessly with any IOC's on the same subnet as the host. Other OSes such as Windows may not support the host mode and will run in the bridged mode. This may break the communication between the micro services. It is therefore recommended to run the RAS containers on a Linux VM that is minimally running Ubuntu Server. Please ensure the the VM network interface is assigned an IP on the same subnet as your EPICS network in order for communication with the IOC's to occur seamlessly.
 
 # Changelog
+
+ V5.0.1 Friday 08 March 2024 Minor Updates:
+  <ul>
+    <li>Package updates to Backend modules</li>
+    <li>Updated to Epics 7.0.8 and Python 3.12.1</li>
+    <li>Package updates to all Node modules</li>
+    <li>Updated to the latest Node LTS</li>
+    <li>Minor Bug fix to EPICS socketIO connections, PR#128</li>
+  </ul>
+  <br />
 
  V5.0.0 Friday 02 February 2024 Major Updates:
   <ul>
