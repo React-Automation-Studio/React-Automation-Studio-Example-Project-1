@@ -576,7 +576,7 @@ or: https://doi.org/10.18429/JACoW-ICALEPCS2023-FR2BCO01
     <li>Package updates to Backend modules</li>
     <li>Updated to Epics 7.0.8 and Python 3.12.2</li>
     <li>Package updates to all Node modules</li>
-    <li>Updated to the latest Node LTS</li>
+    <li>Updated to the latest Node LTS 20.11.1</li>
     <li>Minor Bug fix to EPICS socketIO connections, PR#128</li>
   </ul>
   <br />
