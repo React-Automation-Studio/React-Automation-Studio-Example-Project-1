@@ -1,8 +1,8 @@
-Current Release: V5.0.1
+Current Release: V5.1.0
 
 # Introduction
 
-[Migrate from V4.0.3 to V5.0.X](docs/migrate-from-V4-to-V5.md)
+[Migrate from V4.0.3 to V5.1.0](docs/migrate-from-V4-to-V5.md)
 
 This repository pulls in the src from the  React Automation Studio repository https://github.com/React-Automation-Studio/React-Automation-Studio and acts a standalone boiler plate example project for React Automation Studio without having to delve into the source code of the master repository.
 
@@ -18,7 +18,7 @@ Each of the Docker containers are deployed as micro services and environment var
 
 The microservices that form part of React Automation Studio are shown in Fig. 1 and an overview of the system components are give below:
 
-![picture](./ReactApp/img/microServices.png)
+![picture](./ReactApp/img/sysDiag.PNG)
 
 *Fig 1. The microservices that form part of React Automation Studio*
 
@@ -153,9 +153,9 @@ git tag
 ```
 
 
-To checkout version 5.0.1 run:
+To checkout version 5.10 run:
 ```bash
- git checkout tags/V5.0.1
+ git checkout tags/V5.10
 ```
 
 
@@ -164,7 +164,7 @@ To confirm the correct git submodule version :
 ```bash
 git submodule status
 ```
-Should contain `submodules/React-Automation-Studio (V5.0.1)` in the output for version 5.0.1 .
+Should contain `submodules/React-Automation-Studio (V5.1.0)` in the output for version 5.1.0 .
 
 If not and you previously checked out a different version run:
 ```bash
@@ -570,6 +570,17 @@ or: https://doi.org/10.18429/JACoW-ICALEPCS2023-FR2BCO01
   The docker containers for RAS run in network  mode host. This is done to enable EPICS to communicate seamlessly with any IOC's on the same subnet as the host. Other OSes such as Windows may not support the host mode and will run in the bridged mode. This may break the communication between the micro services. It is therefore recommended to run the RAS containers on a Linux VM that is minimally running Ubuntu Server. Please ensure the the VM network interface is assigned an IP on the same subnet as your EPICS network in order for communication with the IOC's to occur seamlessly.
 
 # Changelog
+
+  V5.1.0 Thursday 25 April 2024 Minor Updates:
+  <ul>
+    <li>Package updates to Backend modules</li>
+    <li>Updated to Python 3.12.3</li>
+    <li>Package updates to all Node modules</li>
+    <li>Updated to the latest Node LTS 20.12.2 </li>
+    <li>Updates to the documentation </li>
+  </ul>
+  </br>            
+
 
  V5.0.1 Friday 08 March 2024 Minor Updates:
   <ul>
