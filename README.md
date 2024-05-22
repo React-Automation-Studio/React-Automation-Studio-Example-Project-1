@@ -153,9 +153,9 @@ git tag
 ```
 
 
-To checkout version 5.10 run:
+To checkout version 5.1.0 run:
 ```bash
- git checkout tags/V5.10
+ git checkout tags/V5.1.0
 ```
 
 
