@@ -1,31 +1,6 @@
 import React from "react";
-
-import withStyles from "@mui/styles/withStyles";
-
-
 import TraditionalLayout from "React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout";
-import CustomTextInput from "../../../components/customComponents/CustomTextInput";
-
-const styles = (theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-  },
-  center: {
-    margin: "auto",
-
-    width: "15%",
-    height: "50%",
-  },
-  button: {
-    width: "100%",
-    height: "100%",
-    marginTop: "auto",
-    marginBottom: "auto",
-    marginLeft: "auto",
-    marginRight: "auto",
-  },
-});
+import CustomTextInput from "../../customComponents/CustomTextInput";
 
 const Example2 = (props) => {
   return (
@@ -34,13 +9,12 @@ const Example2 = (props) => {
       denseAppBar
       alignTitle="center"
     >
-
       <div style={{ paddingTop: 64, paddingBottom: 8 }}>
         This example imports the site specific custom TextInput in the
         ReactApp/src/components/customComponents/ folder
       </div>
       <CustomTextInput
-        pv="pva://$(device):test$(id)"
+        pv="$(device):test$(id)"
         macros={{ "$(device)": "testIOC", "$(id)": "2" }}
         usePvLabel={true}
         usePvPrecision={true}
@@ -52,4 +26,4 @@ const Example2 = (props) => {
   );
 };
 
-export default withStyles(styles, { withTheme: true })(Example2);
+export default Example2;

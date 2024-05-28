@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import withStyles from "@mui/styles/withStyles";
 import Grid from "@mui/material/Grid";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -19,10 +18,7 @@ import Divider from "@mui/material/Divider";
 import StyledIconIndicator from "React-Automation-Studio/components/BaseComponents/StyledIconIndicator";
 import TraditionalLayout from "React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout";
 import { useLocalPV } from "React-Automation-Studio/components/SystemComponents/LocalPV";
-
-// FIXME checkout https://mui.com/components/use-media-query/#migrating-from-withwidth
-const withWidth = () => (WrappedComponent) => (props) =>
-  <WrappedComponent {...props} width="xs" />;
+import { useTheme } from "@mui/material/styles";
 
 function TabContainer(props) {
   return (
@@ -32,46 +28,15 @@ function TabContainer(props) {
   );
 }
 
-const styles = (theme) => ({
-  body1: theme.typography.body1,
-  root: {
-    flexGrow: 1,
-    padding: theme.spacing(2),
-    overflowX: "hidden",
-    overflowY: "hidden",
-  },
-  paper: {
-    padding: theme.spacing(1) * 0,
-    margin: theme.spacing(1) * 0,
-    height: "100%",
-    color: theme.palette.text.secondary,
-  },
-  control: {
-    padding: theme.spacing(1) * 2,
-  },
-});
-
-const MobileDemo1 = (props) => {
+const Example1 = (props) => {
+  const theme = useTheme();
   const [showAdvancedSettings, setShowAdvancedSettings] = useState(0);
   const editorType = useLocalPV({ pv: "loc://editorType" });
-
   const handleChange = (event, value) => {
     setShowAdvancedSettings(value);
   };
 
-  const { width } = props;
-
-  const { classes } = props;
-
-  let graphVH;
-
-  if (width === "xs") {
-    graphVH = "25vh";
-  } else if (width === "sm") {
-    graphVH = "30vh";
-  } else {
-    graphVH = "30vh";
-  }
+  let graphVH = "30vh";
 
   return (
     <TraditionalLayout
@@ -82,7 +47,15 @@ const MobileDemo1 = (props) => {
       <div style={{ paddingBottom: 48 }}>
         {showAdvancedSettings === 0 && (
           <TabContainer key={"tabContainer0"}>
-            <Grid container className={classes.root}>
+            <Grid
+              container
+              sx={{
+                flexGrow: 1,
+                padding: theme.spacing(2),
+                overflowX: "hidden",
+                overflowY: "hidden",
+              }}
+            >
               <Grid item xs={12}>
                 <Grid
                   container
@@ -92,13 +65,12 @@ const MobileDemo1 = (props) => {
                   justifyContent={"flex-start"}
                 >
                   <Grid item xs={12}>
-                    <div style={{ height: graphVH, width: "96vw" }}>
-                      <GraphY
-                        pvs={["pva://testIOC:test4", "pva://testIOC:test5"]}
-                        legend={["Sine Wave", "Amplitude"]}
-                        //lineColor={[this.props.theme.palette.secondary.main,lime['400']]}
-                      />
-                    </div>
+                    <GraphY
+                      height={graphVH}
+                      width="100%"
+                      pvs={["testIOC:test4", "testIOC:test5"]}
+                      legend={["Sine Wave", "Amplitude"]}
+                    />
                   </Grid>
                   <Grid item xs={12}>
                     <Grid
@@ -111,7 +83,7 @@ const MobileDemo1 = (props) => {
                     >
                       <Grid item xs={6}>
                         <TextInput
-                          pv="pva://$(device):amplitude"
+                          pv="$(device):amplitude"
                           macros={{ "$(device)": "testIOC" }}
                           usePvLabel={true}
                           prec={3}
@@ -120,7 +92,7 @@ const MobileDemo1 = (props) => {
                       </Grid>
                       <Grid item xs={6}>
                         <TextOutput
-                          pv="pva://$(device):test3"
+                          pv="$(device):test3"
                           macros={{ "$(device)": "testIOC" }}
                           usePvLabel={true}
                           prec={3}
@@ -132,7 +104,7 @@ const MobileDemo1 = (props) => {
 
                   <Grid item xs={6} sm={4} lg={3}>
                     <Gauge
-                      pv="pva://$(device):amplitude"
+                      pv="$(device):amplitude"
                       macros={{ "$(device)": "testIOC" }}
                       prec={3}
                       usePvMinMax={true}
@@ -149,9 +121,9 @@ const MobileDemo1 = (props) => {
                     >
                       <Grid item>
                         <StyledIconIndicator
-                          pv="pva://$(device)"
+                          pv="$(device)"
                           macros={{ "$(device)": "testIOC:BO1" }}
-                          onColor={props.theme.palette.ok.main}
+                          onColor={theme.palette.ok.main}
                           offColor="default"
                           label={"On"}
                           labelPlacement={"end"}
@@ -159,10 +131,10 @@ const MobileDemo1 = (props) => {
                       </Grid>
                       <Grid item>
                         <StyledIconIndicator
-                          pv="pva://$(device)"
+                          pv="$(device)"
                           macros={{ "$(device)": "testIOC:BO1" }}
                           onColor="default"
-                          offColor={props.theme.palette.error.main}
+                          offColor={theme.palette.error.main}
                           label={"Off"}
                           labelPlacement={"end"}
                         />
@@ -171,7 +143,7 @@ const MobileDemo1 = (props) => {
                   </Grid>
                   <Grid item xs={4} sm={4} lg={4}>
                     <ToggleButton
-                      pv="pva://$(device)"
+                      pv="$(device)"
                       macros={{ "$(device)": "testIOC:BO1" }}
                       custom_selection_strings={["OFF", "ON"]}
                     />
@@ -200,7 +172,7 @@ const MobileDemo1 = (props) => {
                             style={{ textAlign: "center", marginTop: "16px" }}
                           >
                             <ThumbWheel
-                              pv="pva://$(device)"
+                              pv="$(device)"
                               macros={{ "$(device)": "testIOC:amplitude" }}
                               prec_integer={3}
                               prec_decimal={1}
@@ -220,7 +192,7 @@ const MobileDemo1 = (props) => {
                         >
                           <Grid item xs={12}>
                             <Slider
-                              pv="pva://$(device):amplitude"
+                              pv="$(device):amplitude"
                               macros={{ "$(device)": "testIOC" }}
                               usePvMinMax={true}
                             />
@@ -236,7 +208,7 @@ const MobileDemo1 = (props) => {
         )}
         {showAdvancedSettings === 1 && (
           <TabContainer key={"tabContainer1"}>
-            <Grid container className={classes.root}>
+            <Grid container>
               <Grid item xs={12}>
                 <Grid
                   container
@@ -256,7 +228,7 @@ const MobileDemo1 = (props) => {
                     >
                       <Grid item xs={12} lg={4}>
                         <TextInput
-                          pv="pva://$(device):frequency"
+                          pv="$(device):frequency"
                           macros={{ "$(device)": "testIOC" }}
                           usePvUnits={true}
                           prec={1}
@@ -265,7 +237,7 @@ const MobileDemo1 = (props) => {
                       </Grid>
                       <Grid item xs={12} lg={4}>
                         <TextInput
-                          pv="pva://$(device):amplitude"
+                          pv="$(device):amplitude"
                           macros={{ "$(device)": "testIOC" }}
                           usePvUnits={true}
                           usePvLabel={true}
@@ -284,7 +256,6 @@ const MobileDemo1 = (props) => {
       </div>
 
       <AppBar
-        className={classes.body1}
         style={{ position: "fixed", bottom: 0, top: "auto" }}
         color="inherit"
       >
@@ -294,7 +265,6 @@ const MobileDemo1 = (props) => {
           variant="fullWidth"
           scrollButtons={false}
         >
-          {/* <Tab icon={<SupervisorAccount />} /> */}
           <Tab icon={<AccountCircle />} />
           <Tab icon={<Settings />} />
         </Tabs>
@@ -303,6 +273,4 @@ const MobileDemo1 = (props) => {
   );
 };
 
-export default withWidth()(
-  withStyles(styles, { withTheme: true })(MobileDemo1)
-);
+export default Example1;

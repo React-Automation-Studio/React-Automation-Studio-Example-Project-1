@@ -49,7 +49,7 @@ const AppRoutes = (props) => {
       : true;
 
   return (
-    //For all changes see the migration stragey from V4.0.3 to V5.1.0 in the documentation
+    //For all changes see the migration stragey from V4.0.3 to V5.2.0 in the documentation
     <BrowserRouter>
       <Routes>
         <Route
@@ -92,7 +92,7 @@ const AppRoutes = (props) => {
           <Route
             exact
             path="/Login"
-            element={<Login version="V5.1.0" timeout={5000} />}
+            element={<Login version="V5.2.0" timeout={5000} />}
           />
         )}
 

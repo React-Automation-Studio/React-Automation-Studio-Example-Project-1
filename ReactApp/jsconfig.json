@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
+    "jsx": "preserve",
     "paths": {
-      "React-Automation-Studio": [
-        "../submodules/React-Automation-Studio/ReactApp/src"
+      "React-Automation-Studio/*": [
+        "../submodules/React-Automation-Studio/ReactApp/src/*"
       ]
     }
   }
