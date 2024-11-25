@@ -1,6 +1,7 @@
-Current Release: V5.2.1
+Current Release: V6.0.0
 
 # Introduction
+[Migrate from-V5.x.x to V6.0.0](docs/migrate-from-V5-to-V6.md)
 
 [Migrate from V4.0.3 to V5.2.1](docs/migrate-from-V4-to-V5.md)
 
@@ -155,7 +156,7 @@ git tag
 
 To checkout version 5.2.1 run:
 ```bash
- git checkout tags/V5.2.1
+ git checkout tags/V6.0.0
 ```
 
 
@@ -164,7 +165,7 @@ To confirm the correct git submodule version :
 ```bash
 git submodule status
 ```
-Should contain `submodules/React-Automation-Studio (V5.2.1)` in the output for version 5.2.1 .
+Should contain `submodules/React-Automation-Studio (V6.0.0)` in the output for version 5.2.1 .
 
 If not and you previously checked out a different version run:
 ```bash
@@ -570,6 +571,25 @@ or: https://doi.org/10.18429/JACoW-ICALEPCS2023-FR2BCO01
   The docker containers for RAS run in network  mode host. This is done to enable EPICS to communicate seamlessly with any IOC's on the same subnet as the host. Other OSes such as Windows may not support the host mode and will run in the bridged mode. This may break the communication between the micro services. It is therefore recommended to run the RAS containers on a Linux VM that is minimally running Ubuntu Server. Please ensure the the VM network interface is assigned an IP on the same subnet as your EPICS network in order for communication with the IOC's to occur seamlessly.
 
 # Changelog
+V6.0.0 Monday 25 November 2024 
+  <br/>
+  Major Updates:
+  <ul>
+    <li>Updated to the MUI 6</li>
+    <li>Moved from npm to pnpm package manager </li>
+    <li>Updated to MongoDB 8.0.3 </li>
+    <li>Speed improvements to the GraphY component</li>
+    <li>Speed improvements to the Area Detector Appliance</li>
+    </ul>
+  Minor Updates:
+  <ul>
+    <li>Package updates to the frontend modules</li>
+    <li>Updated to the latest Node LTS 22.11.0 </li>
+    <li>Updated to Python 3.12.7</li>
+    <li>Updated to PyEpics 3.5.7</li>
+    <li>Package updates to the backend modules</li>
+  </ul>
+
  V5.2.1 Wednesday 17 July 2024 
   <br/>
   Minor Updates:
