@@ -5,7 +5,7 @@ ADD ./ReactApp/index.html /ReactApp/index.html
 ADD ./ReactApp/vite.config.js /ReactApp/vite.config.js
 COPY ./submodules/React-Automation-Studio/ReactApp/src /ReactApp/React-Automation-Studio
 ADD .env /ReactApp/
-RUN npm run build
+RUN pnpm run build
 VOLUME /build
 CMD cp -R /ReactApp/dist/* /build/
 
