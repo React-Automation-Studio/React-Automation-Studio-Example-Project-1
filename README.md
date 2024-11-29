@@ -154,7 +154,7 @@ git tag
 ```
 
 
-To checkout version 5.2.1 run:
+To checkout version 6.0.0 run:
 ```bash
  git checkout tags/V6.0.0
 ```
@@ -165,7 +165,7 @@ To confirm the correct git submodule version :
 ```bash
 git submodule status
 ```
-Should contain `submodules/React-Automation-Studio (V6.0.0)` in the output for version 5.2.1 .
+Should contain `submodules/React-Automation-Studio (V6.0.0)` in the output for version 6.0.0 .
 
 If not and you previously checked out a different version run:
 ```bash
