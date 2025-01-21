@@ -1,7 +1,7 @@
-Current Release: V6.0.0
+Current Release: V6.0.1
 
 # Introduction
-[Migrate from-V5.x.x to V6.0.0](docs/migrate-from-V5-to-V6.md)
+[Migrate from-V5.x.x to V6.x.x](docs/migrate-from-V5-to-V6.md)
 
 [Migrate from V4.0.3 to V5.2.1](docs/migrate-from-V4-to-V5.md)
 
@@ -154,9 +154,9 @@ git tag
 ```
 
 
-To checkout version 6.0.0 run:
+To checkout version 6.0.1 run:
 ```bash
- git checkout tags/V6.0.0
+ git checkout tags/V6.0.1
 ```
 
 
@@ -165,7 +165,7 @@ To confirm the correct git submodule version :
 ```bash
 git submodule status
 ```
-Should contain `submodules/React-Automation-Studio (V6.0.0)` in the output for version 6.0.0 .
+Should contain `submodules/React-Automation-Studio (V6.0.1)` in the output for version 6.0.1 .
 
 If not and you previously checked out a different version run:
 ```bash
@@ -571,6 +571,13 @@ or: https://doi.org/10.18429/JACoW-ICALEPCS2023-FR2BCO01
   The docker containers for RAS run in network  mode host. This is done to enable EPICS to communicate seamlessly with any IOC's on the same subnet as the host. Other OSes such as Windows may not support the host mode and will run in the bridged mode. This may break the communication between the micro services. It is therefore recommended to run the RAS containers on a Linux VM that is minimally running Ubuntu Server. Please ensure the the VM network interface is assigned an IP on the same subnet as your EPICS network in order for communication with the IOC's to occur seamlessly.
 
 # Changelog
+V6.0.1 Monday 20 January 2025
+  <br/>
+  Minor Updates:
+  <ul>
+    <li>Fix installation failure due to Poetry 2.x (quick fix)</li>
+  </ul>
+  <br/>
 V6.0.0 Monday 25 November 2024 
   <br/>
   Major Updates:
