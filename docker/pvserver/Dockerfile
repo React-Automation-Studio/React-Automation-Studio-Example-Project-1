@@ -5,9 +5,9 @@ RUN apt-get update && apt-get install -y  \
     lcov valgrind
 COPY ./submodules/React-Automation-Studio/pvServer/pyproject.toml .
 
-RUN pip install --upgrade pip && pip --no-cache-dir install poetry==1.8.5
+RUN pip install --upgrade pip && pip --no-cache-dir install poetry==2.0.1
 RUN poetry config virtualenvs.create false
-RUN poetry install --without dev
+RUN poetry install --no-root
 WORKDIR /pvServer
 
 ADD ./submodules/React-Automation-Studio/pvServer /pvServer
