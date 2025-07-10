@@ -56,7 +56,7 @@ const Example1 = (props) => {
                 overflowY: "hidden",
               }}
             >
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <Grid
                   container
                   spacing={2}
@@ -64,7 +64,7 @@ const Example1 = (props) => {
                   direction={"row"}
                   justifyContent={"flex-start"}
                 >
-                  <Grid item xs={12}>
+                  <Grid size={12}>
                     <GraphY
                       height={graphVH}
                       width="100%"
@@ -72,16 +72,14 @@ const Example1 = (props) => {
                       legend={["Sine Wave", "Amplitude"]}
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid size={12}>
                     <Grid
                       container
                       direction="row"
-                      item
                       justifyContent="center"
                       spacing={2}
-                      alignItems="stretch"
-                    >
-                      <Grid item xs={6}>
+                      alignItems="stretch">
+                      <Grid size={6}>
                         <TextInput
                           pv="$(device):amplitude"
                           macros={{ "$(device)": "testIOC" }}
@@ -90,7 +88,7 @@ const Example1 = (props) => {
                           alarmSensitive={true}
                         />
                       </Grid>
-                      <Grid item xs={6}>
+                      <Grid size={6}>
                         <TextOutput
                           pv="$(device):test3"
                           macros={{ "$(device)": "testIOC" }}
@@ -102,7 +100,12 @@ const Example1 = (props) => {
                     </Grid>
                   </Grid>
 
-                  <Grid item xs={6} sm={4} lg={3}>
+                  <Grid
+                    size={{
+                      xs: 6,
+                      sm: 4,
+                      lg: 3
+                    }}>
                     <Gauge
                       pv="$(device):amplitude"
                       macros={{ "$(device)": "testIOC" }}
@@ -111,7 +114,12 @@ const Example1 = (props) => {
                     />
                   </Grid>
 
-                  <Grid item xs={2} sm={4} lg={5}>
+                  <Grid
+                    size={{
+                      xs: 2,
+                      sm: 4,
+                      lg: 5
+                    }}>
                     <Grid
                       container
                       direction="column"
@@ -119,7 +127,7 @@ const Example1 = (props) => {
                       spacing={2}
                       alignItems="stretch"
                     >
-                      <Grid item>
+                      <Grid>
                         <StyledIconIndicator
                           pv="$(device)"
                           macros={{ "$(device)": "testIOC:BO1" }}
@@ -129,7 +137,7 @@ const Example1 = (props) => {
                           labelPlacement={"end"}
                         />
                       </Grid>
-                      <Grid item>
+                      <Grid>
                         <StyledIconIndicator
                           pv="$(device)"
                           macros={{ "$(device)": "testIOC:BO1" }}
@@ -141,7 +149,12 @@ const Example1 = (props) => {
                       </Grid>
                     </Grid>
                   </Grid>
-                  <Grid item xs={4} sm={4} lg={4}>
+                  <Grid
+                    size={{
+                      xs: 4,
+                      sm: 4,
+                      lg: 4
+                    }}>
                     <ToggleButton
                       pv="$(device)"
                       macros={{ "$(device)": "testIOC:BO1" }}
@@ -149,7 +162,13 @@ const Example1 = (props) => {
                     />
                   </Grid>
 
-                  <Grid item xs={12} sm={12} md={12} lg={12}>
+                  <Grid
+                    size={{
+                      xs: 12,
+                      sm: 12,
+                      md: 12,
+                      lg: 12
+                    }}>
                     <SelectionList
                       debug={false}
                       horizontal={true}
@@ -159,15 +178,15 @@ const Example1 = (props) => {
                       initialLocalVariableValue="ThumbWheel"
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid size={12}>
                     {editorType.value === "None" && (
-                      <Grid container direction="row" item xs={12} spacing={2}>
-                        <Grid item xs={12}></Grid>
+                      <Grid container direction="row" spacing={2} size={12}>
+                        <Grid size={12}></Grid>
                       </Grid>
                     )}
                     {editorType.value === "ThumbWheel" && (
-                      <Grid container direction="row" item xs={12}>
-                        <Grid item xs={12}>
+                      <Grid container direction="row" size={12}>
+                        <Grid size={12}>
                           <div
                             style={{ textAlign: "center", marginTop: "16px" }}
                           >
@@ -183,14 +202,8 @@ const Example1 = (props) => {
                     )}
                     {editorType.value === "Slider" && (
                       <div style={{ marginTop: "16px" }}>
-                        <Grid
-                          container
-                          direction="row"
-                          item
-                          xs={12}
-                          spacing={2}
-                        >
-                          <Grid item xs={12}>
+                        <Grid container direction="row" spacing={2} size={12}>
+                          <Grid size={12}>
                             <Slider
                               pv="$(device):amplitude"
                               macros={{ "$(device)": "testIOC" }}
@@ -209,7 +222,7 @@ const Example1 = (props) => {
         {showAdvancedSettings === 1 && (
           <TabContainer key={"tabContainer1"}>
             <Grid container>
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <Grid
                   container
                   spacing={2}
@@ -217,7 +230,7 @@ const Example1 = (props) => {
                   direction={"column"}
                   justifyContent={"flex-start"}
                 >
-                  <Grid item>
+                  <Grid>
                     <div style={{ marginBottom: 8 }}>Settings</div>
                     <Grid
                       container
@@ -226,7 +239,11 @@ const Example1 = (props) => {
                       direction={"row"}
                       justifyContent={"flex-start"}
                     >
-                      <Grid item xs={12} lg={4}>
+                      <Grid
+                        size={{
+                          xs: 12,
+                          lg: 4
+                        }}>
                         <TextInput
                           pv="$(device):frequency"
                           macros={{ "$(device)": "testIOC" }}
@@ -235,7 +252,11 @@ const Example1 = (props) => {
                           usePvLabel={true}
                         />
                       </Grid>
-                      <Grid item xs={12} lg={4}>
+                      <Grid
+                        size={{
+                          xs: 12,
+                          lg: 4
+                        }}>
                         <TextInput
                           pv="$(device):amplitude"
                           macros={{ "$(device)": "testIOC" }}
@@ -245,7 +266,7 @@ const Example1 = (props) => {
                       </Grid>
                     </Grid>
                   </Grid>
-                  <Grid item>
+                  <Grid>
                     <Divider />
                   </Grid>
                 </Grid>
@@ -254,7 +275,6 @@ const Example1 = (props) => {
           </TabContainer>
         )}
       </div>
-
       <AppBar
         style={{ position: "fixed", bottom: 0, top: "auto" }}
         color="inherit"

@@ -17,14 +17,22 @@ const Staging = (props) => {
       <Grid
         container
         direction="row"
-        item
         justifyContent="center"
         spacing={1}
         alignItems="center"
-        style={{ paddingTop: 64 }}
-      >
-        <Grid item lg={4} sm={4} xs={2}></Grid>
-        <Grid item lg={2} sm={4} xs={8}>
+        style={{ paddingTop: 64 }}>
+        <Grid
+          size={{
+            lg: 4,
+            sm: 4,
+            xs: 2
+          }}></Grid>
+        <Grid
+          size={{
+            lg: 2,
+            sm: 4,
+            xs: 8
+          }}>
           <Grid
             container
             direction="row"
@@ -32,7 +40,7 @@ const Staging = (props) => {
             spacing={3}
             alignItems="stretch"
           >
-            <Grid item xs={12}>
+            <Grid size={12}>
               <Button
                 fullWidth
                 sx={{
@@ -52,7 +60,12 @@ const Staging = (props) => {
           </Grid>
         </Grid>
 
-        <Grid item lg={4} sm={4} xs={2}></Grid>
+        <Grid
+          size={{
+            lg: 4,
+            sm: 4,
+            xs: 2
+          }}></Grid>
       </Grid>
     </TraditionalLayout>
   );
