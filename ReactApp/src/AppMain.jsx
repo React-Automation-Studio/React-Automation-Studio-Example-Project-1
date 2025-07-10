@@ -3,29 +3,6 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TraditionalLayout from "React-Automation-Studio/components/UI/Layout/ComposedLayouts/TraditionalLayout";
 import Grid from "@mui/material/Grid";
-import makeStyles from "@mui/styles/makeStyles";
-// Styles
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-  },
-  center: {
-    margin: "auto",
-
-    width: "15%",
-    height: "50%",
-  },
-  button: {
-    width: "100%",
-    height: "100%",
-    marginTop: "auto",
-    marginBottom: "auto",
-    marginLeft: "auto",
-    marginRight: "auto",
-  },
-}));
 
 let enableDemos =
   typeof import.meta.env.VITE__DISABLE_DEMOS !== "undefined"
@@ -33,7 +10,6 @@ let enableDemos =
     : true;
 
 const AppMain = (props) => {
-  const classes = useStyles();
 
   const styleguideURL =
     window.location.protocol + "//" + window.location.hostname + ":6060/";
@@ -64,7 +40,11 @@ const AppMain = (props) => {
             {enableDemos && (
               <Grid item xs={12}>
                 <Button
-                  className={classes.button}
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    margin: "auto"
+                  }}
                   component={Link}
                   to="/DemosDashboard"
                   color="primary"
@@ -78,7 +58,11 @@ const AppMain = (props) => {
 
             <Grid item xs={12}>
               <Button
-                className={classes.button}
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  margin: "auto"
+                }}
                 component={Link}
                 to="/Staging"
                 color="primary"
@@ -91,7 +75,11 @@ const AppMain = (props) => {
             <Grid item xs={12}>
               <Button
                 fullWidth
-                className={classes.button}
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  margin: "auto"
+                }}
                 target="_blank"
                 href={styleguideURL}
                 variant={buttonVariant}
