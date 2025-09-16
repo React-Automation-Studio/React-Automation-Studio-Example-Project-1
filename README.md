@@ -573,12 +573,12 @@ or: https://doi.org/10.18429/JACoW-ICALEPCS2023-FR2BCO01
   The docker containers for RAS run in network  mode host. This is done to enable EPICS to communicate seamlessly with any IOC's on the same subnet as the host. Other OSes such as Windows may not support the host mode and will run in the bridged mode. This may break the communication between the micro services. It is therefore recommended to run the RAS containers on a Linux VM that is minimally running Ubuntu Server. Please ensure the the VM network interface is assigned an IP on the same subnet as your EPICS network in order for communication with the IOC's to occur seamlessly.
 
 # Changelog
- V7.0.0 Wednesday 9 July 2025
+ V7.0.0 Tuesday 16 September 2025
   <br />
   Major Updates:
   <ul>
     <li>Updated to Updated to MUI V7 </li>
-    <li>Updated to the latest Node LTS 22.17.0 </li>
+    <li>Updated to the latest Node LTS 22.19.0 </li>
     <li>Package updates to frontend modules</li>
     <li>Removed legacy MUI styling</li>
   </ul>
