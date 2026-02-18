@@ -73,5 +73,5 @@
       "plugin:storybook/recommended"
     ]
   },
- "packageManager": "pnpm@10.16.1"
+ "packageManager": "pnpm@10.30.0"
 }
