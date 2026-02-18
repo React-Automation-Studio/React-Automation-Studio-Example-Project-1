@@ -1,0 +1,11 @@
+[project]
+name="admindbinit"
+description = "RAS admin db initialisation script"
+version = "8.0.0"
+dependencies = [
+    "pymongo==4.11.1",
+    "bcrypt==4.2.1"
+]
+
+[tool.uv]
+package = false

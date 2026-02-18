@@ -1,0 +1,9 @@
+[project]
+name = "loadSaveDbInit"
+version = "8.0.0"
+dependencies = [
+    "pymongo==4.11.1"
+]
+
+[tool.uv]
+package = false

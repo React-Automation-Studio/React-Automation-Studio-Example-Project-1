@@ -1,15 +1,13 @@
-FROM python:3.12.4
+FROM epicsbase
 
-
-ADD ./loadSaveDbInit loadSaveDbInit
+ADD ./loadSaveDbInit /loadSaveDbInit
 WORKDIR /loadSaveDbInit
 
-RUN pip install -r requirements.txt
+ENV UV_LINK_MODE=copy
 
+RUN --mount=type=cache,target=/opt/uv-cache/uv \
+    uv sync
 
-
-ENTRYPOINT ["python"]
-
-CMD ["-u","initDB.py"]
+CMD ["uv","run","initDB.py"]
 
 EXPOSE 27017

@@ -5,7 +5,8 @@ RUN apt-get update && apt-get install -y  \
     lcov valgrind
 
 WORKDIR /pvServer
-COPY ./submodules/React-Automation-Studio/pvServer/pyproject.toml .
+ADD ./submodules/React-Automation-Studio/pvServer /pvServer
+
 RUN --mount=type=cache,target=/opt/uv-cache/uv  \
     uv sync
 

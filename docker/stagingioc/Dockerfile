@@ -1,4 +1,4 @@
-FROM epicsbase as epicsupport
+FROM epicsbase AS epicsupport
 
 WORKDIR /epics/support
 
