@@ -12,6 +12,8 @@ services:
   frontend:
     build:
       context: ./
+      additional_contexts:
+         node_cache: "service:node_cache"
       dockerfile: docker/frontend/Dockerfile
       network: host
     volumes:
@@ -27,6 +29,8 @@ services:
     build:
       context: ./
       dockerfile: docker/pvserver/Dockerfile
+      additional_contexts:
+         epicsbase: "service:epicsbase"
     restart: always
     network_mode: host
     tty: true
@@ -55,6 +59,8 @@ services:
     build:
       context: ./
       dockerfile: docker/pvserver/Dockerfile
+      additional_contexts:
+         epicsbase: "service:epicsbase"
     restart: always
     network_mode: host
     tty: true
@@ -83,6 +89,8 @@ services:
     build:
       context: ./
       dockerfile: docker/pvserver/Dockerfile
+      additional_contexts:
+         epicsbase: "service:epicsbase"
     restart: always
     network_mode: host
     tty: true
