@@ -7,5 +7,6 @@ COPY ./submodules/React-Automation-Studio/ReactApp/src /ReactApp/React-Automatio
 ADD .env /ReactApp/
 RUN pnpm run build
 VOLUME /build
-CMD cp -R /ReactApp/dist/* /build/
+ENTRYPOINT []
+CMD ["sh", "-c", "cp -R /ReactApp/dist/* /build/"]
 
