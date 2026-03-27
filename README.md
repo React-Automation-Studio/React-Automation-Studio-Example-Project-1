@@ -1,11 +1,57 @@
-Current Release: V7.0.0
+Current Release: V8.0.0
+
+**Migration Guides:**
+- [Migrate from V7.x.x to V8.x.x](docs/migrate-from-V7-to-V8.md)
+- [Migrate from V6.x.x to V7.x.x](docs/migrate-from-V6-to-V7.md)
+- [Migrate from V5.x.x to V6.x.x](docs/migrate-from-V5-to-V6.md)
+- [Migrate from V4.0.3 to V5.2.X](docs/migrate-from-V4-to-V5.md)
+
+## ⚠️ V8.0.0 Breaking Changes Summary
+
+**If you use the standard RAS containers with the latest Docker, no action is required.**
+
+### Important Requirements
+
+| Item | Requirement | Impact |
+|------|-------------|--------|
+| **Docker Version** | 28.1.1+ | Required - New Docker Compose features |
+| **Docker Compose** | Latest version | Required - Bake feature support |
+| **Python Package Manager** | UV (automatic) | Internal change - transparent to users |
+| **Base OS** | Ubuntu 24.04 LTS | Backend containers only |
+
+### Key Changes
+
+1. **Python Package Management → UV**
+   - Unified local cache shared across all containers
+   - **Action needed:** Only if you have custom Python backend containers
+
+2. **EPICS Base Image Foundation**
+   - `epicsbase` is now the foundational layer for all backend containers
+   - **Action needed:** Update custom compose files to reference epicsbase
+
+3. **Custom Docker Compose Configurations**
+   - If you maintain custom `docker-compose.yml` files, add to backend services:
+   ```yaml
+   your_service:
+     build:
+       additional_contexts:
+         epicsbase: "service:epicsbase"
+   ```
+   - For frontend/node services:
+   ```yaml
+   your_service:
+     build:
+       additional_contexts:
+         node_cache: "service:node_cache"
+   ```
+
+4. **Optional Performance Boost**
+   - Enable Docker Compose Bake for 2-3x faster multi-container builds
+   - Reference: https://docs.docker.com/compose/how-tos/dependent-images/
+
+**For detailed migration steps, see [Migrate from V7.x.x to V8.x.x](docs/migrate-from-V7-to-V8.md)**
 
 # Introduction
-[Migrate from-V6.x.x to V7.x.x](docs/migrate-from-V6-to-V7.md)
-
-[Migrate from-V5.x.x to V6.x.x](docs/migrate-from-V5-to-V6.md)
-
-[Migrate from V4.0.3 to V5.2.1](docs/migrate-from-V4-to-V5.md)
 
 This repository pulls in the src from the  React Automation Studio repository https://github.com/React-Automation-Studio/React-Automation-Studio and acts a standalone boiler plate example project for React Automation Studio without having to delve into the source code of the master repository.
 
@@ -73,7 +119,7 @@ Apart form mobile UIs complex UIs suitable for desktop systems can also be creat
 
 *3. Styleguide*
 
-A lot of effort was put into the documentation and a style guide based on React Styleguidedist and is used as the help function and to document the use of all the components from the source files. The current style guide is also  interactive with a demo IOC. All the properties of each of the components are documented and examples of their usage are shown.
+A lot of effort was put into the documentation and a style guide based on React Storybook and is used as the help function and to document the use of all the components from the source files. The current style guide is also  interactive with a demo IOC. All the properties of each of the components are documented and examples of their usage are shown.
 
 *4. Access rights and Administration*
 
@@ -121,22 +167,19 @@ The development and production versions of React Automation Studio have been con
 It is advised to only use the containerized version with a Linux environment. (See the FAQ section on other operating systems).
 
 
-Prerequisites: git, latest version of docker-ce and docker compose 
+Prerequisites: git, latest version of docker-ce and docker compose
 
-( At the time of writing the system used Docker V20.10.17 and docker compose V2.6.0 )
+(At the time of writing the system used Docker V28.1.1)
 
-To install docker-ce on Unbuntu follow:
+V8.0.0 includes updates to the docker compose orchestration. See the migration guide for more info.
+
+To install Docker CE on Ubuntu, follow:
 
 https://docs.docker.com/engine/install/ubuntu/
 
 It is advised to the follow the Post Installation steps for Linux:
 
 https://docs.docker.com/engine/install/linux-postinstall/
-
-
-And docker compose (if it is not installed via the previous steps):
-
-https://docs.docker.com/compose/install/compose-plugin/#installing-compose-on-linux-systems
 
 
 Then first clone this repo:
@@ -156,9 +199,9 @@ git tag
 ```
 
 
-To checkout version 7.0.0 run:
+To checkout version 8.0.0 run:
 ```bash
- git checkout tags/V7.0.0
+ git checkout tags/V8.0.0
 ```
 
 
@@ -167,7 +210,7 @@ To confirm the correct git submodule version :
 ```bash
 git submodule status
 ```
-Should contain `submodules/React-Automation-Studio (V7.0.0)` in the output for version 6.1.0 .
+Should contain `submodules/React-Automation-Studio (V8.0.0)` in the output.
 
 If not and you previously checked out a different version run:
 ```bash
@@ -209,7 +252,27 @@ docker compose -f docker-compose-dev-styleguide-dev.yml up
 ```
 Will launch the development version of the styleguide.
 
-**Note**: Any of the above containers can be rebuilt by add **--build** at the end of the command.
+**Note**: Any of the above containers can be rebuilt by adding **--build** at the end of the command.
+
+### Performance Optimization - Docker Compose Bake
+
+For significantly faster builds (2-3x speedup) on systems with multiple backend services, enable Docker Compose Bake:
+
+1. Edit `$HOME/.docker/config.json`:
+```json
+{
+  "plugins": {
+    "buildx": {
+      "default-load": true
+    }
+  }
+}
+```
+
+2. Restart Docker daemon
+3. Builds will now use buildx for parallel compilation
+
+Reference: https://docs.docker.com/compose/how-tos/dependent-images/
 
 
 
@@ -573,6 +636,23 @@ or: https://doi.org/10.18429/JACoW-ICALEPCS2023-FR2BCO01
   The docker containers for RAS run in network  mode host. This is done to enable EPICS to communicate seamlessly with any IOC's on the same subnet as the host. Other OSes such as Windows may not support the host mode and will run in the bridged mode. This may break the communication between the micro services. It is therefore recommended to run the RAS containers on a Linux VM that is minimally running Ubuntu Server. Please ensure the the VM network interface is assigned an IP on the same subnet as your EPICS network in order for communication with the IOC's to occur seamlessly.
 
 # Changelog
+ V8.0.0
+  <br />
+  Major Updates:
+  <ul>
+    <li>Updated base OS to Ubuntu 24.04 LTS for backend containers</li>
+    <li>Migrated Python package management to UV</li>
+    <li>epicsbase is now the foundational layer for all backend containers</li>
+    <li>Docker Compose Bake support for 2-3x faster builds</li>
+    <li>Requires Docker V28.1.1+</li>
+  </ul>
+  Breaking Changes:
+  <ul>
+    <li>
+      See the <a href="docs/migrate-from-V7-to-V8.md">migration guide</a> to migrate from V7.x.x to V8.0.0
+    </li>
+  </ul>
+
  V7.0.0 Tuesday 16 September 2025
   <br />
   Major Updates:
