@@ -12,6 +12,8 @@ services:
   frontend:
     build:
       context: ./
+      additional_contexts:
+         node_cache: "service:node_cache"
       dockerfile: docker/frontend/Dockerfile
       network: host
     volumes:
@@ -27,6 +29,8 @@ services:
     build:
       context: ./
       dockerfile: docker/pvserver/Dockerfile
+      additional_contexts:
+         epicsbase: "service:epicsbase"
     restart: always
     network_mode: host
     tty: true
@@ -55,6 +59,8 @@ services:
     build:
       context: ./
       dockerfile: docker/pvserver/Dockerfile
+      additional_contexts:
+         epicsbase: "service:epicsbase"
     restart: always
     network_mode: host
     tty: true
@@ -83,6 +89,8 @@ services:
     build:
       context: ./
       dockerfile: docker/pvserver/Dockerfile
+      additional_contexts:
+         epicsbase: "service:epicsbase"
     restart: always
     network_mode: host
     tty: true
@@ -202,10 +210,13 @@ services:
     build:
       context: ./submodules/React-Automation-Studio/
       dockerfile: docker/mongoSetup/Dockerfile
+      additional_contexts:
+         epicsbase: "service:epicsbase"
     hostname: mongosetup
     restart: on-failure
     network_mode: "host"
     depends_on:
+      - epicsbase
       - mongo1
       - mongo2
       - mongo3
@@ -220,21 +231,26 @@ services:
       - LOADSAVE_DATABASE_REPLICA_SET_NAME=devrs
     build:
       context: ./
-
+      additional_contexts:
+         epicsbase: "service:epicsbase"
       dockerfile: docker/loadSaveDbInit/Dockerfile
     network_mode: "host"
     tty: true
     stdin_open: true
     depends_on:
+      - epicsbase
       - mongosetup
   initializealarmhandlerdb:
     build:
       context: ./
       dockerfile: docker/alarmHandlerDbInit/Dockerfile
+      additional_contexts:
+         epicsbase: "service:epicsbase"
     hostname: initializealarmhandlerdb
     restart: on-failure
     network_mode: "host"
     depends_on:
+      - epicsbase
       - mongosetup
     stdin_open: true
     tty: true
@@ -243,6 +259,8 @@ services:
     build:
       context: ./submodules/React-Automation-Studio/
       dockerfile: docker/alarmHandlerServer/Dockerfile
+      additional_contexts:
+         epicsbase: "service:epicsbase"
     hostname: alarmhandlerserver
     restart: always
     depends_on:
@@ -262,10 +280,13 @@ services:
     build:
       context: ./
       dockerfile: ./submodules/React-Automation-Studio/docker/adminDbInit/Dockerfile
+      additional_contexts:
+         epicsbase: "service:epicsbase"
     network_mode: "host"
     tty: true
     stdin_open: true
     depends_on:
+      - epicsbase
       - mongosetup
 
 # As of RAS V5.0.0 MongoDB volumes are now defined by the compose project name and mongodb version
