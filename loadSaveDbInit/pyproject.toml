@@ -2,7 +2,7 @@
 name = "loadSaveDbInit"
 version = "8.0.0"
 dependencies = [
-    "pymongo==4.11.1"
+    "pymongo==4.16.0"
 ]
 
 [tool.uv]
