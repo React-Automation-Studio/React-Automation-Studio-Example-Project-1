@@ -14,6 +14,8 @@ services:
     build:
       context: ./
       dockerfile: docker/frontendserverDev/Dockerfile
+      additional_contexts:
+        node_cache: "service:node_cache"
     volumes:
       # mount ReactApp folder contents to ReactApp folder
       - ./ReactApp/package.json:/ReactApp/package.json
@@ -34,6 +36,8 @@ services:
     build:
       context: ./
       dockerfile: docker/pvserver/Dockerfile
+      additional_contexts:
+          epicsbase: "service:epicsbase"
     restart: always
     network_mode: host
     tty: true
@@ -80,6 +84,8 @@ services:
     build:
       context: ./
       dockerfile: docker/pvserver/Dockerfile
+      additional_contexts:
+         epicsbase: "service:epicsbase"
     restart: always
     network_mode: host
     env_file: .env
@@ -104,6 +110,8 @@ services:
     build:
       context: ./
       dockerfile: docker/demoioc/Dockerfile
+      additional_contexts:
+         epicsbase: "service:epicsbase"
     tty: true
     stdin_open: true
     restart: always
@@ -115,6 +123,8 @@ services:
     build:
       context: ./
       dockerfile: docker/storybook/Dockerfile
+      additional_contexts:
+         node_cache: "service:node_cache"
     env_file: .env
     environment:
       - pvServerPort=5001
@@ -126,6 +136,8 @@ services:
   stagingtestioc:
     build:
       context: ./
+      additional_contexts:
+         epicsbase: "service:epicsbase"
       args: # Environment variables available at build-time
         - http_proxy
         - https_proxy
@@ -146,7 +158,7 @@ services:
   # In this case, make sure to set the COMPOSE_PROJECT_NAME variable in the .env file or make sure project folder names are unique between instances
 
   mongo1:
-    image: mongo:${RAS_MONGODB_VERSION-8.0.4}
+    image: mongo:${RAS_MONGODB_VERSION-8.2.3}
     hostname: mongo1
     restart: always
     network_mode: "host"
@@ -162,7 +174,7 @@ services:
     command: "--bind_ip_all --port 27017 --replSet ${REPLICA_SET_NAME-devrs}"
 
   mongo2:
-    image: mongo:${RAS_MONGODB_VERSION-8.0.4}
+    image: mongo:${RAS_MONGODB_VERSION-8.2.3}
     hostname: mongo2
     restart: always
     network_mode: "host"
@@ -178,7 +190,7 @@ services:
     command: "--bind_ip_all --port 27018 --replSet ${REPLICA_SET_NAME-devrs}"
 
   mongo3:
-    image: mongo:${RAS_MONGODB_VERSION-8.0.4}
+    image: mongo:${RAS_MONGODB_VERSION-8.2.3}
     hostname: mongo3
     restart: always
     network_mode: "host"
@@ -196,6 +208,8 @@ services:
     build:
       context: ./submodules/React-Automation-Studio/
       dockerfile: docker/mongoSetup/Dockerfile
+      additional_contexts:
+         epicsbase: "service:epicsbase"
     hostname: mongosetup
     restart: on-failure
     network_mode: "host"
@@ -203,9 +217,11 @@ services:
       - mongo1
       - mongo2
       - mongo3
+      - epicsbase
     stdin_open: true
     tty: true
     env_file: .env
+    
 
   initializeloadsavedb: ### This is copy of the main repos loadsavedb init routine and can be fully customized
     env_file: .env
@@ -216,19 +232,25 @@ services:
       context: ./
 
       dockerfile: docker/loadSaveDbInit/Dockerfile
+      additional_contexts:
+         epicsbase: "service:epicsbase"
     network_mode: "host"
     tty: true
     stdin_open: true
     depends_on:
+      - epicsbase
       - mongosetup
   initializealarmhandlerdb:
     build:
       context: ./
       dockerfile: docker/alarmHandlerDbInit/Dockerfile
+      additional_contexts:
+         epicsbase: "service:epicsbase"
     hostname: initializealarmhandlerdb
     restart: on-failure
     network_mode: "host"
     depends_on:
+      - epicsbase
       - mongosetup
     stdin_open: true
     tty: true
@@ -237,11 +259,13 @@ services:
     build:
       context: ./submodules/React-Automation-Studio/
       dockerfile: docker/alarmHandlerServer/Dockerfile
+      additional_contexts:
+         epicsbase: "service:epicsbase"
     hostname: alarmhandlerserver
     restart: always
     depends_on:
-      - initializealarmhandlerdb
       - epicsbase
+      - initializealarmhandlerdb
     network_mode: "host"
     stdin_open: true
     tty: true
@@ -256,10 +280,13 @@ services:
     build:
       context: ./
       dockerfile: ./submodules/React-Automation-Studio/docker/adminDbInit/Dockerfile
+      additional_contexts:
+         epicsbase: "service:epicsbase"
     network_mode: "host"
     tty: true
     stdin_open: true
     depends_on:
+      - epicsbase
       - mongosetup
   signalcli:
     build:
@@ -290,14 +317,14 @@ services:
 
 volumes:
   mongo-db-data1:
-    name: ${COMPOSE_PROJECT_NAME}-mongo-db-data1-mongo-${RAS_MONGODB_VERSION-8.0.4}
+    name: ${COMPOSE_PROJECT_NAME}-mongo-db-data1-mongo-${RAS_MONGODB_VERSION-8.2.3}
   mongo-db-configdb1:
-    name: ${COMPOSE_PROJECT_NAME}-mongo-db-configdb1-mongo-${RAS_MONGODB_VERSION-8.0.4}
+    name: ${COMPOSE_PROJECT_NAME}-mongo-db-configdb1-mongo-${RAS_MONGODB_VERSION-8.2.3}
   mongo-db-data2:
-    name: ${COMPOSE_PROJECT_NAME}-mongo-db-data2-mongo-${RAS_MONGODB_VERSION-8.0.4}
+    name: ${COMPOSE_PROJECT_NAME}-mongo-db-data2-mongo-${RAS_MONGODB_VERSION-8.2.3}
   mongo-db-configdb2:
-    name: ${COMPOSE_PROJECT_NAME}-mongo-db-configdb2-mongo-${RAS_MONGODB_VERSION-8.0.4}
+    name: ${COMPOSE_PROJECT_NAME}-mongo-db-configdb2-mongo-${RAS_MONGODB_VERSION-8.2.3}
   mongo-db-data3:
-    name: ${COMPOSE_PROJECT_NAME}-mongo-db-data3-mongo-${RAS_MONGODB_VERSION-8.0.4}
+    name: ${COMPOSE_PROJECT_NAME}-mongo-db-data3-mongo-${RAS_MONGODB_VERSION-8.2.3}
   mongo-db-configdb3:
-    name: ${COMPOSE_PROJECT_NAME}-mongo-db-configdb3-mongo-${RAS_MONGODB_VERSION-8.0.4}
+    name: ${COMPOSE_PROJECT_NAME}-mongo-db-configdb3-mongo-${RAS_MONGODB_VERSION-8.2.3}

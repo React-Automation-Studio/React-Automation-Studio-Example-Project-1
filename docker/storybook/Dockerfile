@@ -8,4 +8,5 @@ COPY ./submodules/React-Automation-Studio/ReactApp/img /ReactApp/img
 RUN pnpm run build-storybook
 ADD ./ReactApp/img /ReactApp/storybook-static/img
 VOLUME /build
-CMD cp -R /ReactApp/storybook-static/* /build
+ENTRYPOINT []
+CMD ["sh", "-c", "cp -R /ReactApp/storybook-static/* /build/"]

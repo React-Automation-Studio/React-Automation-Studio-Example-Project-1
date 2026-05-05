@@ -1,4 +1,4 @@
-FROM epicsbase as epicsupport
+FROM epicsbase AS epicsupport
 WORKDIR /epics/support
 
 
@@ -37,5 +37,5 @@ RUN echo $PATH
 
 WORKDIR /epics/testIOC/iocBoot/ioctestIOC/
 
-CMD ../../bin/linux-x86_64/testIOC ./st.cmd
+CMD ["../../bin/linux-x86_64/testIOC", "./st.cmd"]
 EXPOSE 5000 5064 5065 8001
