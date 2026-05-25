@@ -1,4 +1,4 @@
-Current Release: V8.0.0
+Current Release: V8.1.0
 
 **Migration Guides:**
 - [Migrate from V7.x.x to V8.x.x](docs/migrate-from-V7-to-V8.md)
@@ -199,9 +199,9 @@ git tag
 ```
 
 
-To checkout version 8.0.0 run:
+To checkout version 8.1.0 run:
 ```bash
- git checkout tags/V8.0.0
+ git checkout tags/V8.1.0
 ```
 
 
@@ -210,7 +210,7 @@ To confirm the correct git submodule version :
 ```bash
 git submodule status
 ```
-Should contain `submodules/React-Automation-Studio (V8.0.0)` in the output.
+Should contain `submodules/React-Automation-Studio (V8.1.0)` in the output.
 
 If not and you previously checked out a different version run:
 ```bash
@@ -636,6 +636,31 @@ or: https://doi.org/10.18429/JACoW-ICALEPCS2023-FR2BCO01
   The docker containers for RAS run in network  mode host. This is done to enable EPICS to communicate seamlessly with any IOC's on the same subnet as the host. Other OSes such as Windows may not support the host mode and will run in the bridged mode. This may break the communication between the micro services. It is therefore recommended to run the RAS containers on a Linux VM that is minimally running Ubuntu Server. Please ensure the the VM network interface is assigned an IP on the same subnet as your EPICS network in order for communication with the IOC's to occur seamlessly.
 
 # Changelog
+ V8.1.0 Monday 11 May 2026
+  <br />
+  Minor Updates:
+  <ul>
+    <li>Redesigned dashboard with a new "What's New" changelog panel</li>
+    <li>MobileDemo1 / MobileDemo2 page redesigns</li>
+    <li>New Test3D experimental 3D demo with drag-to-rotate that writes back to the rotation PVs</li>
+    <li>Atom One Dark theme; softer Light theme AppBar</li>
+    <li>Gauge restyled — rounded arc edges, alarm-aware accent colour, curved tick labels, and a softer needle</li>
+    <li>Rounded outer corners on ProgressBar and Tank</li>
+    <li>ARIA value semantics on ProgressBar, Tank, and Gauge for accessibility and automated testing</li>
+    <li>BaseComponents storybook docs uplift across all 24 components</li>
+    <li>New storybook-driven integration test suite (Playwright via test-runner) with PV roundtrip + display assertions</li>
+  </ul>
+
+ V8.0.1 Tuesday 5 May 2026
+  <br />
+  Minor Updates:
+  <ul>
+    <li>Updated to the latest Node LTS 24.15.0</li>
+    <li>Updated to pnpm 10.33.3</li>
+    <li>Package updates to frontend modules</li>
+    <li>Switched UV install in epicsBase Dockerfile from ADD to RUN curl to improve build cache stability</li>
+  </ul>
+
  V8.0.0
   <br />
   Major Updates:
